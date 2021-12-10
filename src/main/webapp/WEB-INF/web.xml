@@ -25,6 +25,11 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	
+	<servlet-mapping>
+		<servlet-name>appServlet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	
 	<filter>
  <filter-name>CharacterEncoding</filter-name> <!-- filter-name은 임의로-->
  <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -39,9 +44,5 @@
     <url-pattern>/*</url-pattern>
    </filter-mapping>
 		
-	<servlet-mapping>
-		<servlet-name>appServlet</servlet-name>
-		<url-pattern>/</url-pattern>
-	</servlet-mapping>
 
 </web-app>
