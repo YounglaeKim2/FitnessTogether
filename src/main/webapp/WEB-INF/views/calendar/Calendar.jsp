@@ -10,10 +10,6 @@
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js'></script>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales/ko.js"></script>
 <style>
-	.align{
-		padding: 100px;
-		
-	}
 	table {
 	    width: 100%;
 	    border-top: 1px solid #444444;
