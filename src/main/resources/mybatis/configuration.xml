@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<!-- 클래스 별칭 설정 -->
+	<typeAliases>
+		<!-- 
+		<typeAlias type="com.kosmo.springapp.onememo.service.OneMemoDTO" alias="oneMemoDTO"/>
+		 -->
+	</typeAliases>
+	
+	<!-- 매퍼파일(SQL쿼리 결과와 자바빈 매핑)의 위치정보 설정 -->
+	<mappers>
+		<!-- 
+		<mapper resource="onememo/mybatis/mapper/dynamicsql.xml" />	
+		 -->
+	</mappers>
+</configuration>
