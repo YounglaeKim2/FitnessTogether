@@ -9,5 +9,15 @@
 		<property name="jndiName" value="fnt" />		
 		<property name="resourceRef" value="true" />
 	</bean>
-
+	<!-- 마이바티스 지원을 위한 빈(mybatis-spring-2.x.jar 등록) -->
+	<!-- 1]SqlSessionFactory -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">		
+		<property name="dataSource" ref="dataSource" />		
+		<property name="configLocation"	value="classpath:mybatis/configuration.xml" />
+	</bean>
+	<!-- 2]SqlSessionTemplate (commit(),close() 가 불필요)-->
+	<bean id="template" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory" />
+	</bean>	
+	
 </beans>

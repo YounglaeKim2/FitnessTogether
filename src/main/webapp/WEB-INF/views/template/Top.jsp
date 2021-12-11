@@ -26,6 +26,7 @@
     <!-- Styles -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 	<link href="<c:url value="/resources/css/fontawesome-all.min.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/swiper.css"/>" rel="stylesheet">
 	<link href="<c:url value="/resources/css/styles.css"/>" rel="stylesheet">
@@ -49,7 +50,7 @@
         <div class="container">
 
             <!-- Image Logo -->
-            <a class="navbar-brand logo-image" href="<c:url value="index.html"/>"><img src="<c:url value="/resources/images/logo.svg"/>" alt="alternative"></a> 
+            <a class="navbar-brand logo-image" href="<c:url value="/fnt/main.do"/>"><img src="<c:url value="/resources/images/logo.svg"/>" alt="alternative"></a> 
 
             <!-- Text Logo - Use this if you don't have a graphic logo -->
             <!-- <a class="navbar-brand logo-text" href="<c:url value="index.html"/>">Zinc</a> -->
@@ -83,7 +84,8 @@
                         <a class="nav-link" href="<c:url value="#pricing"/>">게시판</a>
                     </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="<c:url value="fnt/calendar.do"/>">캘린더</a>
+                        <a class="nav-link" href="<c:url value="/fnt/calendar.do"/>">캘린더</a>
+                    	<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                     </li>
                 </ul>
             </div> <!-- end of navbar-collapse -->

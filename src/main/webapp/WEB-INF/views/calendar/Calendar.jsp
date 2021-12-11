@@ -54,6 +54,8 @@
     });
 </script>
 
+	<i class="bi-alarm" style="font-size: 2rem; color: cornflowerblue;"></i>
+
     <!-- Header -->
     <header id="header" class="header">
         <div class="container">
@@ -65,63 +67,109 @@
     <!-- end of header -->
 
 <!-- 모달 작성 -->
-	<div class="modal fade" id="modaltest" data-backdrop="static">
+	<div class="modal fade" id="modaltest" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg modal-dialog-scrollable">
 	   		<div class="modal-content">  
 	   		  				
 	   			<div class="modal-header">
-					<button class="close" data-dismiss="modal">
-						<span>&times;</span>
-					</button>   					
+					 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>   					
 					<h3 id="date" class="modal-title">날짜</h3>
-	  				<h4>운동 기록</h4>
+	  				<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-calendar-event" viewBox="0 0 16 16">
+					  <path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z"></path>
+					  <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"></path>
+					</svg>
 	  			</div>
 	  				
 	  			<div class="modal-body">
-                       	<form class="form-inline" id="passwordForm" method="post" action="<c:url value="/dataroom/Password.kosmo"/>">
-	   						<table>
-	   							<tr>
-	   								<td>부위</td>
-	   								<td>운동종류</td>
-	   								<td>무게</td>
-	   								<td>횟수</td>
-	   							</tr>
-	   							<tr>
-	   								<td>등</td>
-	   								<td>바벨 로우</td>
-	   								<td>40kg</td>
-	   								<td>4세트</td>
-	   							</tr>
-	   							<tr>
-	   								<td>등</td>
-	   								<td>렛풀다운</td>
-	   								<td>80kg</td>
-	   								<td>4세트</td>
-	   							</tr>
-	   							<tr>
-	   								<td>등</td>
-	   								<td>시티드 로우</td>
-	   								<td>45kg</td>
-	   								<td>4세트</td>
-	   							</tr>
-	   							<tr>
-	   								<td>등</td>
-	   								<td>티바 로우</td>
-	   								<td>20kg</td>
-	   								<td>4세트</td>
-	   							</tr>
-	   							<tr>
-	   								<td>등</td>
-	   								<td>케이블 암풀다운</td>
-	   								<td>15kg</td>
-	   								<td>4세트</td>
-	   							</tr>
-	   						</table>
-	   						<br/>
-	   						<div class="form-group">
-	   							<input type="submit" class="btn btn-info" value="추가작성"/>
-	   						</div>
-	   					</form>
+                       	<ul class="nav nav-tabs" id="myTab" role="tablist">
+							<li class="nav-item" role="presentation">
+								<button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#food" type="button" role="tab" aria-controls="food" aria-selected="true">섭취 칼로리</button>
+							</li>
+							<li class="nav-item" role="presentation">
+								<button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#weight" type="button" role="tab" aria-controls="weight" aria-selected="false">운동일지</button>
+							</li>
+						</ul>
+						<br/>
+                       	<div class="tab-content" id="myTabContent">
+							<div class="tab-pane fade show active" id="food" role="tabpanel" aria-labelledby="food-tab">
+								<form class="form-inline" id="passwordForm" method="post" action="<c:url value="/dataroom/Password.kosmo"/>">
+			   						<table>
+			   							<tr>
+			   								<td>음식종류</td>
+			   								<td>칼로리</td>
+			   							</tr>
+			   							<tr>
+			   								<td>라면</td>
+			   								<td>750kcal</td>
+			   							</tr>
+			   							<tr>
+			   								<td>부대찌개</td>
+			   								<td>1200kcal</td>
+			   							</tr>
+			   							<tr>
+			   								<td>아이스크림</td>
+			   								<td>450kcal</td>
+			   							</tr>
+			   							<tr>
+			   								<td>삼겹살</td>
+			   								<td>1250kcal</td>
+			   							</tr>
+			   						</table>
+			   						<br/>
+			   						<div class="form-group">
+			   							<input type="submit" class="btn btn-info" value="추가작성"/>
+			   						</div>
+			   					</form>
+							</div>
+							<div class="tab-pane fade" id="weight" role="tabpanel" aria-labelledby="weight-tab">
+								<form class="form-inline" id="passwordForm" method="post" action="<c:url value="/dataroom/Password.kosmo"/>">
+			   						<table>
+			   							<tr>
+			   								<td>부위</td>
+			   								<td>운동종류</td>
+			   								<td>무게</td>
+			   								<td>횟수</td>
+			   							</tr>
+			   							<tr>
+			   								<td>등</td>
+			   								<td>바벨 로우</td>
+			   								<td>40kg</td>
+			   								<td>4세트</td>
+			   							</tr>
+			   							<tr>
+			   								<td>등</td>
+			   								<td>렛풀다운</td>
+			   								<td>80kg</td>
+			   								<td>4세트</td>
+			   							</tr>
+			   							<tr>
+			   								<td>등</td>
+			   								<td>시티드 로우</td>
+			   								<td>45kg</td>
+			   								<td>4세트</td>
+			   							</tr>
+			   							<tr>
+			   								<td>등</td>
+			   								<td>티바 로우</td>
+			   								<td>20kg</td>
+			   								<td>4세트</td>
+			   							</tr>
+			   							<tr>
+			   								<td>등</td>
+			   								<td>케이블 암풀다운</td>
+			   								<td>15kg</td>
+			   								<td>4세트</td>
+			   							</tr>
+			   						</table>
+			   						<br/>
+			   						<div class="form-group">
+			   							<input type="submit" class="btn btn-info" value="추가작성"/>
+			   						</div>
+			   					</form>
+							</div>
+						</div>
+                       	
+                       
 	                </div>
 	  			</div>   
 			</div>
