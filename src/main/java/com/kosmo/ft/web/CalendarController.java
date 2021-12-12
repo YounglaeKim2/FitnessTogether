@@ -11,4 +11,13 @@ public class CalendarController {
 		return "calendar/Calendar";
 	}
 	
+	@RequestMapping("/fnt/writefood")
+	public String witreFood() {
+		return "calendar/WriteFood";
+	}
+	
+	@RequestMapping("/fnt/writeweight")
+	public String witreWeight() {
+		return "calendar/WriteWeight";
+	}
 }

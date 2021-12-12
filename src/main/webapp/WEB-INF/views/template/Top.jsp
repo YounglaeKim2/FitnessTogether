@@ -86,7 +86,6 @@
                     </li>
                      <li class="nav-item">
                         <a class="nav-link" href="<c:url value="/fnt/calendar.do"/>">캘린더</a>
-                    	<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                     </li>
                 </ul>
             </div> <!-- end of navbar-collapse -->

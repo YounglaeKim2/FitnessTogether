@@ -92,80 +92,76 @@
 						<br/>
                        	<div class="tab-content" id="myTabContent">
 							<div class="tab-pane fade show active" id="food" role="tabpanel" aria-labelledby="food-tab">
-								<form class="form-inline" id="passwordForm" method="post" action="<c:url value="/dataroom/Password.kosmo"/>">
-			   						<table>
-			   							<tr>
-			   								<td>음식종류</td>
-			   								<td>칼로리</td>
-			   							</tr>
-			   							<tr>
-			   								<td>라면</td>
-			   								<td>750kcal</td>
-			   							</tr>
-			   							<tr>
-			   								<td>부대찌개</td>
-			   								<td>1200kcal</td>
-			   							</tr>
-			   							<tr>
-			   								<td>아이스크림</td>
-			   								<td>450kcal</td>
-			   							</tr>
-			   							<tr>
-			   								<td>삼겹살</td>
-			   								<td>1250kcal</td>
-			   							</tr>
-			   						</table>
-			   						<br/>
-			   						<div class="form-group">
-			   							<input type="submit" class="btn btn-info" value="추가작성"/>
-			   						</div>
-			   					</form>
+		   						<table>
+		   							<tr>
+		   								<td>음식종류</td>
+		   								<td>칼로리</td>
+		   							</tr>
+		   							<tr>
+		   								<td>라면</td>
+		   								<td>750kcal</td>
+		   							</tr>
+		   							<tr>
+		   								<td>부대찌개</td>
+		   								<td>1200kcal</td>
+		   							</tr>
+		   							<tr>
+		   								<td>아이스크림</td>
+		   								<td>450kcal</td>
+		   							</tr>
+		   							<tr>
+		   								<td>삼겹살</td>
+		   								<td>1250kcal</td>
+		   							</tr>
+		   						</table>
+		   						<br/>
+		   						<div class="form-group">
+		   							<button type="button" class="btn btn-info" onclick="location.href='<c:url value="/fnt/writefood"/>'">추가작성</button>
+		   						</div>
 							</div>
 							<div class="tab-pane fade" id="weight" role="tabpanel" aria-labelledby="weight-tab">
-								<form class="form-inline" id="passwordForm" method="post" action="<c:url value="/dataroom/Password.kosmo"/>">
-			   						<table>
-			   							<tr>
-			   								<td>부위</td>
-			   								<td>운동종류</td>
-			   								<td>무게</td>
-			   								<td>횟수</td>
-			   							</tr>
-			   							<tr>
-			   								<td>등</td>
-			   								<td>바벨 로우</td>
-			   								<td>40kg</td>
-			   								<td>4세트</td>
-			   							</tr>
-			   							<tr>
-			   								<td>등</td>
-			   								<td>렛풀다운</td>
-			   								<td>80kg</td>
-			   								<td>4세트</td>
-			   							</tr>
-			   							<tr>
-			   								<td>등</td>
-			   								<td>시티드 로우</td>
-			   								<td>45kg</td>
-			   								<td>4세트</td>
-			   							</tr>
-			   							<tr>
-			   								<td>등</td>
-			   								<td>티바 로우</td>
-			   								<td>20kg</td>
-			   								<td>4세트</td>
-			   							</tr>
-			   							<tr>
-			   								<td>등</td>
-			   								<td>케이블 암풀다운</td>
-			   								<td>15kg</td>
-			   								<td>4세트</td>
-			   							</tr>
-			   						</table>
-			   						<br/>
-			   						<div class="form-group">
-			   							<input type="submit" class="btn btn-info" value="추가작성"/>
-			   						</div>
-			   					</form>
+		   						<table>
+		   							<tr>
+		   								<td>부위</td>
+		   								<td>운동종류</td>
+		   								<td>무게</td>
+		   								<td>횟수</td>
+		   							</tr>
+		   							<tr>
+		   								<td>등</td>
+		   								<td>바벨 로우</td>
+		   								<td>40kg</td>
+		   								<td>4세트</td>
+		   							</tr>
+		   							<tr>
+		   								<td>등</td>
+		   								<td>렛풀다운</td>
+		   								<td>80kg</td>
+		   								<td>4세트</td>
+		   							</tr>
+		   							<tr>
+		   								<td>등</td>
+		   								<td>시티드 로우</td>
+		   								<td>45kg</td>
+		   								<td>4세트</td>
+		   							</tr>
+		   							<tr>
+		   								<td>등</td>
+		   								<td>티바 로우</td>
+		   								<td>20kg</td>
+		   								<td>4세트</td>
+		   							</tr>
+		   							<tr>
+		   								<td>등</td>
+		   								<td>케이블 암풀다운</td>
+		   								<td>15kg</td>
+		   								<td>4세트</td>
+		   							</tr>
+		   						</table>
+		   						<br/>
+		   						<div class="form-group">
+		   							<button type="button" class="btn btn-info" onclick="location.href='<c:url value="/fnt/writeweight"/>'">추가작성</button>
+		   						</div>
 							</div>
 						</div>
                        	
