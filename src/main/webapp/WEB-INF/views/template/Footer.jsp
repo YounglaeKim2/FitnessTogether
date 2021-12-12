@@ -9,7 +9,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h4>Pellentesque aliquet mi eu tortor dictum, non imperdiet ante viverra. Phasellus eget enim orci ut pellentes troc</h4>
+                    <h4>Fitness Together</h4>
                     <div class="social-container">
                         <span class="fa-stack">
                             <a href="<c:url value="#your-link"/>">

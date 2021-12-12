@@ -12,16 +12,20 @@
             <div class="row">
                 <div class="col-lg-6 col-xl-5">
                     <div class="text-container">
-                        <div class="section-title">Fitness Together 1</div>
-                        <h1 class="h1-large">Fitness Together 2</h1>
-                        <p class="p-large">Fitness Together 3</p>
-                        <a class="btn-solid-lg" href="#services">Fitness Together 4</a>
-                        <a class="quote" href="#contact"><i class="fas fa-paper-plane"></i>Fitness Together 5</a>
+                        <div class="section-title">Map1</div>
+                        <h1 class="h1-large">Map2</h1>
+                        <p class="p-large">Map3</p>
+                        <a class="btn-solid-lg" href="#services">Map4</a>
+                        <a class="quote" href="#contact"><i class="fas fa-paper-plane"></i>Map5</a>
                     </div> <!-- end of text-container -->
                 </div> <!-- end of col -->
                 <div class="col-lg-6 col-xl-7">
                     <div class="image-container">
+                    <!-- 
                         <img class="img-fluid" src="<c:url value='/resources/images/header_illustration.svg'/>" alt="alternative">
+                         -->
+                        <img class="img-fluid" src="<c:url value='/resources/images/header_illustration.svg'/>" alt="alternative">
+                    
                     </div> <!-- end of image-container -->
                 </div> <!-- end of col -->
             </div> <!-- end of row -->
