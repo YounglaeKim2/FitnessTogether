@@ -75,7 +75,7 @@
                         <a class="nav-link" href="<c:url value="#projects"/>">마이페이지</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<c:url value="/fnt/mapping.do"/>">매핑</a>
+                        <a class="nav-link" href="<c:url value="/fnt/mappingList.do"/>">매핑</a>
                     	<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                     </li>
                      <li class="nav-item">

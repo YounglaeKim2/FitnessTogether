@@ -6,9 +6,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class MappingController {
 	
-	@RequestMapping("/fnt/mapping.do")
+	@RequestMapping("/fnt/mappingList.do")
 	public String goMapping() {
-		return "mapping/Mapping";
+		return "mapping/MappingList";
+	}
+	@RequestMapping("/fnt/mappingWrite.do")
+	public String goMappingWrite() {
+		return "mapping/MappingWrite";
 	}
 
 }
