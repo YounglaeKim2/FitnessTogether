@@ -12,7 +12,7 @@
             <div class="row">
                 <div class="col-lg-6 col-xl-5">
                     <div class="text-container">
-                        <div class="section-title">Fitness Together 1</div>
+                        <div class="section-title">Fitness Together 123345677889</div>
                         <h1 class="h1-large">Fitness Together 2</h1>
                         <p class="p-large">Fitness Together 3</p>
                         <a class="btn-solid-lg" href="#services">Fitness Together 4</a>
