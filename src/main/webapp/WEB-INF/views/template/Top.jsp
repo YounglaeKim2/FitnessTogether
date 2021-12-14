@@ -76,7 +76,6 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<c:url value="/fnt/mappingList.do"/>">매핑</a>
-                    	<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                     </li>
                      <li class="nav-item">
                         <a class="nav-link" href="<c:url value="#pricing"/>">채팅</a>

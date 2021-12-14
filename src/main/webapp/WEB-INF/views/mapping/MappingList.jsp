@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<!-- 부트스트랩 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <!-- Top 시작 -->
 <jsp:include page="/WEB-INF/views/template/Top.jsp" />
 <!-- Top 끝 -->
@@ -19,12 +20,20 @@ body {
 		<h2>
 			Mapping<small>List</small>
 		</h2>
+		<div class="row">
+		<div class="col-md-12 text-right">
+			<a href="<c:url value="/fnt/ViewZZZZ.do"/>
+			"class="btn btn-success">지도</a>
+		</div>
 	</div>
-	<!-- 작성하기 버튼 -->
+	</div>
+	<!-- 작성하기 버튼 
 
 	<div class="row">
 		<div class="col-md-12"></div>
 	</div>
+	-->
+	
 	<div class="row">
 		<div class="col-md-12">
 			<table
@@ -36,11 +45,13 @@ body {
 					<th class="col-md-1 text-center">작성자</th>
 					<th class="col-md-2 text-center">작성일</th>
 				</tr>
+				<!-- 
 				<c:if test="${empty listPagingData.lists }" var="isEmpty">
 					<tr>
 						<td colspan="4">등록된 게시물이 없어요</td>
 					</tr>
 				</c:if>
+				
 				<c:if test="${not isEmpty }">
 					<c:forEach var="item" items="${listPagingData.lists}"
 						varStatus="loop">
@@ -55,7 +66,25 @@ body {
 						</tr>
 					</c:forEach>
 				</c:if>
-
+				 -->
+				<tr>
+					<td>1</td>
+					<td>붕어빵</td>
+					<td>이아영</td>
+					<td>2021.12.1</td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>INC COFFEE</td>
+					<td>김혜란</td>
+					<td>2021.12.2</td>
+				</tr>
+				<tr>
+					<td>3</td>
+					<td>담배쟁이</td>
+					<td>복상일</td>
+					<td>2021.12.3</td>
+				</tr>
 			</table>
 		</div>
 		<!-- column -->
@@ -85,15 +114,22 @@ body {
 			</form>
 		</div>
 	</div>
-		<div class="row">
+	<div class="row">
 		<div class="col-md-12 text-right">
 			<a href="<c:url value="/fnt/mappingWrite.do"/>"
 				class="btn btn-success">등록</a>
 		</div>
 	</div>
+	
+	<div class="row">
+		<div class="col-md-12 text-right">
+			<a href="<c:url value="/fnt/ZZZZ.do"/>"
+				class="btn btn-success">ZZZZ</a>
+		</div>
+	</div>
+	
 </div>
 <!-- 실제 내용 끝-->
-
 
 <!-- footer 시작 -->
 <jsp:include page="/WEB-INF/views/template/Footer.jsp" />
