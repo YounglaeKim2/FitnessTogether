@@ -21,7 +21,7 @@
   	}
 </style>
 <script>
-	
+	var date;
 	$(function() {
 	    var calendarEl = document.getElementById('calendar');
 	    var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -30,9 +30,7 @@
 	    	locale:'ko',
 	    	aspectRatio: 1.5,
 	    	dateClick: function(info) {
-            	console.log(info);
-            	console.log(info.dateStr);
-            	var date = info.dateStr;
+            	date = info.dateStr;
             	$('#date').html(date);
             	$('#modaltest').modal('show');
 	     	},
@@ -51,6 +49,15 @@
 	    $(document).mouseover(function(){
 	    	$('.fc-daygrid-day-frame').css('cursor','pointer');
 	    });
+	    $('#writefood').click(function(){
+	    	//location.href='<c:url value="/fnt/writefood"/>'+"?date="+date;
+	    	location.href='<c:url value="/fnt/writefood"/>';
+	    });
+	    $('#writeweight').click(function(){
+	    	location.href='<c:url value="/fnt/writeweight"/>';
+	    });
+	    
+    	
     });
 </script>
 
@@ -92,10 +99,10 @@
 						<br/>
                        	<div class="tab-content" id="myTabContent">
 							<div class="tab-pane fade show active" id="food" role="tabpanel" aria-labelledby="food-tab">
-		   						<table>
+		   						<table class="table">
 		   							<tr>
-		   								<td>음식종류</td>
-		   								<td>칼로리</td>
+		   								<th scope="col">음식종류</th>
+		   								<th scope="col">칼로리</th>
 		   							</tr>
 		   							<tr>
 		   								<td>라면</td>
@@ -115,17 +122,19 @@
 		   							</tr>
 		   						</table>
 		   						<br/>
-		   						<div class="form-group">
-		   							<button type="button" class="btn btn-info" onclick="location.href='<c:url value="/fnt/writefood"/>'">추가작성</button>
+		   						<div class="form-group" align="right">
+		   							<button id="writefood" type="button" class="btn btn-info">추가작성</button>
+		   							<button id="updatefood" type="button" class="btn btn-info">수정</button>
+		   							<button id="deletefood" type="button" class="btn btn-info">삭제</button>
 		   						</div>
 							</div>
 							<div class="tab-pane fade" id="weight" role="tabpanel" aria-labelledby="weight-tab">
-		   						<table>
+		   						<table class="table">
 		   							<tr>
-		   								<td>부위</td>
-		   								<td>운동종류</td>
-		   								<td>무게</td>
-		   								<td>횟수</td>
+		   								<th scope="col">부위</th>
+		   								<th scope="col">운동종류</th>
+		   								<th scope="col">무게</th>
+		   								<th scope="col">횟수</th>
 		   							</tr>
 		   							<tr>
 		   								<td>등</td>
@@ -159,8 +168,10 @@
 		   							</tr>
 		   						</table>
 		   						<br/>
-		   						<div class="form-group">
-		   							<button type="button" class="btn btn-info" onclick="location.href='<c:url value="/fnt/writeweight"/>'">추가작성</button>
+		   						<div class="form-group" align="right">
+		   							<button id="writeweight" type="button" class="btn btn-info">추가작성</button>
+		   							<button id="updateweight" type="button" class="btn btn-info">수정</button>
+		   							<button id="deleteweight" type="button" class="btn btn-info">삭제</button>
 		   						</div>
 							</div>
 						</div>
