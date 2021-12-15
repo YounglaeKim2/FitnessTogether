@@ -21,7 +21,7 @@
 	<script type="text/javascript" src="//dynamic.criteo.com/js/ld/ld.js?a=90210" async="true"></script>
 	<!-- END Criteo 로더 파일 -->
 	<!-- Criteo 태그 -->
-	
+	<!--  
 	<script type="text/javascript">
     window.criteo_q = window.criteo_q || [];
     var deviceType = /iPad/.test(navigator.userAgent) ? "t" : /Mobile|iP(hone|od)|Android|BlackBerry|IEMobile|Silk/.test(navigator.userAgent) ? "m" : "d";
@@ -31,6 +31,7 @@
         // To Do 1. 현재 유저의 이메일 주소(공백 제거 및 소문자로 변환 후). 유저의 이메일을 알수 없는 상황이면 빈 문자열로 전달
         { event: "setEmail", email: "" }, 
     );
+    -->
 </script>
 <!-- END Criteo 태그 -->  
     
@@ -80,19 +81,34 @@
         </div>
         
         <c:if test="${! empty  NotMember}">
-		<div class="row">
-			<div class="col-xs-offset-1 col-xs-6 alert alert-warning fade in">
-				<button class="close" data-dismiss="alert">
-					<span>×</span>
-				</button>
-				${NotMember }
-			</div>
+		 <!-- The Modal -->
+		<div class="modal" id="login">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		
+		      <!-- Modal Header -->
+		      <div class="modal-header">
+		        <h4 class="modal-title">로그인</h4>
+		      </div>
+		
+		      <!-- Modal body -->
+		      <div class="modal-body">
+		        Modal body..
+		      </div>
+		
+		      <!-- Modal footer -->
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
+		      </div>
+		
+		    </div>
+		  </div>
 		</div>
 		</c:if>
 		
-		<div class="row">
-		<c:if test="${not empty sessionScope.id }" var="isLogin">
-			<div class="col-xs-offset-1 col-xs-6 alert alert-success">${sessionScope.id }님
+		<div class="input-wrapper">
+		<c:if test="${not empty map.id }" var="isLogin">
+			<div class="col-xs-offset-1 col-xs-6 alert alert-success">${map.id }님
 				즐감하세요</div>
 		</c:if>
 		
@@ -101,18 +117,21 @@
         <form method="POST" action="<c:url value='/fnt/LoginProcess.do'/>">
             <div class="input-wrapper">
                 <i class="fa fa-envelope-o" aria-hidden="true"></i>
-                <input type="text" id="id" class="input-login" placeholder="ID"/>
+                <input type="text" id="id" name="id" class="input-login" placeholder="ID"/>
             </div>
             <div class="input-wrapper">
                 <i class="fa fa-lock" aria-hidden="true"></i>
-                <input type="password" id="pwd" class="input-login" placeholder="PASSWORD"/>
+                <input type="password" id="pwd" name="pwd" class="input-login" placeholder="PASSWORD"/>
+                
             </div>
             <input type="submit" class="signin-btn" value="Login"></button>
                         <div class="btn-wrapper-nm">
               
             </div>
+            
         </form>
        </div>
+       
     </div>
     <div class="lost-wrapper hide">
         <form method="POST" action="#" onsubmit=" Lostbox.checkForm(); return false; " style="text-align:right;">
@@ -132,7 +151,9 @@
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js"
         charset="utf-8">
 </script>
+<!--
 <script>
+	
     Stack.add(function () {
             });
 
@@ -178,8 +199,10 @@
         $(".lost-wrapper").addClass("hide");
     }
 </script>
+-->
 
 <!--JS Offsite-->
+<!--  
 <script type="text/javascript">
     window.Symbol || function (t) {
         "use strict";
@@ -220,6 +243,7 @@
     // 갤러리!
     Naruto.begin();
     </script>
+    -->
 </body>
 </html>
 

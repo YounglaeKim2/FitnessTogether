@@ -49,8 +49,6 @@ public class LoginController {
 		//뷰정보 번환]
 		return "common/Login";
 		}
-	
-		
 	}
 
 
