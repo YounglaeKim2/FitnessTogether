@@ -63,16 +63,16 @@
                 <ul class="navbar-nav ms-auto navbar-nav-scroll">
                     
                     <li class="nav-item">
-                        <a class="nav-link" href="<c:url value="#services"/>">로그인</a>
+                        <a class="nav-link" href="<c:url value="/fnt/Login.do"/>">로그인</a>
                     </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="<c:url value="#projects"/>">회원가입</a>
+                        <a class="nav-link" href="<c:url value="/fnt/SignUp.do"/>">회원가입</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<c:url value="#services"/>">로그아웃</a>
+                        <a class="nav-link" href="<c:url value="/fnt/Logout.do"/>">로그아웃</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<c:url value="#projects"/>">마이페이지</a>
+                        <a class="nav-link" href="<c:url value="/fnt/Mypage.do"/>">마이페이지</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<c:url value="/fnt/mappingList.do"/>">매핑</a>
