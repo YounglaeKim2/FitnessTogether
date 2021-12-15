@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!-- 부트스트랩 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <!-- Css Styles -->
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
@@ -23,6 +21,22 @@ body {
 }
 </style>
 <!-- 실제 내용 시작 -->
+<div class="container">
+  <div class="row">
+    <div class="col">
+      Column
+    </div>
+    <div class="col-6">
+      Column
+    </div>
+    <div class="col">
+      Column
+    </div>
+  </div>
+</div>
+
+
+
 <div class="container">
 
 	<div class="page-header">
@@ -126,13 +140,63 @@ body {
                             </form>
                         </div>
                         <div class="blog__sidebar__item">
-                            <h4>Categories</h4>
+                            <h4>서울</h4>
                             <ul>
-                                <li><a href="#">All</a></li>
-                                <li><a href="#">Beauty (20)</a></li>
-                                <li><a href="#">Food (5)</a></li>
-                                <li><a href="#">Life Style (9)</a></li>
-                                <li><a href="#">Travel (10)</a></li>
+                                <li><a href="#">강동</a></li>
+                                <li><a href="#">강서</a></li>
+                                <li><a href="#">강남</a></li>
+                                <li><a href="#">강북</a></li>
+                                <li><a href="#">etc</a></li>
+                            </ul>
+                        </div>
+                        <div class="blog__sidebar__item">
+                            <h4>경기도</h4>
+                            <ul>
+                                <li><a href="#">강동</a></li>
+                                <li><a href="#">강서</a></li>
+                                <li><a href="#">강남</a></li>
+                                <li><a href="#">강북</a></li>
+                                <li><a href="#">etc</a></li>
+                            </ul>
+                        </div>
+                        <div class="blog__sidebar__item">
+                            <h4>강원도</h4>
+                            <ul>
+                                <li><a href="#">강동</a></li>
+                                <li><a href="#">강서</a></li>
+                                <li><a href="#">강남</a></li>
+                                <li><a href="#">강북</a></li>
+                                <li><a href="#">etc</a></li>
+                            </ul>
+                        </div>
+                        <div class="blog__sidebar__item">
+                            <h4>충청도</h4>
+                            <ul>
+                                <li><a href="#">강동</a></li>
+                                <li><a href="#">강서</a></li>
+                                <li><a href="#">강남</a></li>
+                                <li><a href="#">강북</a></li>
+                                <li><a href="#">etc</a></li>
+                            </ul>
+                        </div>
+                        <div class="blog__sidebar__item">
+                            <h4>경상도</h4>
+                            <ul>
+                                <li><a href="#">강동</a></li>
+                                <li><a href="#">강서</a></li>
+                                <li><a href="#">강남</a></li>
+                                <li><a href="#">강북</a></li>
+                                <li><a href="#">etc</a></li>
+                            </ul>
+                        </div>
+                        <div class="blog__sidebar__item">
+                            <h4>전라도</h4>
+                            <ul>
+                                <li><a href="#">강동</a></li>
+                                <li><a href="#">강서</a></li>
+                                <li><a href="#">강남</a></li>
+                                <li><a href="#">강북</a></li>
+                                <li><a href="#">etc</a></li>
                             </ul>
                         </div>
                         <div class="blog__sidebar__item">
@@ -180,6 +244,9 @@ body {
                         </div>
                     </div>
                 </div>
+                
+                
+                
                 <div class="col-lg-8 col-md-7">
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6">
