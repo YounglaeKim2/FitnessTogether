@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="mybatis.mapper.member">
+ 	<select id="selectOptions" parameterType="String" resultType="Map">
+		SELECT name FROM testweight WHERE type = #{type} 		
+	</select>
+ 
+ 	
+ </mapper> 

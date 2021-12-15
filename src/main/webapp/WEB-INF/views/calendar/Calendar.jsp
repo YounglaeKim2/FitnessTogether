@@ -50,11 +50,10 @@
 	    	$('.fc-daygrid-day-frame').css('cursor','pointer');
 	    });
 	    $('#writefood').click(function(){
-	    	//location.href='<c:url value="/fnt/writefood"/>'+"?date="+date;
-	    	location.href='<c:url value="/fnt/writefood"/>';
+	    	location.href='<c:url value="/fnt/writefood.do"/>';
 	    });
 	    $('#writeweight').click(function(){
-	    	location.href='<c:url value="/fnt/writeweight"/>';
+	    	location.href='<c:url value="/fnt/writeweight.do"/>'+"?date="+date;
 	    });
 	    
     	
@@ -100,9 +99,13 @@
                        	<div class="tab-content" id="myTabContent">
 							<div class="tab-pane fade show active" id="food" role="tabpanel" aria-labelledby="food-tab">
 		   						<table class="table">
+		   							
 		   							<tr>
 		   								<th scope="col">음식종류</th>
 		   								<th scope="col">칼로리</th>
+		   							</tr>
+		   							<tr>
+		   								<td colspan="2" align="center">작성된 게시글이 없습니다</td>
 		   							</tr>
 		   							<tr>
 		   								<td>라면</td>
@@ -129,12 +132,15 @@
 		   						</div>
 							</div>
 							<div class="tab-pane fade" id="weight" role="tabpanel" aria-labelledby="weight-tab">
-		   						<table class="table">
+		   						<table  class="table">
 		   							<tr>
 		   								<th scope="col">부위</th>
 		   								<th scope="col">운동종류</th>
 		   								<th scope="col">무게</th>
 		   								<th scope="col">횟수</th>
+		   							</tr>
+		   							<tr>
+		   								<td colspan="4" align="center">작성된 게시글이 없습니다</td>
 		   							</tr>
 		   							<tr>
 		   								<td>등</td>
