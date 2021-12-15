@@ -1,5 +1,7 @@
 package com.kosmo.ft.service;
 
+import java.util.Map;
+
 public interface MemberService {
-	 public boolean Login(MemberDTO dto) throws Exception;
+	 boolean isLogin(Map map);
 }

@@ -3,8 +3,9 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="mybatis.mapper.member">
- 	<select id="memberIsLogin" parameterType="MemberDTO" resultType="int">
-		SELECT COUNT(*) FROM ftmember WHERE id=#{id} AND pwd=#{pwd}		
+ 	<select id="memberIsLogin" parameterType="Map" resultType="int">
+		SELECT COUNT(*) FROM FTMEMBER WHERE id=#{id} AND pwd=#{pwd}		
 	</select>
  
+ 	
  </mapper> 

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.kosmo.ft.service.MemberDTO;
+import com.kosmo.ft.service.MemberService;
 import com.kosmo.ft.service.impl.MemberServiceImpl;
 
 
@@ -21,30 +22,32 @@ import com.kosmo.ft.service.impl.MemberServiceImpl;
 public class LoginController {
 	
 	@Resource(name="memberServiceImpl")
-	private MemberServiceImpl memberServiceImpl;
+	private MemberServiceImpl memberService;
 	
+	//로그인 폼으로 이동
 	@RequestMapping("Login.do")
 	 public String login() {
 	  return "common/Login";
 	}
+	
 	//로그인 처리
 	@RequestMapping("LoginProcess.do")
-	public String process(@RequestParam MemberDTO dto, Model model, SessionStatus status) throws Exception {
-	boolean flag= memberServiceImpl.Login(dto);
-	 model.addAttribute("id", dto.getId());
+	public String process(@RequestParam Map map, Model model, SessionStatus status) {
+	boolean flag= memberService.isLogin(map);
+	 model.addAttribute("id", map.get("id"));
 	 if(!flag) {
 			status.setComplete();
 			model.addAttribute("NotMember","아뒤와 비번이 틀려요");
 		}
 		//뷰정보 번환]
-		return "home";
+		return "common/AfLogin";
 	}
 	   
 	@RequestMapping("Logout.do")
 	public String logout(SessionStatus status){
 		status.setComplete();
 		//뷰정보 번환]
-		return "common/AfLogOut";
+		return "common/Login";
 		}
 	
 		

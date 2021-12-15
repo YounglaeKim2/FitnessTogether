@@ -3,7 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     
 <!-- Top 시작 -->
- <!DOCTYPE html>
+    
+    <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -63,18 +64,15 @@
             <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
                 <ul class="navbar-nav ms-auto navbar-nav-scroll">
                     
+                    
                     <li class="nav-item">
-                        <a class="nav-link" href="<c:url value="/fnt/Login.do"/>">로그인</a>
-                    </li>
-                     <li class="nav-item">
-                        <a class="nav-link" href="<c:url value="#projects"/>">회원가입</a>
-                    </li>
-                  
-                    <li class="nav-item">
-                        <a class="nav-link" href="<c:url value="#projects"/>">마이페이지</a>
+                        <a class="nav-link" href="<c:url value="/fnt/Logout.do"/>">로그아웃</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<c:url value="#pricing"/>">매핑</a>
+                        <a class="nav-link" href="<c:url value="/fnt/Mypage.do"/>">마이페이지</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<c:url value="/fnt/mappingList.do"/>">매핑</a>
                     </li>
                      <li class="nav-item">
                         <a class="nav-link" href="<c:url value="#pricing"/>">채팅</a>
@@ -84,13 +82,14 @@
                     </li>
                      <li class="nav-item">
                         <a class="nav-link" href="<c:url value="/fnt/calendar.do"/>">캘린더</a>
-                    	<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                     </li>
                 </ul>
             </div> <!-- end of navbar-collapse -->
         </div> <!-- end of container -->
     </nav> <!-- end of navbar -->
     <!-- end of navigation -->
+
+      
 <!-- Top 끝 -->
 
     <!-- Header -->
@@ -99,11 +98,11 @@
             <div class="row">
                 <div class="col-lg-6 col-xl-5">
                     <div class="text-container">
-                        <div class="section-title">Welcome to Zinc web agency</div>
-                        <h1 class="h1-large">Zinc creates stylish and efficient sites</h1>
-                        <p class="p-large">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut dignissim, neque ut ultrices sollicitudin</p>
-                        <a class="btn-solid-lg" href="#services">Offered services</a>
-                        <a class="quote" href="#contact"><i class="fas fa-paper-plane"></i>Get quote</a>
+                        <div class="section-title">Fitness Together 123345677889</div>
+                        <h1 class="h1-large">Fitness Together 2</h1>
+                        <p class="p-large">Fitness Together 3</p>
+                        <a class="btn-solid-lg" href="#services">Fitness Together 4</a>
+                        <a class="quote" href="#contact"><i class="fas fa-paper-plane"></i>Fitness Together 5</a>
                     </div> <!-- end of text-container -->
                 </div> <!-- end of col -->
                 <div class="col-lg-6 col-xl-7">

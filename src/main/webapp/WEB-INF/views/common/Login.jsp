@@ -61,7 +61,7 @@
 <div class="login container-fixed">
         <div class="title-logo">
         <img src="<c:url value="/resources/images/logo2.png"/>"/>
-</div>
+		</div>
         <div class="title">로그인</div>
         <div class="login-wrapper">
         <div class="sns-login">
@@ -89,16 +89,19 @@
 			</div>
 		</div>
 		</c:if>
+		
+		<div class="row">
 		<c:if test="${not empty sessionScope.id }" var="isLogin">
 			<div class="col-xs-offset-1 col-xs-6 alert alert-success">${sessionScope.id }님
 				즐감하세요</div>
 		</c:if>
+		
 		<c:if test="${not isLogin }"/>
         <div style="text-align: center; margin-top: -15px; height: 30px; color: #8e8e8e;"> or</div>
-        <form method="POST" action="<c:url value='/fnt/LoginProcess.do'/>" onsubmit=" Login.withId(''); return false; ">
+        <form method="POST" action="<c:url value='/fnt/LoginProcess.do'/>">
             <div class="input-wrapper">
                 <i class="fa fa-envelope-o" aria-hidden="true"></i>
-                <input type="id" id="id" class="input-login" placeholder="ID"/>
+                <input type="text" id="id" class="input-login" placeholder="ID"/>
             </div>
             <div class="input-wrapper">
                 <i class="fa fa-lock" aria-hidden="true"></i>
@@ -109,7 +112,7 @@
               
             </div>
         </form>
-       
+       </div>
     </div>
     <div class="lost-wrapper hide">
         <form method="POST" action="#" onsubmit=" Lostbox.checkForm(); return false; " style="text-align:right;">
