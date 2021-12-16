@@ -26,6 +26,16 @@
 	<!-- 2]SqlSessionTemplate (commit(),close() 가 불필요)-->
 	<bean id="template" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="sqlSessionFactory" />
+	</bean>
+	
+		<!-- 트랜잭션 매니저등록 
+	
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="datasource"/>
 	</bean>	
+	
+	<bean class="org.springframework.transaction.support.TransactionTemplate">	 	  
+ 		<property name="transactionManager" ref="transactionManager"/>	 	
+ 	</bean>-->
 	
 </beans>
