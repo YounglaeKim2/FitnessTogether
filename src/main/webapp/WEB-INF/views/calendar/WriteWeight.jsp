@@ -36,7 +36,7 @@
 						<tbody>
 							<tr>
 								<td>
-									<select name="type" id="wieghtType" class="col-lg-12">
+									<select name="type" class="wieghtType col-lg-12">
 										<option value="">운동부위를 선택해주세요</option>
 										<option value="reg">하체</option>
 										<option value="back">등</option>
@@ -46,7 +46,7 @@
 									</select>
 								</td>
 								<td>
-									<select name="name" id="weightName" class="col-lg-12">
+									<select name="name" class="weightName col-lg-12">
 										<option value="">운동명을 선택해주세요</option>
 									</select>
 								</td>
@@ -72,14 +72,18 @@
 
 	$(function(){
 		
-		var addTable = '<tr><td><select name="" id="" class="col-lg-12"><option value="">운동부위를 선택해주세요</option><option value="reg">하체</option><option value="back">등</option><option value="chest">가슴</option><option value="shoulder">어깨</option></select></td><td><select name="" id="" class="col-lg-12"><option value="">운동명을 선택해주세요</option><option value="">백 스쿼트</option><option value="">레그 프레스</option><option value="">와이드 스쿼트</option><option value="">스티프 데드리프트</option><option value="">레그 컬</option></select></td><td align="center"><input type="text" name="" > Kg</td><td align="center"><input type="text" name="count" > 회</td></tr>';
+		var addTable = '<tr><td><select name="type" class="wieghtType col-lg-12"><option value="">운동부위를 선택해주세요</option><option value="reg">하체</option><option value="back">등</option><option value="chest">가슴</option><option value="shoulder">어깨</option></select></td><td><select name="name" class="weightName col-lg-12"><option value="">운동명을 선택해주세요</option></select></td><td align="center"><input type="text" name="" > Kg</td><td align="center"><input type="text" name="count" > 회</td></tr>';
 		
 		$('#btnform').click(function(){
 			$('#dataform').submit();
 		});
 		
 		$('#add_row').mouseover(function(){
-	    	$('#plus').css('cursor','pointer');
+	    	$('#add_row').css('cursor','pointer');
+	    });
+		
+		$('#remove_row').mouseover(function(){
+	    	$('#remove_row').css('cursor','pointer');
 	    });
 		
 		$('#add_row').click(function(){
@@ -98,7 +102,7 @@
 			$('#weighttable > tbody > tr:last').remove();
 		});
 		
-		$('#wieghtType').change(function(){
+		$('.wieghtType').on("change",function(){
 			$.ajax({
 				url:"<c:url value="/fnt/selectOption.do"/>",
 				dataType:"json",
@@ -110,7 +114,7 @@
 					options += "<option value=''>"+value['NAME']+"</option>";
 					
 				});
-				$('#weightName').html(options);
+				$('.weightName').html(options);
 			});
 		});
 		
