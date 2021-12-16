@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!-- https://mybatis.org/mybatis-3/ko/index.html -->
+<!-- myBatis 환경설정파일 
+	1]데이타베이스 연결정보 설정 
+	2]매퍼파일의 위치정보 설정 -->
+<configuration>
+
+	<!--마이바티스에서 사용할 .properties(리소스파일) 설정 -->
+	<!-- 
+	properties태그가 typeAliases태그보다 위에 위치
+	 -->
+	<!--  
+	<properties resource="onememo/resources/connect.properties"/>
+	-->
+	<!-- 클래스 별칭 설정 -->
+	<typeAliases>
+		<typeAlias type="com.kosmo.ft.service.MappingDTO" alias="mappingDTO"/>
+		<typeAlias type="com.kosmo.ft.service.LineCommentDTO" alias="lineCommentDTO"/>
+		<!-- LineCommentDTO는 별칭 불필요. SELECT결과를 Map에 저장하기때문에 -->
+	</typeAliases>
+
+	<!-- 데이타베이스 연결정보 설정 -->
+	<!-- mybatis-spring-2.x.jar의 API사용시 연결정보 불필요 -->
+	<!--  
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			
+			커넥션 풀 미 사용			
+			<dataSource type="POOLED">
+				<property name="driver" value="${driver}" />
+				<property name="url" value="${url}" />
+				<property name="username" value="${username}" />
+				<property name="password" value="${password}" />
+			</dataSource>
+			 커넥션 풀  사용:반드시 server.xml에 커넥션 풀 설정 
+			<dataSource type="JNDI">
+				<property name="data_source" value="${JNDI_NAME}"/>
+			</dataSource>
+			
+		</environment>
+	</environments>
+	-->
+	<!-- 매퍼파일(SQL쿼리 결과와 자바빈 매핑)의 위치정보 설정 -->
+	<mappers>
+		<mapper resource="mapping/mybatis/mapper/mapping.xml"/>
+		<mapper resource="mapping/mybatis/mapper/linecomment.xml"/>
+		<mapper resource="mapping/mybatis/mapper/dynamicsql.xml"/>
+	</mappers>
+</configuration>
