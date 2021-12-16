@@ -1,0 +1,261 @@
+@media screen and (max-width: 1920px) and (min-width: 1601px) {
+}
+
+@media screen and (max-width: 1600px) and (min-width: 1400px) {
+}
+
+@media screen and (max-width: 1281px) and (min-width: 1024px) {
+	.post-meta .detail {
+        width: 62%;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+	.post-meta .detail {
+        width: 60%;
+    }
+    .post-meta .detail > span {
+        font-size: 20px;
+    }
+    .l-post .l-post-meta > h4 {
+        font-size: 20px;
+    }
+    .right-pading {
+        padding-right: 0;
+    }
+    .left-pading {
+        padding-left: 0;
+    }
+    .detail-meta > h2 {
+        max-width: 100%;
+    }
+    .linked-image {
+        width: 36%;
+        margin-right: 15px;
+    }
+}
+
+@media screen and (max-width: 980px) {
+	.central-meta {
+		margin: 10px 10px 10px 0;
+		width: 100%;
+	}
+	.linked-image {
+        margin-right: 20px;
+        width: 22%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+}
+
+@media screen and (max-width: 640px) {
+	.central-meta {
+		padding: 30px 15px;
+	}
+	.friend-name {
+        width: 86%;
+    }
+    .friend-info > figure {
+        width: 11.6%;
+    }
+    .post-meta .detail {
+        width: 61%;
+    }
+    .detail-top .connect-with {
+        box-shadow: 0 0 20px #bababa;
+        margin-top: 20px;
+        padding: 15px;
+        position: unset;
+        width: 100%;
+    }
+    .detail-meta > h2 {
+        font-size: 23px;
+    }
+    .job-detail > ul li span{
+    	width: 94%;
+    }
+    .we-video-info > ul li span {
+        font-size: 14px;
+    }
+    .we-video-info > ul li span ins {
+        font-size: 10px;
+    }
+    .we-video-info > ul li.social-media {
+        margin-right: 0;
+    }
+    .we-comment {
+        width: 30%;
+    }
+    .we-comet > li ul .we-comment {
+        width: 21%;
+    }
+    li.post-comment .comet-avatar {
+        max-width: 8%;
+        width: 8%;
+    }
+     .we-comet > li ul {
+        margin-left: 20px;
+    }
+    .we-comet > li ul .we-comment {
+        width: 21%;
+    }
+    li.post-comment .comet-avatar {
+        max-width: 8%;
+        width: 8%;
+    }
+    .comet-avatar {
+        max-width: 3.5%;
+        width: 3.5%;
+    }
+    .post-comt-box {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+	.friend-logo > span::before,
+    .friend-logo > span::after {
+        top: -15px;
+    }
+    .friend-logo > span {
+        font-size: 140px;
+    }
+    .post-meta .detail {
+        width: 48%;
+    }
+    .post-meta .detail > span {
+        display: inline-block;
+        font-size: 18px;
+        width: 100%;
+    }
+    .detail-meta > ul {
+        padding-left: 10px;
+        margin-bottom: 0;
+    }
+    .job-detail > h3 {
+        font-size: 22px;
+    }
+    .we-video-info > ul li span {
+        font-size: 14px;
+    }
+    .we-video-info > ul li span ins {
+        font-size: 10px;
+    }
+    .tab-content .comment-text {
+        width: 100%;
+        margin-top: 10px;
+    }
+    .comment-form-author,
+    .comment-form-email {
+        margin-right: 0;
+        width: 100%;
+    }
+    .tab-content .comment-text .user-name {
+        margin-right: 9px;
+    }
+    .tab-content .commentlist > li {
+        width: 100%;
+    }
+    .tab-content .comment-text > p {
+        font-size: 14px;
+    }
+    .comment-respond {
+        width: 100%;
+    }
+    .we-comet > li ul {
+        margin-left: 0;
+    }
+    .comet-avatar {
+        max-width: 5.3%;
+        width: 5.3%;
+    }
+}
+
+@media screen and (max-width: 420px) and (min-width: 361px) {
+	.post-meta .detail {
+        width: 100%;
+    }
+    .job-detail > ul li span {
+        width: 90%;
+    }
+    .linked-image {
+        margin-right: 0;
+        width: 100%;
+    }
+    .linked-image img {
+        width: 100%;
+    }
+    .we-video-info > ul {
+        padding-left: 0;
+    }
+    .commenter-photo {
+        display: inline-block;
+        text-align: center;
+        width: 100%;
+    }
+    .commenter-meta {
+        display: inline-block;
+        margin-top: 20px;
+        max-width: 100%;
+        padding-left: 0;
+        width: 100%;
+    }
+    .comment-box {
+        padding: 20px;
+    }
+    .comments > li > ul {
+        padding-left: 0;
+    }
+}
+
+@media screen and (max-width: 360px) {
+	.post-meta .detail {
+        width: 100%;
+    }
+    .job-detail > ul li span {
+        width: 90%;
+    }
+    .linked-image > a {
+        display: inline-block;
+        width: 100%;
+    }
+    .linked-image > a img {
+        width: 100%;
+    }
+    .we-video-info > ul {
+        padding-left: 5px;
+    }
+    .comet-avatar {
+        max-width: 7.3%;
+        width: 7.3%;
+    }
+    .coment-head > h5 {
+        white-space: nowrap;
+        max-width: 45%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .coment-head > span {
+        vertical-align: top;
+    }
+    .we-reply {
+        vertical-align: super;
+    }
+}
+
+@media screen and (max-width: 320px) {
+	.friend-logo > span {
+        font-size: 170px;
+    }
+    .we-video-info > ul li.social-media {
+        position: absolute;
+        right: 20px;
+        top: -41px;
+    }
+    .comet-avatar {
+        max-width: 10%;
+        width: 10%;
+    }
+    
+}

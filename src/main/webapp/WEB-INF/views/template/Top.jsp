@@ -81,7 +81,7 @@
                         <a class="nav-link" href="<c:url value="#pricing"/>">채팅</a>
                     </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="<c:url value="#pricing"/>">게시판</a>
+                        <a class="nav-link" href="<c:url value="/fnt/photoList.do"/>">소셜게시판</a>
                     </li>
                      <li class="nav-item">
                         <a class="nav-link" href="<c:url value="/fnt/calendar.do"/>">캘린더</a>
