@@ -36,7 +36,7 @@
 						<tbody>
 							<tr>
 								<td>
-									<select name="type" class="wieghtType col-lg-12">
+									<select name="type1" id="wieghtType1" class="testtype col-lg-12">
 										<option value="">운동부위를 선택해주세요</option>
 										<option value="reg">하체</option>
 										<option value="back">등</option>
@@ -46,15 +46,15 @@
 									</select>
 								</td>
 								<td>
-									<select name="name" class="weightName col-lg-12">
+									<select name="name1" id="weightName1" class="col-lg-12">
 										<option value="">운동명을 선택해주세요</option>
 									</select>
 								</td>
 								<td align="center">
-									<input type="text" name="" > Kg
+									<input type="text" name="kg1" > Kg
 								</td>
 								<td align="center">
-									<input type="text" name="count" > 회
+									<input type="text" name="count1" > 회
 								</td>
 							</tr>
 						</tbody>
@@ -72,7 +72,7 @@
 
 	$(function(){
 		
-		var addTable = '<tr><td><select name="type" class="wieghtType col-lg-12"><option value="">운동부위를 선택해주세요</option><option value="reg">하체</option><option value="back">등</option><option value="chest">가슴</option><option value="shoulder">어깨</option></select></td><td><select name="name" class="weightName col-lg-12"><option value="">운동명을 선택해주세요</option></select></td><td align="center"><input type="text" name="" > Kg</td><td align="center"><input type="text" name="count" > 회</td></tr>';
+		var index = 1;
 		
 		$('#btnform').click(function(){
 			$('#dataform').submit();
@@ -85,13 +85,58 @@
 		$('#remove_row').mouseover(function(){
 	    	$('#remove_row').css('cursor','pointer');
 	    });
-		
+		/*
 		$('#add_row').click(function(){
+			var addTable = '<tr><td><select name="type'+ ++index+'" id="wieghtType'+ index +'" class="col-lg-12"><option value="">운동부위를 선택해주세요</option><option value="reg">하체</option><option value="back">등</option><option value="chest">가슴</option><option value="shoulder">어깨</option></select></td><td><select name="name'+index+'" id="weightName'+ index +'" class="col-lg-12"><option value="">운동명을 선택해주세요</option></select></td><td align="center"><input type="text" name="kg'+index+'" > Kg</td><td align="center"><input type="text" name="count'+index+'" > 회</td></tr>';
 			if($('#weighttable > tbody > tr').length == 10){
 				alert('더이상 추가할 수 없습니다');
 				return;
 			}
 			$('#weighttable > tbody:last').append(addTable);
+			
+			$('#wieghtType'+index).on("change",function(){
+				$.ajax({
+					url:"<c:url value="/fnt/selectOption.do"/>",
+					dataType:"json",
+					data:{"type":$(this).val()}
+				}).done(function(data){
+					console.log(data);	
+					console.log(index);
+					var options = "<option value=''>운동명을 선택해주세요</option>";
+					$.each(data,function(index,value){ // value 는 json
+						options += "<option value=''>"+value['NAME']+"</option>";
+					});
+					$('#weightName'+index).html(options);
+				});
+			});
+			
+		});
+		*/
+		$('#add_row').click(function(){
+			var addTable = '<tr><td><select name="type'+ ++index+'" id="wieghtType'+ index +'" class="testtype col-lg-12"><option value="">운동부위를 선택해주세요</option><option value="reg">하체</option><option value="back">등</option><option value="chest">가슴</option><option value="shoulder">어깨</option><option value="arms">팔</option></select></td><td><select name="name'+index+'" id="weightName'+ index +'" class="col-lg-12"><option value="">운동명을 선택해주세요</option></select></td><td align="center"><input type="text" name="kg'+index+'" > Kg</td><td align="center"><input type="text" name="count'+index+'" > 회</td></tr>';
+			if($('#weighttable > tbody > tr').length == 10){
+				alert('더이상 추가할 수 없습니다');
+				return;
+			}
+			$('#weighttable > tbody:last').append(addTable);
+			
+			$('.testtype').on("change",function(){
+				var num = $(this).prop('id').substr(10);
+				
+				$.ajax({
+					url:"<c:url value="/fnt/selectOption.do"/>",
+					dataType:"json",
+					data:{"type":$(this).val()}
+				}).done(function(data){
+					console.log(data);	
+					var options = "<option value=''>운동명을 선택해주세요</option>";
+					$.each(data,function(index,value){ // value 는 json
+						options += "<option value=''>"+value['NAME']+"</option>";
+					});
+					$('#weightName'+num).html(options);
+				});
+			});
+			
 		});
 		
 		$('#remove_row').click(function(){
@@ -100,23 +145,27 @@
 				return;
 			}
 			$('#weighttable > tbody > tr:last').remove();
+			--index;
 		});
 		
-		$('.wieghtType').on("change",function(){
+		$('#wieghtType1').on("change",function(){
 			$.ajax({
 				url:"<c:url value="/fnt/selectOption.do"/>",
 				dataType:"json",
 				data:{"type":$(this).val()}
 			}).done(function(data){
 				console.log(data);	
+				console.log(index);
 				var options = "<option value=''>운동명을 선택해주세요</option>";
 				$.each(data,function(index,value){ // value 는 json
 					options += "<option value=''>"+value['NAME']+"</option>";
-					
 				});
-				$('.weightName').html(options);
+				$('#weightName1').html(options);
+				
 			});
 		});
+		
+			
 		
 		
 		
