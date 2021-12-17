@@ -22,10 +22,6 @@
 <!-- 사이트로고 -->
 
 <link rel="stylesheet"
-	href="<c:url value="/resources/css/photobbs/tl-all.css"/>">
-<link rel="stylesheet"
-	href="<c:url value="/resources/css/photobbs/tl-style.css"/>">
-<link rel="stylesheet"
 	href="<c:url value="/resources/css/photobbs/tl-color.css"/>">
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/photobbs/tl-boots.css"/>">

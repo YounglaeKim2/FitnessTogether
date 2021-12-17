@@ -22,14 +22,11 @@
 <!-- 사이트로고 -->
 
 <link rel="stylesheet"
-	href="<c:url value="/resources/css/photobbs/tl-all-in-one.css"/>">
-<link rel="stylesheet"
 	href="<c:url value="/resources/css/photobbs/tl-color.css"/>">
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/photobbs/tl-boots.css"/>">
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/photobbs/lightboxes/tl-lightboxes.css"/>">
-
 
 </head>
 
@@ -252,11 +249,9 @@
 															src="images/resources/page1.jpg" alt=""></a>
 													</div>
 													<div class="detail">
-														<span>Love Maid - ChillGroves</span>
-														<p>Lorem ipsum dolor sit amet, consectetur ipisicing
-															elit, sed do eiusmod tempor incididunt ut labore et
-															dolore magna aliqua...</p>
-														<a href="#" title="">www.sample.com</a>
+														<span>aaa</span>
+														<p>111222333</p>
+														<a href="#" title="">www.naver.com</a>
 													</div>
 													<div class="we-video-info">
 														<ul>
