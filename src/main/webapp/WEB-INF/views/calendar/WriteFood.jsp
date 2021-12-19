@@ -16,7 +16,7 @@
 	    	<div class="row">
               <div class="text-center">
              	<div class="col-lg-12" style="padding-left: 65%;">
-					<form class="form-line" method="post" action="<c:url value='/fnt/writefood.do'/>">
+					<form class="form-line" method="post" action="<c:url value='/fnt/gowritefood.do'/>">
 						<input type="hidden" value="${date}"/>
 						<div class="form-group" style="padding-left: 30%;">
 							<select name="searchColumn" class="form-control" style="padding-right: 70%;">

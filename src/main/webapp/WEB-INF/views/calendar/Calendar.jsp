@@ -50,7 +50,7 @@
 	    	$('.fc-daygrid-day-frame').css('cursor','pointer');
 	    });
 	    $('#writefood').click(function(){
-	    	location.href='<c:url value="/fnt/writefood.do"/>';
+	    	location.href='<c:url value="/fnt/writefood.do"/>'+"?date="+date;;
 	    });
 	    $('#writeweight').click(function(){
 	    	location.href='<c:url value="/fnt/writeweight.do"/>'+"?date="+date;
