@@ -49,6 +49,10 @@ public class CalendarController {
 	@PostMapping("/fnt/writeweight.do")
 	public String writeWeight(@RequestParam Map map,Model model) {
 		
+		
+		System.out.println(String.format("type1: %s, name1: %s, kg1: %s, count1: %s",map.get("type1"),map.get("name1"),map.get("kg1"),map.get("count1")));
+		System.out.println(String.format("type2: %s, name2: %s, kg2: %s, count2: %s",map.get("type2"),map.get("name2"),map.get("kg2"),map.get("count2")));
+		
 		return "";
 	}
 	
