@@ -72,7 +72,7 @@
                         <a class="nav-link" href="<c:url value="/fnt/Logout.do"/>">로그아웃</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<c:url value="/fnt/Mypage.do"/>">마이페이지</a>
+                        <a class="nav-link" href="<c:url value="/fnt/ProAlter.do"/>">마이페이지</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<c:url value="/fnt/mappingList.do"/>">매핑</a>

@@ -203,7 +203,7 @@
                                             <div class="profile-contents">
                                                 <div class="profile-nickname">
                                                     <a href="/member/setting/3194264">
-                                                        아요니쨘                                                    </a>
+                                                        아요니                                                    </a>
                                                 </div>
                                                 <div class="profile-grade">
                                                     <div>
@@ -334,28 +334,28 @@
         <div class="member-setting">
 
             <div class="member-setting-menu">
-    <a href="/member/setting/">
-        <div class="member-setting-menu-item member-setting-menu-item-active">
+   <a href="<c:url value="/fnt/ProAlter.do"/>">
+        <div class="member-setting-menu-item">
             프로필 수정
         </div>
         <!--/.member-setting-menu-item-->
     </a>
 
-    <a href="/member/password/">
-        <div class="member-setting-menu-item ">
+    <a href="<c:url value="/fnt/PwdAlter.do"/>">
+        <div class="member-setting-menu-item member-setting-menu-item-active">
             비밀번호 변경
         </div>
         <!--/.member-setting-menu-item-->
     </a>
 
-    <a href="/member/leave/">
+    <a href="<c:url value="/fnt/MemberQuit.do"/>">
         <div class="member-setting-menu-item ">
             회원 탈퇴
         </div>
         <!--/.member-setting-menu-item-->
     </a>
 
-    <a href="/member/address/">
+    <a href="<c:url value="/fnt/AddrAlter.do"/>">
         <div class="member-setting-menu-item ">
             주소지 수정
         </div>
@@ -364,99 +364,55 @@
 </div>
 <!--/.member-setting-menu-->
 
-            <div class="member-setting-content" style="padding-left: 180px; padding-top: 40px;">
+          <!--/.member-setting-menu-->
+
+            <div class="member-setting-content"
+                 style="width: 80%; padding-left: 200px; padding-right: 200px; padding-top: 40px;">
 
                 <div id="saved-message" class="content-alert alert-orange">
-                    프로필 저장 되었습니다! :)
+                    신규 비밀번호 등록되었습니다! :)
 
-                    <div class="btn-close" onclick="MemberSetting.hideSavedMessage();"><i class="fa fa-times"
+                    <div class="btn-close" onclick="MemberPassword.hideSaveMessage();"><i class="fa fa-times"
                                                                                           aria-hidden="true"></i></div>
                     <!--/.btn-close-->
                 </div>
+                <!--/.alert-orange-->
 
-                <div id="wrong-message" class="content-alert alert-orange" style="background-color: #F07054;">
-                    이미 사용중인 닉네임 입니다 :(
-                    <div class="btn-close" onclick="MemberSetting.hideWrongMessage();"><i class="fa fa-times"
-                                                                                          aria-hidden="true"></i></div>
+                <div id="failed-message" class="content-alert alert-danger">
+                    <span>현재 비밀번호 확인 후 다시 시도 해주세요! :(</span>
+
+                    <div class="btn-close" onclick="MemberPassword.hideFailedMessage();"><i class="fa fa-times"
+                                                                                            aria-hidden="true"></i>
+                    </div>
                     <!--/.btn-close-->
                 </div>
-                <!--/.alert-red-->
+                <!--/.alert-orange-->
 
-                <form id="memberProfileForm" method="POST" action="/action/form/member/setting/"
-                      onsubmit="return MemberSetting.checkForm();">
+                <form id="memberProfileForm" method="POST" action="/action/form/member/password/"
+                      onsubmit="return MemberPassword.checkForm();">
                     <table class="profile-table">
                         <tbody>
                         <tr>
-                            <td colspan="2" class="text-center">
-                                <div class="profile-wrapper">
-                                    <img id="profile-image"
-                                         src="//cdn.ggumim.co.kr/cache/member/profile/180/20211214115935wcWxTK0553.png"/>
-                                    <input type="hidden" name="recent_profile" id="recent_profile"
-                                           value="20211214115935wcWxTK0553.png"/>
-                                    <div class="update-picture">
-                                        <input type="file" id="fileupload" name="userfile[]" value=""/>
-                                        <i class="fa fa-camera" aria-hidden="true"></i>
-                                    </div>
-                                    <!--/.update-picture-->
-                                </div>
-                                <!--/.profile-wrapper-->
-                                <br/><br/>
+                            <td colspan="2" class="profile-section-header">
+                                비밀번호 변경
                             </td>
                         </tr>
-                       
-                        <tr>
-                            <td>
-                                닉네임 <span>필수</span>
+                                                <tr>
+                            <td style="width:145px;">
+                                신규 비밀번호 <span>필수</span>
                             </td>
                             <td>
-                                <input type="text" class="member-setting-input" name="nickname"
-                                       placeholder="3자 이상 공백,특문X" style="width: 220px;"
-                                       value="아요니쨘"
-                                       onkeydown="MemberSetting.changeNicknameStatus();"/>
-                            </td>
-                            <td class="text-center">
-                                <input type="button" class="btn-save-setting" value="중복검사"
-                                       onclick="MemberSetting.checkNickname();"/>
+                                <input type="password" class="member-setting-input" id="new_password_1"
+                                       name="password_new" value="" style="width: 100%;"/>
                             </td>
                         </tr>
                         <tr>
-                            <td>
-                                이메일 주소 <span>필수</span>
+                            <td style="width: 170px;">
+                                신규 비밀번호 확인 <span>필수</span>
                             </td>
                             <td>
-                                <input type="text" class="member-setting-input" name="email"
-                                       value="dkdysl1106@naver.com"
-                                       style="width: 220px; color:gray;"
-                                       onfocusout="MemberSetting.checkEmail(this);" readOnly />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                휴대폰 번호
-                            </td>
-                            <td>
-                                <input type="text" class="member-setting-input" name="phone_number"
-                                       value="01093704158" style="width: 220px;"
-                                       id="phone_number" placeholder="휴대폰 번호를 입력해주세요"/>
-                            </td>
-                        </tr>
-                       
-                        <tr>
-                            <td>
-                                자기소개
-                            </td>
-                            <td>
-                                <input type="text" class="member-setting-input" name="recent_shout"
-                                       value="" style="width: 100%;"/>
-                            </td>
-                        </tr>
-                          <tr>
-                            <td>
-                                관심사
-                            </td>
-                            <td>
-                                <input type="text" class="member-setting-input" name="inter"
-                                       value="" style="width: 100%;"/>
+                                <input type="password" class="member-setting-input" id="new_password_2" value=""
+                                       style="width: 100%;"/>
                             </td>
                         </tr>
                         <tr>
@@ -466,24 +422,8 @@
                             </td>
                         </tr>
                         <tr>
-                           
-                            <td>
-                              
-                                <!--/.setting-toggle-->
-
-                                <input type="hidden" name="push_setting_news"
-                                       value="1"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                              
-                                <!--/.profile-seperator-->
-                            </td>
-                        </tr>
-                        <tr>
                             <td colspan="2" class="text-center">
-                                <input type="submit" class="btn-save-setting" value="저장하기"/>
+                                <input type="submit" class="btn-save-setting" value="변경하기"/>
                             </td>
                         </tr>
                         </tbody>
@@ -507,7 +447,7 @@
 
     Stack.add(function () {
         MemberSetting.begin();
-        MemberSetting.originalNickname = "아요니쨘";
+        MemberSetting.originalNickname = "아요니";
     });
 </script>
 <div class="popup_term"></div>

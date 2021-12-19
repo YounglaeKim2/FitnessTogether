@@ -1,24 +1,113 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+    
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Your description">
+    <meta name="author" content="Your name">
+
+    <!-- OG Meta Tags to improve the way the post looks when you share the page on Facebook, Twitter, LinkedIn -->
+	<meta property="og:site_name" content="" /> <!-- website name -->
+	<meta property="og:site" content="" /> <!-- website link -->
+	<meta property="og:title" content=""/> <!-- title shown in the actual shared post -->
+	<meta property="og:description" content="" /> <!-- description shown in the actual shared post -->
+	<meta property="og:image" content="" /> <!-- image link, make sure it's jpg -->
+	<meta property="og:url" content="" /> <!-- where do you want your post to link to -->
+	<meta name="twitter:card" content="summary_large_image"> <!-- to have large image post format in Twitter -->
+
+    <!-- Webpage Title -->
+    <title>Fitness Together</title>
+    <!-- Styles -->
    
- <jsp:include page="/WEB-INF/views/template/Top.jsp"/> 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	
+	
+    <link href="<c:url value="/resources/css/swiper.css"/>" rel="stylesheet">
+	<link href="<c:url value="/resources/css/styles.css"/>" rel="stylesheet">
+	
+    <link type="text/css" rel="stylesheet" href="//cdn.ggumim.co.kr/resource/fonts/spoqahansans.css" />
+
+    <link type="text/css" rel="stylesheet" href="//cdn.ggumim.co.kr/static/ggumim-1.6.00.min.css"/>
+    <script type="text/javascript" src="//cdn.ggumim.co.kr/static/ggumim-stack-1.6.00.min.js"></script>
+    <!-- kakao moment -->
+	<!-- Favicon  -->
+    <link rel="icon" href="<c:url value="/resources/images/favicon.png"/>">
+    
+   
+  
+  
+ 
+    
+    
+</head>
+<body data-bs-spy="scroll" data-bs-target="#navbarExample">
+    
+    <!-- Navigation -->
+    <nav id="navbarExample" class="navbar navbar-expand-lg fixed-top navbar-light" aria-label="Main navigation">
+        <div class="container">
+
+            <!-- Image Logo -->
+            <a class="navbar-brand logo-image" href="<c:url value="/fnt/main.do"/>"><img src="<c:url value="/resources/images/logo.svg"/>" alt="alternative"></a> 
+
+            <!-- Text Logo - Use this if you don't have a graphic logo -->
+            <!-- <a class="navbar-brand logo-text" href="<c:url value="index.html"/>">Zinc</a> -->
+
+            <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+                <ul class="navbar-nav ms-auto navbar-nav-scroll">
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="<c:url value="/fnt/Login.do"/>">로그인</a>
+                    </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="<c:url value="/fnt/SignUp.do"/>">회원가입</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<c:url value="/fnt/Logout.do"/>">로그아웃</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<c:url value="/fnt/Mypage.do"/>">마이페이지</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<c:url value="/fnt/mappingList.do"/>">매핑</a>
+                    </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="<c:url value="#pricing"/>">채팅</a>
+                    </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="<c:url value="/fnt/photoList.do"/>">소셜게시판</a>
+                    </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="<c:url value="/fnt/calendar.do"/>">캘린더</a>
+                    </li>
+                </ul>
+            </div> <!-- end of navbar-collapse -->
+        </div> <!-- end of container -->
+    </nav> <!-- end of navbar -->
+    <!-- end of navigation -->
+
+      
 
 <!-- Top 끝 -->
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=1000" />
     <title>Fitness Together</title>
     <!-- dable용 메타태그 -->
     <!-- CSS Offset -->
     <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <!-- 마케팅 Tool Start -->
     <!-- Criteo 로더 파일 -->
-	<script type="text/javascript" src="//dynamic.criteo.com/js/ld/ld.js?a=90210" async="true"></script>
+	<!--<script type="text/javascript" src="//dynamic.criteo.com/js/ld/ld.js?a=90210" async="true"></script>
+	-->
 	<!-- END Criteo 로더 파일 -->
 	<!-- Criteo 태그 -->
 	<!--  
@@ -35,26 +124,16 @@
 </script>
 <!-- END Criteo 태그 -->  
     
-    <!-- 개인화 엔드 -->
-    <div class="ggumim-channel-talk" id="channel_talk" style="display:none;">
-        <img src="//cdn.ggumim.co.kr/storage/201911191517302RTfJHpC36.png" />
-    </div>
-    <link type="text/css" rel="stylesheet" href="//cdn.ggumim.co.kr/resource/fonts/spoqahansans.css" />
-    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/nanumgothic.css" />
-    <link type="text/css" rel="stylesheet" href="//cdn.ggumim.co.kr/static/ggumim-1.6.00.min.css"/>
-    <script type="text/javascript" src="//cdn.ggumim.co.kr/static/ggumim-stack-1.6.00.min.js"></script>
-    <!-- kakao moment -->
-    <script type="text/javascript" charset="UTF-8" src="//t1.daumcdn.net/adfit/static/kp.js"></script>
-    <!-- SpoqaHanSansNeo  -->
-    <link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css' rel='stylesheet' type='text/css'>
+
+   
 </head>
 <body class="">
    
-   <a href="/commerce/cart">
+  
   <div class="item sm-bar cart-icon">
-   <img src="//cdn.ggumim.co.kr/resource/icons/ic_cart_black.png" style="width: 20px; height: 28px; vertical-align: top; margin-top: 26px; " />
+   <img src="//" style="width: 20px; height: 28px; vertical-align: top; margin-top: 26px; " />
    </div>
-    </a>
+   
     
       <a href="/member/order_nonmember/">
       </a>
@@ -79,41 +158,21 @@
             
             </div>
         </div>
-        
+     
         <c:if test="${! empty  NotMember}">
-		 <!-- The Modal -->
-		<div class="modal" id="login">
-		  <div class="modal-dialog">
-		    <div class="modal-content">
 		
-		      <!-- Modal Header -->
-		      <div class="modal-header">
-		        <h4 class="modal-title">로그인</h4>
-		      </div>
-		
-		      <!-- Modal body -->
-		      <div class="modal-body">
-		        Modal body..
-		      </div>
-		
-		      <!-- Modal footer -->
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
-		      </div>
-		
-		    </div>
-		  </div>
-		</div>
 		</c:if>
+		 
 		
-		<div class="input-wrapper">
-		<c:if test="${not empty map.id }" var="isLogin">
-			<div class="col-xs-offset-1 col-xs-6 alert alert-success">${map.id }님
+	
+		<c:if test="${not empty sessionScope.id }" var="isLogin">
+			<div class="col-xs-offset-1 col-xs-6 alert alert-success">${sessionScope.id }님
 				즐감하세요</div>
 		</c:if>
 		
-		<c:if test="${not isLogin }"/>
-        <div style="text-align: center; margin-top: -15px; height: 30px; color: #8e8e8e;"> or</div>
+		<c:if test="${not isLogin }">
+		<div class="input-wrapper" >
+        <div style="text-align: center; margin-top: -15px; height: 30px; color: #8e8e8e;"> </div>
         <form method="POST" action="<c:url value='/fnt/LoginProcess.do'/>">
             <div class="input-wrapper">
                 <i class="fa fa-envelope-o" aria-hidden="true"></i>
@@ -124,15 +183,14 @@
                 <input type="password" id="pwd" name="pwd" class="input-login" placeholder="PASSWORD"/>
                 
             </div>
-            <input type="submit" class="signin-btn" value="Login"></button>
-                        <div class="btn-wrapper-nm">
-              
-            </div>
-            
+            <div class="input-wrapper" style="text-align: center;">
+            <input type="submit" class="signin-btn"  value="LOGIN">
+            </div>    
         </form>
        </div>
-       
+       </c:if>
     </div>
+    
     <div class="lost-wrapper hide">
         <form method="POST" action="#" onsubmit=" Lostbox.checkForm(); return false; " style="text-align:right;">
             <div class="input-wrapper">
@@ -148,9 +206,7 @@
        
    
 </div>
-<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js"
-        charset="utf-8">
-</script>
+
 <!--
 <script>
 	
