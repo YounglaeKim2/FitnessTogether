@@ -7,26 +7,93 @@
 <!-- Top 끝 -->
 
     <!-- Header -->
-    <header id="header" class="header">
+	    <div class="container">
+	      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+	        <div class="carousel-inner">
+	          <div class="carousel-item active">
+	            <img src="<c:url value="/resources/images/mapping/FT1.jpg"/>" class="d-block w-100" alt="...">
+	          </div>
+	          <div class="carousel-item">
+	            <img src="<c:url value="/resources/images/mapping/FT2.jpg"/>" class="d-block w-100" alt="...">
+	          </div>
+	          <div class="carousel-item">
+	            <img src="<c:url value="/resources/images/mapping/FT3.jpg"/>" class="d-block w-100" alt="...">
+	          </div>
+	        </div>
+	        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+	          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+	          <span class="visually-hidden">Previous</span>
+	        </button>
+	        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+	          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+	          <span class="visually-hidden">Next</span>
+	        </button>
+	      </div>
+	    </div>
         <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-xl-5">
-                    <div class="text-container">
-                        <div class="section-title">Fitness Together 123345677889</div>
-                        <h1 class="h1-large">Fitness Together 2</h1>
-                        <p class="p-large">Fitness Together 3</p>
-                        <a class="btn-solid-lg" href="#services">Fitness Together 4</a>
-                        <a class="quote" href="#contact"><i class="fas fa-paper-plane"></i>Fitness Together 5</a>
-                    </div> <!-- end of text-container -->
-                </div> <!-- end of col -->
-                <div class="col-lg-6 col-xl-7">
-                    <div class="image-container">
-                        <img class="img-fluid" src="<c:url value='/resources/images/header_illustration.svg'/>" alt="alternative">
-                    </div> <!-- end of image-container -->
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
+	        <div class="row">
+	            <div class="col-md-4">
+	                <div class="card" style="width: 100%">
+	                    <img src="<c:url value="/resources/images/mapping/FT1.jpg"/>" class="card-img-top" alt="...">
+	                    <div class="card-body">
+	                      <h5 class="card-title">Card title</h5>
+	                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+	                      <a href="#" class="btn btn-primary">Go somewhere</a>
+	                    </div>
+	                  </div>
+	            </div>
+	            <div class="col-md-4">
+	                <div class="card" style="width: 100%">
+	                    <img src="<c:url value="/resources/images/mapping/FT2.jpg"/>" class="card-img-top" alt="...">
+	                    <div class="card-body">
+	                      <h5 class="card-title">Card title</h5>
+	                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+	                      <a href="#" class="btn btn-primary">Go somewhere</a>
+	                    </div>
+	                  </div>
+	            </div>
+	            <div class="col-md-4">
+	                <div class="card" style="width: 100%">
+	                    <img src="<c:url value="/resources/images/mapping/FT3.jpg"/>" class="card-img-top" alt="...">
+	                    <div class="card-body">
+	                      <h5 class="card-title">Card title</h5>
+	                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+	                      <a href="#" class="btn btn-primary">Go somewhere</a>
+	                    </div>
+	                  </div>
+	            </div>
+	            <div class="col-md-4">
+	                <div class="card" style="width: 100%">
+	                    <img src="<c:url value="/resources/images/mapping/FT1.jpg"/>" class="card-img-top" alt="...">
+	                    <div class="card-body">
+	                      <h5 class="card-title">Card title</h5>
+	                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+	                      <a href="#" class="btn btn-primary">Go somewhere</a>
+	                    </div>
+	                  </div>
+	            </div>
+	            <div class="col-md-4">
+	                <div class="card" style="width: 100%">
+	                    <img src="<c:url value="/resources/images/mapping/FT2.jpg"/>" class="card-img-top" alt="...">
+	                    <div class="card-body">
+	                      <h5 class="card-title">Card title</h5>
+	                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+	                      <a href="#" class="btn btn-primary">Go somewhere</a>
+	                    </div>
+	                  </div>
+	            </div>
+	            <div class="col-md-4">
+	                <div class="card" style="width: 100%">
+	                    <img src="<c:url value="/resources/images/mapping/FT3.jpg"/>" class="card-img-top" alt="...">
+	                    <div class="card-body">
+	                      <h5 class="card-title">Card title</h5>
+	                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+	                      <a href="#" class="btn btn-primary">Go somewhere</a>
+	                    </div>
+	                  </div>
+	            </div>
+	        </div>
         </div> <!-- end of container -->
-    </header> <!-- end of header -->
     <!-- end of header -->
 
 

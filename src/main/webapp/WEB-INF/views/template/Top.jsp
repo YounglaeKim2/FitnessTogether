@@ -43,6 +43,11 @@
     
     
 </head>
+<style>
+body {
+	padding-top: 100px
+}
+</style>
 <body data-bs-spy="scroll" data-bs-target="#navbarExample">
     
     <!-- Navigation -->
