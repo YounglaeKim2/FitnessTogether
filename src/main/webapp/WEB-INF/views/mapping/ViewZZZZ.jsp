@@ -17,7 +17,7 @@
 	padding-right: 20px;
 }
 </style>
-
+<body>
 
 
 <head>
@@ -168,6 +168,7 @@
 	</c:if>
 	
 </div>
+</body>
 <!-- footer 시작 -->
 <jsp:include page="/WEB-INF/views/template/Footer.jsp" />
 <!-- footer 끝 -->

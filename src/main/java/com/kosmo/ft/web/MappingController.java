@@ -39,6 +39,10 @@ public class MappingController {
 	public String goViewZZZZ() {
 		return "mapping/ViewZZZZ";
 	}
+	@RequestMapping("View2.do")
+	public String goView2() {
+		return "mapping/View2";
+	}
 	
 	@RequestMapping(value="mappingWrite.do",method = RequestMethod.GET)
 	public String write(@ModelAttribute("id") String id) {

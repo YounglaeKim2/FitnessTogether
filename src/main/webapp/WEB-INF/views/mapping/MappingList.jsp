@@ -5,12 +5,13 @@
 <jsp:include page="/WEB-INF/views/template/Top.jsp" />
 <!-- Top 끝 -->
 
-
+<!-- 
 <style>
 body {
 	padding-top: 100px
 }
 </style>
+ -->
 <!-- 실제 내용 시작 -->
 <div class="container">
 
@@ -19,10 +20,14 @@ body {
 			Mapping<small>List</small>
 		</h2>
 	</div>
-	
 	<div class="d-grid gap-2 d-md-flex justify-content-md-end">
 		<div class="btn btn-link">
 			<a href="<c:url value="/fnt/ViewZZZZ.do"/> "class="btn btn-success">지도</a>
+		</div>
+	</div>
+	<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+		<div class="btn btn-link">
+			<a href="<c:url value="/fnt/View2.do"/> "class="btn btn-success">지도2</a>
 		</div>
 	</div>
 	<!-- 작성하기 버튼 
