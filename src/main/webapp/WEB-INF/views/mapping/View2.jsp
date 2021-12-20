@@ -6,7 +6,6 @@
 <jsp:include page="/WEB-INF/views/template/Top.jsp" />
 <!-- Top 끝 -->
 
-
 <head>
     <meta charset="utf-8">
     <title>키워드로 장소검색하고 목록으로 표출하기</title>
@@ -49,7 +48,7 @@
 		#pagination .on {font-weight: bold; cursor: default;color:#777;}
 	</style>
 </head>
-<div class="container"></div>
+
 <body>
 	<div class="map_wrap">
 		<div id="map"
@@ -70,8 +69,7 @@
 		</div>
 	</div>
 
-	<script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c244899725d72b692838ccde36cbb07d&libraries=services"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c244899725d72b692838ccde36cbb07d&libraries=services"></script>
 	<script>
 		// 마커를 담을 배열입니다
 		var markers = [];
@@ -296,7 +294,6 @@
 		}
 	</script>
 </body>
-
 
 <!-- footer 시작 -->
 <jsp:include page="/WEB-INF/views/template/Footer.jsp" />

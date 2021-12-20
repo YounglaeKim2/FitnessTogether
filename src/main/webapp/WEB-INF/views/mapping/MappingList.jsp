@@ -22,12 +22,12 @@ body {
 	</div>
 	<div class="d-grid gap-2 d-md-flex justify-content-md-end">
 		<div class="btn btn-link">
-			<a href="<c:url value="/fnt/ViewZZZZ.do"/> "class="btn btn-success">지도</a>
+			<a href="<c:url value="/fnt/View1.do"/> "class="btn btn-success">지도뷰1</a>
 		</div>
 	</div>
 	<div class="d-grid gap-2 d-md-flex justify-content-md-end">
 		<div class="btn btn-link">
-			<a href="<c:url value="/fnt/View2.do"/> "class="btn btn-success">지도2</a>
+			<a href="<c:url value="/fnt/View2.do"/> "class="btn btn-success">지도뷰2</a>
 		</div>
 	</div>
 	<!-- 작성하기 버튼 

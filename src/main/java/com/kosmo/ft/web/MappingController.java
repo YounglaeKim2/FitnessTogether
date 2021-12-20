@@ -35,9 +35,9 @@ public class MappingController {
 		return "mapping/ZZZZ";
 	}
 	
-	@RequestMapping("ViewZZZZ.do")
-	public String goViewZZZZ() {
-		return "mapping/ViewZZZZ";
+	@RequestMapping("View1.do")
+	public String goView1() {
+		return "mapping/View1";
 	}
 	@RequestMapping("View2.do")
 	public String goView2() {
