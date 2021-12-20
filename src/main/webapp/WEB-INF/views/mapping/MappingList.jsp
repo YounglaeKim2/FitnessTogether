@@ -88,12 +88,26 @@ body {
 		<!-- column -->
 	</div>
 	<!-- row -->
-	<!-- 페이징 -->
+	<!-- 페이징 
 	<c:if test="${listPagingData.lists.size() !=0 }">
 		<div class="row">
 			<div class="col-md-12 text-center">${listPagingData.pagingString}</div>
 		</div>
 	</c:if>
+	-->
+	<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    <li class="page-item disabled">
+      <a class="page-link">Previous</a>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item">
+      <a class="page-link" href="#">Next</a>
+    </li>
+  </ul>
+</nav>
 	<!-- 검색용 UI -->
 	
 	<div class="container">

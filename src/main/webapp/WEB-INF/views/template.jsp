@@ -5,6 +5,7 @@
 <!-- Top 시작 -->
 <jsp:include page="/WEB-INF/views/template/Top.jsp"/>
 <!-- Top 끝 -->
+<body data-bs-spy="scroll" data-bs-target="#navbarExample">
 
     <!-- Header -->
     <header id="header" class="header">
@@ -29,7 +30,7 @@
     </header> <!-- end of header -->
     <!-- end of header -->
 
-
+</body>
 <!-- footer 시작 -->
 <jsp:include page="/WEB-INF/views/template/Footer.jsp"/>
 <!-- footer 끝 -->

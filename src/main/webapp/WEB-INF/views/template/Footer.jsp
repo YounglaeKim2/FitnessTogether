@@ -4,6 +4,7 @@
 
 
     <!-- Footer -->
+    <footer>
     <div class="footer bg-gray">
         <img class="decoration-city" src='<c:url value="/resources/images/decorationcity.svg"/>' alt="alternative"/>
         <div class="container">
@@ -45,7 +46,8 @@
                 </div> <!-- end of col -->
             </div> <!-- end of row -->
         </div> <!-- end of container -->
-    </div> <!-- end of footer -->  
+    </div> <!-- end of footer -->
+    </footer>
     <!-- end of footer -->
 
 
@@ -53,15 +55,9 @@
     <div class="copyright bg-gray">
         <div class="container">
             <div class="row">
-            	ⓒ2021 Copyright <a href="#">한국 소프트웨어 인재개발원</a>
+            	©2021 Copyright <a href="#">한국 소프트웨어 인재개발원</a>
             </div> <!-- enf of row -->
         </div> <!-- end of container -->
     </div> <!-- end of copyright --> 
     <!-- end of copyright -->
-    
-    
-
- 
-    	
-</body>
 </html>
