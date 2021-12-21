@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--  수정해야함
+<mapper namespace="mybatis.mapper.food">
+	<insert id="foodInsert" parameterType="foodDto">
+		INSERT INTO food VALUES(#{food_no},#{food_name},#{food_type},#{food_amount},#{food_calory},SYSDATE)
+	</insert>
+	<select id="foodSelectList" resultType="foodDto">
+		SELECT * FROM food ORDER BY postdate DESC
+	</select>
+	<select id="foodSelectOne" parameterType="String" resultType="foodDto">
+		SELECT * FROM food WHERE food_name=#{food_name}
+	</select>
+	<update id="foodUpdate" parameterType="foodDto" >
+		UPDATE food SET password = #{password},name=#{name} WHERE username=#{username}	
+	</update>
+	<delete id="foodDelete" parameterType="String">
+		DELETE FROM food WHERE username=#{username}
+	</delete>
+</mapper>
+-->

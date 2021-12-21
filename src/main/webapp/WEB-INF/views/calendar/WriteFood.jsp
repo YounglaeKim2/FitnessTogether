@@ -73,13 +73,11 @@
 		   								<td><input type="checkbox" name="select_food" value="food4"/></td>
 		   							</tr>
 		   						</table>
-		   					</div>
-		   					<!-- 페이징 -->
-		   					<c:if test="${listPagingData.lists.size() !=0 }">
-								<div class="row">
-									<div class="col-md-12 text-center">${listPagingData.pagingString}</div>
+		   						<div align="right">
+									<button id="btnform" type="button" class="btn btn-primary">확인</button>
 								</div>
-							</c:if>		   						
+		   					</div>
+		   					  						
             </div>
         </div> <!-- end of container -->
     </header> <!-- end of header -->
