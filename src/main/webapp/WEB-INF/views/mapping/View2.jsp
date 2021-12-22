@@ -17,7 +17,7 @@
 		.bg_white {background:#fff;}
 		#menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
 		#menu_wrap .option{text-align: center;}
-		#menu_wrap .option p {margin:10px 0;}  
+		#menu_wrap .option p {margin:10px 0;}
 		#menu_wrap .option button {margin-left:5px;}
 		#placesList li {list-style: none;}
 		#placesList .item {position:relative;border-bottom:1px solid #888;overflow: hidden;cursor: pointer;min-height: 65px;}

@@ -29,6 +29,7 @@
 	<link href="<c:url value="/resources/css/fontawesome-all.min.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/swiper.css"/>" rel="stylesheet">
 	<link href="<c:url value="/resources/css/styles.css"/>" rel="stylesheet">
+	<link href="<c:url value="/resources/css/stylesmain.css"/>" rel="stylesheet">
 	
 	<!-- Favicon  -->
     <link rel="icon" href="<c:url value="/resources/images/favicon.png"/>">

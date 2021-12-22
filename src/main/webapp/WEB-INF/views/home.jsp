@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-    
+        
 <!-- Top 시작 -->
 <jsp:include page="/WEB-INF/views/template/Top.jsp"/>
 <!-- Top 끝 -->
@@ -194,7 +194,143 @@
 			    </button>
 			</div>
 		</div>
-
+	
+	<!-- About US
+	================================================== -->
+	<!-- Wrap the rest of the page in another container to center all the content. -->
+	<section class="page-section" id="about">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">ABOUT US</h2>
+                    <h3 class="section-subheading text-muted">WHO WE R</h3>
+                </div>
+                <ul class="timeline">
+                    <li class="timeline-inverted">
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="<c:url value="/resources/images/testimonial-1.jpg"/>" alt="..." /></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h6>TEAM LEADER</h6>
+                                <h4 class="subheading">KIM YoungLae</h4>
+                            </div>
+                            <div class="timeline-body"><p class="text-muted">전체 프로젝트 검수</p></div>
+                            <div class="timeline-body"><p class="text-muted">메인</p></div>
+                            <div class="timeline-body"><p class="text-muted">맵핑</p></div>
+                            <div class="timeline-body"><p class="text-muted">카카오 지도 API</p></div>
+                            <div class="timeline-body"><p class="text-muted">ERD</p></div>
+                            
+                        </div>
+                    </li>
+                    <li>
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="<c:url value="/resources/images/testimonial-2.jpg"/>" alt="..." /></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h6>Project Leader</h6>
+                                <h4 class="subheading">PARK JunHee</h4>
+                            </div>
+                            <div class="timeline-body"><p class="text-muted">전체 프로젝트 검수</p></div>
+                            <div class="timeline-body"><p class="text-muted">맵핑</p></div>
+                            <div class="timeline-body"><p class="text-muted">DB 설계</p></div>
+                            <div class="timeline-body"><p class="text-muted">깃, 템플릿</p></div>
+                        </div>
+                    </li>
+                    <li class="timeline-inverted">
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="<c:url value="/resources/images/testimonial-3.jpg"/>" alt="..." /></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h6>Project Leader</h6>
+                                <h4 class="subheading">KIM HyungCheol</h4>
+                            </div>
+                            <div class="timeline-body"><p class="text-muted">캘린더</p></div>
+                            <div class="timeline-body"><p class="text-muted">깃, 템플릿</p></div>
+                            <div class="timeline-body"><p class="text-muted">운동 DB</p></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="<c:url value="/resources/images/testimonial-4.jpg"/>" alt="..." /></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4 class="subheading">KIM HyeRan</h4>
+                            </div>
+                            <div class="timeline-body"><p class="text-muted">DB 설계</p></div>
+                            <div class="timeline-body"><p class="text-muted">UML 작성</p></div>
+                            <div class="timeline-body"><p class="text-muted">식품 DB</p></div>
+                        </div>
+                    </li>
+                    <li class="timeline-inverted">
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="<c:url value="/resources/images/testimonial-1.jpg"/>" alt="..." /></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4 class="subheading">LEE A-Young</h4>
+                            </div>
+                            <div class="timeline-body"><p class="text-muted">로그인/회원가입</p></div>
+                            <div class="timeline-body"><p class="text-muted">관리자 페이지</p></div>
+                            <div class="timeline-body"><p class="text-muted">로그인 API</p></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="<c:url value="/resources/images/testimonial-2.jpg"/>" alt="..." /></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4 class="subheading">BOCK SangIl</h4>
+                            </div>
+                            <div class="timeline-body"><p class="text-muted">메인 사진 게시판</p></div>
+                            <div class="timeline-body"><p class="text-muted">기능선정 참여</p></div>
+                            
+                        </div>
+                    </li>
+                    <li class="timeline-inverted">
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="<c:url value="/resources/images/testimonial-3.jpg"/>" alt="..." /></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4 class="subheading">HEO JinSeo</h4>
+                            </div>
+                            <div class="timeline-body"><p class="text-muted">기능선정 참여</p></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="<c:url value="/resources/images/testimonial-4.jpg"/>" alt="..." /></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4 class="subheading">CHO HakLae</h4>
+                            </div>
+                            <div class="timeline-body"><p class="text-muted"> </p></div>
+                        </div>
+                    </li>
+                    <li class="timeline-inverted">
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="<c:url value="/resources/images/testimonial-1.jpg"/>" alt="..." /></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4 class="subheading">HAN SangMin</h4>
+                            </div>
+                            <div class="timeline-body"><p class="text-muted"> </p></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="timeline-image">
+                            <h4>
+                                Be Part
+                                <br />
+                                Of Our
+                                <br />
+                                Story!
+                            </h4>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
   <!-- Marketing messaging and featurettes
   ================================================== -->
   <!-- Wrap the rest of the page in another container to center all the content. -->
