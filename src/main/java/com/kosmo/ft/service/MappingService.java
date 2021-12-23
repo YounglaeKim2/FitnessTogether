@@ -5,8 +5,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 public interface MappingService {
-	//로그인용
-	boolean isLogin(Map map);
+//	boolean isLogin(Map map);
 	//목록용
 	ListPagingData<MappingDTO> selectList(Map map,HttpServletRequest req,int nowPage);
 	//상세보기용

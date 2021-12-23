@@ -266,7 +266,7 @@ a {
                         <div class="timeline-image"><img class="rounded-circle img-fluid" src="<c:url value="/resources/images/testimonial-1.jpg"/>" alt="..." /></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
-                                <h4 class="subheading">LEE A-Young</h4>
+                                <h4 class="subheading">LEE Ah-Young</h4>
                             </div>
                             <div class="timeline-body"><p class="text-muted">로그인/회원가입</p></div>
                             <div class="timeline-body"><p class="text-muted">관리자 페이지</p></div>

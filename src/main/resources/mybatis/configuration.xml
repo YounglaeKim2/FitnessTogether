@@ -13,13 +13,14 @@
 	<typeAliases>
 	 
 		<typeAlias type="com.kosmo.ft.service.MemberDTO" alias="MemberDTO"/>
-
+		<typeAlias type="com.kosmo.ft.service.MappingDTO" alias="MappingDTO"/>
 	</typeAliases>
 	
 	<!-- 매퍼파일(SQL쿼리 결과와 자바빈 매핑)의 위치정보 설정 -->
 	<mappers>
 	
 		<mapper resource="mybatis/mapper/member.xml" />	
-		<mapper resource="mybatis/mapper/calendar.xml" />	
+		<mapper resource="mybatis/mapper/calendar.xml" />
+		<mapper resource="mybatis/mapper/mapping.xml"/>
 	</mappers>
 </configuration>

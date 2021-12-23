@@ -3,26 +3,47 @@ package com.kosmo.ft.web;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.kosmo.ft.service.ListPagingData;
+import com.kosmo.ft.service.MappingDTO;
+import com.kosmo.ft.service.impl.MappingServiceImpl;
 
 @RequestMapping("/fnt/")
 @Controller
 public class MappingController {
 	
 	//서비스 주입
-	//@Resource(name="mappingService")
-	//private MappingServiceImpl mappingService;
+	@Resource(name="mappingService")
+	private MappingServiceImpl mappingService;
 	
 	
 	@RequestMapping("mappingList.do")
-	public String goMapping() {
+	public String mappingList(
+			@RequestParam Map map,//검색 파라미터 및 페이징용 키값 저장용
+			@RequestParam(required = false,defaultValue = "1") int nowPage,
+	        HttpServletRequest req,//페이징에 사용할 컨텍스트 루트 경로 얻기용
+	        Model model
+	        
+			) {
+		//서비스 호출
+		ListPagingData<MappingDTO> listPagingData= mappingService.selectList(map, req, nowPage);
+		
+		//데이타 저장
+		model.addAttribute("listPagingData",listPagingData);
+		//뷰정보 반환
 		return "mapping/MappingList";
-	}
+	}/////list
+	
+	
+	
 	/*
 	@RequestMapping("mappingWrite.do")
 	public String goMappingWrite() {

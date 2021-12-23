@@ -5,11 +5,11 @@
 <jsp:include page="/WEB-INF/views/template/Top.jsp" />
 <!-- Top 끝 -->
 
-
 <head>
 <meta charset="utf-8">
 	<title>여러개 마커에 이벤트 등록하기2</title>
 	<style>
+		
 		.map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
 		.map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
 		.map_wrap {position:relative;width:100%;height:500px;}
@@ -48,28 +48,36 @@
 		#pagination .on {font-weight: bold; cursor: default;color:#777;}
 	</style>
 </head>
-<body>
+<body style="padding-top:50px;">
 
 	<!-- div id="map" style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div-->
-	<div class="map_wrap">
-		<div id="map"
-			style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
-
-		<div id="menu_wrap" class="bg_white">
-			<div class="option">
-				<div>
-					<form onsubmit="searchPlaces(); return false;">
-						키워드 : <input type="text" value="가산" id="keyword" size="15">
-						<button type="submit">검색하기</button>
-					</form>
+	<div class="container">
+		<div class="row">	
+			<div class="col"></div>
+			<div class="map_wrap col-10">
+				
+				<div id="map" style="width: 100%; height: 100%; position: relative; overflow: hidden;">
 				</div>
+				<!--
+				<div id="menu_wrap" class="bg_white">
+					<div class="option">
+						<div>
+							<form onsubmit="searchPlaces(); return false;">
+								키워드 : <input type="text" value="가산" id="keyword" size="15">
+								<button type="submit">검색하기</button>
+							</form>
+						</div>
+					</div>
+					<hr>
+					<ul id="placesList"></ul>
+					<div id="pagination"></div>
+				</div>
+				-->
+				
 			</div>
-			<hr>
-			<ul id="placesList"></ul>
-			<div id="pagination"></div>
+			<div class="col"></div>
 		</div>
 	</div>
-	
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c244899725d72b692838ccde36cbb07d&libraries=clusterer"></script>
 	<script>
         var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -142,7 +150,7 @@
 
 
 <div class="container">
-	<div class="col-md-12 text-right" id="xx">
+	<div class="col-md-12 text-right" id="xx" style="margin:10px">
 			<a href="<c:url value="/fnt/mappingList.do"/>
 			"class="btn btn-success">목록</a>
 	</div>

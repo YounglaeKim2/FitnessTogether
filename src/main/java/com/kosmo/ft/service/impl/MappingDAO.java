@@ -27,16 +27,16 @@ public class MappingDAO {
 	@Resource(name="template")
 	private SqlSessionTemplate template;
 	
-	public boolean isLogin(Map map) {
-		// 스프링 지원 마이바티스 API 미 사용시
-				//1]SqlSession얻기
-				SqlSession session= sqlMapper.openSession();
-				//2]selectOne()호출
-				int count=session.selectOne("memoIsLogin",map);
-				//3]close()호출
-				session.close();		
-		return count==1 ? true : false;
-	}//isLogin
+//	public boolean isLogin(Map map) {
+//		// 스프링 지원 마이바티스 API 미 사용시
+//		//1]SqlSession얻기
+//		SqlSession session= sqlMapper.openSession();
+//		//2]selectOne()호출
+//		int count=session.selectOne("mappingIsLogin",map);
+//		//3]close()호출
+//		session.close();		
+//		return count==1 ? true : false;
+//	}//isLogin
 	
 	public List<MappingDTO> selectList(Map map){
 		// 스프링 지원 마이바티스 API 미 사용시

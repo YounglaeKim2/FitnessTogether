@@ -1,55 +1,126 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Your description">
-    <meta name="author" content="Your name">
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- OG Meta Tags to improve the way the post looks when you share the page on Facebook, Twitter, LinkedIn -->
-	<meta property="og:site_name" content="" /> <!-- website name -->
-	<meta property="og:site" content="" /> <!-- website link -->
-	<meta property="og:title" content=""/> <!-- title shown in the actual shared post -->
-	<meta property="og:description" content="" /> <!-- description shown in the actual shared post -->
-	<meta property="og:image" content="" /> <!-- image link, make sure it's jpg -->
-	<meta property="og:url" content="" /> <!-- where do you want your post to link to -->
-	<meta name="twitter:card" content="summary_large_image"> <!-- to have large image post format in Twitter -->
+<!-- SEO Meta Tags -->
+<meta name="description" content="Your description">
+<meta name="author" content="Your name">
 
-    <!-- Webpage Title -->
-    <title>Fitness Together</title>
-    <!-- Styles
+<!-- OG Meta Tags to improve the way the post looks when you share the page on Facebook, Twitter, LinkedIn -->
+<meta property="og:site_name" content="" /><!-- website name -->
+<meta property="og:site" content="" /><!-- website link -->
+<meta property="og:title" content="" /><!-- title shown in the actual shared post -->
+<meta property="og:description" content="" /><!-- description shown in the actual shared post -->
+<meta property="og:image" content="" /><!-- image link, make sure it's jpg -->
+<meta property="og:url" content="" /><!-- where do you want your post to link to -->
+<meta name="twitter:card" content="summary_large_image"><!-- to have large image post format in Twitter -->
+
+<!-- Webpage Title -->
+<title>Fitness Together</title>
+<!-- Styles
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
-	<link href="<c:url value="/resources/css/fontawesome-all.min.css"/>" rel="stylesheet">
-	<!-- 
-	<link href="<c:url value="/resources/css/swiper.css"/>" rel="stylesheet">
-	-->
-	<link href="<c:url value="/resources/css/styles.css"/>" rel="stylesheet">
-	<link href="<c:url value="/resources/css/navbar.css"/>" rel="stylesheet">
-	<link href="<c:url value="/resources/css/stylesmain.css"/>" rel="stylesheet">
-	
-	<!-- Favicon  -->
-    <link rel="icon" href="<c:url value="/resources/images/favicon.png"/>">
-    
-    <!-- Scripts -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> <!-- Bootstrap framework -->
-    <script src="<c:url value="/resources/js/purecounter.min.js"/>"></script> <!-- Purecounter counter for statistics numbers -->
-    <script src="<c:url value="/resources/js/isotope.pkgd.min.js"/>"></script> <!-- Isotope for filter -->
-    <script src="<c:url value="/resources/js/scripts.js"/>"></script> <!-- Custom scripts -->
-    
-    
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+	crossorigin="anonymous">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+<link href="<c:url value="/resources/css/fontawesome-all.min.css"/>"
+	rel="stylesheet">
+<link href="<c:url value="/resources/css/swiper.css"/>" rel="stylesheet">
+<link href="<c:url value="/resources/css/styles.css"/>" rel="stylesheet">
+<link href="<c:url value="/resources/css/navbar.css"/>" rel="stylesheet">
+<link href="<c:url value="/resources/css/stylesmain.css"/>"
+	rel="stylesheet">
+
+<!-- Favicon  -->
+<link rel="icon" href="<c:url value="/resources/images/favicon.png"/>">
+
+<!-- Scripts -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+	crossorigin="anonymous"></script>
+<!-- Bootstrap framework -->
+<script src="<c:url value="/resources/js/purecounter.min.js"/>"></script>
+<!-- Purecounter counter for statistics numbers -->
+<script src="<c:url value="/resources/js/isotope.pkgd.min.js"/>"></script>
+<!-- Isotope for filter -->
+<script src="<c:url value="/resources/js/scripts.js"/>"></script>
+<!-- Custom scripts -->
+
+
 </head>
 
 
 <header id="page-top">
+
+
+	<nav
+		class="navbar navbar-expand-lg navbar-light bg-light rounded fixed-top"
+		aria-label="Tenth navbar example">
+		<div class="container-fluid">
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarsExample08"
+				aria-controls="navbarsExample08" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse justify-content-md-center"
+				id="navbarsExample08">
+				<ul class="navbar-nav">
+					<li class="nav-item"><img
+						src="<c:url value="/resources/images/logo.svg"/>"
+						alt="alternative"></li>
+					<li class="nav-item"><a class="nav-link active"
+						aria-current="page" href="<c:url value="/fnt/main.do"/>">FITNESS
+							TOGETHER</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
+					<li class="nav-item"><a class="nav-link disabled" href="#"
+						tabindex="-1" aria-disabled="true">Disabled</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="<c:url value="/fnt/AboutUs.do"/>">About</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="<c:url value="/fnt/Login.do"/>">로그인</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="<c:url value="/fnt/SignUp.do"/>">회원가입</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="<c:url value="/fnt/Logout.do"/>">로그아웃</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="<c:url value="/fnt/ProAlter.do"/>">마이페이지</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="<c:url value="/fnt/mappingList.do"/>">매핑</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="<c:url value="/fnt/#.do"/>">채팅</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="<c:url value="/fnt/calendar.do"/>">캘린더</a></li>
+
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#" id="dropdown08"
+						data-bs-toggle="dropdown" aria-expanded="false">게시판</a>
+						<ul class="dropdown-menu" aria-labelledby="dropdown08">
+							<li><a class="dropdown-item"
+								href="<c:url value="/fnt/photoList.do"/>">소셜게시판</a></li>
+							<li><a class="dropdown-item" href="#">Another action</a></li>
+							<li><a class="dropdown-item" href="#">Something else
+									here</a></li>
+						</ul></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
 	<!-- Navigation 
     <nav id="navbarExample" class="navbar navbar-expand-lg fixed-top navbar-light" aria-label="Main navigation">
         <div class="container">
@@ -92,9 +163,9 @@
             </div>
         </div>
     </nav>-->
-    <!-- end of navigation -->
-    
-    <!-- Navigation
+	<!-- end of navigation -->
+
+	<!-- Navigation
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
             <div class="container">
                 <a class="navbar-brand" href="#page-top"><img src="assets/img/navbar-logo.svg" alt="..." /></a>
@@ -118,48 +189,4 @@
             </div>
         </nav>
     -->
-    
-<nav class="navbar navbar-expand-lg navbar-light bg-light rounded fixed-top" aria-label="Tenth navbar example">
-    <div class="container-fluid">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample08" aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample08">
-        <ul class="navbar-nav">
-        <li class="nav-item">
-        	<img src="<c:url value="/resources/images/logo.svg"/>" alt="alternative">
-        </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="<c:url value="/fnt/main.do"/>">FITNESS TOGETHER</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-          </li>
-          <li class="nav-item"><a class="nav-link" href="<c:url value="/fnt/AboutUs.do"/>">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="<c:url value="/fnt/Login.do"/>">로그인</a></li>
-          <li class="nav-item"><a class="nav-link" href="<c:url value="/fnt/SignUp.do"/>">회원가입</a></li>
-          <li class="nav-item"><a class="nav-link" href="<c:url value="/fnt/Logout.do"/>">로그아웃</a></li>
-          <li class="nav-item"><a class="nav-link" href="<c:url value="/fnt/ProAlter.do"/>">마이페이지</a></li>
-          <li class="nav-item"><a class="nav-link" href="<c:url value="/fnt/mappingList.do"/>">매핑</a></li>
-          <li class="nav-item"><a class="nav-link" href="<c:url value="/fnt/#.do"/>">채팅</a></li>
-          <li class="nav-item"><a class="nav-link" href="<c:url value="/fnt/calendar.do"/>">캘린더</a></li>
-          
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="dropdown08" data-bs-toggle="dropdown" aria-expanded="false">게시판</a>
-            <ul class="dropdown-menu" aria-labelledby="dropdown08">
-              <li><a class="dropdown-item" href="<c:url value="/fnt/photoList.do"/>">소셜게시판</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-              
-              
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
 </header>

@@ -5,13 +5,17 @@
 <jsp:include page="/WEB-INF/views/template/Top.jsp" />
 <!-- Top 끝 -->
 
-<!-- 
+
 <style>
-body {
-	padding-top: 100px
+.page-link {
+  color: black;
+  text-decoration: underline;
+}
+.btn {
+	
 }
 </style>
- -->
+
 <!-- 실제 내용 시작 -->
 <div class="container">
 
@@ -22,12 +26,12 @@ body {
 	</div>
 	<div class="d-grid gap-2 d-md-flex justify-content-md-end">
 		<div class="btn btn-link">
-			<a href="<c:url value="/fnt/View1.do"/> "class="btn btn-success">지도뷰1</a>
+			<a href="<c:url value="/fnt/View1.do"/> "class="btn btn-primary">지도뷰1</a>
 		</div>
 	</div>
 	<div class="d-grid gap-2 d-md-flex justify-content-md-end">
 		<div class="btn btn-link">
-			<a href="<c:url value="/fnt/View2.do"/> "class="btn btn-success">지도뷰2</a>
+			<a href="<c:url value="/fnt/View2.do"/> "class="btn btn-primary">지도뷰2</a>
 		</div>
 	</div>
 	<!-- 작성하기 버튼 
@@ -48,7 +52,7 @@ body {
 					<th class="col-md-1 text-center">작성자</th>
 					<th class="col-md-2 text-center">작성일</th>
 				</tr>
-				<!-- 
+				
 				<c:if test="${empty listPagingData.lists }" var="isEmpty">
 					<tr>
 						<td colspan="4">등록된 게시물이 없어요</td>
@@ -69,7 +73,7 @@ body {
 						</tr>
 					</c:forEach>
 				</c:if>
-				 -->
+				
 				<tr>
 					<td>1</td>
 					<td>붕어빵</td>
@@ -157,25 +161,25 @@ body {
 	<div class="d-grid gap-2 d-md-flex justify-content-md-end">
 		<div class="btn btn-link me-md-1">
 		<a href="<c:url value="/fnt/mappingWrite.do"/>"
-				class="btn btn-success">등록</a>
+				class="btn btn-primary">등록</a>
 		</div>
 		<div class="btn btn-link me-md-1">
 			<a href="<c:url value="/fnt/ZZZZ.do"/>"
-				class="btn btn-success">ZZZZ</a>
+				class="btn btn-primary">ZZZZ</a>
 		</div>
 	</div>
 	<!--  
 	<div class="row">
 		<div class="col-md-12 text-right">
 			<a href="<c:url value="/fnt/mappingWrite.do"/>"
-				class="btn btn-success">등록</a>
+				class="btn btn-primary">등록</a>
 		</div>
 	</div>
 	
 	<div class="row">
 		<div class="col-md-12 text-right">
 			<a href="<c:url value="/fnt/ZZZZ.do"/>"
-				class="btn btn-success">ZZZZ</a>
+				class="btn btn-primary">ZZZZ</a>
 		</div>
 	</div>
 	-->
