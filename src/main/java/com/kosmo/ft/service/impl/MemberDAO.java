@@ -33,7 +33,7 @@ public class MemberDAO {
 		//2]selectOne()호출
 		int count=session.selectOne("memberIsLogin",map);
 		//3]close()호출
-		session.close();		
+		session.close();
 		return count==1 ? true : false;
 	}//////////////
 

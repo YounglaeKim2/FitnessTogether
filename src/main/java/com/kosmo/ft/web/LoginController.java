@@ -16,42 +16,37 @@ import com.kosmo.ft.service.MemberDTO;
 import com.kosmo.ft.service.MemberService;
 import com.kosmo.ft.service.impl.MemberServiceImpl;
 
-
 @Controller
 @RequestMapping("/fnt/")
 public class LoginController {
-	
-	@Resource(name="memberServiceImpl")
+
+	@Resource(name = "memberServiceImpl")
 	private MemberServiceImpl memberService;
-	
-	//로그인 폼으로 이동
+
+	// 로그인 폼으로 이동
 	@RequestMapping("Login.do")
-	 public String login() {
-	  return "common/Login";
+	public String login() {
+		return "common/Login";
 	}
-	
-	//로그인 처리
+
+	// 로그인 처리
 	@RequestMapping("LoginProcess.do")
 	public String process(@RequestParam Map map, Model model, SessionStatus status) {
-	boolean flag= memberService.isLogin(map);
-	 model.addAttribute("id", map.get("id"));
-	 if(!flag) {
+		boolean flag = memberService.isLogin(map);
+		model.addAttribute("id", map.get("id"));
+		if (!flag) {
 			status.setComplete();
-			model.addAttribute("NotMember","아뒤와 비번이 틀려요");
+			model.addAttribute("NotMember", "아뒤와 비번이 틀려요");
+			return "common/Login";
 		}
-		//뷰정보 번환]
+		// 뷰정보 번환]
 		return "common/AfLogin";
 	}
-	   
+
 	@RequestMapping("Logout.do")
-	public String logout(SessionStatus status){
+	public String logout(SessionStatus status) {
 		status.setComplete();
-		//뷰정보 번환]
+		// 뷰정보 번환]
 		return "common/Login";
-		}
 	}
-
-
-   
-
-
+}
