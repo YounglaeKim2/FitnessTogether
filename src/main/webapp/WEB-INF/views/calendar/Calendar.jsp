@@ -19,6 +19,10 @@
 	    border-bottom: 1px solid #444444;
 	    padding: 10px;
   	}
+  	a {
+	  color: black;
+	  text-decoration: underline;
+	}
 </style>
 <script>
 	var date;

@@ -22,13 +22,17 @@
 
     <!-- Webpage Title -->
     <title>Fitness Together</title>
-    <!-- Styles -->
+    <!-- Styles
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 	<link href="<c:url value="/resources/css/fontawesome-all.min.css"/>" rel="stylesheet">
-    <link href="<c:url value="/resources/css/swiper.css"/>" rel="stylesheet">
+	<!-- 
+	<link href="<c:url value="/resources/css/swiper.css"/>" rel="stylesheet">
+	-->
 	<link href="<c:url value="/resources/css/styles.css"/>" rel="stylesheet">
+	<link href="<c:url value="/resources/css/navbar.css"/>" rel="stylesheet">
 	<link href="<c:url value="/resources/css/stylesmain.css"/>" rel="stylesheet">
 	
 	<!-- Favicon  -->
@@ -43,22 +47,15 @@
     
     
 </head>
-<style>
-body {
-	padding-top: 100px
-}
-</style>
 
-<header>
-	<!-- Navigation -->
+
+<header id="page-top">
+	<!-- Navigation 
     <nav id="navbarExample" class="navbar navbar-expand-lg fixed-top navbar-light" aria-label="Main navigation">
         <div class="container">
 
-            <!-- Image Logo -->
+            
             <a class="navbar-brand logo-image" href="<c:url value="/fnt/main.do"/>"><img src="<c:url value="/resources/images/logo.svg"/>" alt="alternative"></a> 
-
-            <!-- Text Logo - Use this if you don't have a graphic logo -->
-            <!-- <a class="navbar-brand logo-text" href="<c:url value="index.html"/>">Zinc</a> -->
 
             <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -92,12 +89,77 @@ body {
                         <a class="nav-link" href="<c:url value="/fnt/calendar.do"/>">캘린더</a>
                     </li>
                 </ul>
-            </div> <!-- end of navbar-collapse -->
-        </div> <!-- end of container -->
-    </nav> <!-- end of navbar -->
+            </div>
+        </div>
+    </nav>-->
     <!-- end of navigation -->
-</header>
     
+    <!-- Navigation
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand" href="#page-top"><img src="assets/img/navbar-logo.svg" alt="..." /></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars ms-1"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                    	<li class="nav-item"><a class="nav-link" href="<c:url value="/fnt/AboutUs.do"/>">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<c:url value="/fnt/Login.do"/>">로그인</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<c:url value="/fnt/SignUp.do"/>">회원가입</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<c:url value="/fnt/Logout.do"/>">로그아웃</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<c:url value="/fnt/ProAlter.do"/>">마이페이지</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<c:url value="/fnt/mappingList.do"/>">매핑</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<c:url value="/fnt/#.do"/>">채팅</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<c:url value="/fnt/photoList.do"/>">소셜게시판</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<c:url value="/fnt/calendar.do"/>">캘린더</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    -->
     
+<nav class="navbar navbar-expand-lg navbar-light bg-light rounded fixed-top" aria-label="Tenth navbar example">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample08" aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-      
+      <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample08">
+        <ul class="navbar-nav">
+        <li class="nav-item">
+        	<img src="<c:url value="/resources/images/logo.svg"/>" alt="alternative">
+        </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="<c:url value="/fnt/main.do"/>">FITNESS TOGETHER</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="<c:url value="/fnt/AboutUs.do"/>">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="<c:url value="/fnt/Login.do"/>">로그인</a></li>
+          <li class="nav-item"><a class="nav-link" href="<c:url value="/fnt/SignUp.do"/>">회원가입</a></li>
+          <li class="nav-item"><a class="nav-link" href="<c:url value="/fnt/Logout.do"/>">로그아웃</a></li>
+          <li class="nav-item"><a class="nav-link" href="<c:url value="/fnt/ProAlter.do"/>">마이페이지</a></li>
+          <li class="nav-item"><a class="nav-link" href="<c:url value="/fnt/mappingList.do"/>">매핑</a></li>
+          <li class="nav-item"><a class="nav-link" href="<c:url value="/fnt/#.do"/>">채팅</a></li>
+          <li class="nav-item"><a class="nav-link" href="<c:url value="/fnt/calendar.do"/>">캘린더</a></li>
+          
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown08" data-bs-toggle="dropdown" aria-expanded="false">게시판</a>
+            <ul class="dropdown-menu" aria-labelledby="dropdown08">
+              <li><a class="dropdown-item" href="<c:url value="/fnt/photoList.do"/>">소셜게시판</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+              
+              
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>

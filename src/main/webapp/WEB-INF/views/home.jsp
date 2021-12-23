@@ -5,6 +5,12 @@
 <!-- Top 시작 -->
 <jsp:include page="/WEB-INF/views/template/Top.jsp"/>
 <!-- Top 끝 -->
+<style>
+a {
+  color: black;
+  text-decoration: underline;
+}
+</style>
 <body data-bs-spy="scroll" data-bs-target="#navbarExample">
 
     <!-- Header 
