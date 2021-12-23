@@ -146,31 +146,31 @@
 		   								<td>등</td>
 		   								<td>바벨 로우</td>
 		   								<td>40kg</td>
-		   								<td>4세트</td>
+		   								<td>15회</td>
 		   							</tr>
 		   							<tr>
 		   								<td>등</td>
 		   								<td>렛풀다운</td>
 		   								<td>80kg</td>
-		   								<td>4세트</td>
+		   								<td>15회</td>
 		   							</tr>
 		   							<tr>
 		   								<td>등</td>
 		   								<td>시티드 로우</td>
 		   								<td>45kg</td>
-		   								<td>4세트</td>
+		   								<td>15회</td>
 		   							</tr>
 		   							<tr>
 		   								<td>등</td>
 		   								<td>티바 로우</td>
 		   								<td>20kg</td>
-		   								<td>4세트</td>
+		   								<td>15회</td>
 		   							</tr>
 		   							<tr>
 		   								<td>등</td>
 		   								<td>케이블 암풀다운</td>
 		   								<td>15kg</td>
-		   								<td>4세트</td>
+		   								<td>15회</td>
 		   							</tr>
 		   						</table>
 		   						<br/>

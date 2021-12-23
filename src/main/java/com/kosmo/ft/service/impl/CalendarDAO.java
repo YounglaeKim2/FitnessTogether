@@ -16,5 +16,9 @@ public class CalendarDAO {
 	public List<Map> selectOptions(String type){
 		return template.selectList("selectOptions",type);
 	}
-	
+
+	public List<Map> selectSportsNo(List list) {
+		return template.selectList("selectSportsNo",list);
+	}
+
 }

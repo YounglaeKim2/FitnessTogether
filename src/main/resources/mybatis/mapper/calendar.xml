@@ -6,6 +6,13 @@
  	<select id="selectOptions" parameterType="String" resultType="Map">
 		SELECT name FROM testweight WHERE type = #{type} 		
 	</select>
- 
- 	
+	
+	<select id="selectSportsNo" parameterType="List" resultType="Map">
+		SELECT no FROM testweight
+		WHERE name IN  
+		<foreach collection="collection" open="(" close=")" item="item" separator=",">
+			#{item}
+		</foreach>
+	</select>
+	
  </mapper> 

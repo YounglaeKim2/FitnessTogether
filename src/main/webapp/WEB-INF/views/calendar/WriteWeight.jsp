@@ -23,7 +23,11 @@
 		    </div>
             <div class="row">
 	            <form class="form-control" action="<c:url value="/fnt/writeweight.do"/>" method="post" id="dataform">
-					<input type="hidden" value="${date}"/>
+					<input type="hidden" name="postdate" value="${date}"/>
+					<!-- 
+					<input type="hidden" name="id" value="${sessionScope.id}"/>
+					 -->
+					<input type="hidden" name="id" value="hkk1239"/>
 					<table id="weighttable" class="table">
 						<thead class="table-primary">
 							<tr align="center">
@@ -38,11 +42,11 @@
 								<td>
 									<select name="type1" id="wieghtType1" class="testtype col-lg-12">
 										<option value="">운동부위를 선택해주세요</option>
-										<option value="reg">하체</option>
-										<option value="back">등</option>
-										<option value="chest">가슴</option>
-										<option value="shoulder">어깨</option>
-										<option value="arms">팔</option>
+										<option value="하체">하체</option>
+										<option value="등">등</option>
+										<option value="가슴">가슴</option>
+										<option value="어깨">어깨</option>
+										<option value="팔">팔</option>
 									</select>
 								</td>
 								<td>
@@ -51,10 +55,10 @@
 									</select>
 								</td>
 								<td align="center">
-									<input type="text" name="kg1" > Kg
+									<input type="text" name="kg1" /> Kg
 								</td>
 								<td align="center">
-									<input type="text" name="count1" > 회
+									<input type="text" name="count1" /> 회
 								</td>
 							</tr>
 						</tbody>
@@ -78,60 +82,32 @@
 			$('#dataform').submit();
 		});
 		
-		$('#add_row').mouseover(function(){
+		$('.bi').mouseover(function(){
 	    	$('#add_row').css('cursor','pointer');
-	    });
-		
-		$('#remove_row').mouseover(function(){
 	    	$('#remove_row').css('cursor','pointer');
 	    });
-		/*
+		
+		
 		$('#add_row').click(function(){
-			var addTable = '<tr><td><select name="type'+ ++index+'" id="wieghtType'+ index +'" class="col-lg-12"><option value="">운동부위를 선택해주세요</option><option value="reg">하체</option><option value="back">등</option><option value="chest">가슴</option><option value="shoulder">어깨</option></select></td><td><select name="name'+index+'" id="weightName'+ index +'" class="col-lg-12"><option value="">운동명을 선택해주세요</option></select></td><td align="center"><input type="text" name="kg'+index+'" > Kg</td><td align="center"><input type="text" name="count'+index+'" > 회</td></tr>';
+			var addTable = '<tr><td><select name="type'+ ++index+'" id="weightType'+ index +'" class="col-lg-12"><option value="">운동부위를 선택해주세요</option><option value="하체">하체</option><option value="등">등</option><option value="가슴">가슴</option><option value="어깨">어깨</option><option value="팔">팔</option></select></td><td><select name="name'+index+'" id="weightName'+ index +'" class="col-lg-12"><option value="">운동명을 선택해주세요</option></select></td><td align="center"><input type="text" name="kg'+index+'" > Kg</td><td align="center"><input type="text" name="count'+index+'" > 회</td></tr>';
 			if($('#weighttable > tbody > tr').length == 10){
 				alert('더이상 추가할 수 없습니다');
 				return;
 			}
+			var num = index;
 			$('#weighttable > tbody:last').append(addTable);
 			
-			$('#wieghtType'+index).on("change",function(){
+			$('#weightType'+num).on("change",function(){
 				$.ajax({
 					url:"<c:url value="/fnt/selectOption.do"/>",
 					dataType:"json",
 					data:{"type":$(this).val()}
 				}).done(function(data){
 					console.log(data);	
-					console.log(index);
+					console.log(num);
 					var options = "<option value=''>운동명을 선택해주세요</option>";
-					$.each(data,function(index,value){ // value 는 json
-						options += "<option value=''>"+value['NAME']+"</option>";
-					});
-					$('#weightName'+index).html(options);
-				});
-			});
-			
-		});
-		*/
-		$('#add_row').click(function(){
-			var addTable = '<tr><td><select name="type'+ ++index+'" id="wieghtType'+ index +'" class="testtype col-lg-12"><option value="">운동부위를 선택해주세요</option><option value="reg">하체</option><option value="back">등</option><option value="chest">가슴</option><option value="shoulder">어깨</option><option value="arms">팔</option></select></td><td><select name="name'+index+'" id="weightName'+ index +'" class="col-lg-12"><option value="">운동명을 선택해주세요</option></select></td><td align="center"><input type="text" name="kg'+index+'" > Kg</td><td align="center"><input type="text" name="count'+index+'" > 회</td></tr>';
-			if($('#weighttable > tbody > tr').length == 10){
-				alert('더이상 추가할 수 없습니다');
-				return;
-			}
-			$('#weighttable > tbody:last').append(addTable);
-			
-			$('.testtype').on("change",function(){
-				var num = $(this).prop('id').substr(10);
-				
-				$.ajax({
-					url:"<c:url value="/fnt/selectOption.do"/>",
-					dataType:"json",
-					data:{"type":$(this).val()}
-				}).done(function(data){
-					console.log(data);	
-					var options = "<option value=''>운동명을 선택해주세요</option>";
-					$.each(data,function(index,value){ // value 는 json
-						options += "<option value=''>"+value['NAME']+"</option>";
+					$.each(data,function(num,value){ // value 는 json
+						options += "<option value='"+value['NAME']+"'>"+value['NAME']+"</option>";
 					});
 					$('#weightName'+num).html(options);
 				});
@@ -158,7 +134,7 @@
 				console.log(index);
 				var options = "<option value=''>운동명을 선택해주세요</option>";
 				$.each(data,function(index,value){ // value 는 json
-					options += "<option value=''>"+value['NAME']+"</option>";
+					options += "<option value='"+value['NAME']+"'>"+value['NAME']+"</option>";
 				});
 				$('#weightName1').html(options);
 				

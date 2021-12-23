@@ -16,25 +16,14 @@ public class CalendarServiceImpl implements CalendarService {
 
 	@Override
 	public List<Map> selectOptions(String type) {
-		switch (type) {
-		case "reg": 
-			type = "하체";
-			break;
-		case "back":
-			type = "등";
-			break;
-		case "chest":
-			type = "가슴";
-			break;
-		case "shoulder":
-			type = "어깨";
-			break;
-		default: type = "팔";
-		}
-		
 		return dao.selectOptions(type);
 	}
-	
+
+	@Override
+	public List<Map> selectSportsNo(List list) {
+		return dao.selectSportsNo(list);
+	}
+
 	
 	
 }
