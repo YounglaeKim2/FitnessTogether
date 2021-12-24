@@ -1,5 +1,7 @@
 package com.kosmo.ft.web;
 
+import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 
@@ -42,6 +45,12 @@ public class LoginController {
 		// 뷰정보 번환]
 		return "common/AfLogin";
 	}
+	
+	// 카카오로그인 처리
+		@RequestMapping("KakaoLoginProcess.do")
+		public String kakaoLoginprocess(SessionStatus status) {
+			return "common/AfLogin";
+		}
 
 	@RequestMapping("Logout.do")
 	public String logout(SessionStatus status) {
@@ -49,4 +58,7 @@ public class LoginController {
 		// 뷰정보 번환]
 		return "common/Login";
 	}
+	
+	
+	
 }
