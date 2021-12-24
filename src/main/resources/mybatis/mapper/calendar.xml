@@ -7,12 +7,18 @@
 		SELECT name FROM testweight WHERE type = #{type} 		
 	</select>
 	
-	<select id="selectSportsNo" parameterType="List" resultType="Map">
+	<select id="selectSportsNo" parameterType="String" resultType="Map">
 		SELECT no FROM testweight
-		WHERE name IN  
+		WHERE name =#{name}
+		<!--   
 		<foreach collection="collection" open="(" close=")" item="item" separator=",">
 			#{item}
 		</foreach>
+		 -->
 	</select>
+	
+	<insert id="insertWeight" parameterType="Map">
+		INSERT INTO weightbbs VALUES(SEQ_BBS.NEXTVAL,#{kg},#{count},#{postdate},#{no},#{id})
+	</insert>
 	
  </mapper> 

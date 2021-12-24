@@ -17,8 +17,12 @@ public class CalendarDAO {
 		return template.selectList("selectOptions",type);
 	}
 
-	public List<Map> selectSportsNo(List list) {
-		return template.selectList("selectSportsNo",list);
+	public Map selectSportsNo(String str) {
+		return template.selectOne("selectSportsNo",str);
+	}
+
+	public void insertWeight(Map map) {
+		template.insert("insertWeight",map);
 	}
 
 }
