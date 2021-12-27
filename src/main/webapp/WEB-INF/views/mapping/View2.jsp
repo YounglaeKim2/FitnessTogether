@@ -49,7 +49,7 @@
 	</style>
 </head>
 
-<body>
+<body style="padding-top:50px;">
 	<div class="map_wrap">
 		<div id="map"
 			style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>

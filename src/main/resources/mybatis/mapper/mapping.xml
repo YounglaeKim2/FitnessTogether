@@ -55,8 +55,11 @@
 	 -->
 
 	<select id="mappingSelectList" parameterType="Map" resultType="mappingDTO">
-		SELECT o.*,m.name FROM
-		member m JOIN mapping o ON m.id=o.id
+		SELECT * FROM
+			(SELECT T.*,ROWNUM R FROM
+				(SELECT o.*,m.name FROM mapping o JOIN member m ON m.id=o.id ORDER BY no DESC) 
+			T)
+		WHERE R BETWEEN #{start} AND #{end}
 	</select>
 	
 	<select id="mappingTotalRowCount" parameterType="Map" resultType="int">
