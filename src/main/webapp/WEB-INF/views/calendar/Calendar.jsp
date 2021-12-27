@@ -25,31 +25,46 @@
 	}
 </style>
 <script>
-	var date;
-	$(function() {
-	    var calendarEl = document.getElementById('calendar');
-	    var calendar = new FullCalendar.Calendar(calendarEl, {
-	    	height: "1000px",
-	    	initialView: 'dayGridMonth',
-	    	locale:'ko',
-	    	aspectRatio: 1.5,
-	    	dateClick: function(info) {
-            	date = info.dateStr;
-            	$('#date').html(date);
-            	$('#modaltest').modal('show');
-	     	},
-	     	events:[{
-	     		title:"등운동",
-	     		start:"2021-12-10"
-   			},{
-	     		title:"팔운동",
-	     		start:"2021-12-11"
-   			},{
-	     		title:"어깨운동",
-	     		start:"2021-12-12"
-   			}]
-	    });
-	    calendar.render();
+	
+	$.ajax({
+		url:'<c:url value="/fnt/showCalendar.do"/>',
+		data:{"id":"hkk1239"},
+		dataType:"json",
+		type:"post"
+	}).done(function(data){
+		var date;
+		var list = data;
+		var events = list.map(function(item){
+			return {
+				title : item["TYPE"]+" 운동",
+				start : item["POSTDATE"]
+			}
+		});
+		console.log(typeof events);
+		console.log(events);
+		events = [...new Set(events.map(JSON.stringify))].map(JSON.parse);
+		console.log(typeof events);
+		console.log(events);
+		$(function() {
+			
+		    var calendarEl = document.getElementById('calendar');
+		    var calendar = new FullCalendar.Calendar(calendarEl, {
+		    	height: "1000px",
+		    	initialView: 'dayGridMonth',
+		    	locale:'ko',
+		    	aspectRatio: 1.5,
+		    	dateClick: function(info) {
+	            	date = info.dateStr;
+	            	$('#date').html(date);
+	            	$('#modaltest').modal('show');
+		     	},
+		     	events:events
+		    });
+		    calendar.render();
+		    
+	});
+	
+	
 	    $(document).mouseover(function(){
 	    	$('.fc-daygrid-day-frame').css('cursor','pointer');
 	    });

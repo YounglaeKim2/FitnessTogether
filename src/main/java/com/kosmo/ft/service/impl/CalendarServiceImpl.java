@@ -62,16 +62,17 @@ public class CalendarServiceImpl implements CalendarService {
 			writeMap.put("count",kg);
 			writeList.add(writeMap);
 		}
-		// 만들어진 List<Map> 출력
-	
-		for(int i = 0;i < writeList.size();i++) {
-			System.out.println(writeList.get(i)); 
-		}
-		 
+		
+		// DB에 Map 하나씩 저장
 		for(Map resultMap:writeList) {
 			dao.insertWeight(resultMap);
 		}
 		
+	}
+
+	@Override
+	public List<Map> showCalendar(Map map) {
+		return dao.showCalendar(map);
 	}
 
 	
