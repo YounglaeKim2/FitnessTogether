@@ -75,6 +75,10 @@ public class CalendarServiceImpl implements CalendarService {
 		return dao.showCalendar(map);
 	}
 
+	public List<Map> showWeight(Map map) {
+		return dao.showWeight(map);
+	}
+
 	
 	
 }

@@ -25,6 +25,7 @@
 	}
 </style>
 <script>
+$(function() {
 	
 	$.ajax({
 		url:'<c:url value="/fnt/showCalendar.do"/>',
@@ -45,38 +46,65 @@
 		events = [...new Set(events.map(JSON.stringify))].map(JSON.parse);
 		console.log(typeof events);
 		console.log(events);
-		$(function() {
-			
-		    var calendarEl = document.getElementById('calendar');
-		    var calendar = new FullCalendar.Calendar(calendarEl, {
-		    	height: "1000px",
-		    	initialView: 'dayGridMonth',
-		    	locale:'ko',
-		    	aspectRatio: 1.5,
-		    	dateClick: function(info) {
-	            	date = info.dateStr;
-	            	$('#date').html(date);
-	            	$('#modaltest').modal('show');
-		     	},
-		     	events:events
-		    });
-		    calendar.render();
-		    
-	});
-	
-	
+		
+	    var calendarEl = document.getElementById('calendar');
+	    var calendar = new FullCalendar.Calendar(calendarEl, {
+	    	height: "1000px",
+	    	initialView: 'dayGridMonth',
+	    	locale:'ko',
+	    	aspectRatio: 1.5,
+	    	dateClick: function(info) {
+            	date = info.dateStr;
+            	$('#date').html(date);
+            	$('#modaltest').modal('show');
+            	
+            	$.ajax({
+            		url:'<c:url value="/fnt/showWeight.do"/>',
+            		data:{"id":"hkk1239","postdate":date},
+            		dataType:"json",
+            		type:"post"
+            	}).done(function(data){
+					console.log("리스트정보 :",data);
+            		var list = "<table  class='table'>";
+            		list += "<tr><th scope=\"col\">부위</th><th scope=\"col\">운동종류</th><th scope=\"col\">무게</th><th scope=\"col\">횟수</th></tr>";
+            		if(data.length ==0){
+            			list += "<tr><td colspan='4' align='center'>작성된 게시글이 없습니다</td></tr>";
+            		}
+            		
+            		$.each(data,function(index,element){
+            			list += "<tr><td>"+element['TYPE']+"</td><td>"+element['NAME']+"</td><td>"+element['KG']+"kg</td><td>"+element['COUNT']+"회</td></tr>";
+            		});
+            		
+           			list += "</table>";
+           			list += "<br/><div class='form-group' align='right'><button id='writeweight' type='button' class='btn btn-info'>추가작성</button><button id='updateweight' type='button' class='btn btn-info'>수정</button><button id='deleteweight' type='button' class='btn btn-info'>삭제</button></div>";
+           			
+            		$('#weight').html(list);
+            		
+           		    $('#writefood').click(function(){
+           		    	location.href='<c:url value="/fnt/writefood.do"/>'+"?date="+date;;
+           		    });
+           		    $('#writeweight').click(function(){
+           		    	location.href='<c:url value="/fnt/writeweight.do"/>'+"?date="+date;
+           		    });
+            	});
+            	
+            	
+	     	},
+	     	events:events
+	    });
+	    calendar.render();
+		
 	    $(document).mouseover(function(){
-	    	$('.fc-daygrid-day-frame').css('cursor','pointer');
-	    });
-	    $('#writefood').click(function(){
-	    	location.href='<c:url value="/fnt/writefood.do"/>'+"?date="+date;;
-	    });
-	    $('#writeweight').click(function(){
-	    	location.href='<c:url value="/fnt/writeweight.do"/>'+"?date="+date;
-	    });
-	    
+			$('.fc-daygrid-day-frame').css('cursor','pointer');
+		    });
     	
+	   
     });
+	
+	
+	
+	
+});
 </script>
 
 	<i class="bi-alarm" style="font-size: 2rem; color: cornflowerblue;"></i>
@@ -118,7 +146,6 @@
                        	<div class="tab-content" id="myTabContent">
 							<div class="tab-pane fade show active" id="food" role="tabpanel" aria-labelledby="food-tab">
 		   						<table class="table">
-		   							
 		   							<tr>
 		   								<th scope="col">음식종류</th>
 		   								<th scope="col">칼로리</th>
@@ -151,53 +178,6 @@
 		   						</div>
 							</div>
 							<div class="tab-pane fade" id="weight" role="tabpanel" aria-labelledby="weight-tab">
-		   						<table  class="table">
-		   							<tr>
-		   								<th scope="col">부위</th>
-		   								<th scope="col">운동종류</th>
-		   								<th scope="col">무게</th>
-		   								<th scope="col">횟수</th>
-		   							</tr>
-		   							<tr>
-		   								<td colspan="4" align="center">작성된 게시글이 없습니다</td>
-		   							</tr>
-		   							<tr>
-		   								<td>등</td>
-		   								<td>바벨 로우</td>
-		   								<td>40kg</td>
-		   								<td>15회</td>
-		   							</tr>
-		   							<tr>
-		   								<td>등</td>
-		   								<td>렛풀다운</td>
-		   								<td>80kg</td>
-		   								<td>15회</td>
-		   							</tr>
-		   							<tr>
-		   								<td>등</td>
-		   								<td>시티드 로우</td>
-		   								<td>45kg</td>
-		   								<td>15회</td>
-		   							</tr>
-		   							<tr>
-		   								<td>등</td>
-		   								<td>티바 로우</td>
-		   								<td>20kg</td>
-		   								<td>15회</td>
-		   							</tr>
-		   							<tr>
-		   								<td>등</td>
-		   								<td>케이블 암풀다운</td>
-		   								<td>15kg</td>
-		   								<td>15회</td>
-		   							</tr>
-		   						</table>
-		   						<br/>
-		   						<div class="form-group" align="right">
-		   							<button id="writeweight" type="button" class="btn btn-info">추가작성</button>
-		   							<button id="updateweight" type="button" class="btn btn-info">수정</button>
-		   							<button id="deleteweight" type="button" class="btn btn-info">삭제</button>
-		   						</div>
 							</div>
 						</div>
                        	

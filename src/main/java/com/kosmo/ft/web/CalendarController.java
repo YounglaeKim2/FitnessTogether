@@ -73,5 +73,14 @@ public class CalendarController {
 		return lists;
 	}
 	
+	@PostMapping("/fnt/showWeight.do")
+	@ResponseBody
+	public List<Map> showWeight(@RequestParam Map map){ // 아이디와 날짜 정보받기
+		List<Map> lists = service.showWeight(map);
+		for(Map date:lists) {
+			date.put("POSTDATE", date.get("POSTDATE").toString().substring(0, 10));
+		}
+		return lists;
+	}
 }
 

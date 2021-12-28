@@ -13,4 +13,5 @@ public interface CalendarService {
 	
 	List<Map> showCalendar(Map map);
 	
+	List<Map> showWeight(Map map);
 }
