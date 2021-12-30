@@ -65,18 +65,18 @@ $(function() {
             		type:"post"
             	}).done(function(data){
 					console.log("리스트정보 :",data);
-            		var list = "<table  class='table'>";
-            		list += "<tr><th scope=\"col\">부위</th><th scope=\"col\">운동종류</th><th scope=\"col\">무게</th><th scope=\"col\">횟수</th></tr>";
+            		var list = "<form class='form-control' action='<c:url value="/fnt/deleteweight.do"/>' method='post' id='dataform'><table  class='table'>";
+            		list += "<tr><th><input id='all' type='checkbox' /></th><th scope=\"col\">부위</th><th scope=\"col\">운동종류</th><th scope=\"col\">무게</th><th scope=\"col\">횟수</th></tr>";
             		if(data.length ==0){
-            			list += "<tr><td colspan='4' align='center'>작성된 게시글이 없습니다</td></tr>";
+            			list += "<tr><td colspan='6' align='center'>작성된 게시글이 없습니다</td></tr>";
             		}
             		
             		$.each(data,function(index,element){
-            			list += "<tr><td>"+element['TYPE']+"</td><td>"+element['NAME']+"</td><td>"+element['KG']+"kg</td><td>"+element['COUNT']+"회</td></tr>";
+            			list += "<tr><td><input type='checkbox' name='no' value='"+element['W_NO']+"'/></td><td>"+element['TYPE']+"</td><td>"+element['NAME']+"</td><td>"+element['KG']+"kg</td><td>"+element['COUNT']+"회</td></tr>";
             		});
             		
            			list += "</table>";
-           			list += "<br/><div class='form-group' align='right'><button id='writeweight' type='button' class='btn btn-info'>추가작성</button><button id='updateweight' type='button' class='btn btn-info'>수정</button><button id='deleteweight' type='button' class='btn btn-info'>삭제</button></div>";
+           			list += "<br/><div class='form-group' align='right'><button id='writeweight' type='button' class='btn btn-info'>추가작성</button> <button id='updateweight' type='button' class='btn btn-info'>수정</button> <button id='deleteweight' type='button' class='btn btn-info'>삭제</button></form></div>";
            			
             		$('#weight').html(list);
             		
@@ -86,6 +86,44 @@ $(function() {
            		    $('#writeweight').click(function(){
            		    	location.href='<c:url value="/fnt/writeweight.do"/>'+"?date="+date;
            		    });
+           		    
+           		    $('#deleteweight').click(function(){
+           		    	if(confirm('정말로 삭제하시겠습니까?')){
+           		    		if(data.length ==0) {
+           		    			alert("삭제할 내용이 없습니다")
+           		    			return;
+           		    		}
+           		    		$('#dataform').submit();
+           		    	}
+           		    });
+           		    
+     		    	$(':checkbox').on('click',function(){
+        		 		if($(this).prop('id') == $('#all').prop('id')){ // "전체선택" 클릭
+        		 			if($(this).prop('checked')){ // 체크한 경우
+        		 				$(':checkbox:gt(0)').each(function(){
+        		 					$(this).prop('checked',true);
+        		 				});
+        		 			}
+        		 			else{ // 해제한 경우
+        		 				$(':checkbox:gt(0)').each(function(){
+        		 					$(this).prop('checked',false);
+        		 				});
+        		 			}
+        		 		}
+        		 		else{ // "전체선택"이 아닌 체크박스 클릭
+        		 			if($(this).prop('checked')){ // 체크한 경우
+        		 				// 체크된 모든 체크박스의 수와 전체 선택을 제외한 체크박스의 수가 같다면
+        		 				// 즉 모두 선택되었다면
+        		 				if($(':checkbox:gt(0)').length == $(':checkbox:checked').length){
+        		 					$(':checkbox:first').prop('checked',true);
+        		 				}
+        		 			}
+        		 			else{ // 해제한 경우
+        		 				$(':checkbox:first').prop('checked',false);
+        		 			}
+        		 		}
+        		 	});
+           		    
             	});
             	
             	
@@ -96,7 +134,7 @@ $(function() {
 		
 	    $(document).mouseover(function(){
 			$('.fc-daygrid-day-frame').css('cursor','pointer');
-		    });
+	    });
     	
 	   
     });

@@ -33,4 +33,8 @@ public class CalendarDAO {
 		return template.selectList("selectWeight",map);
 	}
 
+	public void deleteWeight(String no) {
+		template.delete("deleteWegiht",no);
+	}
+
 }

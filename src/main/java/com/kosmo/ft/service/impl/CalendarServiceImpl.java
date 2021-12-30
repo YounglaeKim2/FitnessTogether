@@ -79,6 +79,14 @@ public class CalendarServiceImpl implements CalendarService {
 		return dao.showWeight(map);
 	}
 
+	@Override
+	public void deleteWeight(String[] no) {
+		for(int i=0;i<no.length;i++) {
+			dao.deleteWeight(no[i]);
+		}
+		
+	}
+
 	
 	
 }

@@ -82,5 +82,12 @@ public class CalendarController {
 		}
 		return lists;
 	}
+	
+	@RequestMapping("/fnt/deleteweight.do")
+	public String deleteWeight(@RequestParam String[] no) {// 체크박스라 String 배열로 받기
+		service.deleteWeight(no); 
+		return "calendar/Calendar";
+	}
+	
 }
 

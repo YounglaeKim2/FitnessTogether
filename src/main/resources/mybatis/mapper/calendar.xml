@@ -29,4 +29,8 @@
 		SELECT * FROM testweight T JOIN weightbbs W ON T.no=W.no WHERE id=#{id} AND postdate=#{postdate}
 	</select>
 	
+	<delete id="deleteWegiht" parameterType="String">
+		DELETE weightbbs WHERE w_no=#{no}
+	</delete>
+	
  </mapper> 
