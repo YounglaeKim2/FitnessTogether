@@ -88,7 +88,7 @@
 						Welcome
 					</span>
 					<span class="login100-form-title p-b-48">
-						<i class="zmdi zmdi-font"></i>
+						<!--<i class="zmdi zmdi-font"></i>-->
 					</span>
 					
 					 <c:if test="${! empty  NotMember}">
@@ -132,9 +132,10 @@
 							</button>
 						</div>
 					</div>
-					<!-- 
+				
 	<!-- start 카카오계정으로 로그인하기 -->
 	  <a href="javascript:kakaoLogin();"><img src="<c:url value="/resources/login/images/kakao_login_medium_wide.png"/>" style="margin:10px; height:40px;width:260px;"></a>
+    
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 
     <script>
@@ -183,7 +184,7 @@
 	<!-- start 구글로 로그인하기 -->
 	
 	<!-- 구글 로그인 버튼 -->
-		<script src="https://apis.google.com/js/platform.js" async defer></script>
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
 	<script src="https://apis.google.com/js/api:client.js"></script>
 	
  	 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
@@ -218,8 +219,11 @@
  
   <!-- In the callback, you would hide the gSignInWrapper element on a
   successful sign in -->
+  
   <div id="gSignInWrapper">
+  
     <div id="customBtn" class="customGPlusSignIn">
+     
       <span class="icon"></span>
       <span class="buttonText">구글로 로그인</span>
     </div>

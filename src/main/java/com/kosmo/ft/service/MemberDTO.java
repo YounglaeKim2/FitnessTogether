@@ -3,7 +3,7 @@ package com.kosmo.ft.service;
 public class MemberDTO {
 	private String id;
 	private String pwd;
-	private String nickname;
+	private String name;
 	private int height;
 	private int weight;
 	private String gender;
@@ -21,11 +21,11 @@ public class MemberDTO {
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}
-	public String getNickname() {
-		return nickname;
+	public String getName() {
+		return name;
 	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
+	public void setName(String name) {
+		this.name = name;
 	}
 	public int getHeight() {
 		return height;
@@ -59,7 +59,7 @@ public class MemberDTO {
 	}
 	@Override
 	public String toString() {
-		return "MemberDTO [id=" + id + ", pwd=" + pwd + ", nickname=" + nickname + ", height=" + height + ", weight="
+		return "MemberDTO [id=" + id + ", pwd=" + pwd + ", name=" + name + ", height=" + height + ", weight="
 				+ weight + ", gender=" + gender + ", age=" + age + ", address=" + address + "]";
 	}
 	
