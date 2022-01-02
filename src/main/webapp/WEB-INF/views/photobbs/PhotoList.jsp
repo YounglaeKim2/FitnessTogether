@@ -2,898 +2,428 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+<!-- 카드리스트 섹션 -->
+
 <!-- Top 시작 -->
 <jsp:include page="/WEB-INF/views/template/Top.jsp" />
 <!-- Top 끝 -->
 
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!--가로넓이는 장치크기에.. 안드로이드 기본값(160dpi) 1로 처리  -->
-<meta name="description" content="" />
-<!--즐겨찾기시 키워드 (미지정)-->
-<meta name="keywords" content="" />
-<!--페이지 키워드 (미지정)-->
-<title>Fitness Together</title>
+<c:forEach var="tmp" items="${list}">
 
-<link rel="icon"
-	href="<c:url value="/resources/images/photobbs/fav.png"/>"
-	type="image/png" sizes="16x16">
-<!-- 사이트로고 -->
-
-<link rel="stylesheet"
-	href="<c:url value="/resources/css/photobbs/tl-color.css"/>">
-<link rel="stylesheet"
-	href="<c:url value="/resources/css/photobbs/tl-boots.css"/>">
-<link rel="stylesheet"
-	href="<c:url value="/resources/css/photobbs/lightboxes/tl-lightboxes.css"/>">
-
-</head>
-
-<body>
-	<!-- 현 사용자 정보 시작 -->
-	<div class="container-fluid">
-		<div class="row merged">
-			<div class="col-lg-2 col-sm-3">
-				<div class="user-avatar">
-					<figure>
-						<img src="images/resources/user-avatar.jpg" alt="">
-						<!-- 작은 프사 -->
-					</figure>
+	<div class="col-3 card inner">
+		<div class="thumb">
+			<div class="card-img" type="button" idx="${tmp.bno}"
+				data-bs-toggle="modal" data-bs-target="viewModal${tmp.bno}">
+				<div class="box">
+					<img src="./upload/picture/${tmp.media}"
+						class="card-img-top img-wrapper" alt="...">
 				</div>
 			</div>
-
-			<div class="col-lg-10 col-sm-9">
-				<div class="timeline-info">
-					<ul>
-						<li class="admin-name">
-							<h5>${param.nickname}</h5> <span>내 포스팅</span>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- 현 사용자 정보 끝 -->
-
-	<!-- 좌측 사이드바 시작 -->
-	<section>
-		<div class="gap gray-bg">
-			<div class="container-fluid">
+			<div class="card-body">
 				<div class="row">
-					<div class="col-lg-12">
-						<div class="row" id="page-contents">
-							<div class="col-lg-3">
-								<aside class="sidebar static">
-									<div class="widget">
-										<h4 class="widget-title">소셜</h4>
-										<ul class="socials">
-											<li class="myposting"><a title=""
-												href="/fnt/photoList.do"> <span>내 포스팅</span></a></li>
-											<li class="frposting"><a title=""
-												href="/fnt/frPhotoList.do"> <span>친구 소식</span></a></li>
-											<li class="mapposting"><a title=""
-												href="/fnt/mapPhotoList.do"> <span>내 주변 사람들</span></a></li>
-										</ul>
-									</div>
+					<div class="col-xsm card-title">${tmp.name}</div>
+					<div class="col-sm card-heart" id="card-heart">
+						<c:choose>
+							<%--로그인 상태일때 -하트 클릭되게 --%>
+							<c:when test="${not empty sessionScope.name}">
+								<c:choose>
+									<c:when test="${empty tmp.hno}">
+										<%--빈 하트일때 --%>
+										<span><a idx="${tmp.bno}" href="javascript:"
+											class="heart-click heart_icon${tmp.no}"> <img
+												alt="빈하트이미지"
+												src="<c:url value="/resources/images/photobbs/icons/bi bi-suit-heart.png"/>"
+												width="16" height="16" class="bi bi-suit-heart">
+										</a> </span>
+									</c:when>
+									<c:otherwise>
+										<%--꽉찬 하트일때 --%>
+										<span><a idx="${tmp.bno}" href="javascript:"
+											class="heart-click heart_icon${tmp.bno}"> <img
+												alt="꽉찬하트이미지"
+												src="<c:url value="/resources/images/photobbs/icons/bi bi-suit-heart-fill.png"/>"
+												width="16" height="16" class="bi bi-suit-heart-fill">
+										</a> </span>
+									</c:otherwise>
+								</c:choose>
+							</c:when>
+							<%--로그인 상태가 아닐때 -하트 클릭 안되게 --%>
+							<c:otherwise>
+								<span><a href="javascript:" class="heart-notlogin"> <img
+										alt="빈하트이미지"
+										src="<c:url value="/resources/images/photobbs/icons/bi bi-suit-heart.png"/>"
+										width="16" height="16" class="bi bi-suit-heart">
+								</a> </span>
+							</c:otherwise>
+						</c:choose>
+						<span id="heart${tmp.bno}">${tmp.heart}</span>
 
-									<!--바로가기 시작 -->
-									<div class="widget">
-										<h4 class="widget-title">바로가기</h4>
-										<ul class="naves">
-											<li><i class="ti-clipboard"></i> <a href="profile.html"
-												title="">프로필</a></li>
-											<li><i class="ti-mouse-alt"></i> <a href="follow.html"
-												title="">팔로우관리</a></li>
+						<%--댓글 아이콘 --%>
+						<span> <img alt="댓글아이콘이미지"
+							src="<c:url value="/resources/images/photobbs/icons/bi bi-chat-dots.png"/>"
+							class="bi bi-chat-dots" width="16" height="16">
+						</span> <span id="reply${tmp.bno}">${tmp.reply}</span>
 
-										</ul>
-									</div>
-									<!-- 바로가기 끝 -->
-
-									<!-- 최근 포스팅 시작 -->
-									<!-- 임의로 써놓은거에요.. -->
-									<div class="widget">
-										<h4 class="widget-title">최근 포스팅</h4>
-										<ul class="activitiez">
-											<li>
-												<div class="activity-meta">
-													<i>10 hours Ago</i> <span><a href="#" title="">Commented
-															on Video posted </a></span>
-													<h6>
-														by <a href="newsfeed.html">박준희</a>
-													</h6>
-												</div>
-											</li>
-											<li>
-												<div class="activity-meta">
-													<i>30 Days Ago</i> <span><a href="newsfeed.html"
-														title="">Posted your status. “하이하이”</a></span>
-												</div>
-											</li>
-											<li>
-												<div class="activity-meta">
-													<i>2 Years Ago</i> <span><a href="#" title="">Share
-															a video on her timeline.</a></span>
-													<h6>
-														"<a href="newsfeed.html">ㅋㅋㅋㅋㅋㅋ</a>"
-													</h6>
-												</div>
-											</li>
-										</ul>
-									</div>
-									<!-- 최근 포스팅 끝 -->
-
-									<!-- 친구요청 시작 -->
-									<div class="widget stick-widget">
-										<h4 class="widget-title">친구요청</h4>
-										<ul class="followers">
-											<li>
-												<figure>
-													<img src="images/resources/friend-avatar2.jpg" alt="">
-												</figure>
-												<div class="friend-meta">
-													<h4>
-														<a href="time-line.html" title="">김길동</a>
-													</h4>
-													<a href="#" title="" class="underline">친구추가</a>
-												</div>
-											</li>
-											<li>
-												<figure>
-													<img src="images/resources/friend-avatar4.jpg" alt="">
-												</figure>
-												<div class="friend-meta">
-													<h4>
-														<a href="time-line.html" title="">박길동</a>
-													</h4>
-													<a href="#" title="" class="underline">친구추가</a>
-												</div>
-											</li>
-											<li>
-												<figure>
-													<img src="images/resources/friend-avatar6.jpg" alt="">
-												</figure>
-												<div class="friend-meta">
-													<h4>
-														<a href="time-line.html" title="">최길동</a>
-													</h4>
-													<a href="#" title="" class="underline">친구추가</a>
-												</div>
-											</li>
-											<li>
-												<figure>
-													<img src="images/resources/friend-avatar8.jpg" alt="">
-												</figure>
-												<div class="friend-meta">
-													<h4>
-														<a href="time-line.html" title="">홍길동</a>
-													</h4>
-													<a href="#" title="" class="underline">친구추가</a>
-												</div>
-											</li>
-											<li>
-												<figure>
-													<img src="images/resources/friend-avatar3.jpg" alt="">
-												</figure>
-												<div class="friend-meta">
-													<h4>
-														<a href="time-line.html" title="">이길동</a>
-													</h4>
-													<a href="#" title="" class="underline">친구추가</a>
-												</div>
-											</li>
-										</ul>
-									</div>
-									<!-- 친구요청 끝 -->
-								</aside>
-							</div>
-							<!-- 좌측 사이드바 끝 -->
-
-							<!-- 중앙 메인포스트 부분 시작 -->
-							<!-- 포스팅 박스 시작 -->
-							<div class="col-lg-6">
-								<div class="loadMore">
-									<div class="central-meta item">
-										<div class="new-postbox">
-											<figure>
-												<img src="images/resources/admin2.jpg" alt="">
-											</figure>
-											<div class="newpst-input">
-												<form method="post">
-													<textarea rows="2" placeholder="포스팅 내용을 입력하세요"></textarea>
-													<div class="attachments">
-														<ul>
-															<li><i class="fa fa-music"></i> <label
-																class="fileContainer"> <input type="file">
-															</label></li>
-															<li><i class="fa fa-image"></i> <label
-																class="fileContainer"> <input type="file">
-															</label></li>
-															<li><i class="fa fa-video-camera"></i> <label
-																class="fileContainer"> <input type="file">
-															</label></li>
-															<li><i class="fa fa-camera"></i> <label
-																class="fileContainer"> <input type="file">
-															</label></li>
-															<li>
-																<button type="submit">등록하기</button>
-															</li>
-														</ul>
-													</div>
-												</form>
-											</div>
-										</div>
-									</div>
-									<!-- 포스팅 박스 끝 -->
-
-									<!-- 중앙 타임라인 시작 -->
-									<div class="central-meta item">
-										<div class="user-post">
-											<div class="friend-info">
-												<figure>
-													<img src="images/resources/friend-avatar10.jpg" alt="">
-												</figure>
-												<div class="friend-name">
-													<ins>
-														<a href="time-line.html" title="">복상일</a>
-													</ins>
-													<span>published: december,15 2021 20:PM</span>
-												</div>
-												<div class="description">
-													<p>배고프다..</p>
-												</div>
-
-												<div class="post-meta">
-													<div class="linked-image align-left">
-														<a href="#" title=""><img
-															src="images/resources/page1.jpg" alt=""></a>
-													</div>
-													<div class="detail">
-														<span>aaa</span>
-														<p>111222333</p>
-														<a href="#" title="">www.naver.com</a>
-													</div>
-													<div class="we-video-info">
-														<ul>
-															<li><span class="views" data-toggle="tooltip"
-																title="views"> <i class="fa fa-eye"></i> <ins>1.2k</ins>
-															</span></li>
-															<li><span class="comment" data-toggle="tooltip"
-																title="Comments"> <i class="fa fa-comments-o"></i>
-																	<ins>52</ins>
-															</span></li>
-															<li><span class="like" data-toggle="tooltip"
-																title="like"> <i class="ti-heart"></i> <ins>2.2k</ins>
-															</span></li>
-															<li><span class="dislike" data-toggle="tooltip"
-																title="dislike"> <i class="ti-heart-broken"></i>
-																	<ins>200</ins>
-															</span></li>
-															<li class="social-media">
-																<div class="menu">
-																	<div class="btn trigger">
-																		<i class="fa fa-share-alt"></i>
-																	</div>
-																	<div class="rotater">
-																		<div class="btn btn-icon">
-																			<a href="#" title=""><i class="fa fa-html5"></i></a>
-																		</div>
-																	</div>
-																	<div class="rotater">
-																		<div class="btn btn-icon">
-																			<a href="#" title=""><i class="fa fa-facebook"></i></a>
-																		</div>
-																	</div>
-																	<div class="rotater">
-																		<div class="btn btn-icon">
-																			<a href="#" title=""><i class="fa fa-google-plus"></i></a>
-																		</div>
-																	</div>
-																	<div class="rotater">
-																		<div class="btn btn-icon">
-																			<a href="#" title=""><i class="fa fa-twitter"></i></a>
-																		</div>
-																	</div>
-																	<div class="rotater">
-																		<div class="btn btn-icon">
-																			<a href="#" title=""><i class="fa fa-css3"></i></a>
-																		</div>
-																	</div>
-																	<div class="rotater">
-																		<div class="btn btn-icon">
-																			<a href="#" title=""><i class="fa fa-instagram"></i></a>
-																		</div>
-																	</div>
-																	<div class="rotater">
-																		<div class="btn btn-icon">
-																			<a href="#" title=""><i class="fa fa-dribbble"></i></a>
-																		</div>
-																	</div>
-																	<div class="rotater">
-																		<div class="btn btn-icon">
-																			<a href="#" title=""><i class="fa fa-pinterest"></i></a>
-																		</div>
-																	</div>
-																</div>
-															</li>
-														</ul>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="central-meta item">
-										<div class="user-post">
-											<div class="friend-info">
-												<figure>
-													<img src="images/resources/friend-avatar10.jpg" alt="">
-												</figure>
-												<div class="friend-name">
-													<ins>
-														<a href="time-line.html" title="">Janice Griffith</a>
-													</ins>
-													<span>published: june,2 2018 19:PM</span>
-												</div>
-												<div class="post-meta">
-													<img src="images/resources/user-post.jpg" alt="">
-													<div class="we-video-info">
-														<ul>
-
-															<li><span class="views" data-toggle="tooltip"
-																title="views"> <i class="fa fa-eye"></i> <ins>1.2k</ins>
-															</span></li>
-															<li><span class="comment" data-toggle="tooltip"
-																title="Comments"> <i class="fa fa-comments-o"></i>
-																	<ins>52</ins>
-															</span></li>
-															<li><span class="like" data-toggle="tooltip"
-																title="like"> <i class="ti-heart"></i> <ins>2.2k</ins>
-															</span></li>
-															<li><span class="dislike" data-toggle="tooltip"
-																title="dislike"> <i class="ti-heart-broken"></i>
-																	<ins>200</ins>
-															</span></li>
-															<li class="social-media">
-																<div class="menu">
-																	<div class="btn trigger">
-																		<i class="fa fa-share-alt"></i>
-																	</div>
-																	<div class="rotater">
-																		<div class="btn btn-icon">
-																			<a href="#" title=""><i class="fa fa-html5"></i></a>
-																		</div>
-																	</div>
-																	<div class="rotater">
-																		<div class="btn btn-icon">
-																			<a href="#" title=""><i class="fa fa-facebook"></i></a>
-																		</div>
-																	</div>
-																	<div class="rotater">
-																		<div class="btn btn-icon">
-																			<a href="#" title=""><i class="fa fa-google-plus"></i></a>
-																		</div>
-																	</div>
-																	<div class="rotater">
-																		<div class="btn btn-icon">
-																			<a href="#" title=""><i class="fa fa-twitter"></i></a>
-																		</div>
-																	</div>
-																	<div class="rotater">
-																		<div class="btn btn-icon">
-																			<a href="#" title=""><i class="fa fa-css3"></i></a>
-																		</div>
-																	</div>
-																	<div class="rotater">
-																		<div class="btn btn-icon">
-																			<a href="#" title=""><i class="fa fa-instagram"></i></a>
-																		</div>
-																	</div>
-																	<div class="rotater">
-																		<div class="btn btn-icon">
-																			<a href="#" title=""><i class="fa fa-dribbble"></i></a>
-																		</div>
-																	</div>
-																	<div class="rotater">
-																		<div class="btn btn-icon">
-																			<a href="#" title=""><i class="fa fa-pinterest"></i></a>
-																		</div>
-																	</div>
-
-																</div>
-															</li>
-														</ul>
-													</div>
-													<div class="description">
-
-														<p>
-															Curabitur world's most beautiful car in <a href="#"
-																title="">#test drive booking !</a> the most beatuiful
-															car available in america and the saudia arabia, you can
-															book your test drive by our official website
-														</p>
-													</div>
-												</div>
-											</div>
-											<div class="coment-area">
-												<ul class="we-comet">
-													<li>
-														<div class="comet-avatar">
-															<img src="images/resources/comet-1.jpg" alt="">
-														</div>
-														<div class="we-comment">
-															<div class="coment-head">
-																<h5>
-																	<a href="time-line.html" title="">Jason borne</a>
-																</h5>
-																<span>1 year ago</span> <a class="we-reply" href="#"
-																	title="Reply"><i class="fa fa-reply"></i></a>
-															</div>
-															<p>we are working for the dance and sing songs. this
-																car is very awesome for the youngster. please vote this
-																car and like our post</p>
-														</div>
-														<ul>
-															<li>
-																<div class="comet-avatar">
-																	<img src="images/resources/comet-2.jpg" alt="">
-																</div>
-																<div class="we-comment">
-																	<div class="coment-head">
-																		<h5>
-																			<a href="time-line.html" title="">alexendra
-																				dadrio</a>
-																		</h5>
-																		<span>1 month ago</span> <a class="we-reply" href="#"
-																			title="Reply"><i class="fa fa-reply"></i></a>
-																	</div>
-																	<p>
-																		yes, really very awesome car i see the features of
-																		this car in the official website of <a href="#"
-																			title="">#Mercedes-Benz</a> and really impressed :-)
-																	</p>
-																</div>
-															</li>
-															<li>
-																<div class="comet-avatar">
-																	<img src="images/resources/comet-3.jpg" alt="">
-																</div>
-																<div class="we-comment">
-																	<div class="coment-head">
-																		<h5>
-																			<a href="time-line.html" title="">Olivia</a>
-																		</h5>
-																		<span>16 days ago</span> <a class="we-reply" href="#"
-																			title="Reply"><i class="fa fa-reply"></i></a>
-																	</div>
-																	<p>i like lexus cars, lexus cars are most beautiful
-																		with the awesome features, but this car is really
-																		outstanding than lexus</p>
-																</div>
-															</li>
-														</ul>
-													</li>
-													<li>
-														<div class="comet-avatar">
-															<img src="images/resources/comet-1.jpg" alt="">
-														</div>
-														<div class="we-comment">
-															<div class="coment-head">
-																<h5>
-																	<a href="time-line.html" title="">Donald Trump</a>
-																</h5>
-																<span>1 week ago</span> <a class="we-reply" href="#"
-																	title="Reply"><i class="fa fa-reply"></i></a>
-															</div>
-															<p>
-																we are working for the dance and sing songs. this video
-																is very awesome for the youngster. please vote this
-																video and like our channel <i class="em em-smiley"></i>
-															</p>
-														</div>
-													</li>
-													<li><a href="#" title="" class="showmore underline">more
-															comments</a></li>
-													<li class="post-comment">
-														<div class="comet-avatar">
-															<img src="images/resources/comet-1.jpg" alt="">
-														</div>
-														<div class="post-comt-box">
-															<form method="post">
-																<textarea placeholder="Post your comment"></textarea>
-																<div class="add-smiles">
-																	<span class="em em-expressionless" title="add icon"></span>
-																</div>
-																<div class="smiles-bunch">
-																	<i class="em em---1"></i> <i class="em em-smiley"></i>
-																	<i class="em em-anguished"></i> <i
-																		class="em em-laughing"></i> <i class="em em-angry"></i>
-																	<i class="em em-astonished"></i> <i class="em em-blush"></i>
-																	<i class="em em-disappointed"></i> <i
-																		class="em em-worried"></i> <i
-																		class="em em-kissing_heart"></i> <i class="em em-rage"></i>
-																	<i class="em em-stuck_out_tongue"></i>
-																</div>
-																<button type="submit"></button>
-															</form>
-														</div>
-													</li>
-												</ul>
-											</div>
-										</div>
-									</div>
-									<div class="central-meta item">
-										<div class="user-post">
-											<div class="friend-info">
-												<figure>
-													<img src="images/resources/friend-avatar10.jpg" alt="">
-												</figure>
-												<div class="friend-name">
-													<ins>
-														<a href="time-line.html" title="">Janice Griffith</a>
-													</ins>
-													<span>published: june,2 2018 19:PM</span>
-												</div>
-												<div class="post-meta">
-													<iframe src="https://player.vimeo.com/video/15232052"
-														height="315" webkitallowfullscreen mozallowfullscreen
-														allowfullscreen></iframe>
-													<div class="we-video-info">
-														<ul>
-
-															<li><span class="views" data-toggle="tooltip"
-																title="views"> <i class="fa fa-eye"></i> <ins>1.2k</ins>
-															</span></li>
-															<li><span class="comment" data-toggle="tooltip"
-																title="Comments"> <i class="fa fa-comments-o"></i>
-																	<ins>52</ins>
-															</span></li>
-															<li><span class="like" data-toggle="tooltip"
-																title="like"> <i class="ti-heart"></i> <ins>2.2k</ins>
-															</span></li>
-															<li><span class="dislike" data-toggle="tooltip"
-																title="dislike"> <i class="ti-heart-broken"></i>
-																	<ins>200</ins>
-															</span></li>
-															<li class="social-media">
-																<div class="menu">
-																	<div class="btn trigger">
-																		<i class="fa fa-share-alt"></i>
-																	</div>
-																	<div class="rotater">
-																		<div class="btn btn-icon">
-																			<a href="#" title=""><i class="fa fa-html5"></i></a>
-																		</div>
-																	</div>
-																	<div class="rotater">
-																		<div class="btn btn-icon">
-																			<a href="#" title=""><i class="fa fa-facebook"></i></a>
-																		</div>
-																	</div>
-																	<div class="rotater">
-																		<div class="btn btn-icon">
-																			<a href="#" title=""><i class="fa fa-google-plus"></i></a>
-																		</div>
-																	</div>
-																	<div class="rotater">
-																		<div class="btn btn-icon">
-																			<a href="#" title=""><i class="fa fa-twitter"></i></a>
-																		</div>
-																	</div>
-																	<div class="rotater">
-																		<div class="btn btn-icon">
-																			<a href="#" title=""><i class="fa fa-css3"></i></a>
-																		</div>
-																	</div>
-																	<div class="rotater">
-																		<div class="btn btn-icon">
-																			<a href="#" title=""><i class="fa fa-instagram"></i></a>
-																		</div>
-																	</div>
-																	<div class="rotater">
-																		<div class="btn btn-icon">
-																			<a href="#" title=""><i class="fa fa-dribbble"></i></a>
-																		</div>
-																	</div>
-																	<div class="rotater">
-																		<div class="btn btn-icon">
-																			<a href="#" title=""><i class="fa fa-pinterest"></i></a>
-																		</div>
-																	</div>
-
-																</div>
-															</li>
-														</ul>
-													</div>
-													<div class="description">
-
-														<p>
-															Lonely Cat Enjoying in Summer Curabitur <a href="#"
-																title="">#mypage</a> ullamcorper ultricies nisi. Nam
-															eget dui. Etiam rhoncus. Maecenas tempus, tellus eget
-															condimentum rhoncus, sem quam semper libero, sit amet
-															adipiscing sem neque sed ipsum. Nam quam nunc,
-														</p>
-													</div>
-												</div>
-											</div>
-											<div class="coment-area">
-												<ul class="we-comet">
-													<li>
-														<div class="comet-avatar">
-															<img src="images/resources/comet-1.jpg" alt="">
-														</div>
-														<div class="we-comment">
-															<div class="coment-head">
-																<h5>
-																	<a href="time-line.html" title="">Jason borne</a>
-																</h5>
-																<span>1 year ago</span> <a class="we-reply" href="#"
-																	title="Reply"><i class="fa fa-reply"></i></a>
-															</div>
-															<p>we are working for the dance and sing songs. this
-																video is very awesome for the youngster. please vote
-																this video and like our channel</p>
-														</div>
-
-													</li>
-													<li>
-														<div class="comet-avatar">
-															<img src="images/resources/comet-2.jpg" alt="">
-														</div>
-														<div class="we-comment">
-															<div class="coment-head">
-																<h5>
-																	<a href="time-line.html" title="">Sophia</a>
-																</h5>
-																<span>1 week ago</span> <a class="we-reply" href="#"
-																	title="Reply"><i class="fa fa-reply"></i></a>
-															</div>
-															<p>
-																we are working for the dance and sing songs. this video
-																is very awesome for the youngster. <i
-																	class="em em-smiley"></i>
-															</p>
-														</div>
-													</li>
-													<li><a href="#" title="" class="showmore underline">more
-															comments</a></li>
-													<li class="post-comment">
-														<div class="comet-avatar">
-															<img src="images/resources/comet-2.jpg" alt="">
-														</div>
-														<div class="post-comt-box">
-															<form method="post">
-																<textarea placeholder="Post your comment"></textarea>
-																<div class="add-smiles">
-																	<span class="em em-expressionless" title="add icon"></span>
-																</div>
-																<div class="smiles-bunch">
-																	<i class="em em---1"></i> <i class="em em-smiley"></i>
-																	<i class="em em-anguished"></i> <i
-																		class="em em-laughing"></i> <i class="em em-angry"></i>
-																	<i class="em em-astonished"></i> <i class="em em-blush"></i>
-																	<i class="em em-disappointed"></i> <i
-																		class="em em-worried"></i> <i
-																		class="em em-kissing_heart"></i> <i class="em em-rage"></i>
-																	<i class="em em-stuck_out_tongue"></i>
-																</div>
-																<button type="submit"></button>
-															</form>
-														</div>
-													</li>
-												</ul>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- centerl meta -->
-
-							<!-- 우측 배너광고 넣기용 시작 -->
-							<div class="col-md-3">
-								<aside class="sidebar static">
-									<div class="widget">
-										<div class="banner medium-opacity bluesh">
-											<div class="banner-top">
-												<img
-													src="<c:url value="/resources/images/photobbs/banner/photo-banner.jpg"/>"
-													alt="" class="img-responsive"><i
-													class="fa fa-ellipsis-h"></i>
-											</div>
-										</div>
-									</div>
-									<!-- 우측 배너광고 넣기용 끝 -->
-
-									<!-- 우측 사이드바 최근 만난친구 시작 -->
-									<div class="widget friend-list stick-widget">
-										<h4 class="widget-title">최근 만난 친구</h4>
-										<div id="searchDir"></div>
-										<ul id="people-list" class="friends-request">
-											<li>
-												<figure>
-													<img src="images/resources/friend-avatar.jpg" alt="">
-													<span class="status f-online"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line.html">김영래</a> <i><a
-														href="https://wpkixx.com/cdn-cgi/l/email-protection"
-														class="__cf_email__"
-														data-cfemail="4136282f352433322e2d25243301262c20282d6f222e2c">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												<figure>
-													<img src="images/resources/friend-avatar2.jpg" alt="">
-													<span class="status f-away"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line.html">박준희</a> <i><a
-														href="https://wpkixx.com/cdn-cgi/l/email-protection"
-														class="__cf_email__"
-														data-cfemail="3a585b48545f497a5d575b535614595557">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												<figure>
-													<img src="images/resources/friend-avatar3.jpg" alt="">
-													<span class="status f-off"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line.html">김형철</a> <i><a
-														href="https://wpkixx.com/cdn-cgi/l/email-protection"
-														class="__cf_email__"
-														data-cfemail="127873617d7c7052757f737b7e3c717d7f">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												<figure>
-													<img src="images/resources/friend-avatar4.jpg" alt="">
-													<span class="status f-off"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line.html">허진서</a> <i><a
-														href="https://wpkixx.com/cdn-cgi/l/email-protection"
-														class="__cf_email__"
-														data-cfemail="620803110d0c0022050f030b0e4c010d0f">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-
-												<figure>
-													<img src="images/resources/friend-avatar5.jpg" alt="">
-													<span class="status f-online"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line.html">이아영</a> <i><a
-														href="https://wpkixx.com/cdn-cgi/l/email-protection"
-														class="__cf_email__"
-														data-cfemail="0963687a66676b496e64686065276a6664">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-
-												<figure>
-													<img src="images/resources/friend-avatar6.jpg" alt="">
-													<span class="status f-away"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line.html">김혜란</a> <i><a
-														href="https://wpkixx.com/cdn-cgi/l/email-protection"
-														class="__cf_email__"
-														data-cfemail="5b313a283435391b3c363a323775383436">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-
-												<figure>
-													<img src="images/resources/friend-avatar7.jpg" alt="">
-													<span class="status f-off"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line.html">조학래</a> <i><a
-														href="https://wpkixx.com/cdn-cgi/l/email-protection"
-														class="__cf_email__"
-														data-cfemail="472d263428292507202a262e2b6924282a">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-
-												<figure>
-													<img src="images/resources/friend-avatar5.jpg" alt="">
-													<span class="status f-online"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line.html">한상민</a> <i><a
-														href="https://wpkixx.com/cdn-cgi/l/email-protection"
-														class="__cf_email__"
-														data-cfemail="7a101b091514183a1d171b131654191517">[email&#160;protected]</a></i>
-												</div>
-											</li>
-										</ul>
-										<!-- 우측 사이드바 최근만난친구 끝 -->
-
-										<div class="chat-box">
-											<div class="chat-head">
-												<span class="status f-online"></span>
-												<h6>Bucky Barnes</h6>
-												<div class="more">
-													<span><i class="ti-more-alt"></i></span> <span
-														class="close-mesage"><i class="ti-close"></i></span>
-												</div>
-											</div>
-
-											<div class="chat-list">
-												<ul>
-													<li class="me">
-														<div class="chat-thumb">
-															<img src="images/resources/chatlist1.jpg" alt="">
-														</div>
-														<div class="notification-event">
-															<span class="chat-message-item"> Hi James! Please
-																remember to buy the food for tomorrow! I’m gonna be
-																handling the gifts and Jake’s gonna get the drinks </span> <span
-																class="notification-date"><time
-																	datetime="2004-07-24T18:18" class="entry-date updated">Yesterday
-																	at 8:10pm</time></span>
-														</div>
-													</li>
-													<li class="you">
-														<div class="chat-thumb">
-															<img src="images/resources/chatlist2.jpg" alt="">
-														</div>
-														<div class="notification-event">
-															<span class="chat-message-item"> Hi James! Please
-																remember to buy the food for tomorrow! I’m gonna be
-																handling the gifts and Jake’s gonna get the drinks </span> <span
-																class="notification-date"><time
-																	datetime="2004-07-24T18:18" class="entry-date updated">Yesterday
-																	at 8:10pm</time></span>
-														</div>
-													</li>
-													<li class="me">
-														<div class="chat-thumb">
-															<img src="images/resources/chatlist1.jpg" alt="">
-														</div>
-														<div class="notification-event">
-															<span class="chat-message-item"> Hi James! Please
-																remember to buy the food for tomorrow! I’m gonna be
-																handling the gifts and Jake’s gonna get the drinks </span> <span
-																class="notification-date"><time
-																	datetime="2004-07-24T18:18" class="entry-date updated">Yesterday
-																	at 8:10pm</time></span>
-														</div>
-													</li>
-												</ul>
-												<form class="text-box">
-													<textarea placeholder="Post enter to post..."></textarea>
-													<div class="add-smiles">
-														<span title="add icon" class="em em-expressionless"></span>
-													</div>
-													<div class="smiles-bunch">
-														<i class="em em---1"></i> <i class="em em-smiley"></i> <i
-															class="em em-anguished"></i> <i class="em em-laughing"></i>
-														<i class="em em-angry"></i> <i class="em em-astonished"></i>
-														<i class="em em-blush"></i> <i class="em em-disappointed"></i>
-														<i class="em em-worried"></i> <i
-															class="em em-kissing_heart"></i> <i class="em em-rage"></i>
-														<i class="em em-stuck_out_tongue"></i>
-													</div>
-													<button type="submit"></button>
-												</form>
-											</div>
-										</div>
-									</div>
-								</aside>
-							</div>
-							<!-- 우측 사이드바 끝 -->
-						</div>
+						<%--눈알 아이콘 --%>
+						<span> <img alt="조회수아이콘이미지"
+							src="<c:url value="/resources/images/photobbs/icons/bi bi-eye.png"/>"
+							class="bi bi-eye" width="16" height="16">
+						</span> <span id="hit${tmp.bno}">${tmp.hit}</span>
 					</div>
 				</div>
 			</div>
 		</div>
-	</section>
+	</div>
 
-</body>
+	<!-- view Modal -->
+	<!-- tableindex = -1 을 주며 tab키로 이동못하도록 -->
+	<div class="modal fade" id="viewModal${tmp.bno}" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="m_subject">[${tmp.address}]&nbsp;${tmp.subject }</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<section class="modal-section">
+						<!-- 글쓴이 프로필 사진이 원형으로 나오는 부분 -->
+						<div class="row">
+							<div class="col-10">
+								<span id="m_writer_profile"> <a
+									href="other_profile.do?other_id=${tmp.name }"> <img
+										id="profileImage" src="" alt="프사" /> <%--업로드할 프사의 이미지 경로가 들어갈예정 --%>
+										<%-- "<c:url value="/resources/images/photobbs/upload/'${tmp.profile }'"/>" --%>
+								</a>
+								</span>&nbsp;&nbsp;<span id="m_writer">${tmp.name }</span>
+							</div>
+							<div class="col-2">${tmp.wdate }</div>
+						</div>
+					</section>
+					<section class="modal-section-media">
+						<div class="container" id="m_media">
+							<img class="w-100" id="media-image" src="" alt="업로드이미지" />
+							<%--업로드할 사진의 이미지 경로가 들어갈예정 --%>
+							<%-- "<c:url value="/resources/images/photobbs/upload/'${tmp.media }'"/>" --%>
+						</div>
+					</section>
+
+					<section class="modal-section">
+						<div id="m_heart_reply_hit">
+							<span id="m_heart_icon"> <c:choose>
+									<%--로그인 상태일때 - 하트 클릭되게끔 --%>
+									<c:when test="${not empty sessionScope.name }">
+										<c:choose>
+											<c:when test="${empty tmp.hno}">
+												<%-- 빈 하트일때 --%>
+												<a idx="{tmp.bno}" href="javascript:"
+													class="heart-click heart_icon${tmp.bno}"> <img
+													alt="빈하트"
+													src="<c:url value="/resources/images/photobbs/icons/bi bi-suit-heart.png"/>"
+													class="bi bi-suit-heart" width="16" height="16" />
+												</a>
+											</c:when>
+											<c:otherwise>
+												<%-- 꽉찬 하트일때 --%>
+												<a idx="${tmp.bno}" href="javascript:"
+													class="heart-click heart_icon${tmp.bno}"> <img
+													alt="꽉찬 하트"
+													src="<c:url value="/resources/images/photobbs/icons/bi bi-suit-heart-fill.png"/>"
+													width="16" height="16" class="bi bi-suit-heart-fill" />
+												</a>
+											</c:otherwise>
+										</c:choose>
+									</c:when>
+									<%--로그인 상태가 아닐때 - 하트클릭 안되게 --%>
+									<c:otherwise>
+										<a href="javascript:" class="heart-notlogin"> <img
+											alt="빈하트"
+											src="<c:url value="/resources/images/photobbs/icons/bi bi-suit-heart.png"/>"
+											class="bi bi-suit-heart" width="16" height="16" />
+										</a>
+									</c:otherwise>
+								</c:choose>
+							</span> <span id="m_heart${tmp.no}">${tmp.heart }</span>
+
+							<%-- 댓글 수 --%>
+							<span> <a idx="${tmp.bno}" href="javascript:"
+								class="open_reply_list" data-bs-toggle="collapse"
+								data-bs-target="#reply_card${tmp.bno}" aria-expanded="false"
+								aria-controls="collapseExample"> <img alt="댓글아이콘이미지"
+									src="<c:url value="/resources/images/photobbs/icons/bi bi-chat-dots.png"/>"
+									class="bi bi-chat-dots" width="16" height="16">
+							</a>
+							</span> <span id="m_reply${tmp.bno}">${tmp.reply}</span>
+
+							<%-- 조회수 --%>
+							<span> <img alt="조회수아이콘이미지"
+								src="<c:url value="/resources/images/photobbs/icons/bi bi-eye.png"/>"
+								class="bi bi-eye" width="16" height="16">
+							</span> <span id="m_hit${tmp.bno}">${tmp.hit}</span>
+						</div>
+					</section>
+					<section class="modal-section">
+						<div id="m_content">${tmp.content }</div>
+					</section>
+				</div>
+
+				<div>
+					<!-- 댓글 -->
+					<div class="collapse" id="reply_card${tmp.bno }">
+						<section class="modal-section">
+							<div class="card card-body">
+								<!-- 댓글 목록 -->
+								<div class="reply-list reply-list${tmp.bno }">
+									<!-- 댓글 목록이 들어가는 곳 -->
+								</div>
+								<!--로그인 상태에만 나오는 댓글 작성칸 -->
+								<c:if test="${not empty sessionScope.name }">
+									<div class="row reply-write">
+										<div class="col-1">
+											<a href="other_profile.do?other_nick=${tmp.name }"> <img
+												id="write_reply_profileImage" src="" /> <!-- "<c:url value="/resources/images/photobbs/upload/'${sessionScope.profile }'"/>" -->
+												<!-- src에는 세션에 로그인한 프로필의 사진이 들어감 -->
+											</a>
+										</div>
+										<div class="col-8" class="input_reply_div">
+											<input class="w-100 form-control" id="input_reply${tmp.bno}"
+												type="text" placeholder="댓글입력...">
+										</div>
+										<div class="col-3">
+											<button type="button" idx="${tmp.bno }"
+												class="btn btn-success mb-1 write_reply">댓글&nbsp;달기</button>
+										</div>
+									</div>
+								</c:if>
+							</div>
+						</section>
+					</div>
+				</div>
+				<div id="modify_delete">
+					<%-- 수정/삭제버튼 --%>
+					<c:if test="${not empty id and tmp.name eq sessionScope.name}">
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-bs-toggle="modal" data-bs-target="#modifyModal${tmp.bno}">수정</button>
+							<button type="button" class="btn btn-dark" data-bs-toggle="modal"
+								data-bs-target="#modifyModal${tmp.bno}">삭제</button>
+						</div>
+					</c:if>
+				</div>
+			</div>
+		</div>
+	</div>
+	<%-- view Modal 끝 --%>
+
+	<!-- modify Modal(수정 모달)-->
+	<div class="modal fade" id="modifyModal${tmp.bno}" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">modify confirm</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">수정페이지로 이동 하시겠습니까?</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">아니요</button>
+					<button type="button" class="btn btn-primary"
+						onclick="location.href='/fnt/picture_modify.do?bno=${tmp.bno}'">네</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- modify Modal 끝 -->
+
+	<!-- delete Modal -->
+	<div class="modal fade" id="deleteModal${tmp.bno}" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">삭제 확인</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">정말로 삭제하시겠습니까?</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">아니요</button>
+					<button type="button" class="btn btn-primary"
+						onclick="location.href='javascript:PictureDelete(${tmp.bno})'">네</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</c:forEach>
+
+<script>
+	
+const GetList = function(currentPage){
+	console.log("inGetList"+currentPage);
+	
+	//무한 스크롤
+	$.ajax({
+		url:"<c: value="/fnt/photoList.do"/>",
+		method:"POST",
+		//검색기능이 있는 경우 condition과 keyword를 함께 넘겨줘야한다.(검색결과만 출력하기 위해서)
+		data:"pageNum="+currentPage+"&condition=${condition}&keyword=${keyword}",
+		//PhotoList.jsp의 내용이 data로 들어오도록 함.
+		success:function(data){
+			console.log(data);
+			//응답된 문자열은 html 형식이다.(PhotoList.jsp에 응답내용이 있다.)
+			//해당 문자열을 .card-list-container div에 html로 해석하라고 추가
+			$(".card-list-container").append(data);
+			//로딩바를 숨긴다.
+			$(".back-drop").hide();
+			//로딩중이 아니라고 표시한다.
+			isLoading=false;
+			console.log("ajax");
+			
+			$(".heart-click").unbind('click');
+			//로그인 한 상태에서 하트를 클릭했을 때 (로그인한 상태의 하트의 <a></a> class명: heart-click)
+			$(".heart-click").click(function(){
+				
+				//게시물 번호(bno)를 idx로 전달받아 저장
+				let bno = $(this).attr('idx');
+				console.log("heart-click");
+				
+				//빈하트를 눌렀을때
+				if($(this).children('png').attr('class') == "bi bi-suit-heart-fill"){
+					console.log("빈하트 클릭" + bno);
+					
+					$.ajax({
+						url : "<c: value="/fnt/saveHeart.do"/>",
+						type : 'post',
+						data : {
+							bno : bno,
+						},
+						success : function(pto) {
+							//페이지 새로고침
+							//document.location.reload(true);
+							
+							let heart = pto.heart;
+							
+							//페이지와 모달창에 하트수를 갱신
+							$('#m_heart'+bno).text(heart);
+							$('#heart'+bno).text(heart);
+							
+							console.log("하트추가 성공");	
+						},
+						error: function() {
+							alert('서버에 에러가 발생했습니다');
+						}
+			
+					});
+					
+					console.log("꽉찬하트로 바꾸기");
+					$(this).attr('src','<c:url value="/resources/images/photobbs/icons/bi bi-suit-heart-fill.png"/>')
+					$('.heart_icon'+bno).attr('src', '<c:url value="/resources/images/photobbs/icons/bi bi-suit-heart-fill.png"/>')
+				
+					//꽉찬 하트를 눌렀을 때
+				}else if($(this).children('png').attr('class') == "bi bi-suit-heart-fill"){
+					console.log("꽉찬하트 클릭"+bno);
+					
+					$.ajax({
+						uri: "<c: value="/fnt/removeHeart.do"/>",
+						type: "post",
+						data:{
+							bno : bno,
+						},
+						success : function(pto) {
+							//페이지 새로고침
+							//document.location.reload(true);
+							
+							let heart = pto.heart;
+							//페이지, 모달창에 하트 수 갱신
+							$('#m_heart'+bno).text(heart);
+							$('#heart'+bno).text(heart);
+							
+							console.log("하트삭제 성공");
+						},
+						error: function() {
+							alert('서버 에러');
+						}
+					});
+					console.log("빈하트로 바꾸기");
+					
+					//빈하트로 바꾸기
+					$(this).attr('src', '<c:url value="/resources/images/photobbs/icons/bi bi-suit-heart.png"/>')
+					$('.heart_icon'+bno).attr('src', '<c:url value="/resources/images/photobbs/icons/bi bi-suit-heart.png"/>')
+				}
+			});
+			
+			//로그인 안한 상태에서 하트를 클릭하면 로그인해야한다는 알림창이 뜹니다.
+			//(로그인한 상태인 하트의 <a></a> class명: heart-notlogin)
+			$('.heart-notlogin').unbind('click');
+			$('.heart-notlogin').click(function() {
+				alert('로그인 하셔야 하트를 누를 수 있습니다');
+			});
+			
+			//댓글아이콘을 클릭했을때 댓글 리스트 함수를 호출
+			$(".open_reply_list").unbind('click');
+			$(".open_reply_list").click(function() {
+				let bno = $(this).attr('idx');
+				//게시물의 no에 해당하는 댓글 리스트를 가져오는 함수
+				ReplyList(bno);
+			});
+			
+			//댓글 달기 버튼 클릭시 실행
+			$(".write_reply").unbind('click');
+			$(".write_reply").click(function() {
+				//게시물 번호
+				let bno = $(this).attr('idx');
+				//책갈피
+				//댓글 입력란의 내용을 가져온다.
+				let content = $("#input_reply"+bno).val();
+				
+				//앞뒤 공백을 제거한다.(띄어쓰기만 입력했을때 댓글작성안되게 처리하기 위함)
+				content = content.trim();
+				
+				console.log(content);
+				
+				if(content == ""){ //입력 내용없을시
+					alert("내용을 입력하세요");
+				}
+				else{
+					//입력란 비우기
+					$('#input_reply'+bno).val("");
+					
+					// reply+1 하고 그 값을 가져옴
+					$.ajax({
+						url : "<c: value="/fnt/picture_write_reply.do"/>",
+						type: "post",
+						data: {
+							bno : bno,
+							content : content
+						},
+						success : function(pto){
+							
+							let reply = pto.reply;
+							//페이지, 모달창에 댓글 수 갱신
+							$('#m_reply'+bno).text(reply);
+							$('#reply'+bno).text(reply);
+							
+							console.log("댓글 작성 성공");
+							
+							//댓글리스트 새로 받아오기
+							ReplyList(bno);
+						},
+						error : function() {
+							alert('서버 에러');
+						}
+					});
+				}
+			});
+		}
+	
+	});
+}
+	
+</script>
 
 <!-- footer 시작 -->
 <jsp:include page="/WEB-INF/views/template/Footer.jsp" />

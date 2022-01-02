@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="mybatis.mapper.member">
+ 	<select id="picture_count" parameterType="com.kosmo.ft.service.PictureDTO" resultType="int">
+		SELECT COUNT(bno) FROM BOARD
+		<choose>
+			<!-- if문과 비슷한 구조로 subject가 둘 null이 아니면 제목검색 이런식-->
+			<when test="subject != null">
+				WHERE (SUBJECT LIKE CONCAT('%',#{subject},'%'))
+			</when>
+			<when test="content != null">
+				WHERE (CONTENT LIKE CONCAT('%',#{content},'%'))
+			</when>
+			<when test="name != null">
+				WHERE (CONTENT LIKE CONCAT('%',#{name},'%'))
+			</when>
+			<when test="address != null">
+				WHERE (CONTENT LIKE CONCAT('%',#{address},'%'))
+			</when>
+		</choose>	
+	</select>
+	
+	<select id="picture_favorite_count" parameterType="com.kosmo.ft.service.PictureHeartDTO" resultType="int">
+		SELECT COUNT(*) FROM HEART WHERE name LIKE '${name}'
+	</select>
+	
+	<!-- 로그인 안한버전 사진게시판 리스트 -->
+	<select id="picture_list_login" resultType="com.kosmo.ft.service.PictureDTO">
+		SELECT b.bno, subject, content, name, date_format(wdate,'%Y-%m-%d') wdate, hit, address, media, reply, heart, m.profile
+		FROM BOARD b LEFT OUTER JOIN MEMBER m
+		ON b.name = m.name
+		
+		<choose>
+			<!-- if문과 비슷한 구조로 subject가 둘 null이 아니면 제목검색 이런식-->
+			<when test="subject != null">
+				WHERE (SUBJECT LIKE CONCAT('%',#{subject},'%'))
+			</when>
+			<when test="content != null">
+				WHERE (CONTENT LIKE CONCAT('%',#{content},'%'))
+			</when>
+			<when test="name != null">
+				WHERE (CONTENT LIKE CONCAT('%',#{name},'%'))
+			</when>
+			<when test="address != null">
+				WHERE (CONTENT LIKE CONCAT('%',#{address},'%'))
+			</when>
+		</choose>	
+		ORDER BY b.bno DESC
+		limit #{startRowNum}, #{rowCount}
+	</select>
+	
+	<!-- 로그인 한버전 사진게시판 리스트 -->
+	<select id="picture_list" parameterType="com.kosmo.ft.service.PictureDTO" resultType="com.kosmo.ft.service.PictureDTO">
+		SELECT b.bno, subject, content, name, date_format(wdate,'%Y-%m-%d') wdate, hit, address, media, reply, heart, h.hno ,m.profile
+		FROM BOARD b LEFT OUTER JOIN HEART h
+		ON #{name} = h.name AND b.bno = h.bno
+		LEFT OUTER JOIN MEMBER m
+		ON b.name = m.name
+		
+		<choose>
+			<!-- if문과 비슷한 구조로 subject가 둘 null이 아니면 제목검색 이런식-->
+			<when test="subject != null">
+				WHERE (SUBJECT LIKE CONCAT('%',#{subject},'%'))
+			</when>
+			<when test="content != null">
+				WHERE (CONTENT LIKE CONCAT('%',#{content},'%'))
+			</when>
+			<when test="name != null">
+				WHERE (CONTENT LIKE CONCAT('%',#{name},'%'))
+			</when>
+			<when test="address != null">
+				WHERE (CONTENT LIKE CONCAT('%',#{address},'%'))
+			</when>
+		</choose>	
+		ORDER BY b.bno DESC
+		limit #{startRowNum}, #{rowCount}
+	</select>
+	
+	<!-- BEST 게시물5 리스트 -->
+	<select id="best_picture_list" parameterType="com.kosmo.ft.service.PictureDTO" resultType="com.kosmo.ft.service.PictureDTO">
+		SELECT bno, name, hit, address, media, reply, heart
+		FROM BOARD
+		
+		<choose>
+			<!-- if문과 비슷한 구조로 subject가 둘 null이 아니면 제목검색 이런식-->
+			<when test="subject != null">
+				WHERE (SUBJECT LIKE CONCAT('%',#{subject},'%'))
+			</when>
+			<when test="content != null">
+				WHERE (CONTENT LIKE CONCAT('%',#{content},'%'))
+			</when>
+			<when test="name != null">
+				WHERE (CONTENT LIKE CONCAT('%',#{name},'%'))
+			</when>
+			<when test="address != null">
+				WHERE (CONTENT LIKE CONCAT('%',#{address},'%'))
+			</when>
+		</choose>	
+		ORDER BY heart DESC
+		limit 5
+	</select>
+	
+ </mapper> 

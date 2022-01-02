@@ -120,7 +120,7 @@
 						data-bs-toggle="dropdown" aria-expanded="false"> Board </a>
 						<ul class="dropdown-menu" aria-labelledby="dropdown08">
 							<li><a class="dropdown-item"
-								href="<c:url value="/fnt/photoList.do"/>">소셜게시판</a></li>
+								href="<c:url value="/fnt/picture_list.do"/>">소셜게시판</a></li>
 							<li><a class="dropdown-item"
 								href="#">Q & A Board</a></li>
 							<li><a class="dropdown-item" 

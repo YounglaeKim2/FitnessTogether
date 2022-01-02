@@ -1,23 +1,237 @@
 package com.kosmo.ft.web;
 
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.Map;
+
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kosmo.ft.service.PictureDTO;
+import com.kosmo.ft.service.impl.PictureDAO;
 
 @Controller
-public class PhotoBbsController {
+public class PhotoBbsController extends HttpServlet{
+	
+	//공통적용 + 검색창 목록 관련
+	@RequestMapping("/fnt/picture_list.do")
+	public String picture_list(HttpServletRequest request, HttpSession session) {
+		
+		final int PAGE_ROW_COUNT = 12;
+		
+		//dao 객체생성
+		PictureDAO dao = new PictureDAO();
+		
+		//보여줄 페이지의 번호를 일단 1이라고 초기값 지정
+		int pageNum =1;
+		//페이지 번호가 파라미터로 전달되는지 읽어와 본다.
+		String strPageNum = request.getParameter("pageNum");
+		//페이지의 번호가 파라미터로 넘어온다면
+		if(strPageNum != null) {
+			//숫자로 바꿔서 보여줄 페이지 번호로 지정
+			pageNum = Integer.parseInt(strPageNum);
+			
+		}//if
+		
+		//보여줄 페이지의 시작 ROWNUM -0부터 시작
+		int startRowNum = 0 + (pageNum -1) * PAGE_ROW_COUNT;
+		//보여줄 페이지의 끝 ROWNUM
+		int endRowNum = pageNum * PAGE_ROW_COUNT;
+		
+		int rowCount = PAGE_ROW_COUNT;
+		
+		//검색 키워드 관련된 처리 - 검색 키워드가 파라미터로 넘어올 수 있고 안넘어 올 수도 있음.
+		String keyword = request.getParameter("keyword");
+		String condition = request.getParameter("condition");
+		
+		//키워드가 넘어오지 않는다면
+		if(keyword == null) {
+			//키워드와 검색 조건에 빈 문자열 넣기
+			keyword = "";
+			condition = "";
+		}//if
+		
+		//특수기호를 인코딩한 키워드를 미리 준비한다.
+		String encodedK = URLEncoder.encode(keyword);
+		
+		//startRowNum과 rowCount를 PictureDTO객체에 담는다.
+		PictureDTO pto = new PictureDTO();
+		pto.setStartRownum(startRowNum);
+		pto.setEndRowNum(endRowNum);
+		pto.setRowCount(rowCount);
+		
+		//ArrayList 객체의 참조값을 담을 지역변수 생성
+		ArrayList<PictureDTO> list = null;
+		//전체 row의 개수를 담을 지역변수를 미리 만든다. -검색조건이 들어올 경우 '검색결과갯수'가 된다.
+		int totalRow =0;
+		
+		//검색키워드가 넘어온다면
+		if(!keyword.equals("")) { //검색조건에 따라 분기
+			if(condition.equals("subject")) { //제목검색
+				pto.setSubject(keyword);
+			}
+			else if (condition.equals("content")) { //내용검색
+				pto.setContent(keyword);
+			}
+			else if (condition.equals("writer")) { //작성자검색
+				pto.setName(keyword);
+			}
+			else if (condition.equals("content")) { //위치검색
+				pto.setAddress(keyword);
+			}//다른검색조건 추가시 else if추가
+			
+		}
+		if (session.getAttribute("name") == null) {
+			//로그인 상태가 아닐때
+			//System.out.println("로그인 상태가 아닐때");
+			//사진 게시판 목록 가져오기
+			list = dao.boardList(pto);
+		}
+		else {
+			//로그인 상태일때
+			//System.out.println("로그인 상태일때");
+			
+			//현재 사용자의 닉네임 세팅
+			pto.setName((String) session.getAttribute("name"));
+			
+			//사진 게시판 목록 가져오기
+			list = dao.boardListLogin(pto);
+		}
+		//글의 개수
+		totalRow = dao.PictureCount(pto);
+		
+		//전체 페이지의 갯수 구하기
+		int totalPageCount = (int)Math.ceil(totalRow/(double)PAGE_ROW_COUNT);
+		
+		request.setAttribute("list", list);
+		request.setAttribute("totalPageCount", totalPageCount);
+		request.setAttribute("condition", condition);
+		request.setAttribute("keyword", keyword);
+		request.setAttribute("totalRow", totalRow);
+		//pageNum도 추가로 담아주기
+		request.setAttribute("pageNum", pageNum);
+		
+		//여기까지의 내용이 PhotoList 페이지와 동일하게 적용될 내용
+		//PhotoList페이지는 스크롤을 내릴때 추가되는 게시물들을 가져오기 떄문에
+		//best5에 해당사항 없음
+		
+		//좋아요(heart)순 상위5개 가져오기
+		ArrayList<PictureDTO> bestList = new ArrayList();
+		bestList = dao.bestList(pto);
+		
+		request.setAttribute("bestList", bestList);
+		
+		return "photobbs/Picture_list";
+	}
 
+	//디폴트 사진목록
 	@RequestMapping("/fnt/photoList.do")
-	public String myFeed() {
+	public String photoList(HttpServletRequest request, HttpSession session) {
+		
+		//한 페이지에 표시할 이미지카드수(12로 설정)
+		final int PAGE_ROW_COUNT = 12;
+		
+		PictureDAO dao = new PictureDAO();
+		
+		//보여줄 페이지의 번호를 일단 1이라고 초기값 지정
+		int pageNum =1;
+		//페이지 번호가 파라미터로 전달되는지 읽어와 본다
+		String strPageNum = request.getParameter("pageNum");
+		//만일 페이지 번호가 파라미터로 넘어온다면
+		if(strPageNum != null) {
+			//숫자로 바꿔서 보여줄 페이지 번호로 지정한다.
+			pageNum = Integer.parseInt(strPageNum);
+		}
+		
+		//보여줄 페이지의 시작 ROWNUM -0 부터 시작
+		int startRowNum = 0 + (pageNum - 1) * PAGE_ROW_COUNT;
+		//보여줄 페이지의 끝 ROWNUM
+		int endRowNum = pageNum * PAGE_ROW_COUNT;
+		int rowCount = PAGE_ROW_COUNT;
+		
+		//검색키워드 관련 처리
+		String keyword = request.getParameter("keyword");
+		String condition = request.getParameter("condition");
+		//만일 키워드로 넘어오지 않는다면
+		if(keyword == null) {
+			keyword = "";
+			condition = "";
+		}
+		
+		//특수기호 인코딩 키워드를 준비
+		String encodedK = URLEncoder.encode(keyword);
+		
+		//startRowNum과 rowCount를 PictureDTO 객체에 담기
+		PictureDTO pto = new PictureDTO();
+		pto.setStartRownum(startRowNum);
+		pto.setEndRowNum(endRowNum);
+		pto.setRowCount(rowCount);
+		
+		//ArrayList 객체의 참조값 담을 지역변수
+		ArrayList<PictureDTO> list = null;
+		//전체 row의 갯수를 담을 지역변수 미리 만들기.
+		int totalRow = 0;
+		
+		//검색키워드가 넘어올경우
+		if(!keyword.equals("")) { //검색조건에따른 분기
+			if(condition.equals("subject")) { //제목일경우
+				//검색 키워드를 PictureDTO에 담아서 전달한다.
+				pto.setSubject(keyword);
+			}
+			else if(condition.equals("content")) { //내용일경우
+				pto.setContent(keyword);
+			}
+			else if(condition.equals("name")) { //작성자 닉네임 일경우
+				pto.setName(keyword);
+			}
+			else if(condition.equals("address")) { //위치(주소)일경우
+				pto.setAddress(keyword);
+			} //기타 검색조건 추가시 아래 else if() 계속 추가
+		}
+		
+		// 위의 분기에 따라 pto에 담기에는 내용이 다르고
+		// 그 내용을 기준으로 조건이 다를때마다 다른내용이 select 되도록 dynamic query를 구성한다.
+		// 글 목록 얻어오기
+		
+		if(session.getAttribute("name") == null) {
+			//로그인 상태가 아닐때
+			System.out.println("로그인 상태가 아닐때");
+			//사진게시판 목록 가져오
+			list = dao.boardList(pto);
+		}
+		else {
+			//로그인 상태일때
+			
+			//현재 사용자의 닉네임을 세팅
+			pto.setName((String)session.getAttribute("name"));
+			
+			//사진게시판 목록 가져오기
+			list = dao.boardListLogin(pto);
+		}
+		
+		//글 갯수
+		totalRow = dao.PictureCount(pto);
+		
+		//전체 페이지의 갯수 구하기
+		int totalPageCount = (int)Math.ceil(totalRow/(double)PAGE_ROW_COUNT);
+		
+		request.setAttribute("list", list);
+		request.setAttribute("totalPageCount", list);
+		request.setAttribute("condition", condition);
+		request.setAttribute("keyword", keyword);
+		request.setAttribute("totalRow", totalRow);
+		request.setAttribute("pageNum", pageNum);
+		
 		return "photobbs/PhotoList";
 	}
 	
-	@RequestMapping("/fnt/frPhotoList.do")
-	public String frFeed() {
-		return "photobbs/FrPhotoList";
-	}
-	
-	@RequestMapping("/fnt/mapPhotoList.do")
-	public String mapFeed() {
-		return "photobbs/MapPhotoList";
-	}
-}
+}///PhotoBbsController
