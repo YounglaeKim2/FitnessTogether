@@ -33,4 +33,5 @@
 		DELETE weightbbs WHERE w_no=#{no}
 	</delete>
 	
+	
  </mapper> 

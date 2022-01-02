@@ -49,7 +49,8 @@ $(function() {
 		
 	    var calendarEl = document.getElementById('calendar');
 	    var calendar = new FullCalendar.Calendar(calendarEl, {
-	    	height: "1000px",
+	    	height: 900,
+	    	contentHeight: 300,
 	    	initialView: 'dayGridMonth',
 	    	locale:'ko',
 	    	aspectRatio: 1.5,
@@ -76,7 +77,7 @@ $(function() {
             		});
             		
            			list += "</table>";
-           			list += "<br/><div class='form-group' align='right'><button id='writeweight' type='button' class='btn btn-info'>추가작성</button> <button id='updateweight' type='button' class='btn btn-info'>수정</button> <button id='deleteweight' type='button' class='btn btn-info'>삭제</button></form></div>";
+           			list += "<br/><div class='form-group' align='right'><button id='writeweight' type='button' class='btn btn-info'>추가작성</button> <button id='deleteweight' type='button' class='btn btn-info'>삭제</button></form></div>";
            			
             		$('#weight').html(list);
             		
@@ -88,11 +89,11 @@ $(function() {
            		    });
            		    
            		    $('#deleteweight').click(function(){
+           		    	if($(':checkbox:checked').length ==0) {
+       		    			alert("삭제할 내용이 없습니다")
+       		    			return;
+       		    		}
            		    	if(confirm('정말로 삭제하시겠습니까?')){
-           		    		if(data.length ==0) {
-           		    			alert("삭제할 내용이 없습니다")
-           		    			return;
-           		    		}
            		    		$('#dataform').submit();
            		    	}
            		    });
@@ -147,15 +148,11 @@ $(function() {
 
 	<i class="bi-alarm" style="font-size: 2rem; color: cornflowerblue;"></i>
 
-    <!-- Header -->
-    <header id="header" class="header">
-        <div class="container">
-            <div class="row">
-                <div id='calendar'></div>
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </header> <!-- end of header -->
-    <!-- end of header -->
+    <div class="container" style="padding-top: 50px; padding-bottom: 40px">
+        <div class="row">
+            <div id='calendar'></div>
+        </div> <!-- end of row -->
+    </div> <!-- end of container -->
 
 <!-- 모달 작성 -->
 	<div class="modal fade" id="modaltest" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
