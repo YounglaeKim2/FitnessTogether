@@ -201,130 +201,7 @@ a {
 			</div>
 		</div>
 	
-	<!-- About US
-	================================================== -->
-	<!-- Wrap the rest of the page in another container to center all the content. -->
-	<section class="page-section" id="about">
-            <div class="container">
-                <div class="text-center">
-                    <h2 class="section-heading text-uppercase">ABOUT US</h2>
-                    <h3 class="section-subheading text-muted">WHO WE R</h3>
-                </div>
-                <ul class="timeline">
-                    <li class="timeline-inverted">
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="<c:url value="/resources/images/testimonial-1.jpg"/>" alt="..." /></div>
-                        <div class="timeline-panel">
-                            <div class="timeline-heading">
-                                <h6>TEAM LEADER</h6>
-                                <h4 class="subheading">KIM YoungLae</h4>
-                            </div>
-                            <div class="timeline-body"><p class="text-muted">전체 프로젝트 검수</p></div>
-                            <div class="timeline-body"><p class="text-muted">메인</p></div>
-                            <div class="timeline-body"><p class="text-muted">맵핑</p></div>
-                            <div class="timeline-body"><p class="text-muted">카카오 지도 API</p></div>
-                            <div class="timeline-body"><p class="text-muted">ERD</p></div>
-                            
-                        </div>
-                    </li>
-                    <li>
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="<c:url value="/resources/images/testimonial-2.jpg"/>" alt="..." /></div>
-                        <div class="timeline-panel">
-                            <div class="timeline-heading">
-                                <h6>Project Leader</h6>
-                                <h4 class="subheading">PARK JunHee</h4>
-                            </div>
-                            <div class="timeline-body"><p class="text-muted">전체 프로젝트 검수</p></div>
-                            <div class="timeline-body"><p class="text-muted">맵핑</p></div>
-                            <div class="timeline-body"><p class="text-muted">DB 설계</p></div>
-                            <div class="timeline-body"><p class="text-muted">깃, 템플릿</p></div>
-                        </div>
-                    </li>
-                    <li class="timeline-inverted">
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="<c:url value="/resources/images/testimonial-3.jpg"/>" alt="..." /></div>
-                        <div class="timeline-panel">
-                            <div class="timeline-heading">
-                                <h6>Project Leader</h6>
-                                <h4 class="subheading">KIM HyungCheol</h4>
-                            </div>
-                            <div class="timeline-body"><p class="text-muted">캘린더</p></div>
-                            <div class="timeline-body"><p class="text-muted">깃, 템플릿</p></div>
-                            <div class="timeline-body"><p class="text-muted">운동 DB</p></div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="<c:url value="/resources/images/testimonial-4.jpg"/>" alt="..." /></div>
-                        <div class="timeline-panel">
-                            <div class="timeline-heading">
-                                <h4 class="subheading">KIM HyeRan</h4>
-                            </div>
-                            <div class="timeline-body"><p class="text-muted">DB 설계</p></div>
-                            <div class="timeline-body"><p class="text-muted">UML 작성</p></div>
-                            <div class="timeline-body"><p class="text-muted">식품 DB</p></div>
-                        </div>
-                    </li>
-                    <li class="timeline-inverted">
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="<c:url value="/resources/images/testimonial-1.jpg"/>" alt="..." /></div>
-                        <div class="timeline-panel">
-                            <div class="timeline-heading">
-                                <h4 class="subheading">LEE Ah-Young</h4>
-                            </div>
-                            <div class="timeline-body"><p class="text-muted">로그인/회원가입</p></div>
-                            <div class="timeline-body"><p class="text-muted">관리자 페이지</p></div>
-                            <div class="timeline-body"><p class="text-muted">로그인 API</p></div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="<c:url value="/resources/images/testimonial-2.jpg"/>" alt="..." /></div>
-                        <div class="timeline-panel">
-                            <div class="timeline-heading">
-                                <h4 class="subheading">BOCK SangIl</h4>
-                            </div>
-                            <div class="timeline-body"><p class="text-muted">메인 사진 게시판</p></div>
-                            <div class="timeline-body"><p class="text-muted">기능선정 참여</p></div>
-                            
-                        </div>
-                    </li>
-                    <li class="timeline-inverted">
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="<c:url value="/resources/images/testimonial-3.jpg"/>" alt="..." /></div>
-                        <div class="timeline-panel">
-                            <div class="timeline-heading">
-                                <h4 class="subheading">HEO JinSeo</h4>
-                            </div>
-                            <div class="timeline-body"><p class="text-muted">기능선정 참여</p></div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="<c:url value="/resources/images/testimonial-4.jpg"/>" alt="..." /></div>
-                        <div class="timeline-panel">
-                            <div class="timeline-heading">
-                                <h4 class="subheading">CHO HakLae</h4>
-                            </div>
-                            <div class="timeline-body"><p class="text-muted"> </p></div>
-                        </div>
-                    </li>
-                    <li class="timeline-inverted">
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="<c:url value="/resources/images/testimonial-1.jpg"/>" alt="..." /></div>
-                        <div class="timeline-panel">
-                            <div class="timeline-heading">
-                                <h4 class="subheading">HAN SangMin</h4>
-                            </div>
-                            <div class="timeline-body"><p class="text-muted"> </p></div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="timeline-image">
-                            <h4>
-                                Be Part
-                                <br />
-                                Of Our
-                                <br />
-                                Story!
-                            </h4>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </section>
+	
 	
 	
 	
@@ -343,34 +220,8 @@ a {
 
   <div class="container marketing">
 
-    <!-- Three columns of text below the carousel -->
-    <div class="row">
-      <div class="col-lg-4">
-        <img src="<c:url value="/resources/images/mapping/FT1.jpg"/>" class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#777" dy=".3em">1</text></img>
-
-        <h2>Heading</h2>
-        <p>Some representative placeholder content for the three columns of text below the carousel. This is the first column.</p>
-        <p><a class="btn btn-secondary" href="#">View details »</a></p>
-      </div><!-- /.col-lg-4 -->
-      
-      
-      <div class="col-lg-4">
-        <img src="<c:url value="/resources/images/mapping/FT2.jpg"/>" class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#777" dy=".3em">2</text></img>
-
-        <h2>Heading</h2>
-        <p>Another exciting bit of representative placeholder content. This time, we've moved on to the second column.</p>
-        <p><a class="btn btn-secondary" href="#">View details »</a></p>
-      </div><!-- /.col-lg-4 -->
-      
-      
-      <div class="col-lg-4">
-        <img src="<c:url value="/resources/images/mapping/FT3.jpg"/>" class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#777" dy=".3em">3</text></img>
-
-        <h2>Heading</h2>
-        <p>And lastly this, the third column of representative placeholder content.</p>
-        <p><a class="btn btn-secondary" href="#">View details »</a></p>
-      </div><!-- /.col-lg-4 -->
-    </div><!-- /.row -->
+    
+    
 
 
     <!-- START THE FEATURETTES -->

@@ -81,42 +81,67 @@
 			<div class="collapse navbar-collapse justify-content-md-center"
 				id="navbarsExample08">
 				<ul class="navbar-nav">
+					<!--
 					<li class="nav-item"><img
 						src="<c:url value="/resources/images/logo.svg"/>"
 						alt="alternative"></li>
+					-->
 					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="<c:url value="/fnt/main.do"/>">FITNESS
-							TOGETHER</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
+						aria-current="page" href="<c:url value="/fnt/main.do"/>"> FITNESS
+							TOGETHER </a></li>
+					<!--
+					<li class="nav-item"><a class="nav-link" href="#">Link</a></li>	
+					
 					<li class="nav-item"><a class="nav-link disabled" href="#"
-						tabindex="-1" aria-disabled="true">Disabled</a></li>
+						tabindex="10" aria-disabled="true">Disabled</a></li>
+						
 					<li class="nav-item"><a class="nav-link"
 						href="<c:url value="/fnt/AboutUs.do"/>">About</a></li>
+					-->	
+						
 					<li class="nav-item"><a class="nav-link"
-						href="<c:url value="/fnt/Login.do"/>">로그인</a></li>
+						href="<c:url value="/fnt/Login.do"/>"> 로그인 </a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="<c:url value="/fnt/SignUp.do"/>">회원가입</a></li>
+						href="<c:url value="/fnt/SignUp.do"/>"> 회원가입 </a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="<c:url value="/fnt/Logout.do"/>">로그아웃</a></li>
+						href="<c:url value="/fnt/Logout.do"/>"> 로그아웃 </a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="<c:url value="/fnt/ProAlter.do"/>">마이페이지</a></li>
+						href="<c:url value="/fnt/ProAlter.do"/>"> 마이페이지 </a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="<c:url value="/fnt/mappingList.do"/>">매핑</a></li>
+						href="<c:url value="/fnt/mappingList.do"/>"> 매핑 </a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="<c:url value="/fnt/#.do"/>">채팅</a></li>
+						href="<c:url value="/fnt/#.do"/>"> 채팅 </a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="<c:url value="/fnt/calendar.do"/>">캘린더</a></li>
+						href="<c:url value="/fnt/calendar.do"/>"> 캘린더 </a></li>
+						
 
 					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" href="#" id="dropdown08"
-						data-bs-toggle="dropdown" aria-expanded="false">게시판</a>
+						class="nav-link dropdown-toggle" href="#" id="dropdownBoard"
+						data-bs-toggle="dropdown" aria-expanded="false"> Board </a>
 						<ul class="dropdown-menu" aria-labelledby="dropdown08">
 							<li><a class="dropdown-item"
 								href="<c:url value="/fnt/photoList.do"/>">소셜게시판</a></li>
-							<li><a class="dropdown-item" href="#">Another action</a></li>
-							<li><a class="dropdown-item" href="#">Something else
-									here</a></li>
-						</ul></li>
+							<li><a class="dropdown-item"
+								href="#">Q & A Board</a></li>
+							<li><a class="dropdown-item" 
+								href="#">Something else here</a></li>
+						</ul>
+					</li>
+					
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#" id="dropdownAbout"
+						data-bs-toggle="dropdown" aria-expanded="false"> About </a>
+						<ul class="dropdown-menu" aria-labelledby="dropdownAbout">
+							<li><a class="dropdown-item"
+								href="<c:url value="/fnt/whoWeAre.do"/>">Our Amazing Team</a></li>
+							<li><a class="dropdown-item" 
+								href="<c:url value="/fnt/howWeDid.do"/>">How We Did</a></li>
+							<li><a class="dropdown-item" 
+								href="#">Something else here</a></li>
+						</ul>
+					</li>
+					
+					
 				</ul>
 			</div>
 		</div>
