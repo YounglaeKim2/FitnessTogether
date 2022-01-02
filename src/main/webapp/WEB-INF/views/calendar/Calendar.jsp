@@ -50,10 +50,16 @@ $(function() {
 	    var calendarEl = document.getElementById('calendar');
 	    var calendar = new FullCalendar.Calendar(calendarEl, {
 	    	height: 900,
-	    	contentHeight: 300,
+	    	dayMaxEvents: true,
+	    	
 	    	initialView: 'dayGridMonth',
 	    	locale:'ko',
 	    	aspectRatio: 1.5,
+	    	headerToolbar: {
+	    		left: 'prevYear,nextYear',
+	    		right: 'prev,next today',
+	    		center: 'title',
+    		},
 	    	dateClick: function(info) {
             	date = info.dateStr;
             	$('#date').html(date);
@@ -146,7 +152,6 @@ $(function() {
 });
 </script>
 
-	<i class="bi-alarm" style="font-size: 2rem; color: cornflowerblue;"></i>
 
     <div class="container" style="padding-top: 50px; padding-bottom: 40px">
         <div class="row">
