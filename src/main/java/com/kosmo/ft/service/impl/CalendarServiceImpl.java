@@ -50,8 +50,8 @@ public class CalendarServiceImpl implements CalendarService {
 			String kg="";
 			for(int j=1;j<=size;j++) { // 
 				if(key[i].equals(map.get("name"+j).toString())) {
-					count += map.get("kg"+j).toString()+" ";
-					kg += map.get("count"+j).toString()+" ";
+					count += map.get("kg"+j).toString()+"kg ";
+					kg += map.get("count"+j).toString()+"회 ";
 				}
 			}
 			writeMap.put("id",map.get("id"));

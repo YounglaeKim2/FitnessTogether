@@ -58,7 +58,7 @@ $(function() {
 	    	headerToolbar: {
 	    		left: 'prevYear,nextYear',
 	    		right: 'prev,next today',
-	    		center: 'title',
+	    		center: 'title'
     		},
 	    	dateClick: function(info) {
             	date = info.dateStr;
@@ -79,7 +79,7 @@ $(function() {
             		}
             		
             		$.each(data,function(index,element){
-            			list += "<tr><td><input type='checkbox' name='no' value='"+element['W_NO']+"'/></td><td>"+element['TYPE']+"</td><td>"+element['NAME']+"</td><td>"+element['KG']+"kg</td><td>"+element['COUNT']+"회</td></tr>";
+            			list += "<tr><td><input type='checkbox' name='no' value='"+element['W_NO']+"'/></td><td>"+element['TYPE']+"</td><td>"+element['NAME']+"</td><td>"+element['KG']+"</td><td>"+element['COUNT']+"</td></tr>";
             		});
             		
            			list += "</table>";
@@ -142,12 +142,8 @@ $(function() {
 	    $(document).mouseover(function(){
 			$('.fc-daygrid-day-frame').css('cursor','pointer');
 	    });
-    	
 	   
     });
-	
-	
-	
 	
 });
 </script>
