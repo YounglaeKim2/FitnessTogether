@@ -168,6 +168,10 @@
 			<a href="<c:url value="/fnt/ZZZZ.do"/>"
 				class="btn btn-primary">ZZZZ</a>
 		</div>
+		<div class="btn btn-link me-md-1">
+			<a href="<c:url value="/fnt/ViewPost.do"/>"
+				class="btn btn-primary">ViewPost</a>
+		</div>
 	</div>
 	<!--  
 	<div class="row">

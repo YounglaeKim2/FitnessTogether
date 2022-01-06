@@ -127,7 +127,7 @@
           markers.push(marker);
           kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
           kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
-          }
+        }
 
           // 클러스터러에 마커들을 추가합니다
           clusterer.addMarkers(markers);

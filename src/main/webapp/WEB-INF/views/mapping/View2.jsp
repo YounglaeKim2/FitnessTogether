@@ -29,7 +29,6 @@
 		#placesList .info .tel {color:#009900;}
 		#placesList .item .markerbg {float:left;position:absolute;width:36px; height:37px;margin:10px 0 0 10px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png) no-repeat;}
 		#placesList .item .marker_1 {background-position: 0 -10px;}
-		
 		#placesList .item .marker_2 {background-position: 0 -56px;}
 		#placesList .item .marker_3 {background-position: 0 -102px}
 		#placesList .item .marker_4 {background-position: 0 -148px;}
@@ -44,7 +43,6 @@
 		#placesList .item .marker_13 {background-position: 0 -562px;}
 		#placesList .item .marker_14 {background-position: 0 -608px;}
 		#placesList .item .marker_15 {background-position: 0 -654px;}
-		
 		#pagination {margin:10px auto;text-align: center;}
 		#pagination a {display:inline-block;margin-right:10px;}
 		#pagination .on {font-weight: bold; cursor: default;color:#777;}
