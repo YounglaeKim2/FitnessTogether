@@ -5,116 +5,115 @@
 <!-- Top 시작 -->
 <jsp:include page="/WEB-INF/views/template/Top.jsp"/>
 <!-- Top 끝 -->
-   	<div class="container">
-        <div class="col-xs-12"  style="margin-bottom: 5px">
-        	<div class="col-">
+   	<div class="container" style="padding-top: 100px; padding-bottom: 100px">
+       	<div class="row"  style="margin-bottom: 10px;">
+	       	<div>
 				<span style="font-size: 3em; font-weight: bold;">${date}</span>            	
 	    	</div>
-	    	<!-- 검색용 UI -->
-	    	<div class="row">
-            	<div class="text-center">
-             		<div class="col-lg-12" style="padding-left: 65%;">
-						<form class="form-line" method="post" action="<c:url value='/fnt/gowritefood.do'/>">
-							<input type="hidden" value="${date}"/>
-							<div class="form-group" style="padding-left: 30%;">
-								<select name="searchColumn" class="form-control" style="padding-right: 70%;">
-									<option selected value="">검색 내용 선택</option>
-									<option value="title">음식 이름</option>
-									<option value="name">음식 종류</option>
-								</select>
+    	</div>
+    	<div class="row" style="margin-bottom: 35px;">
+    		<div class="col-md-12">
+	   			<form id="dataform" method="post">
+	   				<div class="row align-items-end">
+	   					<div class="col-md-7">
+	   						　
+	   					</div>
+	   					<div class="col-md-5">
+	   						
+			   				<div class="input-group">
+								<input type="text" name="searchWord" class="form-control" placeholder="검색하실 식품명을 입력해주세요"/>
+								<input type="button" id="searchBtn" class="btn btn btn-info" value="검색" />
 							</div>
-							<div class="form-group" style="padding-left: 30%;" >
-								<input type="text" name="searchWord" class="form-control" />
-							</div>
-							<div class="form-line" style="padding-left: 80%;">	
-								<button id="searchBtn" type="submit" class="btn btn-primary" >검색</button>
-							</div>
-						</form>
+						</div>
 					</div>
-				</div>
-		    </div>
-		</div> <!-- end of row -->    
-        <br/>
-        <div class="form-control" id="myTabContent" style="paddng-left: 20% ">
-			<div class="tab-pane fade show active" id="food" role="tabpanel" aria-labelledby="food-tab">
-				<table id="weighttable" class="table">
+				</form>
+			</div>
+	    </div>
+	    <form class="form-control" action="<c:url value="/fnt/writeweight.do"/>" method="post" id="foodform">
+		    <input type="hidden" value="${date}"/>
+			<table class="table" style="text-align: center;">
+				<thead class="table-primary">
 					<tr style="font-size: 1.1em; font-weight: bold;">
-	   					<td>음식이름</td>
-	   					<td>음식 종류</td>
-	   					<td>칼로리</td>
-	   					<td><input type="checkbox" value="all"/></td>
-	   				</tr>
-	   				<tr>
-	   					<td>라면</td>
-	   					<td>인스턴스</td>
-	   					<td>750kcal</td>
-	   					<td><input type="checkbox" name="select_food" value="food1"/></td>
-	   				</tr>
-	   				<tr>
-	   					<td>부대찌개</td>
-	   					<td>찌개류</td>
-	   					<td>1200kcal</td>
-	   					<td><input type="checkbox" name="select_food" value="food2"/></td>
-	   				</tr>
-	   				<tr>
-	   					<td>아이스크림</td>
-	   					<td>유제품류</td>
-	   					<td>450kcal</td>
-	   					<td><input type="checkbox" name="select_food" value="food3"/></td>
-	   				</tr>
-	   				<tr>
-	   					<td>삼겹살</td>
-	   					<td>고기류</td>
-	   					<td>1250kcal</td>
-	   					<td><input type="checkbox" name="select_food" value="food4"/></td>
-	   				</tr>
-	   			</table>
-	   			<div align="right">
-					<button id="btnform" type="button" class="btn btn-primary">확인</button>
-				</div>
-	   		</div>
-		</div>
+		 				<td><input type="checkbox" value="all"/></td>
+		 				<td>식품이름</td>
+		 				<td>총내용량</td>
+		 				<td>열량(kcal)</td>
+		 				<td>탄수화물(g)</td>
+		 				<td>단백질(g)</td>
+		 				<td>지방(g)</td>
+					</tr>
+				</thead>
+				<tbody>	
+		 			<tr>
+		 				<td><input type="checkbox" name="select_food" value="food1"/></td>
+		 				<td>닭꼬치</td>
+		 				<td>70 g</td>
+		 				<td>176.72 kcal</td>
+		 				<td>13.35 g</td>
+		 				<td>11.56 g</td>
+		 				<td>8.57 g</td>
+		 			</tr>
+		 			<tr>
+		 				<td><input type="checkbox" name="select_food" value="food2"/></td>
+		 				<td>국물떡볶이</td>
+		 				<td>310 g</td>
+		 				<td>605 kcal</td>
+		 				<td>128 g</td>
+		 				<td>17 g</td>
+		 				<td>2.9 g</td>
+		 			</tr>
+		 			<tr style="font-weight: bold; background-color: aqua;">
+		 				<td colspan="3">종합 섭취량</td>
+						<td>781.72 kcal</td>
+		 				<td>141 g</td>
+		 				<td>28.56 g</td>
+		 				<td>11.47 g</td>
+		 			</tr>
+	 			</tbody>
+	  		</table>
+	  		<div align="right">
+				<button id="btnform" type="button" class="btn btn btn-info">저장</button>
+				<button id="" type="button" class="btn btn btn-info">식품삭제</button>
+			</div>
+		</form>
 	</div> <!-- end of container -->
 <script>
-//검색버튼처리(검색기능은 미완성)
 $(function(){
-	var searchBtn = $("#searchBtn");
 	
+	//검색버튼 클릭시
 	$('#searchBtn').click(function(){
-		if(searchBtn.find("option:selected").val()){
-			alert("검색할 항목을 선택하세요.");
-			return false;
-		}
-		if(!searchBtn.find("input[name='searchWord']").val()){
-			alert("검색하고 싶은 키워드를 입력하세요.");
-			return false;
-		}
-		//e.preventDefalut();
-		searchBtn.submit();
+		$.ajax({
+			url:"<c:url value="/fnt/searchFood.do"/>",
+			data:$('#dataform').serialize(),
+			dataType:"json",
+			type:"post"
+		}).done(function(data){	
+			console.log(data);
+			console.log(typeof data);
+			if(data[0][['CODE']] == "INFO-200") alert("검색된 결과가 없습니다")
+		});
 	});
 	
-	//체크박스 선택여부
+	// 체크박스용
 	$(':checkbox').click(function(){
-		if($(this).val()=='all'){//"전체선택" 클릭
-			if($(this).prop('checked')){//체크한 경우
+		if($(this).val()=='all'){
+			if($(this).prop('checked')){
 				$(':checkbox:gt(0)').each(function(){
 					$(this).prop('checked',true);
 				});
 			}
-			else{//해제한 경우
+			else{
 				$(':checkbox:gt(0)').each(function(){
 					$(this).prop('checked',false);
 				});
 			}
 		}
-		else{//"전체선택"이 아닌 체크박스 클릭
-			if($(this).prop('checked')){//체크한 경우
-				//체크된 모든 체크박스의 수와 전체 선택을 제외한 체크박스의 수가 같다면 
-				//즉 모두 선택되었다면 
+		else{
+			if($(this).prop('checked')){
 				if($(':checkbox:gt(0)').length == $(':checkbox:checked').length)
 					$(':checkbox:first').prop('checked',true);
 			}
-			else{//해제한 경우
+			else{
 				$(':checkbox:first').prop('checked',false);
 			}
 		}

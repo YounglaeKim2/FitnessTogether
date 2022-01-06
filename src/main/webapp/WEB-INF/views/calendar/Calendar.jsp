@@ -183,28 +183,42 @@ $(function() {
 							<div class="tab-pane fade show active" id="food" role="tabpanel" aria-labelledby="food-tab">
 		   						<table class="table">
 		   							<tr>
-		   								<th scope="col">음식종류</th>
-		   								<th scope="col">칼로리</th>
+						 				<td><input type="checkbox" value="all"/></td>
+						 				<td>식품이름</td>
+						 				<td>총내용량</td>
+						 				<td>열량(kcal)</td>
+						 				<td>탄수화물(g)</td>
+						 				<td>단백질(g)</td>
+						 				<td>지방(g)</td>
+									</tr>
+		   							<tr>
+		   								<td colspan="7" align="center">작성된 게시글이 없습니다</td>
 		   							</tr>
 		   							<tr>
-		   								<td colspan="2" align="center">작성된 게시글이 없습니다</td>
-		   							</tr>
-		   							<tr>
-		   								<td>라면</td>
-		   								<td>750kcal</td>
-		   							</tr>
-		   							<tr>
-		   								<td>부대찌개</td>
-		   								<td>1200kcal</td>
-		   							</tr>
-		   							<tr>
-		   								<td>아이스크림</td>
-		   								<td>450kcal</td>
-		   							</tr>
-		   							<tr>
-		   								<td>삼겹살</td>
-		   								<td>1250kcal</td>
-		   							</tr>
+						 				<td><input type="checkbox" name="select_food" value="food1"/></td>
+						 				<td>닭꼬치</td>
+						 				<td>70 g</td>
+						 				<td>176.72 kcal</td>
+						 				<td>13.35 g</td>
+						 				<td>11.56 g</td>
+						 				<td>8.57 g</td>
+						 			</tr>
+						 			<tr>
+						 				<td><input type="checkbox" name="select_food" value="food2"/></td>
+						 				<td>국물떡볶이</td>
+						 				<td>310 g</td>
+						 				<td>605 kcal</td>
+						 				<td>128 g</td>
+						 				<td>17 g</td>
+						 				<td>2.9 g</td>
+						 			</tr>
+						 			<tr style="text-align: center; font-weight: bold;">
+						 				<td colspan="3">종합 섭취량</td>
+										<td>781.72 kcal</td>
+						 				<td>141 g</td>
+						 				<td>28.56 g</td>
+						 				<td>11.47 g</td>
+						 			</tr>
 		   						</table>
 		   						<br/>
 		   						<div class="form-group" align="right">
