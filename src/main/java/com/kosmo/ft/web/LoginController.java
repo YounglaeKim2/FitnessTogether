@@ -44,7 +44,8 @@ public class LoginController {
 				return "common/Login";
 			}
 		// 뷰정보 번환]
-		return "common/AfLogin";
+		//return "common/AfLogin";
+		return "home";
 	}
 
 	
@@ -60,7 +61,4 @@ public class LoginController {
 		// 뷰정보 번환]
 		return "common/Login";
 	}
-	
-	
-	
 }

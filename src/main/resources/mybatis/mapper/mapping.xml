@@ -12,24 +12,24 @@
 		 상세보기에 적용:글번호에 따른 모든 한줄 댓글도 가져오기위해 collection태그 사용	    
 	-->
 	<resultMap type="mappingDTO" id="mappingDTOResult">
-		<!-- 
+		<!--
 		property:자바빈(OneMemoDTO)의 속성명
 		column:테이블의 컬럼(조회(SELECT)결과의 컬럼명들 의미)
-		 -->
+		-->
 		<result column="no" property="no"/>
 		<result column="title" property="title"/>
 		<result column="content" property="content"/>
 		<result column="postDate" property="postDate"/>
 		<result column="id" property="id"/>
 		<result column="name" property="name"/>
-		<!-- <result column="commentCount" property="commentCount"/>	 -->	
-		<!-- 
+		<!--<result column="commentCount" property="commentCount"/>-->	
+		<!--
 		1:N관계 매핑용
 		column: 조인조건의 컬럼명 (ON onememo.no = linecomments.no)
 		select: select태그의 id 속성값(쿼리문은 조인문)
 		javaType : OneMemoDTO의 자식레코드를 담을 컬렉션 타입
 		ofType : 자식의 DTO타입
-		 -->
+		-->
 		<!-- <collection property="comments" column="no" select="onememo.mybatis.mapper.linecomment.commentListsUsingCollection" javaType="List" ofType="lineCommentDTO"/>  -->
 	
 	</resultMap>	

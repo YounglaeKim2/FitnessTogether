@@ -24,7 +24,6 @@ public class MappingController {
 	@Resource(name="mappingService")
 	private MappingServiceImpl mappingService;
 	
-	
 	@RequestMapping("mappingList.do")
 	public String mappingList(
 			@RequestParam Map map,//검색 파라미터 및 페이징용 키값 저장용
