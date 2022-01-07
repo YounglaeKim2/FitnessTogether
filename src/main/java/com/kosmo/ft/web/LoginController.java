@@ -1,6 +1,5 @@
 package com.kosmo.ft.web;
 
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,52 +12,50 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.kosmo.ft.service.MemberDTO;
-import com.kosmo.ft.service.MemberService;
-
 import com.kosmo.ft.service.impl.MemberServiceImpl;
 
 @Controller
-@RequestMapping("/fnt/")
 public class LoginController {
-
-	@Resource
-	private MemberServiceImpl memberService;
+	@Autowired 
+	private MemberServiceImpl service;
 	
-	// 로그인 폼으로 이동
-	@RequestMapping("Login.do")
-	public String login() {
-		return "common/Login";
-	}
-
-	// 로그인 처리
-	@RequestMapping("LoginProcess.do")
-	public String process(@RequestParam Map map, Model model, SessionStatus status) {
-		boolean flag = memberService.isLogin(map);
-		model.addAttribute("id", map.get("id"));
-			if (!flag) {
-				status.setComplete();
-				model.addAttribute("NotMember", "아뒤와 비번이 틀려요");
-				return "common/Login";
-			}
-		// 뷰정보 번환]
-		//return "common/AfLogin";
-		return "home";
-	}
-
-	
-	// 카카오로그인 처리
-		@RequestMapping("KakaoLoginProcess.do")
-		public String kakaoLoginprocess(SessionStatus status) {
-			return "common/AfLogin";
+	//로그인 폼으로 이동]
+		@RequestMapping("/fnt/Login.do")
+		public String login() {
+			return "common/Login";
 		}
-
-	@RequestMapping("Logout.do")
-	public String logout(SessionStatus status) {
-		status.setComplete();
-		// 뷰정보 번환]
-		return "common/Login";
+	
+	//로그인 요청
+	@ResponseBody
+	@RequestMapping("/fnt/login.do") 
+	public String login(String id, String pwd, HttpSession session) {
+		//화면에서 입력한 아이디와 비밀번호가 일치하는 회원 정보가 DB에 있는지 확인하여
+		HashMap<String, String> map = new HashMap<String, String>(); 
+		
+		map.put("id", id); 
+		map.put("pwd", pwd);
+		MemberDTO dto = service.member_login(map); //일치하는 회원 정보가 있다면 회원 정보를 세션에 담는다
+		session.setAttribute("login_info", dto); 
+		
+		return dto == null ? "false" : "true"; 
 	}
-}
+	
+	//로그아웃 요청 
+	@ResponseBody 
+	@RequestMapping("/fnt/logout.do") 
+	public void logout(HttpSession session) {
+		session.removeAttribute("login_info"); 
+	} 
+	
+	
+	//회원가입 화면 요청
+	@RequestMapping("/fnt/signup.do") 
+	public String member(HttpSession session) {
+		session.setAttribute("category", "join");
+		return "common/SignUp"; 
+		} 
+	}

@@ -1,5 +1,6 @@
 package com.kosmo.ft.service.impl;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -7,37 +8,67 @@ import javax.annotation.Resource;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.kosmo.ft.service.MemberDTO;
+import com.kosmo.ft.service.MemberService;
 
-public class MemberDAO {
-	
-	/*SqlSessionFactory를 직접 생성하지 않고 주입(DI)하기*/
-	@Resource(name = "sqlSessionFactory")
-	private SqlSessionFactory sqlMapper;//static 필드 지원 안함
-	
-	/*[스프링에서 지원하는  마이바티스 관련 API(mybatis-spring-2.버전.jar) SqlSessionTemplate 사용]
-	   -위 프로그래밍 순서의 (가)  및 (나)에서는 commit()호출
-		그리고 (다)의 close()호출 불필요 
-	 */
-	
-	@Resource(name="template")
-	private SqlSessionTemplate template;
+@Repository 
+public class MemberDAO implements MemberService { 
+	@Autowired
+	private SqlSession sql; //이미 만들어둔 SqlSession을 이용하기 위해 Autowired를 사용한다
 
-	private static final String namespace="mybatis.mapper.member";
-	
-	public boolean isLogin(Map map) {
-		// 스프링 지원 마이바티스 API 미 사용시
-		//1]SqlSession얻기
-		SqlSession session= sqlMapper.openSession();
-		//2]selectOne()호출
-		int count=session.selectOne("memberIsLogin",map);
-		//3]close()호출
-		session.close();
-		return count==1 ? true : false;
-	}//////////////
 
-	public MemberDTO selectOne(Map map) {
-		return template.selectOne("memberSelectOne",map);
+	@Override
+	public boolean member_insert(MemberDTO dto) { 
+		// TODO Auto-generated method stub 
+		return false; 
 	}
+	
+
+	@Override
+	public MemberDTO member_select(String id) {
+		// TODO Auto-generated method stub 
+		return null; 
+	}
+	
+
+	@Override 
+	public  MemberDTO member_login(HashMap<String, String> map) {
+		return sql.selectOne("mybatis.mapper.member.login", map); 
+	}
+	
+	@Override 
+	public boolean member_id_check(String id) { 
+		// TODO Auto-generated method stub
+		return false; 
+	}
+	
+
+	@Override 
+	public boolean member_update(MemberDTO dto) { 
+		// TODO Auto-generated method stub
+		return false; 
+	}
+	
+
+	@Override 
+	public boolean member_delete(String id) { 
+		// TODO Auto-generated method stub 
+		return false; 
+		}
+	
+
+				
+
+
+
+
+
+
 }
+
+
+
+

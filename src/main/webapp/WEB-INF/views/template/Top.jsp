@@ -99,12 +99,19 @@
 						href="<c:url value="/fnt/AboutUs.do"/>">About</a></li>
 					-->	
 						
-					<li class="nav-item"><a class="nav-link"
+					<!-- 로그인하지 않은 경우 --> 
+					<c:if test="${empty login_info }">
+					<li class="nav-item"><a class="nav-link" 
 						href="<c:url value="/fnt/Login.do"/>"> 로그인 </a></li>
 					<li class="nav-item"><a class="nav-link"
 						href="<c:url value="/fnt/SignUp.do"/>"> 회원가입 </a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="<c:url value="/fnt/Logout.do"/>"> 로그아웃 </a></li>
+					</c:if>
+					
+					<!-- 로그인한 경우 -->
+					 <c:if test="${!empty login_info }">
+					<li class="nav-item"><a class="nav-link" onclick="go_logout()"
+						href="<c:url value="/fnt/logout.do"/>"> 로그아웃 </a></li>
+					</c:if>
 					<li class="nav-item"><a class="nav-link"
 						href="<c:url value="/fnt/ProAlter.do"/>"> 마이페이지 </a></li>
 					<li class="nav-item"><a class="nav-link"
@@ -140,6 +147,15 @@
 								href="#">Something else here</a></li>
 						</ul>
 					</li>
+					
+					<c:if test="${!empty login_info }">
+					<li> 
+						<span style="position: absolute; top: -14px; left: -120px">
+							 <input type="text" id="userid" placeholder="아이디" /> 
+							 <input type="password" onkeypress="if(event.keyCode == 13) {go_login()}" id="userpw" placeholder="비밀번호" /> 
+						 </span> 
+					</li>
+					</c:if>
 					
 					
 				</ul>

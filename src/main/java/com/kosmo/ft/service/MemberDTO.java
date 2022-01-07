@@ -9,6 +9,14 @@ public class MemberDTO {
 	private String gender;
 	private int age;
 	private String address;
+	private String KAKAOLOGIN;
+	private String tel;
+	private String inter;
+	private String adminck;
+	private String pro;
+	private String email;
+	private String admin;
+	
 	public String getId() {
 		return id;
 	}
@@ -57,10 +65,59 @@ public class MemberDTO {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	public String getKAKAOLOGIN() {
+		return KAKAOLOGIN;
+	}
+	public void setKAKAOLOGIN(String kAKAOLOGIN) {
+		KAKAOLOGIN = kAKAOLOGIN;
+	}
+	public String getTel() {
+		return tel;
+	}
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+	public String getInter() {
+		return inter;
+	}
+	public void setInter(String inter) {
+		this.inter = inter;
+	}
+	public String getAdminck() {
+		return adminck;
+	}
+	public void setAdminck(String adminck) {
+		this.adminck = adminck;
+	}
+	public String getPro() {
+		return pro;
+	}
+	public void setPro(String pro) {
+		this.pro = pro;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getAdmin() {
+		return admin;
+	}
+	public void setAdmin(String admin) {
+		this.admin = admin;
+	}
 	@Override
 	public String toString() {
-		return "MemberDTO [id=" + id + ", pwd=" + pwd + ", name=" + name + ", height=" + height + ", weight="
-				+ weight + ", gender=" + gender + ", age=" + age + ", address=" + address + "]";
+		return "MemberDTO [id=" + id + ", pwd=" + pwd + ", name=" + name + ", height=" + height + ", weight=" + weight
+				+ ", gender=" + gender + ", age=" + age + ", address=" + address + ", KAKAOLOGIN=" + KAKAOLOGIN
+				+ ", tel=" + tel + ", inter=" + inter + ", adminck=" + adminck + ", pro=" + pro + ", email=" + email
+				+ ", admin=" + admin + "]";
 	}
+	
+	
+
+	
+	
 	
 }

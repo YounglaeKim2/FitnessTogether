@@ -32,12 +32,12 @@
         <meta property="og:image:width" content="600" />
         <meta property="fb:app_id" content="1137369866307827" />
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-    <link rel="canonical" href="https://www.ggumim.co.kr" />
+    
     <!-- CSS Offset -->
-    <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    
     <!-- 마케팅 Tool Start -->
     <!-- Criteo 로더 파일 -->
-<script type="text/javascript" src="//dynamic.criteo.com/js/ld/ld.js?a=90210" async="true"></script>
+<script type="text/javascript" async="true" src="<c:url value="/resources/dynamic.criteo.com/ld.css"/>"/></script>
 <!-- END Criteo 로더 파일 -->
 <!-- Criteo 태그 -->
 <script type="text/javascript">
@@ -153,147 +153,20 @@
     <div class="ggumim-channel-talk" id="channel_talk" style="display:none;">
         <img src="//cdn.ggumim.co.kr/storage/201911191517302RTfJHpC36.png" />
     </div>
-    <link type="text/css" rel="stylesheet" href="//cdn.ggumim.co.kr/resource/fonts/spoqahansans.css" />
-            <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/nanumgothic.css" />
-        <link type="text/css" rel="stylesheet" href="//cdn.ggumim.co.kr/static/ggumim-1.6.00.min.css"/>
-        <script type="text/javascript" src="//cdn.ggumim.co.kr/static/ggumim-stack-1.6.00.min.js"></script>
+     <link type="text/css" rel="stylesheet" href="<c:url value="/resources/fonts/spoqahansans.css" />"/>
+    <link type="text/css" rel="stylesheet" href="<c:url value="/resources/fonts.googleapis.com/nanumgothic.css"/>"/>
+    <link type="text/css" rel="stylesheet" href="<c:url value="/resources/static/ggumim-1.6.10.min.css"/>"/>
+    <script type="text/javascript" src="<c:url value="/resources/static/ggumim-stack-1.6.00.min.js"/> "/></script>
         <!-- kakao moment -->
-    <script type="text/javascript" charset="UTF-8" src="//t1.daumcdn.net/adfit/static/kp.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="<c:url value="/resources/t1.daumcdn.net/kp.js"/>"/></script>
     <!-- SpoqaHanSansNeo  -->
-    <link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css' rel='stylesheet' type='text/css'>
+    <link  rel='stylesheet' type='text/css' href="<c:url value="/resources/spoqa.github.io/SpoqaHanSansNeo.css"/>"/>
 </head>
 <body class=" body-gray ">
     <div class="app-induce-banner">
       
     </div>
-<div id="navApp">
-    <div class="navEmptySpace" />
-    <div class="head ">
-        <div class="head-bar head-bar-white">
-            <div class="navigation">
-                <div class="nav-new">
-                    <div class="logo">
-                        <a href="/">
-                            <div class="logo-img"></div>
-                        </a>
-                    </div>
-                    <div class="menu">
-                        <div class="category-menu">
-                            <div class="title">
-                         
-                      
-                            </a>
-                            <a href="/commerce/cart">
-                                <div class="item sm-bar cart-icon">
-                           <img src="//cdn.ggumim.co.kr/resource/icons/ic_cart_black.png" style="width: 20px; height: 28px; vertical-align: top; margin-top: 26px; " />
-                                </div>
-                            </a>
-                               <div class="item sm-bar member">
-                                    <div class="profile-image-wrapper">
-                                        <img class="profile-image" src="//cdn.ggumim.co.kr/cache/member/profile/180/20211214115935wcWxTK0553.png" />
-                                    </div>
-                                    <!--/.profile-image-wrapper-->
-                                    <div class="nickname">
-                                        아요니쨘                                    </div>
-                                    <div class="subnavigation subnavigation-menu" style="right: 10px;top: 80px; z-index: 999;">
-                                        <div class="member-profile-section">
-                                            <div class="profile-image">
-                                                <img src="//cdn.ggumim.co.kr/cache/member/profile/180/20211214115935wcWxTK0553.png" alt="멤버 프로필 이미지" />
-                                            </div>
-                                            <div class="profile-contents">
-                                                <div class="profile-nickname">
-                                                    <a href="/member/setting/3194264">
-                                                        아요니                                                    </a>
-                                                </div>
-                                                <div class="profile-grade">
-                                                    <div>
-                                                        등급
-                                                    </div>
-                                                    <div>
-                                                        FAMILY                                                    </div>
-                                                </div>
-                                                <div class="profile-point">
-                                                    <div>
-                                                        포인트
-                                                    </div>
-                                                    <div>
-                                                        0 원
-                                                    </div>
-                                                </div>
-                                                <div class="profile-coupon">
-                                                    <div>
-                                                        쿠폰
-                                                    </div>
-                                                    <div>
-                                                        5 장
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="membership-tooltip-wrap">
-                                                <div class="membership-tooltip">
-                                                    <div class="membership-title">
-                                                        등급별 포인트 적립 안내
-                                                    </div>
-                                                    <div class="membership-family">
-                                                        FAMILY 등급 : 포인트 1% 적립
-                                                    </div>
-                                                    <div class="membership-vip">
-                                                        VIP 등급 : 포인트 3% 적립
-                                                    </div>
-                                                    <div class="membership-detail" onclick="location.href='/member/membership'">
-                                                        자세히 보기
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <ul>
-                                            <li>
-                                                <a href="/member/noti/3194264">
-                                                    알림
-                                                </a>
-                                                <div class="notice-count">
-                                                    1                                                </div>
-                                            </li>
-                                            <li>
-                                                <a href="/member/view/3194264">
-                                                    보관함
-                                                </a>
-                                                <div  class="notice-count hide">
-                                                    0                                                </div>
-                                            </li>
-                                            <li>
-                                                                                                    <a href="/member/my_order/3194264">
-                                                        주문정보
-                                                    </a>
-                                                                                                <div class="notice-count">
-                                                    0                                                </div>
-                                            </li>
-                                                                                            <li>
-                                                  
-                                                </li>
-                                                                                        <li>
-                                                <a href="/logout/">
-                                                    로그아웃
-                                                </a>
-                                            </li>
-                                            <li class="ggumim-infomation">
-                                                <p class="num">1522-7966</p>
-                                                <p class="kakao">카카오플러스 친추 '집꾸미기'</p>
-                                                <p class="open">OPEN AM 10:00 - PM 5:00</p>
-                                                <p class="off">SAT, SUN, HOLIDAY OFF.</p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <!--/.subnavigation-menu-->
-                                </div>
-                                
-                                                    </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
     <script>
         let isTabFixed = false;
         Stack.add(function () {
@@ -618,9 +491,9 @@
             <script>
             console.log("test production");
         </script>
-        <script type="text/javascript" src="//cdn.ggumim.co.kr/static/ggumim-vendors-1.6.00.min.js"></script>
-        <script type="text/javascript" src="//cdn.ggumim.co.kr/static/ggumim-common-1.6.00.min.js"></script>
-        <script type="text/javascript" src="//cdn.ggumim.co.kr/static/ggumim-app-1.6.00.min.js"></script>
+        <script type="text/javascript" src="<c:url value="/resources/static/ggumim-vendors-1.6.00.min.js"/>"/></script>
+        <script type="text/javascript" src="<c:url value="/resources/static/ggumim-common-1.6.00.min.js"/>"/></script>
+        <script type="text/javascript" src="<c:url value="/resources/static/ggumim-app-1.6.00.min.js"/>"/></script>
     <script>
     // 쌍였던 애들 처리
     Stack.process();

@@ -75,64 +75,77 @@
       font-family: 'Roboto', sans-serif;
     }
   </style>
+  
+  <script>
+  function go_login() {
+	  if( $('#id').val() == '' ) {
+		  alert('아이디를 입력하세요!'); 
+		  $('#id').focus(); 
+		  return; 
+		  } else if( $('#pwd').val() == '' ) {
+			  alert('비밀번호를 입력하세요!');
+			  $('#pwd').focus(); 
+			  return; 
+		} 
+	  
+	  $.ajax({ 
+		  type: 'post',
+		  url: '<c:url value="/fnt/login.do"/>', 
+		  data: { id:$('#id').val(), pwd :$('#pwd').val() },
+		  success: function(data) {
+			  if(data == 'true') {
+				  location.reload(); 
+				  } else { alert('아이디나 비밀번호가 일치하지 않습니다!');
+				  $("#id").focus(); 
+				  } 
+			  }, 
+			  error:function(request,status,error){
+		             alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		          }
+			  });
+	  } 
+  function go_logout() {
+	  $.ajax({ 
+		  type: "post",
+		  url: '<c:url value="/fnt/logout.do"/>', 
+		  success: function() { 
+			  location.reload(); 
+			  }, 
+			       error:function(request,status,error){
+		             alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		          }
+	  });
+  }
+  </script>
 </head>
 <body>
-	
-  
+
+
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-			 <form method="POST" action="<c:url value='/fnt/LoginProcess.do'/>">
 				<form class="login100-form validate-form">
-					<span class="login100-form-title p-b-26">
-						Welcome
-					</span>
-					<span class="login100-form-title p-b-48">
-						<!--<i class="zmdi zmdi-font"></i>-->
-					</span>
-					
-					 <c:if test="${! empty  NotMember}">
-						<div class="row">
-						<div class="col-xs-offset-1 col-xs-6 alert alert-warning fade in">
-							<button class="close" data-dismiss="alert">
-							<span>×</span>
-							</button>
-							${NotMember }
-						</div>
-						</div>
-					</c:if>
-					
-					
-					<c:if test="${not empty sessionScope.id }" var="isLogin">
-						<div class="col-xs-offset-1 col-xs-6 alert alert-success">${sessionScope.id }님 즐감하세요</div>
-					</c:if>
-					
-					
-					<c:if test="${not isLogin }"/>
+					<span class="login100-form-title p-b-26">Welcome</span> 
+					<span class="login100-form-title p-b-48"><!--<i class="zmdi zmdi-font"></i>--></span>
 					<div class="wrap-input100 validate-input" >
-					
-						<input class="input100" type="text" name="id">
+						<input class="input100" type="text" id="id">
 						<span class="focus-input100" data-placeholder="아이디를 입력하세요"></span>
 					</div>
-
 					<div class="wrap-input100 validate-input" data-validate="Enter password">
-					 
-						<span class="btn-show-pass">
+					 	<span class="btn-show-pass">
 							<i class="zmdi zmdi-eye"></i>
 						</span>
-						<input class="input100" type="password" name="pwd">
+						<input class="input100" type="password" id="pwd">
 						<span class="focus-input100" data-placeholder="비밀번호를 입력하세요"></span>
 					</div>
-
 					<div class="container-login100-form-btn">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
-							<button class="login100-form-btn ">
-								Login
-							</button>
+							<button class="login100-form-btn" id="login" onclick="go_login()">Login</button>
 						</div>
 					</div>
-				
+		
+					
 	<!-- start 카카오계정으로 로그인하기 -->
 	  <a href="javascript:kakaoLogin();"><img src="<c:url value="/resources/login/images/kakao_login_medium_wide.png"/>" style="margin:10px; height:40px;width:260px;"></a>
     
@@ -142,7 +155,7 @@
         // 자스키 - dce1a6b74b6037f0cc344d0b3f4d8a97
         window.Kakao.init("dce1a6b74b6037f0cc344d0b3f4d8a97");
         console.log(Kakao.isInitialized()); // sdk초기화여부판단
-      //카카오로그인
+   
       function kakaoLogin() {
           Kakao.Auth.login({
             success: function (response) {
@@ -150,6 +163,7 @@
                 url: '/v2/user/me',
                 success: function (response) {
               	  console.log(response)
+                  
                 },
                 fail: function (error) {
                   console.log(error)
@@ -223,7 +237,7 @@
   <div id="gSignInWrapper">
   
     <div id="customBtn" class="customGPlusSignIn">
-     
+     	<form method="POST" action="<c:url value='/fnt/LoginProcess.do'/>">
       <span class="icon"></span>
       <span class="buttonText">구글로 로그인</span>
     </div>
@@ -310,7 +324,8 @@ function onSignInFailure(t){
 			</div>
 		</div>
 	</div>
-	
+	</form>
+
 
 	
 <!--===============================================================================================-->
