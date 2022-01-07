@@ -31,7 +31,7 @@ public class LoginController {
 	
 	//로그인 요청
 	@ResponseBody
-	@RequestMapping("/fnt/login.do") 
+	@RequestMapping("/fnt/loginprocess.do") 
 	public String login(String id, String pwd, HttpSession session) {
 		//화면에서 입력한 아이디와 비밀번호가 일치하는 회원 정보가 DB에 있는지 확인하여
 		HashMap<String, String> map = new HashMap<String, String>(); 

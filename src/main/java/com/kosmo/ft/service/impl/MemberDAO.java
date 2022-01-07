@@ -17,7 +17,7 @@ import com.kosmo.ft.service.MemberService;
 @Repository 
 public class MemberDAO implements MemberService { 
 	@Autowired
-	private SqlSession sql; //이미 만들어둔 SqlSession을 이용하기 위해 Autowired를 사용한다
+	private SqlSessionTemplate template; //이미 만들어둔 SqlSession을 이용하기 위해 Autowired를 사용한다
 
 
 	@Override
@@ -36,7 +36,7 @@ public class MemberDAO implements MemberService {
 
 	@Override 
 	public  MemberDTO member_login(HashMap<String, String> map) {
-		return sql.selectOne("mybatis.mapper.member.login", map); 
+		return template.selectOne("mybatis.mapper.member.login", map); 
 	}
 	
 	@Override 

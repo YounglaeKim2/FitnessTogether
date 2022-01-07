@@ -90,7 +90,7 @@
 	  
 	  $.ajax({ 
 		  type: 'post',
-		  url: '<c:url value="/fnt/login.do"/>', 
+		  url:'<c:url value="/fnt/loginprocess.do"/>',
 		  data: { id:$('#id').val(), pwd :$('#pwd').val() },
 		  success: function(data) {
 			  if(data == 'true') {
@@ -144,8 +144,7 @@
 							<button class="login100-form-btn" id="login" onclick="go_login()">Login</button>
 						</div>
 					</div>
-		
-					
+			
 	<!-- start 카카오계정으로 로그인하기 -->
 	  <a href="javascript:kakaoLogin();"><img src="<c:url value="/resources/login/images/kakao_login_medium_wide.png"/>" style="margin:10px; height:40px;width:260px;"></a>
     

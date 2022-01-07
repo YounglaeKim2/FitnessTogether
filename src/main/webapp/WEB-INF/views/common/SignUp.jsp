@@ -13,16 +13,14 @@
  	.tit_page {
  	 overflow: hidden;
  	 width: 1050px;
- 	 margin: 40px 30px 20px 50px;
+ 	 margin: 40px 30px 20px 60px;
  	 padding: 70px 20px 30px 640px;
  	 font-size: 24px;
  	 font-weight: 900;
  	}
  	.hr-4{
- 	background-color: #080000;
  	margin: 10px 20px 20px 20px;
- 	height: 2px;
- 	width: 590px;
+ 	width: 580px;
  	}
  	.w-pct60 th{
      text-align: left; 
@@ -45,22 +43,36 @@
     .w-pct60 input{
     height: 44px;
     width: 332px; 
-    padding: 0 14px;
+    padding: 10px 14px;
+    margin: 3px;
     border: 1px solid #ccc;
     font-size: 14px;
-    color: #333;
+    color:#9c9797;
     line-height: 20px;
     border-radius: 3px;
     background: #fff;
     outline: none;
     vertical-align: top;
     }
+   input::placeholder{
+   color:#d1cfcf;
+   font-weight:bold;
+   }
+   .chk_id{
+   border: 5px;
+   }
  	#w-px160{
  	text-align:left;
  	}
  	#w-px161{
  	text-align:left;
  	}
+ 	
+ 	/* 성별 라디오 버튼*/
+ 	table tr td  input[type=radio]:checked+.ico{
+ 	background-color: #5f0081;
+ 	}
+ 
     table tr td input[name=tel] {
     	 width: 40px; 
     	 }
@@ -80,9 +92,9 @@
     .invalid { color: red; } 
     }
     </style> 
+    
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> 
     </head> 
-    
     <body> 
     <div id="container">
     <div class="tit_page" style="text-size:18pt">
@@ -90,73 +102,92 @@
     </div>
     <div id="main">
 	<div class="content" style="width:2000px; text-align:center; padding: 0 0 0 440px">
-    <p class="w-pct60 right" style="margin: 0 auto; padding:0 540px 0 0; font-size: 13px;">*는 필수 입력 항목입니다.</p> 
-    <hr class="hr-4">
+    <p class="w-pct60 right" style="margin: 0 auto; padding:0 540px 0 0; font-size: 13px;"></p> 
+    <hr class="hr-4" style="height:3px;">
     <form> 
       <table class="w-pct60">
        	<tr>
-       		<th class="w-px160">성명* </th> 
-       		<td><input type="text" name="name" /></td>
+       		<th class="w-px160">이름 </th> 
+       		<td><input type="text" name="name" placeholder="이름을 입력해주세요"/></td>
         </tr> 
         <tr> 
-        	<th class="w-px161">아이디*</th> 
+        	<th class="w-px161">아이디</th> 
         	<td> 
-        	<input type="text" name="id" class="chk"/>
+        	<input type="text" name="id" class="chk" placeholder="6자 이상의 영문과 숫자 조합"/>
+        	<input type="hidden" name="chk_id" class="chk_id" required fld_essential label="아이디중복체크" value>
+        	<a class="btn default" href="" style="color:black;
+        	font-size:15px;
+        	height:44px;
+        	width: 100px;
+        	margin:3.7px 8px 7px 1px;
+        	padding:10px 10px 10px 10px;
+        	border:2px solid #595757;">중복확인</a>
         	<br> 
        		<div class='valid'><!--아이디를 입력하세요(영문 소문자, 숫자만 입력 가능) --></div> 
        		</td>
         </tr>
         <tr>
-          	<th>비밀번호*</th> 
+          	<th>비밀번호</th> 
            	<td> 
-           	<input type="password" name="pwd" class="chk" /> 
+           	<input type="password" name="pwd" class="chk" placeholder="비밀번호를 입력해주세요" /> 
           	<div class="valid"><!--비밀번호를 입력하세요(영문 대/소문자, 숫자를 모두 포함) --></div>
             </td> 
          </tr> 
          <tr> 
-            <th>비밀번호 확인*</th>
+            <th>비밀번호 확인</th>
             <td> 
-            <input type="password" name="pwd_ck" class="chk" />
+            <input type="password" name="pwd_ck" class="chk" placeholder="비밀번호를 한번 더 입력해주세요"/>
             <div class="valid"><!--비밀번호를 다시 입력하세요--></div> 
             </td> 
           </tr>
           <tr> 
-               <th>성별*</th>
+               <th>성별</th>
                <td>
-               <label><input type="radio" style="width:50px; background: black; height:20px;border:1px;" id="gender" name="gender" value="남" checked/>남</label>
-               <label><input type="radio" style="width:50px; height:20px;border:1px;" id="gender" name="gender" value="여" />여</label> 
+               <label><input type="radio" style="width:50px; background: black; height:20px;border:1px;" id="gender1" name="gender" value="남" checked="checked"/>남</label>
+               <span class="ico"></span>
+               <label><input type="radio" style="width:50px; height:20px;border:1px;" id="gender2" name="gender" value="여" />여</label> 
                </td>
           </tr>
           <tr>
-                <th>이메일*</th>
-                <td> <input type="text" name="email" /> <div class="valid"><!-- 이메일을 입력하세요 --> </div> 
+                <th>이메일</th>
+                <td> 
+                <input type="text" name="email" placeholder="ex)kosmo12@kosmo.com" /> 
+                <input type="hidden" name="chk_email" class="chk_email" required fld_essential label="이메일중복체크" value>
+	        	<a class="btn default" href="" style="color:black;
+	        	font-size:15px;
+	        	height:44px;
+	        	width: 100px;
+	        	margin:3.7px 8px 7px 1px;
+	        	padding:10px 10px 10px 10px;
+	        	border:2px solid #595757;">중복확인</a>
+                <div class="valid" ><!-- 이메일을 입력하세요 --> </div> 
                 </td> 
           </tr>
            <tr>
-                 <th>생년월일*</th>
-                 <td> <input type="text" name="birth" readonly /> 
+                 <th>생년월일</th>
+                 <td> <input type="text" name="birth" readonly  /> 
                  <span id="delete" style="color: red; position: relative; right: 25px; display: none;">
                  <i class="fas fa-times font-img"></i>
                  </span> <!-- fontawesome에서 가져온 무료 아이콘 --> 
                  </td> 
            </tr> 
            <tr>
-                  <th>전화번호*</th> 
+                  <th>전화번호</th> 
                   <td> 
-                  <input type="text" name="tel" /> - 
-                  <input type="text" name="tel" /> - 
-                  <input type="text" name="tel" /> </td>
+                  <input type="text" name="tel" style="width:80px;" /> - 
+                  <input type="text" name="tel" style="width:80px;" /> - 
+                  <input type="text" name="tel" style="width:80px;" /> </td>
            </tr> 
             <tr> 
-                   <th>주소*</th>
+                   <th>주소</th>
                    <td>
                    <a class='btn-fill-s' onclick="daum_post()">우편번호 찾기</a> 
                    <br>
                    <input type="text" name="post" class="w-px60" readonly /> 
                    <br>
-                   <input type="text" name="addr" readonly/>
+                   <input type="text" name="addr" class="w-px60" readonly/>
                    <br>
-                   <input type="text" name="addr" />
+                   <input type="text" name="addr" class="w-px60" />
 				   </td> 
 			</tr>
  	</table>
@@ -164,7 +195,7 @@
   </div>
   </div>
   </div>
-  <script type="text/javascript" src="<c:url value="resources/signup/signup_check.js"/>"> </script>
+  <script type="text/javascript" src="<c:url value="/resources/signup/signup_check.js"/>"> </script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/js/all.min.js"></script>
   <!-- cdnjs.com에서 가져온 fontawesome cdn 라이브러리 --> 
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -196,6 +227,7 @@
 	$('#delete').css('display', 'none'); });
     function after(date) { if(date > new Date()) { return [false]; } else { return [true]; } } 
     function daum_post() { new daum.Postcode({ oncomplete: function(data) { $('[name=post]').val( data.zonecode );
+    
     //우편번호
     //지번 주소 
     : J, 도로명 주소 : R var address = data.userSelectedType == 'J' ? data.jibunAddress : data.roadAddress;
