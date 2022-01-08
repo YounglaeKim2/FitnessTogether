@@ -106,7 +106,7 @@
 			}
 
 			// 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
-			ps.keywordSearch(keyword, placesSearchCB);
+			ps.keywordSearch(keyword+' 헬스장', placesSearchCB);
 		}
 
 		// 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
@@ -146,7 +146,7 @@
 			// 지도에 표시되고 있는 마커를 제거합니다
 			removeMarker();
 
-			for (var i = 0; i < 1; i++) {
+			for (var i = 0; i < 15; i++) {
 
 				// 마커를 생성하고 지도에 표시합니다
 				var placePosition = new kakao.maps.LatLng(places[i].y,

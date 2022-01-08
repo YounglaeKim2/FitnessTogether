@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kosmo.ft.service.ListPagingData;
 import com.kosmo.ft.service.MappingDTO;
@@ -40,6 +41,21 @@ public class MappingController {
 		//뷰정보 반환
 		return "mapping/MappingList";
 	}/////list
+	
+	
+	@RequestMapping("View.do")
+	public String view(@RequestParam Map map,Model model) {
+		//서비스 호출]
+		MappingDTO record=mappingService.selectOne(map);
+		//데이타 저장]
+		//줄바꿈 처리
+		record.setContent(record.getContent().replace("\r\n","<br/>"));
+		model.addAttribute("record", record);
+		/////////////////////////////////////////////
+		//뷰정보 반환]
+		return "mapping/View";
+		
+	}
 	
 	
 	
@@ -72,6 +88,13 @@ public class MappingController {
 	public String write(@ModelAttribute("id") String id) {
 		return "mapping/MappingWrite";
 	}//리스트에서 작성페이지로 이동
+	
+	@RequestMapping(value="getlocation.do",produces="application/json;charset=UTF-8")
+	public @ResponseBody Map getlocation(@RequestParam Map map) {
+		Map loctionInfo = mappingService.getlocation(map);
+		return loctionInfo;
+	}
+	
 	
 //	@RequestMapping(value="mappingWrite.do",method = RequestMethod.POST)
 //	public String writeOk(/*@ModelAttribute("id") String id,*/

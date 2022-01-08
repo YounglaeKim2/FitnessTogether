@@ -33,7 +33,7 @@
 	</div>
 	<div class="d-grid gap-2 d-md-flex justify-content-md-end">
 		<div class="btn btn-link">
-			<a href="<c:url value="/fnt/View2.do"/> "class="btn btn-primary">지도뷰2</a>
+			<a href="<c:url value="/fnt/View2.do"/> "class="btn btn-primary">헬스장 찾기</a>
 		</div>
 	</div>
 	<!-- 작성하기 버튼 
@@ -68,7 +68,7 @@
 							<td>${listPagingData.totalRecordCount - (((listPagingData.nowPage - 1) * listPagingData.pageSize) + loop.index)}</td>
 
 							<td class="text-left"><a
-								href="<c:url value="/onememo/bbs/View.do?no=${item.no}&nowPage="/><c:out value="${param.nowPage }" default="1"/>">${item.title }</a>
+								href="<c:url value="/fnt/View.do?no=${item.no}&nowPage="/><c:out value="${param.nowPage }" default="1"/>">${item.title }</a>
 								<span class="badge">${item.commentCount }</span></td>
 							<td>${item.name }</td>
 							<td>${item.postDate }</td>

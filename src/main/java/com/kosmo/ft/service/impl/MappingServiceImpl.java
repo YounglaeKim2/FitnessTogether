@@ -96,6 +96,9 @@ public class MappingServiceImpl implements MappingService{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	public Map getlocation(Map map) {
+		return dao.getlocation(map);
+	}
   
    
 } 

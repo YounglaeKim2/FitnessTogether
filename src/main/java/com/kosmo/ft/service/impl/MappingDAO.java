@@ -83,6 +83,10 @@ public class MappingDAO {
 	public void delete(Map map) {
 		template.delete("mappingDelete",map);
 	}
+
+	public Map getlocation(Map map) {
+		return template.selectOne("mappingSelectLocation", map);
+	}
 	
 	
 }

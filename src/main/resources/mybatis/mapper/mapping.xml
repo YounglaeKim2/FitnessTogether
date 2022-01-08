@@ -92,6 +92,9 @@
 		DELETE mapping WHERE no=#{no}
 	</delete>
 
+	<select id="mappingSelectLocation" parameterType="Map" resultType="Map">
+		SELECT title,latitude,longitude FROM mapping WHERE no=#{no}
+	</select>
 
 
 

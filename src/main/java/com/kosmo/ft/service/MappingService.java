@@ -14,4 +14,5 @@ public interface MappingService {
 	int insert(Map map);
 	int delete(Map map);
 	int update(Map map);
+	Map getlocation(Map map);
 }

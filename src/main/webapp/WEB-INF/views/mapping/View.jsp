@@ -5,7 +5,7 @@
 <jsp:include page="/WEB-INF/views/template/Top.jsp" />
 <!-- Top 끝 -->
 <div class="container px-4 py-5" id="featured-3">
-	<h1 class="pb-2 border-bottom">Perching Service<h4>원하는 이벤트에 참여하세요!! (map)</h4></h1>
+	<h1 class="pb-2 border-bottom">Perching Service<h4>${record.title}</h4></h1>
 </div>
 <head>
 <meta charset="utf-8">
@@ -49,12 +49,9 @@
 		#pagination a {display:inline-block;margin-right:10px;}
 		#pagination .on {font-weight: bold; cursor: default;color:#777;}
 	</style>
+	
 </head>
-<!--
-<body style="padding-top:50px;">
--->
 <body>
-	<!-- div id="map" style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div-->
 	<div class="container">
 		<div class="d-grid gap-2 d-md-flex justify-content-md-end">
 			<div class="btn btn-link">
@@ -117,7 +114,16 @@
             averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
             minLevel: 4 // 클러스터 할 최소 지도 레벨 
         });
-
+		
+        $.ajax({
+        	url:"<c:url value="/fnt/getlocation.do"/>",
+        	data:{"no":${record.no}},
+        	datatpye:"json",
+        	type:"post"
+        }).done(function(data){
+        	console.log(data);
+        });
+        
         var data = [
           [37.47918244596204, 126.879142796576, '<div style="padding:5px;">붕어빵</div>'],
           [37.47852824039385, 126.87920656036123, '<div style="padding:5px;">담배쟁이</div>'],
@@ -170,72 +176,38 @@
 
 
 
-<div class="container" style="padding-top:15px;">
-	
-	<div class="row">
-		<div class="col-md-12">
-			<table
-				class="table table-bordered table-hover table-condensed text-center">
-				<!-- 테이블 컬럼폭은 col-*-*계열로 설정 -->
-				<tr>
-					<th class="col-md-1 text-center">번호</th>
-					<th class="text-center">제목</th>
-					<th class="col-md-1 text-center">작성자</th>
-					<th class="col-md-2 text-center">작성일</th>
-				</tr>
-				<!-- 
-				<c:if test="${empty listPagingData.lists }" var="isEmpty">
-					<tr>
-						<td colspan="4">등록된 게시물이 없어요</td>
-					</tr>
-				</c:if>
-				 -->
-						<tr>
-							<td>1</td>
-							<td>붕어빵</td>
-							<td>이아영</td>
-							<td>2021.12.1</td>
-						</tr>
-						<tr>
-							<td>2</td>
-							<td>INC COFFEE</td>
-							<td>김혜란</td>
-							<td>2021.12.2</td>
-						</tr>
-						<tr>
-							<td>3</td>
-							<td>담배쟁이</td>
-							<td>복상일</td>
-							<td>2021.12.3</td>
-						</tr>
-				<!-- 
-				<c:if test="${not isEmpty }">
-					<c:forEach var="item" items="${listPagingData.lists}" varStatus="loop">
-						<tr>
-							<td>${listPagingData.totalRecordCount - (((listPagingData.nowPage - 1) * listPagingData.pageSize) + loop.index)}</td>
-	
-							<td class="text-left"><a
-								href="<c:url value="/onememo/bbs/View.do?no=${item.no}&nowPage="/><c:out value="${param.nowPage }" default="1"/>">${item.title }</a>
-								<span class="badge">${item.commentCount }</span></td>
-							<td>${item.name }</td>
-							<td>${item.postDate }</td>
-						</tr>
-					</c:forEach>
-				</c:if>
-				 -->
-			</table>
-		</div>
-		<!-- column -->
-	</div>
-	<!-- row -->
-	<!-- 페이징 -->
-	<c:if test="${listPagingData.lists.size() !=0 }">
+	<div class="container" style="padding-top:15px;">
+		
 		<div class="row">
-			<div class="col-md-12 text-center">${listPagingData.pagingString}</div>
+			<div class="col-md-offset-2 col-md-8">
+				<table class="table table-bordered table-striped">
+					<tr>
+						<th class="col-md-2 text-center">번호</th>
+						<td>${record.no}</td>
+					</tr>
+					<tr>
+						<th class="text-center">제목</th>
+						<td>${record.title}</td>
+					</tr>
+					<tr>
+						<th class="text-center">작성자</th>
+						<td>${record.name}</td>
+					</tr>
+					<tr>
+						<th class="text-center">등록일</th>
+						<td>${record.postDate}</td>
+					</tr>
+					<tr>
+						<th class="text-center" colspan="2">내용</th>
+					</tr>
+					<tr>
+						<td colspan="2">${record.content}</td>
+					</tr>
+				</table>
+			</div>
 		</div>
-	</c:if>
-	
-</div>
+		
+	</div>
 </body>
 
 
