@@ -4,7 +4,10 @@
 <!-- Top 시작 -->
 <jsp:include page="/WEB-INF/views/template/Top.jsp" />
 <!-- Top 끝 -->
-
+    <div class="container px-4 py-5" id="featured-3">
+    	<h1 class="pb-2 border-bottom">Perching Service<h4>원하는 이벤트에 참여하세요!! (map)</h4></h1>
+    
+	</div>
 <head>
 <meta charset="utf-8">
 	<title>여러개 마커에 이벤트 등록하기2</title>
@@ -48,17 +51,24 @@
 		#pagination .on {font-weight: bold; cursor: default;color:#777;}
 	</style>
 </head>
+<!--
 <body style="padding-top:50px;">
-
+-->
+<body>
 	<!-- div id="map" style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div-->
 	<div class="container">
+		<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+			<div class="btn btn-link">
+				<a href="<c:url value="/fnt/mappingList.do"/> "class="btn btn-primary">목록 보기</a>
+			</div>
+		</div>
 		<div class="row">	
 			<div class="col"></div>
 			<div class="map_wrap col-10">
 				
 				<div id="map" style="width: 100%; height: 100%; position: relative; overflow: hidden;">
 				</div>
-				<!--
+				
 				<div id="menu_wrap" class="bg_white">
 					<div class="option">
 						<div>
@@ -72,7 +82,7 @@
 					<ul id="placesList"></ul>
 					<div id="pagination"></div>
 				</div>
-				-->
+				
 				
 			</div>
 			<div class="col"></div>
@@ -89,6 +99,18 @@
     
         // 지도를 생성한다 
         var map = new kakao.maps.Map(mapContainer, mapOption);
+        
+     	// 지도 타입 변경 컨트롤을 생성한다
+		var mapTypeControl = new kakao.maps.MapTypeControl();
+
+		// 지도의 상단 우측에 지도 타입 변경 컨트롤을 추가한다
+		map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);	
+
+		// 지도에 확대 축소 컨트롤을 생성한다
+		var zoomControl = new kakao.maps.ZoomControl();
+
+		// 지도의 우측에 확대 축소 컨트롤을 추가한다
+		map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 
         // 마커 클러스터러를 생성합니다 
         var clusterer = new kakao.maps.MarkerClusterer({
@@ -149,11 +171,8 @@
 
 
 
-<div class="container">
-	<div class="col-md-12 text-right" id="xx" style="margin:10px">
-			<a href="<c:url value="/fnt/mappingList.do"/>
-			"class="btn btn-success">목록</a>
-	</div>
+<div class="container" style="padding-top:15px;">
+	
 	<div class="row">
 		<div class="col-md-12">
 			<table

@@ -17,16 +17,18 @@
 </style>
 
 <!-- 실제 내용 시작 -->
+    <div class="container px-4 py-5" id="featured-3">
+    	<h1 class="pb-2 border-bottom">Perching Service<h4>원하는 이벤트에 참여하세요!! (list)</h4></h1>
+    
+	</div>
+
+
 <div class="container">
 
-	<div class="page-header">
-		<h2>
-			Mapping<small>List</small>
-		</h2>
-	</div>
+	
 	<div class="d-grid gap-2 d-md-flex justify-content-md-end">
 		<div class="btn btn-link">
-			<a href="<c:url value="/fnt/View1.do"/> "class="btn btn-primary">지도뷰1</a>
+			<a href="<c:url value="/fnt/View1.do"/> "class="btn btn-primary">지도 보기</a>
 		</div>
 	</div>
 	<div class="d-grid gap-2 d-md-flex justify-content-md-end">
