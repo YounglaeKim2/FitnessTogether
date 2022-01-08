@@ -2,11 +2,13 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
- <mapper namespace="mybatis.mapper.member">
- 	<select id="picture_count" parameterType="com.kosmo.ft.service.PictureDTO" resultType="int">
+
+<mapper namespace="mybatis.mapper.photobbs">
+	<select id="picture_count"
+		parameterType="com.kosmo.ft.service.PictureDTO" resultType="int">
 		SELECT COUNT(bno) FROM BOARD
 		<choose>
-			<!-- if문과 비슷한 구조로 subject가 둘 null이 아니면 제목검색 이런식-->
+			<!-- if문과 비슷한 구조로 subject가 둘 null이 아니면 제목검색 이런식 -->
 			<when test="subject != null">
 				WHERE (SUBJECT LIKE CONCAT('%',#{subject},'%'))
 			</when>
@@ -19,21 +21,25 @@
 			<when test="address != null">
 				WHERE (CONTENT LIKE CONCAT('%',#{address},'%'))
 			</when>
-		</choose>	
+		</choose>
 	</select>
-	
-	<select id="picture_favorite_count" parameterType="com.kosmo.ft.service.PictureHeartDTO" resultType="int">
+
+	<select id="picture_favorite_count"
+		parameterType="com.kosmo.ft.service.PictureHeartDTO" resultType="int">
 		SELECT COUNT(*) FROM HEART WHERE name LIKE '${name}'
 	</select>
-	
+
 	<!-- 로그인 안한버전 사진게시판 리스트 -->
-	<select id="picture_list_login" resultType="com.kosmo.ft.service.PictureDTO">
-		SELECT b.bno, subject, content, name, date_format(wdate,'%Y-%m-%d') wdate, hit, address, media, reply, heart, m.profile
-		FROM BOARD b LEFT OUTER JOIN MEMBER m
+	<select id="picture_list_login"
+		resultType="com.kosmo.ft.service.PictureDTO">
+		SELECT b.bno, subject, content, name, date_format(wdate,'%Y-%m-%d')
+		wdate, hit, address, media, reply, heart, m.pro
+		FROM BOARD b LEFT
+		OUTER JOIN MEMBER m
 		ON b.name = m.name
-		
+
 		<choose>
-			<!-- if문과 비슷한 구조로 subject가 둘 null이 아니면 제목검색 이런식-->
+			<!-- if문과 비슷한 구조로 subject가 둘 null이 아니면 제목검색 이런식 -->
 			<when test="subject != null">
 				WHERE (SUBJECT LIKE CONCAT('%',#{subject},'%'))
 			</when>
@@ -46,21 +52,26 @@
 			<when test="address != null">
 				WHERE (CONTENT LIKE CONCAT('%',#{address},'%'))
 			</when>
-		</choose>	
+		</choose>
 		ORDER BY b.bno DESC
 		limit #{startRowNum}, #{rowCount}
 	</select>
-	
+
 	<!-- 로그인 한버전 사진게시판 리스트 -->
-	<select id="picture_list" parameterType="com.kosmo.ft.service.PictureDTO" resultType="com.kosmo.ft.service.PictureDTO">
-		SELECT b.bno, subject, content, name, date_format(wdate,'%Y-%m-%d') wdate, hit, address, media, reply, heart, h.hno ,m.profile
-		FROM BOARD b LEFT OUTER JOIN HEART h
+	<select id="picture_list"
+		parameterType="com.kosmo.ft.service.PictureDTO"
+		resultType="com.kosmo.ft.service.PictureDTO">
+		SELECT b.bno, subject, content, name, date_format(wdate,'%Y-%m-%d')
+		wdate, hit, address, media, reply, heart, h.hno ,m.pro
+		FROM BOARD b
+		LEFT OUTER JOIN HEART h
 		ON #{name} = h.name AND b.bno = h.bno
-		LEFT OUTER JOIN MEMBER m
+		LEFT OUTER
+		JOIN MEMBER m
 		ON b.name = m.name
-		
+
 		<choose>
-			<!-- if문과 비슷한 구조로 subject가 둘 null이 아니면 제목검색 이런식-->
+			<!-- if문과 비슷한 구조로 subject가 둘 null이 아니면 제목검색 이런식 -->
 			<when test="subject != null">
 				WHERE (SUBJECT LIKE CONCAT('%',#{subject},'%'))
 			</when>
@@ -73,18 +84,20 @@
 			<when test="address != null">
 				WHERE (CONTENT LIKE CONCAT('%',#{address},'%'))
 			</when>
-		</choose>	
+		</choose>
 		ORDER BY b.bno DESC
 		limit #{startRowNum}, #{rowCount}
 	</select>
-	
+
 	<!-- BEST 게시물5 리스트 -->
-	<select id="best_picture_list" parameterType="com.kosmo.ft.service.PictureDTO" resultType="com.kosmo.ft.service.PictureDTO">
+	<select id="best_picture_list"
+		parameterType="com.kosmo.ft.service.PictureDTO"
+		resultType="com.kosmo.ft.service.PictureDTO">
 		SELECT bno, name, hit, address, media, reply, heart
 		FROM BOARD
-		
+
 		<choose>
-			<!-- if문과 비슷한 구조로 subject가 둘 null이 아니면 제목검색 이런식-->
+			<!-- if문과 비슷한 구조로 subject가 둘 null이 아니면 제목검색 이런식 -->
 			<when test="subject != null">
 				WHERE (SUBJECT LIKE CONCAT('%',#{subject},'%'))
 			</when>
@@ -97,9 +110,135 @@
 			<when test="address != null">
 				WHERE (CONTENT LIKE CONCAT('%',#{address},'%'))
 			</when>
-		</choose>	
+		</choose>
 		ORDER BY heart DESC
 		limit 5
 	</select>
+
+	<!-- 좋아요 관련 -->
+
+	<!-- 좋아요 추가 -->
+
+	<insert id="picture_heart_save"
+		parameterType="com.kosmo.ft.service.PictureHeartDTO">
+		INSERT INTO HEART
+		VALUES(0, #{bno}, #{name})
+	</insert>
+
+	<update id="picture_heart_up"
+		parameterType="com.kosmo.ft.service.PictureHeartDTO">
+		UPDATE BOARD SET heart=heart+1
+		WHERE NO=#{NO}
+	</update>
+
+	<!-- 좋아요 삭제 -->
+	<delete id="picture_heart_remove"
+		parameterType="com.kosmo.ft.service.PictureHeartDTO">
+		DELETE FROM HEART
+		WHERE bno=#{bno} AND name=#{name}
+	</delete>
+
+	<update id="picture_heart_down"
+		parameterType="com.kosmo.ft.service.PictureHeartDTO">
+		UPDATE BOARD SET heart=heart-1
+	</update>
+
+	<!-- 좋아요 추가/삭제시 좋아요 갯수 가져오기 -->
+	<select id="picture_heart_count"
+		parameterType="com.kosmo.ft.service.PictureHeartDTO"
+		resultType="com.kosmo.ft.service.PictureHeartDTO">
+		SELECT heart
+		FROM BOARD
+		WHERE bno=#{bno}
+	</select>
+
+	<!-- 댓글관련 -->
+
+	<!-- 댓글 쓰기 -->
+	<insert id="picture_reply_write"
+		parameterType="com.kosmo.ft.service.PictureReplyDTO">
+		INSERT INTO REPLY
+		VALUES(0, #{bno}, #{grp}, 0, 0, #{name}, #{content}, now())
+	</insert>
+
+	<!-- 댓글일경우 rno,grp 일치하게 함 -->
+	<update id="picture_reply_check"
+		parameterType="com.kosmo.ft.service.PictureReplyDTO">
+		UPDATE REPLY SET grp=#{grp}
+		WHERE rno != grp
+	</update>
+
+	<!-- 댓글이 삭제된 댓글일때 그에 딸린 대댓글들이 모두 삭제되면 테이블에서 완전삭제 -->
+	<delete id="picture_reply_delete_after_rereply_delete"
+		parameterType="com.kosmo.ft.service.PictureReplyDTO">
+		DELETE FROM REPLY
+		WHERE content="" AND grp=#{grp}
+	</delete>
+
+	<!-- 대댓글 쓰기 -->
+	<insert id="picture_rereply_write"
+		parameterType="com.kosmo.ft.service.PictureReplyDTO">
+		INSERT INTO REPLY
+		VALUES(0, #{bno}, #{grp}, 0, #{grpl}, #{name}, #{content}, now())
+	</insert>
+
+	<!-- BOARD에 댓글 수 증가시키기 -->
+	<update id="picture_reply_up"
+		parameterType="com.kosmo.ft.service.PictureReplyDTO">
+		UPDATE BOARD SET reply=reply+1
+		WHERE rno != #{rno}
+	</update>
+
+	<!-- 댓글 리스트 가져오기 -->
+	<select id="picture_replyList"
+		parameterType="com.kosmo.ft.service.PictureReplyDTO" resultType="com.kosmo.ft.service.PictureReplyDTO">
+		SELECT r.rno, r.bno, r.grp, r.grpl, r.name, r.content, date_format(wdate,'%Y-%m-%d') wdate, datediff(now(), wdate) wgap, m.pro
+		FROM REPLY r LEFT OUTER JOIN MEMBER m
+		ON r.name = m.name
+		WHERE r.bno = #{bno}
+		ORDER BY grp ASC, grps DESC
+	</select>
 	
- </mapper> 
+	<!-- 댓글 추가/삭제시 댓글 갯수 가져오기 -->
+	<select id="picture_reply_count"
+		parameterType="com.kosmo.ft.service.PictureReplyDTO" resultType="com.kosmo.ft.service.PictureReplyDTO">
+		SELECT reply
+		FROM BOARD
+		WHERE rno = #{rno}
+	</select>
+	
+	<!-- 댓글의 대댓글 수를 카운트 -->
+	<select id="picture_count-rereply"
+		parameterType="com.kosmo.ft.service.PictureReplyDTO" resultType="int">
+		SELECT COUNT(bno)
+		FROM REPLY
+		WHERE bno = #{bno} AND grp = #{grp}
+	</select>
+	
+	<!-- 대댓글 수를 카운트 -->
+	<select id="picture_count_rereply_fromrereply"
+		parameterType="com.kosmo.ft.service.PictureReplyDTO" resultType="int">
+		SELECT COUNT(bno)
+		FROM REPLY
+		WHERE rno = #{grp} AND grp = #{grp}
+	</select>
+	
+	<!-- 댓글 삭제(대댓글이 없는 경우) -->
+	<delete id="picture_reply_delete" parameterType="com.kosmo.ft.service.PictureReplyDTO">
+		DELETE FROM REPLY
+		WHERE rno=#{rno}
+	</delete>
+	
+	<!-- 댓글 삭제(대댓글이 있는 경우) -->
+	<update id="picture_reply_not_delete" parameterType="com.kosmo.ft.service.PictureReplyDTO">
+		UPDATE REPLY SET content=""
+		WHERE rno=#{rno}
+	</update>
+	
+	<!-- BOARD 테이블의 댓글 수 감소 -->
+	<update id="picture_reply_down" parameterType="com.kosmo.ft.service.PictureReplyDTO">
+		UPDATE BOARD SET reply=reply-1
+		WHERE rno=#{rno}
+	</update>
+
+</mapper> 

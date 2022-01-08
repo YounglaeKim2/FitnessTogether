@@ -73,43 +73,6 @@
 	<img src=" "/>
 </div>
 
-<script>
-//페이지가 처음 로딩될때 보여줄 페이지
-let currentPage = 1;
-//현재 페이지가 로딩중인지 여부를 저장할 변수
-let isLoading = false;
-
-//웹브라우저의 창을 스크롤 할 때 마다 호출되는 함수 등록
-$(window).on("scroll",function(){
-	//위로 스크롤된 길이
-	let scrollTop = $(window).scrollTop();
-	//웹브라우저 창의 높이
-	let windowHeight = $(window).height();
-	//문서 전체의 높이
-	let documentHeight = $(document).height();
-	//바닥까지 스크롤 되어쓴지 여부를 알아낸다.
-	let isBottom = scrollTop+windowHeight + 10 >= documentHeight;
-	
-	if(isBottom){
-		//현재페이지가 마지막 페이지라면
-		if(currentPage == ${totalPageCount} || isLoading){
-			return; //여기에서 끝낸다
-		}
-		
-		//현재 로딩중이라고 표시하기
-		isLoading = true;
-		//로딩바를 띄우기
-		$(".back-drop").show();
-		//요청할 페이지 번호를 1 증가시키기
-		currentPage++;
-		//추가로 받아올 페이지를 서버에 ajax 요청을 하고
-		console.log("inscroll"+currentPage);
-		GetList(currentPage);
-	};
-});
-	
-</script>
-
 <!-- footer 시작 -->
 <jsp:include page="/WEB-INF/views/template/Footer.jsp" />
 <!-- footer 끝 -->

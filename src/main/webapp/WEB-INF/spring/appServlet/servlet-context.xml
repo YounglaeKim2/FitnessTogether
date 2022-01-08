@@ -28,8 +28,6 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	
-	
 	<beans:bean id="memberServiceImpl"
 		class="com.kosmo.ft.service.impl.MemberServiceImpl" />
 		<beans:bean id="memberDAO"
@@ -41,7 +39,18 @@
 		<beans:bean id="adminDAO"
 		class="com.kosmo.ft.service.impl.AdminDAO" />
 		
-	
+	<!-- 파일 업로드 설정 -->
+	<beans:bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 파일 사이즈 설정 가능 byte 단위
+		<property name="maxUploadSize" value="100000" />
+		-->
+		<!-- max upload size in bytes -->
+        <!-- <beans:property name="maxUploadSize" value="20971520" />  20MB -->
+        <!-- max size of file in memory (in bytes) -->
+        <!-- <beans:property name="maxInMemorySize" value="1048576" />  1MB -->
+	</beans:bean>
+		
 	<context:component-scan base-package="com.kosmo.ft" />
 	 <!-- 리소스 컨트롤러에 주입할 커맨드객체(DTO계열) 빈 등록-세터 인젝션을 통해 초기화 --> 
 	 	 

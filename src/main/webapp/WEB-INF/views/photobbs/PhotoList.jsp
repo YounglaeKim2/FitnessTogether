@@ -30,7 +30,7 @@
 									<c:when test="${empty tmp.hno}">
 										<%--빈 하트일때 --%>
 										<span><a idx="${tmp.bno}" href="javascript:"
-											class="heart-click heart_icon${tmp.no}"> <img
+											class="heart-click heart_icon${tmp.bno}"> <img
 												alt="빈하트이미지"
 												src="<c:url value="/resources/images/photobbs/icons/bi bi-suit-heart.png"/>"
 												width="16" height="16" class="bi bi-suit-heart">
@@ -94,7 +94,7 @@
 								<span id="m_writer_profile"> <a
 									href="other_profile.do?other_id=${tmp.name }"> <img
 										id="profileImage" src="" alt="프사" /> <%--업로드할 프사의 이미지 경로가 들어갈예정 --%>
-										<%-- "<c:url value="/resources/images/photobbs/upload/'${tmp.profile }'"/>" --%>
+										<%-- "<c:url value="/resources/images/photobbs/upload/'${tmp.pro }'"/>" --%>
 								</a>
 								</span>&nbsp;&nbsp;<span id="m_writer">${tmp.name }</span>
 							</div>
@@ -144,7 +144,7 @@
 										</a>
 									</c:otherwise>
 								</c:choose>
-							</span> <span id="m_heart${tmp.no}">${tmp.heart }</span>
+							</span> <span id="m_heart${tmp.bno}">${tmp.heart }</span>
 
 							<%-- 댓글 수 --%>
 							<span> <a idx="${tmp.bno}" href="javascript:"
@@ -170,28 +170,28 @@
 
 				<div>
 					<!-- 댓글 -->
-					<div class="collapse" id="reply_card${tmp.bno }">
+					<div class="collapse" id="reply_card${tmp.rno }">
 						<section class="modal-section">
 							<div class="card card-body">
 								<!-- 댓글 목록 -->
-								<div class="reply-list reply-list${tmp.bno }">
+								<div class="reply-list reply-list${tmp.rno }">
 									<!-- 댓글 목록이 들어가는 곳 -->
 								</div>
 								<!--로그인 상태에만 나오는 댓글 작성칸 -->
 								<c:if test="${not empty sessionScope.name }">
 									<div class="row reply-write">
 										<div class="col-1">
-											<a href="other_profile.do?other_nick=${tmp.name }"> <img
-												id="write_reply_profileImage" src="" /> <!-- "<c:url value="/resources/images/photobbs/upload/'${sessionScope.profile }'"/>" -->
+											<a href="other_pro.do?other_name=${tmp.name }"> <img
+												id="write_reply_profileImage" src="" /> <!-- "<c:url value="/resources/images/photobbs/upload/'${sessionScope.pro }'"/>" -->
 												<!-- src에는 세션에 로그인한 프로필의 사진이 들어감 -->
 											</a>
 										</div>
 										<div class="col-8" class="input_reply_div">
-											<input class="w-100 form-control" id="input_reply${tmp.bno}"
+											<input class="w-100 form-control" id="input_reply${tmp.rno}"
 												type="text" placeholder="댓글입력...">
 										</div>
 										<div class="col-3">
-											<button type="button" idx="${tmp.bno }"
+											<button type="button" idx="${tmp.rno }"
 												class="btn btn-success mb-1 write_reply">댓글&nbsp;달기</button>
 										</div>
 									</div>
@@ -200,6 +200,7 @@
 						</section>
 					</div>
 				</div>
+				
 				<div id="modify_delete">
 					<%-- 수정/삭제버튼 --%>
 					<c:if test="${not empty id and tmp.name eq sessionScope.name}">
@@ -260,8 +261,45 @@
 	</div>
 </c:forEach>
 
+
 <script>
+//페이지가 처음 로딩될때 보여줄 페이지
+var currentPage = 1;
+//현재 페이지가 로딩중인지 여부를 저장할 변수
+var isLoading = false;
+
+//웹브라우저의 창을 스크롤 할 때 마다 호출되는 함수 등록
+$(window).on("scroll",function(){
+	//위로 스크롤된 길이
+	var scrollTop = $(window).scrollTop();
+	//웹브라우저 창의 높이
+	var windowHeight = $(window).height();
+	//문서 전체의 높이
+	var documentHeight = $(document).height();
+	//바닥까지 스크롤 되어쓴지 여부를 알아낸다.
+	var isBottom = scrollTop+windowHeight + 10 >= documentHeight;
 	
+	if(isBottom){
+		//현재페이지가 마지막 페이지라면
+		if(currentPage == ${totalPageCount} || isLoading){
+			return; //여기에서 끝낸다
+		}
+		
+		//현재 로딩중이라고 표시하기
+		isLoading = true;
+		//로딩바를 띄우기
+		$(".back-drop").show();
+		//요청할 페이지 번호를 1 증가시키기
+		currentPage++;
+		//추가로 받아올 페이지를 서버에 ajax 요청을 하고
+		console.log("inscroll"+currentPage);
+		GetList(currentPage);
+	};
+});
+	
+</script>
+
+<script>
 const GetList = function(currentPage){
 	console.log("inGetList"+currentPage);
 	
@@ -288,7 +326,7 @@ const GetList = function(currentPage){
 			$(".heart-click").click(function(){
 				
 				//게시물 번호(bno)를 idx로 전달받아 저장
-				let bno = $(this).attr('idx');
+				var bno = $(this).attr('idx');
 				console.log("heart-click");
 				
 				//빈하트를 눌렀을때
@@ -305,7 +343,7 @@ const GetList = function(currentPage){
 							//페이지 새로고침
 							//document.location.reload(true);
 							
-							let heart = pto.heart;
+							var heart = pto.heart;
 							
 							//페이지와 모달창에 하트수를 갱신
 							$('#m_heart'+bno).text(heart);
@@ -324,11 +362,12 @@ const GetList = function(currentPage){
 					$('.heart_icon'+bno).attr('src', '<c:url value="/resources/images/photobbs/icons/bi bi-suit-heart-fill.png"/>')
 				
 					//꽉찬 하트를 눌렀을 때
-				}else if($(this).children('png').attr('class') == "bi bi-suit-heart-fill"){
+				}
+				else if($(this).children('png').attr('class') == "bi bi-suit-heart-fill"){
 					console.log("꽉찬하트 클릭"+bno);
 					
 					$.ajax({
-						uri: "<c: value="/fnt/removeHeart.do"/>",
+						url: "<c: value="/fnt/removeHeart.do"/>",
 						type: "post",
 						data:{
 							bno : bno,
@@ -337,7 +376,7 @@ const GetList = function(currentPage){
 							//페이지 새로고침
 							//document.location.reload(true);
 							
-							let heart = pto.heart;
+							var heart = pto.heart;
 							//페이지, 모달창에 하트 수 갱신
 							$('#m_heart'+bno).text(heart);
 							$('#heart'+bno).text(heart);
@@ -363,10 +402,24 @@ const GetList = function(currentPage){
 				alert('로그인 하셔야 하트를 누를 수 있습니다');
 			});
 			
+			//페이지가 뒤로가기 하면 하트버튼과 하트 수 갱신이 안됨. 이때 하트 누르면 DB에 중복으로 들어감
+			//이것을 방지하기위해 뒤로가기할때 css로 클릭막고 새로고침으로 갱신된 하트수가 나오게 하기위함
+			$(window).bind("pageshow",function(event){
+				//파폭,사파리 뿐 아니라 익스 크롬의 경우도 고려하여
+				if(event.originalEvent.persisted || (window.performance && window.performance.navigation.type == 2)) {
+					console.log('BFCahe로부터 복원됨');
+					$(".heart-click").css("pointer-events","none");
+					location.reload(); //새로고침
+				}
+				else{
+					console.log('하트수 최신화된 페이지 열기');
+				}
+			});
+			
 			//댓글아이콘을 클릭했을때 댓글 리스트 함수를 호출
 			$(".open_reply_list").unbind('click');
 			$(".open_reply_list").click(function() {
-				let bno = $(this).attr('idx');
+				var bno = $(this).attr('idx');
 				//게시물의 no에 해당하는 댓글 리스트를 가져오는 함수
 				ReplyList(bno);
 			});
@@ -375,10 +428,10 @@ const GetList = function(currentPage){
 			$(".write_reply").unbind('click');
 			$(".write_reply").click(function() {
 				//게시물 번호
-				let bno = $(this).attr('idx');
+				var bno = $(this).attr('idx');
 				//책갈피
 				//댓글 입력란의 내용을 가져온다.
-				let content = $("#input_reply"+bno).val();
+				var content = $("#input_reply"+bno).val();
 				
 				//앞뒤 공백을 제거한다.(띄어쓰기만 입력했을때 댓글작성안되게 처리하기 위함)
 				content = content.trim();
@@ -388,6 +441,7 @@ const GetList = function(currentPage){
 				if(content == ""){ //입력 내용없을시
 					alert("내용을 입력하세요");
 				}
+				
 				else{
 					//입력란 비우기
 					$('#input_reply'+bno).val("");
@@ -402,7 +456,7 @@ const GetList = function(currentPage){
 						},
 						success : function(pto){
 							
-							let reply = pto.reply;
+							var reply = pto.reply;
 							//페이지, 모달창에 댓글 수 갱신
 							$('#m_reply'+bno).text(reply);
 							$('#reply'+bno).text(reply);
@@ -419,9 +473,172 @@ const GetList = function(currentPage){
 				}
 			});
 		}
-	
 	});
 }
+	
+</script>
+
+<script>
+	//페이지가 열리자마자 실행되는 자스코드
+	
+	$(document).ready(function(){
+		
+		GetList(1);
+		
+		//애니메이션 관련 시작
+		
+		$(document).ready(function(){
+			$(window).scroll(function(){
+				$('.thumb').each(function(i){
+					
+					var bottom_element = $(this).offset().top + $(this).outerHeight();
+					var bottom_window = $(window).scrollTop() + $(window).height();
+					
+					if (bottom_window > bottom_element){
+						$(this).animate({'opacity':'1','margin-bottom':'0px'},1000);
+					}
+				});
+			});
+		});
+		
+		//애니메이션 관련 끝
+		
+		//조회수 올리기 시작
+		$(document).on('click','card-img',function(){
+			//게시물 번호(bno)를 idx로 전달받아 저장합니다.
+			var bno = $(this).attr('idx');
+			
+			console.log(bno+"에 hit(조회수) + 1을 함");
+			
+			// +1된 hit값 불러오기
+			$.ajax({
+				url : "<c: value="/fnt/picture_view.do"/>",
+				type: "post",
+				data: {
+					bno : bno
+				},
+				success : function(to){
+					var hit = to.hit;
+					
+					$('#_hit'+bno).text(hit);
+					$('#hit'+bno).text(hit);
+				
+				},
+				error: function(){
+					alert('서버 에러');
+				}
+			});
+		});
+	});
+	
+	//창 크기 변해도 가로세로 맞추기 위해
+	$(window).resize(function(){
+		$('.box').each(function(){
+			$(this).height($(this).width());
+		});
+	}).resize();
+</script>
+
+<script>
+	//댓글
+	
+	//게시물의 댓글 목록을 불러오는 자스코드
+	const ReplyList = function(rno){
+		$.ajax({
+			url : "<c: value="/fnt/picture_replyList.do"/>",
+			type : 'post',
+			data : {
+				rno : rno
+			},
+			success : function(data){
+				
+				console.log("댓글 리스트 가져오기 성공");
+				
+				//댓글 목록을 html로 담기
+				var listHtml = "";
+				for(const i in data){
+					var rno = data[i].rno;
+					var bno = data[i].bno;
+					var grp = data[i].grp;
+					var grps = data[i].grps;
+					var grpl = data[i].grpl;
+					var name = data[i].name;
+					var content = data[i].content;
+					var wdate = data[i].wdate;
+					var wgap = data[i].wgap;
+					var pro = data[i].pro;
+					
+					console.log(grpl]); //댓글일땐 0, 대댓글일땐 1
+					
+					listHtml += "<div class='row replyrow reply" + rno +"'>";
+					
+					if(content == ""){ //삭제된 댓글일때
+						listHtml += "	 <div>";
+						listHtml += "	 		(삭제된 댓글입니다)";
+						listHtml += "	 <div>";
+					}
+					else{
+						if(grpl == 0){ //댓글일때
+							listHtml += "	 <div class='col-1'>";
+							listHtml += "	 		<a href='other_pro.do?other_name="+name+"'>";
+							//아래 프로필이미지 경로는 나중에 물어보고 수정하기
+							listHtml += "	 				<img class='reply_list_profileImage' src='./upload/pro/"+ pro +"'/>";						
+							listHtml += "	 		</a>";		
+							listHtml += "	 </div>";
+							listHtml += "	 <div class='rereply-content col-8'>";
+							listHtml += "	 		<div>";
+							listHtml += "	 				<span>";
+							listHtml += "	 						<b>"+ name +"</b>";
+							listHtml += "	 				</span>";
+							listHtml += "	 				<span>";
+							listHtml += 	 						content;
+							listHtml += "	 				</span>";
+							listHtml += "	 		</div>";
+							// 현재 로그인 상태일때 답글작성 버튼이 나온다.
+							if("${name}" != ""){
+								listHtml += "			<div>";
+								//함수에 게시글번호(bno), 댓글번호(rno), 모댓글 작성자(name)를 인자로 담아서 넘기고
+								//이때 댓글 작성자 name은 string, string을 인자로 넣기위해 "", ''로 감싼다.
+								listHtml += "					<a href='#' class='write_reply_start' data-bs-toggle='collapse' data-bs-target='#re_reply"+ no +"' aria-controls='collapseExample'>답글$nbsp;달기</a>";
+								listHtml += "			</div>";
+							}
+							listHtml += "   </div>"
+						}
+						else{ //대댓글일때
+							listHtml += "	 <div class='col-1'>";
+							listHtml += "	 </div>";
+							listHtml += "	 <div class='col-1'>";
+							listHtml += "	 				<img class='reply_list_profileImage' src='./upload/pro/"+ pro +"'/>";
+							listHtml += "	 </div>";
+							listHtml += "	 <div class='rereply-content col-7'>";
+							listHtml += "	 		<div>";
+							listHtml += "	 				<span>";
+							listHtml += "	 						<b>"+ name +"</b>";
+							listHtml += "	 				</span>";
+							listHtml += "	 				<span>";
+							listHtml += 	 						content;
+							listHtml += "	 				</span>";
+							listHtml += "	 		</div>";
+							listHtml += "   </div>"
+						}
+						
+						listHtml += "	 <div class='col-3 reply-right'>";
+						listHtml += "	 		<div>";
+						listHtml +=						wdate;
+						listHtml += "	 		</div>";
+						//책갈피
+						
+						//현재 로그인 상태라면
+						if("${name}" == name){
+							listHtml += "			<div>";
+							listHtml += "				<a href='javascript:' rno='>";
+							listHtml += "			</div>";
+						}
+					}
+				}
+			}
+		});
+	}
 	
 </script>
 
