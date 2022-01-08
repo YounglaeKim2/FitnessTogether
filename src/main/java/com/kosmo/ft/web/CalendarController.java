@@ -73,13 +73,11 @@ public class CalendarController {
 		headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
 		HttpEntity entity = new HttpEntity(headers);
 		String url = "http://openapi.foodsafetykorea.go.kr/api/cb8f0be721a04b56a16d/I2790/json/1/50/DESC_KOR="+searchWord;
-		System.out.println(url);
 		ResponseEntity<Map> response = restTemplate.exchange(
 				url,//요청 URI
 				HttpMethod.GET,//요청 메소드
 				entity,//HttpEntity(요청바디와 요청헤더)
 				Map.class);
-		System.out.println(response.getBody());
 		Map result_one = (Map)response.getBody().get("I2790");
 		List<Map> result_two = null;
 		if(result_one.get("row")!= null) {
