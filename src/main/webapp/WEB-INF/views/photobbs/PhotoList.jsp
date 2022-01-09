@@ -200,7 +200,7 @@
 						</section>
 					</div>
 				</div>
-				
+
 				<div id="modify_delete">
 					<%-- 수정/삭제버튼 --%>
 					<c:if test="${not empty id and tmp.name eq sessionScope.name}">
@@ -474,7 +474,7 @@ const GetList = function(currentPage){
 			});
 		}
 	});
-}
+};
 	
 </script>
 
@@ -537,6 +537,112 @@ const GetList = function(currentPage){
 			$(this).height($(this).width());
 		});
 	}).resize();
+</script>
+
+<script>
+	const WriteReReply = function(bno,rno){
+		
+		console.log(bno);
+		console.log(rno);
+		
+		console.log($("#input_rereply" + rno).val());
+		
+		//댓글 입력란의 내용을 가져온다.
+		var content = $("#input_rereply" +rno).val();
+		content = content.trim();
+		
+		if(content == ""){ //입력된 내용 없을때
+			alert("내용을 입력해주세요");
+		}
+		else{
+			//입력란 비우기
+			$("#input_rereply" + rno).val("");
+			
+			//reply+1 하고 그 값을 가져오기
+			$.ajax({
+				url : "<c: value="/fnt/picture_write_rereply.do"/>",
+				type : "post",
+				data : {
+					rno : rno,
+					bno : bno,
+					content : content
+				},
+				success: function(pto) {
+					
+					var reply = pto.reply;
+					//페이지, 모달창에 댓글 수를 갱신
+					$('#m_reply'+bno).text(reply);
+					$('#reply'+bno).text(reply);
+					
+					console.log("답글 작성 성공");
+					
+					//게시물 번호(bno)에 해당하는 댓글리스트를 새로 받아오기
+					ReplyList(bno);
+				},
+				error: function(){
+					alert("서버 에러");
+				}
+			});
+		};
+	};
+	
+	//댓글(최상위) 삭제일때
+	
+	const DeleteReply = function(rno, bno){
+		//grp이 rno인 댓글이 있는 경우 content에 null을 넣고 없으면 삭제.
+		$.ajax({
+			url: "<c: value="/fnt/picture_delete_reply.do"/>",
+			type: "post",
+			data : {
+				rno : rno,
+				bno : bno
+			},
+			success: function(pto) {
+				var reply = pto.reply;
+				
+				//페이지, 모당창에 댓글수 갱신
+				$('#m_reply'+bno).text(reply);
+				$('#reply'+bno).text(reply);
+				
+				console.log("모댓글 삭제 성공");
+				
+				//게시물 번호(bno)에 해당하는 댓글리스트를 새로 받아오기
+				ReplyList(bno);
+			},
+			error: function() {
+				alert('서버 에러');
+			}
+		});
+	};
+	
+	//답글 삭제일때
+	const DeleteReReply = function(rno, bno, grp){
+		
+		$.ajax({
+			url: "<c: value="/fnt/picture_delete_rereply.do"/>",
+			type: "post",
+			data : {
+				rno : rno,
+				bno : bno,
+				grp : grp
+			},
+			success: function(pto) {
+				var reply = pto.reply;
+				
+				//페이지, 모당창에 댓글수 갱신
+				$('#m_reply'+bno).text(reply);
+				$('#reply'+bno).text(reply);
+				
+				console.log("답글 삭제 성공");
+				
+				//게시물 번호(bno)에 해당하는 댓글리스트를 새로 받아오기
+				ReplyList(bno);
+			},
+			error: function() {
+				alert('서버 에러');
+			}
+		});
+	};
 </script>
 
 <script>
@@ -628,17 +734,80 @@ const GetList = function(currentPage){
 						listHtml += "	 		</div>";
 						//책갈피
 						
-						//현재 로그인 상태라면
-						if("${name}" == name){
-							listHtml += "			<div>";
-							listHtml += "				<a href='javascript:' rno='>";
-							listHtml += "			</div>";
-						}
+						if("${name}" != ""){ //현재 로그인 상태이고
+						
+							//작성자가 로그인한 사용자라면
+							if("${name}" == name){
+								listHtml += "			<div>";
+								//수정할 댓글의 rno와 grpl을 함께 넘긴다.
+								//grpl을 넘기는 이유는 댓글 수정란과 대댓글 수정란을 구분하기 위하여
+								listHtml += "				<a href='javascript:' rno='"+ rno +"' grpl='"+ grpl +"' class='reply_modify'>수정</a>";
+								listHtml += "				&nbsp;|&nbsp;"
+								//삭제는 rno만 넘긴다.
+								listHtml += "				<a href='javascript:' rno='"+ rno +"' grpl='"+ grpl +"' bno'"+ bno +"' grp'"+grp+"' class='reply_delete'>삭제</a>";
+								listHtml += "			</div>";
+							}///if
+						}///if
+						listHtml += "   <div class='collapse row rereply_write' id='re_reply"+rno+"'>";
+						listHtml += "  		<div class='col-1'>"		
+						listHtml += "   </div>"
+						listHtml += "  		<div class='col-1'>"
+						listHtml += "  			<a href='other_profile.do?other_name="+name+"'>";
+						listHtml += "  				<img id='write_reply_profileImage' src='<c:url value="/resources/images/upload/profile/${pro}"/>'";
+						//위 두항목은 추후에 .do와 프로필 경로 등 반드시 합의하에 수정할 것.
+						listHtml += "  			</a>";
+						listHtml += "   	</div>"
+						listHtml += "  		<div class='col-7'>"
+						listHtml += "		<input class='w-100 input_rereply_div form-control'	id='input_rereply"+ rno +"' type='text' placeholder='댓글을 입력하세요'>"		
+						listHtml += "   	</div>"
+						listHtml += "  		<div class='col-3'>"
+						
+						//대댓다는 버튼을 누르면 댓글번호(rno)와 게시물번호(bno)
+						//동적으로 넣은 html태그에서 발생하는 이벤트는 동적으로 처리해야한다.
+						//가령, 동적으로 넣은 html태그에서 발생하는 click이벤트는 html태그 안에서 onclick으로 처리하지말고, 제이쿼리에서 클래스명이나 id값으로 받아서 처리해야한다.
+						listHtml += "  			<button type='button' class='btn btn-success mb-1 write_rereply' rno='"+ rno +"' bno='"+ bno + "'>답글&nbsp;달기"</button>"
+						listHtml += "   	</div>"
+						listHtml += "   </div>"
+						//---답글입력란 끝
 					}
-				}
+					
+					listHtml += "</div>";
+				};///for
+				
+				//동적으로 넣은 html에 대한 이벤트 처리는 같은 함수내에서 처리해줘야한다.
+				//$(document).ready(function(){}); 안에 쓰지 말것.
+				
+				//댓글 리스트 부분에 받아온 댓글 리스트 넣기
+				$(".reply-list"+rno).html(listHtml);
+				
+				//답글을 작성한 후 답글달기 버튼을 눌렀을 때 클릭이벤트를 제이쿼리로 처리
+				$('button.btn.btn-success.mb-1.write_rereply').on('click',function(){
+					console.log('rno',$(this).attr('rno'));
+					console.log('bno',$(this).attr('bno'));
+					
+					//답글을 DB에 저장하는 함수를 호출하기
+					WriteReReply($(this).attr('rno'),$(this).attr('bno'));
+				});
+				
+				//삭제버튼 클릭시
+				$('.reply_delete').on('click',function(){
+					//댓글삭제일 경우
+					if($(this).attr('grpl') == 0){
+						DeleteReply($(this).attr('rno'), $(this).attr('bno'));
+					}
+					//대댓(답글) 삭제일시
+					else{
+						DeleteReReply($(this).attr('rno'), $(this).attr('grp'));
+					}
+					
+				})
+				
+			},////success
+			error: function() {
+				alert('서버 에러');
 			}
 		});
-	}
+	};
 	
 </script>
 
