@@ -105,7 +105,27 @@ public class MappingController {
 //		return "forward:/mapping/mappingList.do";
 //		
 //	}
-						  
+	
+
+	@RequestMapping(value="Verification.do",method = RequestMethod.GET)
+	public String live(@ModelAttribute("id") String id) {
+		//뷰정보 반환]
+		return "mapping/Verification";
+	}
+
+	@RequestMapping(value="Verification.do",method = RequestMethod.POST)
+	public String liveCheck(@ModelAttribute("id") String id,
+						  @RequestParam Map map
+			) throws Exception {
+		//서비스 호출]	
+		map.put("id", id);
+		System.out.println("latitude:"+map.get("latitude"));
+		System.out.println("longitude:"+map.get("longitude"));
+		System.out.println("cityLocation:"+map.get("cityLocation"));
+		//mappingService.check(map);
+		//뷰정보 반환]목록으로 이동
+		return "mapping/Live";
+	}				  
 }
 
 

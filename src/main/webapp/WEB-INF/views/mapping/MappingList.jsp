@@ -78,7 +78,7 @@
 			</div>
 		
 			<div class="btn btn-link">
-				<a href="<c:url value="/fnt/xx.do"/> "class="btn btn-primary">인증버튼</a>
+				<a href="<c:url value="/fnt/Verification.do"/> "class="btn btn-primary">인증하기</a>
 			</div>
 		</div>
 		<div class="row">	
