@@ -95,7 +95,6 @@ public class MappingController {
 		return loctionInfo;
 	}
 	
-	
 //	@RequestMapping(value="mappingWrite.do",method = RequestMethod.POST)
 //	public String writeOk(/*@ModelAttribute("id") String id,*/
 //						  @RequestParam Map map

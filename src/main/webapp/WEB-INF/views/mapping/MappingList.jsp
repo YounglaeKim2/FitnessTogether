@@ -35,6 +35,10 @@
 		<div class="btn btn-link">
 			<a href="<c:url value="/fnt/View2.do"/> "class="btn btn-primary">헬스장 찾기</a>
 		</div>
+	</div><div class="d-grid gap-2 d-md-flex justify-content-md-end">
+		<div class="btn btn-link">
+			<a href="<c:url value="/fnt/xx.do"/> "class="btn btn-primary">인증버튼</a>
+		</div>
 	</div>
 	<!-- 작성하기 버튼 
 

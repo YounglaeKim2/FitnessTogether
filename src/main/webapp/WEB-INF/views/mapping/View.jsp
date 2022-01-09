@@ -116,7 +116,7 @@
         });
 		
         $.ajax({
-        	url:"<c:url value="/fnt/getlocation.do"/>",
+        	url:"<c:url value="/fnt/getlatlng.do"/>",
         	data:{"no":${record.no}},
         	datatpye:"json",
         	type:"post"
@@ -129,7 +129,8 @@
           [37.47852824039385, 126.87920656036123, '<div style="padding:5px;">담배쟁이</div>'],
           [37.4793107563299, 126.87801098940167, '<div style="padding:5px;">INC COFFEE</div>']
         ]
-        
+
+	
         var markers =[];
 
         for (var i = 0; i < data.length; i++ ) {
