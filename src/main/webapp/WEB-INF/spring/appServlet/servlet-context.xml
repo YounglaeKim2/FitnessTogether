@@ -34,11 +34,7 @@
 		class="com.kosmo.ft.service.impl.MemberDAO" />
 		
 	
-	<beans:bean id="adminServiceImpl"
-		class="com.kosmo.ft.service.impl.AdminServiceImpl" />
-		<beans:bean id="adminDAO"
-		class="com.kosmo.ft.service.impl.AdminDAO" />
-		
+	
 	<!-- 파일 업로드 설정 -->
 	<beans:bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

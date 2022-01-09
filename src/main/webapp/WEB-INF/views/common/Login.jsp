@@ -31,6 +31,24 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/login/css/util.css"/>"/>
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/login/css/main.css"/>"/>
+	<link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />	
+<!--===============================================================================================-->
+	<script src="<c:url value="/resources/login/vendor/jquery/jquery-3.2.1.min.js"/> "/></script>
+<!--===============================================================================================-->
+	<script src="<c:url value="/resources/login/vendor/animsition/js/animsition.min.js"/> "/></script>
+<!--===============================================================================================-->
+	<script src="<c:url value="/resources/login/vendor/bootstrap/js/popper.js"/> "/></script>
+	<script src="<c:url value="/resources/login/vendor/bootstrap/js/bootstrap.min.js"/> "/></script>
+<!--===============================================================================================-->
+	<script src="<c:url value="/resources/login/vendor/select2/select2.min.js"/> "/></script>
+<!--===============================================================================================-->
+	<script src="<c:url value="/resources/login/vendor/daterangepicker/moment.min.js"/> "/></script>
+	<script src="<c:url value="/resources/login/vendor/daterangepicker/daterangepicker.js"/> "/></script>
+<!--===============================================================================================-->
+	<script src="<c:url value="/resources/login/vendor/countdowntime/countdowntime.js"/> "/></script>
+<!--===============================================================================================-->
+	<script src="<c:url value="/resources/login/js/main.js"/> "/></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <!--===============================================================================================-->
   <style type="text/css">
     #customBtn {
@@ -75,76 +93,46 @@
       font-family: 'Roboto', sans-serif;
     }
   </style>
-  
-  <script>
-  function go_login() {
-	  if( $('#id').val() == '' ) {
-		  alert('아이디를 입력하세요!'); 
-		  $('#id').focus(); 
-		  return; 
-		  } else if( $('#pwd').val() == '' ) {
-			  alert('비밀번호를 입력하세요!');
-			  $('#pwd').focus(); 
-			  return; 
-		} 
-	  
-	  $.ajax({ 
-		  type: 'post',
-		  url:'<c:url value="/fnt/loginprocess.do"/>',
-		  data: { id:$('#id').val(), pwd :$('#pwd').val() },
-		  success: function(data) {
-			  if(data == 'true') {
-				  location.reload(); 
-				  } else { alert('아이디나 비밀번호가 일치하지 않습니다!');
-				  $("#id").focus(); 
-				  } 
-			  }, 
-			  error:function(request,status,error){
-		             alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-		          }
-			  });
-	  } 
-  function go_logout() {
-	  $.ajax({ 
-		  type: "post",
-		  url: '<c:url value="/fnt/logout.do"/>', 
-		  success: function() { 
-			  location.reload(); 
-			  }, 
-			       error:function(request,status,error){
-		             alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-		          }
-	  });
-  }
-  </script>
+ 
+ 
 </head>
 <body>
-
-
+<script type="text/javascript">
+		  swal("Hello world!");
+</script>
+	
+  
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-				<form class="login100-form validate-form">
-					<span class="login100-form-title p-b-26">Welcome</span> 
-					<span class="login100-form-title p-b-48"><!--<i class="zmdi zmdi-font"></i>--></span>
+				<span class="login100-form-title p-b-26">
+					Welcome
+				</span>
+				
+				<form action="<c:url value="/fnt/LoginProcess.do"/>">
 					<div class="wrap-input100 validate-input" >
-						<input class="input100" type="text" id="id">
+						<input class="input100" type="text" name="id">
 						<span class="focus-input100" data-placeholder="아이디를 입력하세요"></span>
 					</div>
+		
 					<div class="wrap-input100 validate-input" data-validate="Enter password">
-					 	<span class="btn-show-pass">
+						<span class="btn-show-pass">
 							<i class="zmdi zmdi-eye"></i>
 						</span>
-						<input class="input100" type="password" id="pwd">
+						<input class="input100" type="password" name="pwd">
 						<span class="focus-input100" data-placeholder="비밀번호를 입력하세요"></span>
 					</div>
+					
 					<div class="container-login100-form-btn">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
-							<button class="login100-form-btn" id="login" onclick="go_login()">Login</button>
+							<button class="login100-form-btn" onclick="javascript:btn()">
+								Login
+							</button>
 						</div>
 					</div>
-			
+				</form>
+				
 	<!-- start 카카오계정으로 로그인하기 -->
 	  <a href="javascript:kakaoLogin();"><img src="<c:url value="/resources/login/images/kakao_login_medium_wide.png"/>" style="margin:10px; height:40px;width:260px;"></a>
     
@@ -154,7 +142,7 @@
         // 자스키 - dce1a6b74b6037f0cc344d0b3f4d8a97
         window.Kakao.init("dce1a6b74b6037f0cc344d0b3f4d8a97");
         console.log(Kakao.isInitialized()); // sdk초기화여부판단
-   
+      //카카오로그인
       function kakaoLogin() {
           Kakao.Auth.login({
             success: function (response) {
@@ -162,7 +150,6 @@
                 url: '/v2/user/me',
                 success: function (response) {
               	  console.log(response)
-                  
                 },
                 fail: function (error) {
                   console.log(error)
@@ -236,7 +223,7 @@
   <div id="gSignInWrapper">
   
     <div id="customBtn" class="customGPlusSignIn">
-     	<form method="POST" action="<c:url value='/fnt/LoginProcess.do'/>">
+     
       <span class="icon"></span>
       <span class="buttonText">구글로 로그인</span>
     </div>
@@ -323,26 +310,9 @@ function onSignInFailure(t){
 			</div>
 		</div>
 	</div>
-	</form>
-
-
 	
-<!--===============================================================================================-->
-	<script src="<c:url value="/resources/login/vendor/jquery/jquery-3.2.1.min.js"/> "/></script>
-<!--===============================================================================================-->
-	<script src="<c:url value="/resources/login/vendor/animsition/js/animsition.min.js"/> "/></script>
-<!--===============================================================================================-->
-	<script src="<c:url value="/resources/login/vendor/bootstrap/js/popper.js"/> "/></script>
-	<script src="<c:url value="/resources/login/vendor/bootstrap/js/bootstrap.min.js"/> "/></script>
-<!--===============================================================================================-->
-	<script src="<c:url value="/resources/login/vendor/select2/select2.min.js"/> "/></script>
-<!--===============================================================================================-->
-	<script src="<c:url value="/resources/login/vendor/daterangepicker/moment.min.js"/> "/></script>
-	<script src="<c:url value="/resources/login/vendor/daterangepicker/daterangepicker.js"/> "/></script>
-<!--===============================================================================================-->
-	<script src="<c:url value="/resources/login/vendor/countdowntime/countdowntime.js"/> "/></script>
-<!--===============================================================================================-->
-	<script src="<c:url value="/resources/login/js/main.js"/> "/></script>
+
+
 	
 </body>
 </html>

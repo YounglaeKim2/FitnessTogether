@@ -21,6 +21,7 @@
  	.hr-4{
  	margin: 10px 20px 20px 20px;
  	width: 580px;
+ 	color:#000000;
  	}
  	.w-pct60 th{
      text-align: left; 
@@ -117,6 +118,7 @@
         	<input type="hidden" name="chk_id" class="chk_id" required fld_essential label="아이디중복체크" value>
         	<a class="btn default" href="" style="color:black;
         	font-size:15px;
+        	font-weight:bold;
         	height:44px;
         	width: 100px;
         	margin:3.7px 8px 7px 1px;
@@ -155,6 +157,7 @@
                 <input type="hidden" name="chk_email" class="chk_email" required fld_essential label="이메일중복체크" value>
 	        	<a class="btn default" href="" style="color:black;
 	        	font-size:15px;
+	        	font-weight:bold;
 	        	height:44px;
 	        	width: 100px;
 	        	margin:3.7px 8px 7px 1px;

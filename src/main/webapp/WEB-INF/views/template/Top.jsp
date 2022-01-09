@@ -100,7 +100,7 @@
 					-->	
 						
 					<!-- 로그인하지 않은 경우 --> 
-					<c:if test="${empty login_info }">
+					<c:if test="${empty sessionScope.id}" var="isLogin">
 					<li class="nav-item"><a class="nav-link" 
 						href="<c:url value="/fnt/Login.do"/>"> 로그인 </a></li>
 					<li class="nav-item"><a class="nav-link"
@@ -108,9 +108,9 @@
 					</c:if>
 					
 					<!-- 로그인한 경우 -->
-					 <c:if test="${!empty login_info }">
-					<li class="nav-item"><a class="nav-link" onclick="go_logout()"
-						href="<c:url value="/fnt/logout.do"/>"> 로그아웃 </a></li>
+					 <c:if test="${!empty sessionScope.id}" >
+					<li class="nav-item"><a class="nav-link" 
+						href="<c:url value="/fnt/Logout.do"/>"> 로그아웃 </a></li>
 					</c:if>
 					<li class="nav-item"><a class="nav-link"
 						href="<c:url value="/fnt/ProAlter.do"/>"> 마이페이지 </a></li>
@@ -138,24 +138,20 @@
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="dropdownAbout"
 						data-bs-toggle="dropdown" aria-expanded="false"> About </a>
+						
+						<c:if test="${!empty sessionScope.id}">
+							<li style="width:200px;">${sessionScope.id } 님 환영합니다</li>
+						</c:if>
 						<ul class="dropdown-menu" aria-labelledby="dropdownAbout">
 							<li><a class="dropdown-item"
 								href="<c:url value="/fnt/whoWeAre.do"/>">Our Amazing Team</a></li>
 							<li><a class="dropdown-item" 
 								href="<c:url value="/fnt/howWeDid.do"/>">How We Did</a></li>
-							<li><a class="dropdown-item" 
-								href="#">Something else here</a></li>
+							<li><a class="dropdown-item" href="#">Something else here</a></li>
 						</ul>
 					</li>
 					
-					<c:if test="${!empty login_info }">
-					<li> 
-						<span style="position: absolute; top: -14px; left: -120px">
-							 <input type="text" id="userid" placeholder="아이디" /> 
-							 <input type="password" onkeypress="if(event.keyCode == 13) {go_login()}" id="userpw" placeholder="비밀번호" /> 
-						 </span> 
-					</li>
-					</c:if>
+					
 					
 					
 				</ul>
