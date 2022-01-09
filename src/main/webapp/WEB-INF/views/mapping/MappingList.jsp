@@ -146,6 +146,8 @@
 					<c:forEach var="item" items="${listPagingData.lists}"
 						varStatus="loop">
 						<input type="hidden" name="title" value=${item.title }>
+						<input type="hidden" name="name" value=${item.name }>
+						<input type="hidden" name="postDate" value=${item.postDate }>
 						<input type="hidden" name="latitude" value=${item.latitude }>
 						<input type="hidden" name="longitude" value=${item.longitude }>
 					</c:forEach>
@@ -248,9 +250,32 @@
 	</div>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c244899725d72b692838ccde36cbb07d&libraries=clusterer"></script>
 	<script>
+	    var listEl = document.getElementById('placesList'); 
+	    var menuEl = document.getElementById('menu_wrap');
+	    var fragment = document.createDocumentFragment();
+	    
+	    var lat = "";
+	    var lng = "";
+	    if (navigator.geolocation) {
+			//브라우저의 geolocation 지원 여부 판단
+
+			//PositionOptions객체 설정용]
+			var options = {
+				timeout : 3000,
+				maximumAge : 5000
+			};
+			//현재 위치 정보를 한번만 얻기
+			navigator.geolocation.getCurrentPosition(successCallback);
+		}
+		//현재 위치를 성공적으로 수신시 자동으로 호출되는 콜백함수
+		function successCallback(position) {
+			lat = position.coords.latitude;
+			lng = position.coords.longitude;
+		}
+		
         var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
             mapOption = {
-                center: new kakao.maps.LatLng(37.47893666774784, 126.87891734605707), // 지도의 중심좌표
+                center: new kakao.maps.LatLng(lat, lng), // 지도의 중심좌표
                 level: 2, // 지도의 확대 레벨
                 mapTypeId : kakao.maps.MapTypeId.ROADMAP // 지도종류
             }; 
@@ -280,20 +305,24 @@
         var data=[];
 		for(var i = 0; i < $("input[name=title]").length; i++ ) {
 			var title = document.getElementsByName("title")[i].value;
+			var name = document.getElementsByName("name")[i].value;
+			var postDate = document.getElementsByName("postDate")[i].value;
 			var latitude = document.getElementsByName("latitude")[i].value;
 			var longitude = document.getElementsByName("longitude")[i].value;
-			var value = [latitude, longitude, '<div style="padding:5px;">'+title+'</div>'];
+			var value = [latitude, longitude, '<div style="padding:5px;">'+title+'</div>',name,postDate];
 			data[i]=value;
 		}
 		
         var markers =[];
 
         for (var i = 0; i < data.length; i++ ) {
+        	
           // 지도에 마커를 생성하고 표시한다
           var marker = new kakao.maps.Marker({
             position: new kakao.maps.LatLng(data[i][0], data[i][1]), // 마커의 좌표
             map: map // 마커를 표시할 지도 객체
           });
+          itemEl = getListItem(i, data);
 
           // 마커가 지도 위에 표시되도록 설정합니다
           //marker.setMap(map);
@@ -310,6 +339,11 @@
           markers.push(marker);
           kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
           kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+          
+          fragment.appendChild(itemEl);
+          listEl.appendChild(fragment);
+          menuEl.scrollTop = 0;
+
         }
 
           // 클러스터러에 마커들을 추가합니다
@@ -328,6 +362,21 @@
                   infowindow.close();
               };
           }
+          function getListItem(index, data) {
+
+        	    var el = document.createElement('li'),
+        	    itemStr = '<span class="markerbg marker_' + (index+1) + '"></span>' +
+        	                '<div class="info">' +
+        	                '   <h4>' + data[i][2] + '</h4>';
+        	    itemStr += '    <span>작성자 : ' + data[i][3] + '</span>' +
+                			'   <span>작성일 : ' +  data[i][4]  + '</span>' +
+        	                '</div>';           
+
+        	    el.innerHTML = itemStr;
+        	    el.className = 'item';
+
+        	    return el;
+        	}
 	</script>
 	
 	
