@@ -102,24 +102,39 @@
 					<!-- 로그인하지 않은 경우 --> 
 					<c:if test="${empty sessionScope.id}" var="isLogin">
 					<li class="nav-item"><a class="nav-link" 
-						href="<c:url value="/fnt/Login.do"/>"> 로그인 </a></li>
+						href="<c:url value="/fnt/Login.do"/>"> Sign-in </a>
+					</li>
 					<li class="nav-item"><a class="nav-link"
-						href="<c:url value="/fnt/SignUp.do"/>"> 회원가입 </a></li>
+						href="<c:url value="/fnt/SignUp.do"/>"> Sign-up </a>
+					</li>
 					</c:if>
 					
 					<!-- 로그인한 경우 -->
-					 <c:if test="${!empty sessionScope.id}" >
+					<c:if test="${!empty sessionScope.id}" >
 					<li class="nav-item"><a class="nav-link" 
-						href="<c:url value="/fnt/Logout.do"/>"> 로그아웃 </a></li>
+						href="<c:url value="/fnt/Logout.do"/>"> Log-Out </a>
+					</li>
 					</c:if>
+					
 					<li class="nav-item"><a class="nav-link"
-						href="<c:url value="/fnt/ProAlter.do"/>"> 마이페이지 </a></li>
+						href="<c:url value="/fnt/ProAlter.do"/>"> My-Page </a>
+					</li>
+					
 					<li class="nav-item"><a class="nav-link"
-						href="<c:url value="/fnt/mappingList.do"/>"> 매핑 </a></li>
+						href="<c:url value="/fnt/mappingList.do"/>"> Perching </a>
+					</li>
+						
 					<li class="nav-item"><a class="nav-link"
-						href="<c:url value="/fnt/#.do"/>"> 채팅 </a></li>
+						href="<c:url value="/fnt/#.do"/>"> Chat </a>
+					</li>
+					
 					<li class="nav-item"><a class="nav-link"
-						href="<c:url value="/fnt/calendar.do"/>"> 캘린더 </a></li>
+						href="<c:url value="/fnt/calendar.do"/>"> Calendar </a>
+					</li>
+					
+					<li class="nav-item"><a class="nav-link"
+						href="<c:url value="/fnt/findFacilities.do"/>"> Sports-Facilities </a>
+					</li>
 						
 
 					<li class="nav-item dropdown"><a
