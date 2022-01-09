@@ -142,6 +142,14 @@
 						</c:forEach>
 					</c:if>
 				</table>
+				<c:if test="${not isEmpty }">
+					<c:forEach var="item" items="${listPagingData.lists}"
+						varStatus="loop">
+						<input type="hidden" name="title" value=${item.title }>
+						<input type="hidden" name="latitude" value=${item.latitude }>
+						<input type="hidden" name="longitude" value=${item.longitude }>
+					</c:forEach>
+				</c:if>
 			</div>
 			<!-- column -->
 		</div>
@@ -269,12 +277,15 @@
             minLevel: 4 // 클러스터 할 최소 지도 레벨 
         });
 
-        var data = [
-          [37.47918244596204, 126.879142796576, '<div style="padding:5px;">붕어빵</div>'],
-          [37.47852824039385, 126.87920656036123, '<div style="padding:5px;">담배쟁이</div>'],
-          [37.4793107563299, 126.87801098940167, '<div style="padding:5px;">INC COFFEE</div>']
-        ]
-        
+        var data=[];
+		for(var i = 0; i < $("input[name=title]").length; i++ ) {
+			var title = document.getElementsByName("title")[i].value;
+			var latitude = document.getElementsByName("latitude")[i].value;
+			var longitude = document.getElementsByName("longitude")[i].value;
+			var value = [latitude, longitude, '<div style="padding:5px;">'+title+'</div>'];
+			data[i]=value;
+		}
+		
         var markers =[];
 
         for (var i = 0; i < data.length; i++ ) {

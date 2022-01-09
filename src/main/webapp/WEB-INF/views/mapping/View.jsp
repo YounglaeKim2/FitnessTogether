@@ -84,11 +84,53 @@
 			<div class="col"></div>
 		</div>
 	</div>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c244899725d72b692838ccde36cbb07d&libraries=clusterer"></script>
+	
+	<div class="container" style="padding-top:15px;">
+		
+		<div class="row">
+			<div class="col-md-offset-2 col-md-8">
+				<table class="table table-bordered table-striped">
+					<tr>
+						<th class="col-md-2 text-center">번호</th>
+						<td>${record.no}</td>
+					</tr>
+					<tr>
+						<th class="text-center">제목</th>
+						<td>${record.title}</td>
+					</tr>
+					<tr>
+						<th class="text-center">작성자</th>
+						<td>${record.name}</td>
+					</tr>
+					<tr>
+						<th class="text-center">등록일</th>
+						<td>${record.postDate}</td>
+					</tr>
+					<tr>
+						<th class="text-center" colspan="2">내용</th>
+					</tr>
+					<tr>
+						<td colspan="2">${record.content}</td>
+					</tr>
+				</table>
+		
+				<input type="hidden" name="title" value=${record.title }>
+				<input type="hidden" name="latitude" value=${record.latitude }>
+				<input type="hidden" name="longitude" value=${record.longitude }>
+			</div>
+		</div>
+		
+	</div>
+</body>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c244899725d72b692838ccde36cbb07d&libraries=clusterer"></script>
 	<script>
+	    var title = document.getElementsByName("title")[0].value;
+		var latitude = document.getElementsByName("latitude")[0].value;
+		var longitude = document.getElementsByName("longitude")[0].value;
+		
         var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
             mapOption = {
-                center: new kakao.maps.LatLng(37.47893666774784, 126.87891734605707), // 지도의 중심좌표
+                center: new kakao.maps.LatLng(latitude, longitude), // 지도의 중심좌표
                 level: 2, // 지도의 확대 레벨
                 mapTypeId : kakao.maps.MapTypeId.ROADMAP // 지도종류
             }; 
@@ -124,19 +166,14 @@
         	console.log(data);
         });
         
-        var data = [
-          [37.47918244596204, 126.879142796576, '<div style="padding:5px;">붕어빵</div>'],
-          [37.47852824039385, 126.87920656036123, '<div style="padding:5px;">담배쟁이</div>'],
-          [37.4793107563299, 126.87801098940167, '<div style="padding:5px;">INC COFFEE</div>']
-        ]
+		var data = [latitude, longitude, '<div style="padding:5px;">'+title+'</div>'];
 
 	
         var markers =[];
 
-        for (var i = 0; i < data.length; i++ ) {
           // 지도에 마커를 생성하고 표시한다
           var marker = new kakao.maps.Marker({
-            position: new kakao.maps.LatLng(data[i][0], data[i][1]), // 마커의 좌표
+            position: new kakao.maps.LatLng(data[0], data[1]), // 마커의 좌표
             map: map // 마커를 표시할 지도 객체
           });
 
@@ -147,7 +184,7 @@
 
           // 인포윈도우를 생성합니다
           var infowindow = new kakao.maps.InfoWindow({
-              content : data[i][2]
+              content : data[2]
           });
             
           // 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
@@ -155,7 +192,7 @@
           markers.push(marker);
           kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
           kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
-        }
+        
 
           // 클러스터러에 마커들을 추가합니다
           clusterer.addMarkers(markers);
@@ -174,43 +211,6 @@
               };
           }
 	</script>
-
-
-
-	<div class="container" style="padding-top:15px;">
-		
-		<div class="row">
-			<div class="col-md-offset-2 col-md-8">
-				<table class="table table-bordered table-striped">
-					<tr>
-						<th class="col-md-2 text-center">번호</th>
-						<td>${record.no}</td>
-					</tr>
-					<tr>
-						<th class="text-center">제목</th>
-						<td>${record.title}</td>
-					</tr>
-					<tr>
-						<th class="text-center">작성자</th>
-						<td>${record.name}</td>
-					</tr>
-					<tr>
-						<th class="text-center">등록일</th>
-						<td>${record.postDate}</td>
-					</tr>
-					<tr>
-						<th class="text-center" colspan="2">내용</th>
-					</tr>
-					<tr>
-						<td colspan="2">${record.content}</td>
-					</tr>
-				</table>
-			</div>
-		</div>
-		
-	</div>
-</body>
-
 
 
 

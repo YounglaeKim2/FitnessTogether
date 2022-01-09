@@ -20,6 +20,8 @@ public class MappingDTO {
 	private String name;//이름 저장용
 	//각 글에 따른 댓글 총수 저장용
 	private String commentCount;
+	private String latitude;
+	private String longitude;
 	
 	//no에 따른 모든 한줄 댓글 목록 저장용
 	//마이바티스의 ResultMap 태그의 collection태그 적용용	

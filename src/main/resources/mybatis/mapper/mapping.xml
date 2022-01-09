@@ -22,6 +22,8 @@
 		<result column="postDate" property="postDate"/>
 		<result column="id" property="id"/>
 		<result column="name" property="name"/>
+		<result column="latitude" property="latitude"/>
+		<result column="longitude" property="longitude"/>
 		<!--<result column="commentCount" property="commentCount"/>-->	
 		<!--
 		1:N관계 매핑용
