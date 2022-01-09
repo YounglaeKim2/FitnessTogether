@@ -66,6 +66,7 @@
 		<h1 class="pb-2 border-bottom">Perching Service<h4>원하는 이벤트에 참여하세요!! (list)</h4></h1>
    
 	</div>
+	
 	<div class="container">
 		
 		<div class="d-grid gap-2 d-md-flex justify-content-md-end">
@@ -74,7 +75,7 @@
 			</div>
 		
 			<div class="btn btn-link">
-				<a href="<c:url value="/fnt/View2.do"/> "class="btn btn-primary">헬스장 찾기</a>
+				<a href="<c:url value="/fnt/View2.do"/> "class="btn btn-primary">View2</a>
 			</div>
 		
 			<div class="btn btn-link">
@@ -89,14 +90,16 @@
 				</div>
 				
 				<div id="menu_wrap" class="bg_white">
+					<!--
 					<div class="option">
 						<div>
 							<form onsubmit="searchPlaces(); return false;">
-								키워드 : <input type="text" value="가산" id="keyword" size="15">
+								키워드 : <input type="text" value="" id="keyword" size="15">
 								<button type="submit">검색하기</button>
 							</form>
 						</div>
 					</div>
+					-->
 					<hr>
 					<ul id="placesList"></ul>
 					<div id="pagination"></div>
@@ -106,9 +109,6 @@
 			</div>
 			<div class="col"></div>
 		</div>
-		
-		
-		
 		<div class="row" style="padding-top:15px;">
 			<div class="col-md-12">
 				<table
@@ -162,21 +162,7 @@
 				<div class="col-md-12 text-center">${listPagingData.pagingString}</div>
 			</div>
 		</c:if>
-		<!--
-		<nav aria-label="Page navigation example">
-	  		<ul class="pagination justify-content-center">
-			    <li class="page-item disabled">
-			      <a class="page-link">Previous</a>
-			    </li>
-			    <li class="page-item"><a class="page-link" href="#">1</a></li>
-			    <li class="page-item"><a class="page-link" href="#">2</a></li>
-			    <li class="page-item"><a class="page-link" href="#">3</a></li>
-			    <li class="page-item">
-			      <a class="page-link" href="#">Next</a>
-			    </li>
-			  </ul>
-		</nav>
-		-->
+		
 		<!-- 검색용 UI -->
 		
 		<div class="container">
@@ -196,27 +182,6 @@
 		    </div>
 		  </div>
 		</div>	
-		<!--  
-		<div class="container">
-			<div class="row">
-				<div class="text-center">
-					<form class="form-inline" method="post" action="<c:url value='/onememo/bbs/List.do'/>">
-						<div class="form-group">
-							<select name="searchColumn" class="form-control">
-								<option value="title">제목</option>
-								<option value="name">작성자</option>
-								<option value="content">내용</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<input type="text" name="searchWord" class="form-control" />
-						</div>
-						<button type="submit" class="btn btn-primary">검색</button>
-					</form>
-				</div>
-			</div>
-		</div>
-		-->
 		
 		<div class="d-grid gap-2 d-md-flex justify-content-md-end">
 			<div class="btn btn-link me-md-1">
@@ -227,35 +192,17 @@
 				<a href="<c:url value="/fnt/ZZZZ.do"/>"
 					class="btn btn-primary">ZZZZ</a>
 			</div>
-			<div class="btn btn-link me-md-1">
-				<a href="<c:url value="/fnt/ViewPost.do"/>"
-					class="btn btn-primary">ViewPost</a>
-			</div>
+			
 		</div>
-		<!--  
-		<div class="row">
-			<div class="col-md-12 text-right">
-				<a href="<c:url value="/fnt/mappingWrite.do"/>"
-					class="btn btn-primary">등록</a>
-			</div>
-		</div>
-		
-		<div class="row">
-			<div class="col-md-12 text-right">
-				<a href="<c:url value="/fnt/ZZZZ.do"/>"
-					class="btn btn-primary">ZZZZ</a>
-			</div>
-		</div>
-		-->
 	</div>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c244899725d72b692838ccde36cbb07d&libraries=clusterer"></script>
 	<script>
 	    var listEl = document.getElementById('placesList'); 
 	    var menuEl = document.getElementById('menu_wrap');
 	    var fragment = document.createDocumentFragment();
-	    
 	    var lat = "";
 	    var lng = "";
+	    
 	    if (navigator.geolocation) {
 			//브라우저의 geolocation 지원 여부 판단
 
@@ -267,6 +214,7 @@
 			//현재 위치 정보를 한번만 얻기
 			navigator.geolocation.getCurrentPosition(successCallback);
 		}
+	    
 		//현재 위치를 성공적으로 수신시 자동으로 호출되는 콜백함수
 		function successCallback(position) {
 			lat = position.coords.latitude;
@@ -362,6 +310,7 @@
                   infowindow.close();
               };
           }
+          
           function getListItem(index, data) {
 
         	    var el = document.createElement('li'),
@@ -378,12 +327,6 @@
         	    return el;
         	}
 	</script>
-	
-	
-	
-	
-	
-	
 </body>
 <!-- 실제 내용 끝-->
 

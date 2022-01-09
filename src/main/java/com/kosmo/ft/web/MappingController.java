@@ -70,10 +70,6 @@ public class MappingController {
 	public String goZZZZ() {
 		return "mapping/ZZZZ";
 	}
-	@RequestMapping("ViewPost.do")
-	public String viewPost() {
-		return "mapping/ViewPost";
-	}
 	
 	@RequestMapping("View1.do")
 	public String goView1() {
