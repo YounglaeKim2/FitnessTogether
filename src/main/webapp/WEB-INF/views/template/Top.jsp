@@ -133,7 +133,7 @@
 					</li>
 					
 					<li class="nav-item"><a class="nav-link"
-						href="<c:url value="/fnt/findFacilities.do"/>"> Sports-Facilities </a>
+						href="#"> Sports-Facilities </a>
 					</li>
 						
 
