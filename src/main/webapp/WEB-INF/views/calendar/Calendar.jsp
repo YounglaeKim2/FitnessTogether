@@ -41,11 +41,7 @@ $(function() {
 				start : item["POSTDATE"]
 			}
 		});
-		console.log(typeof events);
-		console.log(events);
 		events = [...new Set(events.map(JSON.stringify))].map(JSON.parse);
-		console.log(typeof events);
-		console.log(events);
 		
 	    var calendarEl = document.getElementById('calendar');
 	    var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -71,7 +67,6 @@ $(function() {
             		dataType:"json",
             		type:"post"
             	}).done(function(data){
-					console.log("리스트정보 :",data);
             		var list = "<form class='form-control' action='<c:url value="/fnt/deleteweight.do"/>' method='post' id='dataform'><table  class='table'>";
             		list += "<tr><th><input id='all' type='checkbox' /></th><th scope=\"col\">부위</th><th scope=\"col\">운동종류</th><th scope=\"col\">무게</th><th scope=\"col\">횟수</th></tr>";
             		if(data.length ==0){
@@ -230,13 +225,10 @@ $(function() {
 							<div class="tab-pane fade" id="weight" role="tabpanel" aria-labelledby="weight-tab">
 							</div>
 						</div>
-                       	
-                       
 	                </div>
 	  			</div>   
 			</div>
 	   	</div>    	
-	</div>
 	<!-- 모달끝 -->
 
 <!-- footer 시작 -->
