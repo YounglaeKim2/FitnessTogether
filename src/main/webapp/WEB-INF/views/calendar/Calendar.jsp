@@ -62,6 +62,36 @@ $(function() {
             	$('#modaltest').modal('show');
             	
             	$.ajax({
+	            	url:'<c:url value="/fnt/showFood.do"/>',
+	            	data:{"id":"hkk1239","postdate":date},
+	            	dataType:"json",
+	            	type:"post"
+	            }).done(function(data){
+	            	var list = "<form class='form-control' action='<c:url value="/fnt/deleteFood.do"/>' method='post' id='dataform'><table class='table'>";
+            		list += "<tr><th><input type='checkbox' id='all_'/></th><th>식품이름</th><th>1회 제공량</th><th>열량(kcal)</th><th>탄수화물(g)</th><th>단백질(g)</th><th>지방(g)</th></tr>"
+            		if(data.length ==0){
+            			list += "<tr><td colspan='7' align='center'>작성된 게시글이 없습니다</td></tr>";
+            		}
+            		var totalkcal = 0;
+            		var totaltan = 0;
+            		var totaldan = 0;
+            		var totalgi = 0;
+            		$.each(data,function(index,element){
+            			list += "<tr><td><input type='checkbox' name='no_' value='"+element['F_NO']+"'/></td><td>"+element['F_NAME']+"</td><td>"+element['F_SIZE']+" g</td><td>"+element['F_KCAL']+" kcal</td><td>"+element['F_TAN']+" g</td><td>"+element['F_DAN']+" g</td><td>"+element['F_GI']+" g</td></tr>";
+            			totalkcal += element['F_KCAL'];
+            			totaltan += element['F_TAN'];
+            			totaldan += element['F_DAN'];
+            			totalgi += element['F_GI'];
+            		});
+            		list += "<tr><td colspan='2' style='text-align: center; font-weight:bold;'>종합 섭취량<td><td>"+totalkcal+" kcal</td><td>"+totaltan+" g</td><td>"+totaldan+" g</td><td>"+totalgi+" g</td></tr>"
+	            	list += "</table>";
+	            	list += "<br/><div class='form-group' align='right'><button id='writeFood' type='button' class='btn btn-info'>추가작성</button> <button id='deleteFood' type='button' class='btn btn-info'>삭제</button></form></div>";
+	            	$('#food').html(list);
+	            });
+            	
+					
+            	
+            	$.ajax({
             		url:'<c:url value="/fnt/showWeight.do"/>',
             		data:{"id":"hkk1239","postdate":date},
             		dataType:"json",
@@ -82,7 +112,7 @@ $(function() {
            			
             		$('#weight').html(list);
             		
-           		    $('#writefood').click(function(){
+           		    $('#writeFood').click(function(){
            		    	location.href='<c:url value="/fnt/writefood.do"/>'+"?date="+date;;
            		    });
            		    $('#writeweight').click(function(){
@@ -125,7 +155,7 @@ $(function() {
         		 			}
         		 		}
         		 	});
-           		    
+     		    	
             	});
             	
             	
@@ -149,7 +179,7 @@ $(function() {
             <div id='calendar'></div>
         </div> <!-- end of row -->
     </div> <!-- end of container -->
-
+    
 <!-- 모달 작성 -->
 	<div class="modal fade" id="modaltest" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg modal-dialog-scrollable">
@@ -176,51 +206,8 @@ $(function() {
 						<br/>
                        	<div class="tab-content" id="myTabContent">
 							<div class="tab-pane fade show active" id="food" role="tabpanel" aria-labelledby="food-tab">
-		   						<table class="table">
-		   							<tr>
-						 				<td><input type="checkbox" value="all"/></td>
-						 				<td>식품이름</td>
-						 				<td>총내용량</td>
-						 				<td>열량(kcal)</td>
-						 				<td>탄수화물(g)</td>
-						 				<td>단백질(g)</td>
-						 				<td>지방(g)</td>
-									</tr>
-		   							<tr>
-		   								<td colspan="7" align="center">작성된 게시글이 없습니다</td>
-		   							</tr>
-		   							<tr>
-						 				<td><input type="checkbox" name="select_food" value="food1"/></td>
-						 				<td>닭꼬치</td>
-						 				<td>70 g</td>
-						 				<td>176.72 kcal</td>
-						 				<td>13.35 g</td>
-						 				<td>11.56 g</td>
-						 				<td>8.57 g</td>
-						 			</tr>
-						 			<tr>
-						 				<td><input type="checkbox" name="select_food" value="food2"/></td>
-						 				<td>국물떡볶이</td>
-						 				<td>310 g</td>
-						 				<td>605 kcal</td>
-						 				<td>128 g</td>
-						 				<td>17 g</td>
-						 				<td>2.9 g</td>
-						 			</tr>
-						 			<tr style="text-align: center; font-weight: bold;">
-						 				<td colspan="3">종합 섭취량</td>
-										<td>781.72 kcal</td>
-						 				<td>141 g</td>
-						 				<td>28.56 g</td>
-						 				<td>11.47 g</td>
-						 			</tr>
-		   						</table>
-		   						<br/>
-		   						<div class="form-group" align="right">
-		   							<button id="writefood" type="button" class="btn btn-info">추가작성</button>
-		   							<button id="updatefood" type="button" class="btn btn-info">수정</button>
-		   							<button id="deletefood" type="button" class="btn btn-info">삭제</button>
-		   						</div>
+		   						
+		   						
 							</div>
 							<div class="tab-pane fade" id="weight" role="tabpanel" aria-labelledby="weight-tab">
 							</div>

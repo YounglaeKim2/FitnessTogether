@@ -87,5 +87,33 @@ public class CalendarServiceImpl implements CalendarService {
 		
 	}
 
+	public void insertFood(Map map) {
+		int size = map.size()-2;
+		List<Map> foodList = new Vector<Map>();
+		for(int i=0;i<size;i++) {
+			Map foodmap = new HashMap();
+			String[] food = map.get("food"+(i+1)).toString().split("_");
+			foodmap.put("f_name",food[0]);
+			foodmap.put("f_size",food[1]);
+			foodmap.put("f_kcal",food[2]);
+			foodmap.put("f_tan",food[3]);
+			foodmap.put("f_dan",food[4]);
+			foodmap.put("f_gi",food[5]);
+			foodmap.put("id",map.get("id"));
+			foodmap.put("postdate",map.get("postdate"));
+			foodList.add(foodmap);
+		}
+		
+		// DB에 Map 하나씩 저장
+		for(Map resultMap:foodList) {
+			dao.insertFood(resultMap);
+		}
+		
+	}
+
+	public List<Map> showFood(Map map) {
+		return dao.showFood(map);
+	}
+
 	
 }

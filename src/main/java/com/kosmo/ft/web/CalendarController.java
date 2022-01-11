@@ -91,9 +91,9 @@ public class CalendarController {
 	}
 	
 	@PostMapping("/fnt/writefood.do")
-	public String writeFood(@RequestParam Map map,Model model) {
-		
-		return "";
+	public String writeFood(@RequestParam Map map) {
+		service.insertFood(map);
+		return "calendar/Calendar";
 	}
 	
 	@PostMapping("/fnt/showCalendar.do")
@@ -123,6 +123,15 @@ public class CalendarController {
 		return "calendar/Calendar";
 	}
 	
+	@RequestMapping("/fnt/showFood.do")
+	@ResponseBody
+	public List<Map> showFood(@RequestParam Map map){ // 아이디와 날짜 정보받기
+		List<Map> lists = service.showFood(map);
+		for(Map date:lists) {
+			date.put("POSTDATE", date.get("POSTDATE").toString().substring(0, 10));
+		}
+		return lists;
+	}
 	
 }
 

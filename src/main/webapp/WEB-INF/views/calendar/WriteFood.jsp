@@ -61,8 +61,12 @@
 				</form>
 			</div>
 	    </div>
-	    <form class="form-control" action="<c:url value="/fnt/writeweight.do"/>" method="post" id="foodform">
-		    <input type="hidden" value="${date}"/>
+	    <form class="form-control" action="<c:url value="/fnt/writefood.do"/>" method="post" id="foodform">
+		    <input type="hidden" name='postdate' value="${date}"/>
+		   <!-- 
+			<input type="hidden" name="id" value="${sessionScope.id}"/>
+			-->
+			<input type="hidden" name="id" value="hkk1239"/>
 			<table id="foodtable" class="table" style="text-align: center;">
 				<thead class="table-primary">
 					<tr style="font-size: 1.1em; font-weight: bold;">
@@ -86,8 +90,8 @@
 	 			</tr>
 	  		</table>
 	  		<div align="right">
-				<button id="btnform" type="button" class="btn btn btn-info">저장</button>
-				<button id="" type="button" class="btn btn btn-info">식품삭제</button>
+				<button id="savebtn" type="button" class="btn btn btn-info">저장</button>
+				<button id="deletebtn" type="button" class="btn btn btn-info">식품삭제</button>
 			</div>
 		</form>
 	</div> <!-- end of container -->
@@ -108,7 +112,11 @@
 <script>
 $(function(){
 	
-	
+	var totalkcal = 0;
+	var totaltan = 0;
+	var totaldan = 0;
+	var totalgi = 0;
+	var count = 1;
 	function search(){
 		
 		$.ajax({
@@ -129,6 +137,7 @@ $(function(){
 			$('#dataList').modal('show');
 			$('#modaltitle').html($('#searchWord').val()+'으로 검색한 결과');
 			$('#searchWord').val("");
+			
 			$.each(data,function(index,value){
 				/*
 					DESC_KOR : 식품이름
@@ -140,23 +149,66 @@ $(function(){
 					NUTR_CONT3 : 단백질
 					NUTR_CONT4 : 지방
 				*/
-				num = index;
+				var num = index;
 				++num;
-				list += "<li id='li_"+num+"' class='li_'> <stron style='font-weight: vold;'>"+value['DESC_KOR']+" ["+value['MAKER_NAME']+"]</strong><p style='font-size:13px'>[1회 제공량: "+value['SERVING_SIZE']+" g] [칼로리: "+value['NUTR_CONT1']+" kcal] [탄수화물: "+value['NUTR_CONT2']+" g] [단백질: "+value['NUTR_CONT3']+" g] [지방: "+value['NUTR_CONT4']+" g]</p></li>";
-				var tr = "<tr><td><input type='checkbox' value=''/></td><td>"+value['DESC_KOR']+"</td><td>"+value['SERVING_SIZE']+" g</td><td>"+value['NUTR_CONT1']+" kcal</td><td>"+value['NUTR_CONT2']+" g</td><td>"+value['NUTR_CONT3']+" g</td><td>"+value['NUTR_CONT4']+" g</td></tr>";
+				var kcal = isNaN(Math.round(parseInt(value['NUTR_CONT1'])))?0:Math.round(parseInt(value['NUTR_CONT1']));
+				var tan = isNaN(Math.round(parseInt(value['NUTR_CONT2'])))?0:Math.round(parseInt(value['NUTR_CONT2']));
+				var dan = isNaN(Math.round(parseInt(value['NUTR_CONT3'])))?0:Math.round(parseInt(value['NUTR_CONT3']));
+				var gi = isNaN(Math.round(parseInt(value['NUTR_CONT4'])))?0:Math.round(parseInt(value['NUTR_CONT4']));
+				list += "<li id='li_"+num+"' class='li_'> <stron style='font-weight: vold;'>"+value['DESC_KOR']+" ["+value['MAKER_NAME']+"]</strong><p style='font-size:13px'>[1회 제공량: "+Math.round(parseInt(value['SERVING_SIZE']))+" g] [칼로리: "+kcal+" kcal] [탄수화물: "+tan+" g] [단백질: "+dan+" g] [지방: "+gi+" g]</p></li>";
+				var tr = "<tr><td><input type='checkbox' value='checked"+num+"'/></td><td>"+value['DESC_KOR']+"</td><td>"+Math.round(parseInt(value['SERVING_SIZE']))+" g</td><td>"+kcal+" kcal</td><td>"+tan+" g</td><td>"+dan+" g</td><td>"+gi+" g</td></tr>";
 				$(document).on("click","#li_"+num,function(){
 					$('#foodtable > tbody:last').prev().append(tr);
-					$('#modalcontent').html("");
+					var hidden = "<input name='food"+count++ +"' type='hidden' value='"+value['DESC_KOR']+"_"+Math.round(parseInt(value['SERVING_SIZE']))+"_"+kcal+"_"+tan+"_"+dan+"_"+gi+"'/>"
+					$('#foodform').append(hidden);
+					totalkcal += kcal;
+					totaltan += tan;
+					totaldan += dan;
+					totalgi += gi;
 					$('#dataList').modal('hide');
 					$(document).off();
 				});
-			});
+			}); // each
+			
 			list += "</ul>";
+			
 			$('#modalcontent').html(list);
 			
-		});
+			$(document).on("click","li",function(){
+				$('#foodtable > tbody:eq(1) > tr').html("<td colspan='3'>종합 섭취량</td><td>"+totalkcal+" kcal</td><td>"+totaltan+" g</td><td>"+totaldan+" g</td><td>"+totalgi+" g</td>");
+				$(document).off();
+			});
+			
+			
+						
+			
+		}); //done
 			
 	}
+
+	$('#deletebtn').click(function(){
+		size_ = $(':checkbox:checked').length;
+		for(var j=0;j<size_;j++){
+			if($(':checkbox:checked').eq(j).val() != "all"){
+				m_kcal = parseInt(($(':checkbox:checked').eq(j).parent().parent().children('td').eq(3).html()).replace(" kcal",""));
+				m_tan = parseInt(($(':checkbox:checked').eq(j).parent().parent().children('td').eq(4).html()).replace(" g",""));
+				m_dan = parseInt(($(':checkbox:checked').eq(j).parent().parent().children('td').eq(5).html()).replace(" g",""));
+				m_gi = parseInt(($(':checkbox:checked').eq(j).parent().parent().children('td').eq(6).html()).replace(" g",""));
+				totalkcal -= m_kcal;
+				totaltan -= m_tan;
+				totaldan -= m_dan;
+				totalgi -= m_gi;
+				$('#foodtable > tbody:eq(1) > tr').html("<td colspan='3'>종합 섭취량</td><td>"+totalkcal+" kcal</td><td>"+totaltan+" g</td><td>"+totaldan+" g</td><td>"+totalgi+" g</td>");
+				$(':checkbox:checked').eq(j).parent().parent().remove();
+				$('#foodform > input[type=hidden]:last').remove();
+				count--;
+			}
+		}
+	});
+	
+	$('#savebtn').click(function(){
+		$('#foodform').submit();
+	});
 	
 	
 	//검색버튼 클릭시

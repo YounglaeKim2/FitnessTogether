@@ -17,4 +17,8 @@ public interface CalendarService {
 	
 	void deleteWeight(String[] no);
 	
+	void insertFood(Map map);
+	
+	List<Map> showFood(Map map);
+	
 }

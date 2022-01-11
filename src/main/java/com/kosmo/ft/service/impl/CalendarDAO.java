@@ -37,4 +37,12 @@ public class CalendarDAO {
 		template.delete("deleteWegiht",no);
 	}
 
+	public void insertFood(Map map) {
+		template.insert("insertFood",map);
+	}
+
+	public List<Map> showFood(Map map) {
+		return template.selectList("selectFood",map);
+	}
+
 }

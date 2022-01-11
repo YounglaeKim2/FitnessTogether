@@ -33,5 +33,12 @@
 		DELETE weightbbs WHERE w_no=#{no}
 	</delete>
 	
+	<insert id="insertFood" parameterType="Map">
+		INSERT INTO foodbbs VALUES(SEQ_FOODBBS.NEXTVAL,#{f_name},#{f_size},#{f_kcal},#{f_tan},#{f_dan},#{f_gi},#{id},#{postdate})
+	</insert>
+	
+	<select id="selectFood" parameterType="Map" resultType="Map">
+		SELECT * FROM foodbbs WHERE id=#{id} AND postdate=#{postdate}
+	</select>
 	
  </mapper> 
