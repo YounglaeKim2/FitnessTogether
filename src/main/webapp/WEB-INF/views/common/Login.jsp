@@ -93,54 +93,43 @@
       font-family: 'Roboto', sans-serif;
     }
   </style>
- 
- 
 </head>
+
+
 <body>
-<script type="text/javascript">
-		  swal("Hello world!");
-</script>
-	
-  
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-				<span class="login100-form-title p-b-26">
-					Welcome
-				</span>
-				
+				<span class="login100-form-title p-b-26">Welcome</span>
 				<form action="<c:url value="/fnt/LoginProcess.do"/>">
 					<div class="wrap-input100 validate-input" >
-						<input class="input100" type="text" name="id">
-						<span class="focus-input100" data-placeholder="아이디를 입력하세요"></span>
+						<input style="font-weight:bold;" class="input100" type="text" name="id" id="id" placeholder="아이디를 입력하세요">
 					</div>
 		
 					<div class="wrap-input100 validate-input" data-validate="Enter password">
-						<span class="btn-show-pass">
-							<i class="zmdi zmdi-eye"></i>
-						</span>
-						<input class="input100" type="password" name="pwd">
-						<span class="focus-input100" data-placeholder="비밀번호를 입력하세요"></span>
+						<input style="font-weight:bold;" class="input100" type="password" name="pwd" id="pwd" placeholder="비밀번호를 입력하세요">
 					</div>
 					
 					<div class="container-login100-form-btn">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
-							<button class="login100-form-btn" onclick="javascript:btn()">
+							<button class="login100-form-btn" onclick="Alert();">
 								Login
 							</button>
 						</div>
 					</div>
 				</form>
 				
-	<!-- start 카카오계정으로 로그인하기 -->
-	  <a href="javascript:kakaoLogin();"><img src="<c:url value="/resources/login/images/kakao_login_medium_wide.png"/>" style="margin:10px; height:40px;width:260px;"></a>
-    
-    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-
+	
+	 <!-- start 카카오계정으로 로그인하기 -->
+	  <a href="javascript:kakaoLogin();"> 
+	  <img src="<c:url value="/resources/login/images/kakao_login_medium_wide.png"/>" style="margin:10px; height:40px;width:260px;"></a>
+     	
+      <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+	
     <script>
         // 자스키 - dce1a6b74b6037f0cc344d0b3f4d8a97
-        window.Kakao.init("dce1a6b74b6037f0cc344d0b3f4d8a97");
+        //window.Kakao.init("dce1a6b74b6037f0cc344d0b3f4d8a97");
         console.log(Kakao.isInitialized()); // sdk초기화여부판단
       //카카오로그인
       function kakaoLogin() {
@@ -148,9 +137,23 @@
             success: function (response) {
               Kakao.API.request({
                 url: '/v2/user/me',
-                success: function (response) {
-              	  console.log(response)
-                },
+                success: res => {	 
+             
+                const email = res.kakao_account.email;
+                const gender = res.kakao_account.gender;
+                const name = res.kakao_account.profile.nickname;
+                const kakao_account = res.kakao_account;
+     
+              	  console.log(kakao_account);
+              	  console.log(email);
+	              console.log(gender);
+	              console.log(name);
+	              
+	              $('kakaoemail').val(email);
+	              $('kakaoename').val(name);
+	              $('kakaogender').val(gender);        
+	              
+	              },
                 fail: function (error) {
                   console.log(error)
                 },
@@ -162,32 +165,29 @@
           })
         }
       //카카오로그아웃  
+      window.Kakao.init('dce1a6b74b6037f0cc344d0b3f4d8a97');
       function kakaoLogout() {
-          if (Kakao.Auth.getAccessToken()) {
-            Kakao.API.request({
-              url: '/v1/user/unlink',
-              success: function (response) {
-              	console.log(response)
-              },
-              fail: function (error) {
-                console.log(error)
-              },
-            })
-            Kakao.Auth.setAccessToken(undefined)
+          if (!Kakao.Auth.getAccessToken()) {
+           console.log('Not logged in');
+           return;
           }
-        }  
-      
+          Kakao.Auth.logout(function(response){
+        	  alert(response + 'logout');
+        	  window.location.href='/'
+        	  });
+          };
     </script>
-    <!-- end 카카오계정으로 로그인하기 -->
-				
+    <!-- end 카카오계정으로 로그인하기 
+    -->
+			
 	
 	<!-- start 구글로 로그인하기 -->
 	
 	<!-- 구글 로그인 버튼 -->
 	<script src="https://apis.google.com/js/platform.js" async defer></script>
 	<script src="https://apis.google.com/js/api:client.js"></script>
-	
- 	 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+	<script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
  
   	<script>
 		  var googleUser = {};
@@ -205,25 +205,24 @@
 		  };
 
 		  function attachSignin(element) {
-		    console.log(element.id);
+		    console.log(element);
 		    auth2.attachClickHandler(element, {},
 		        function(googleUser) {
 		          document.getElementById('name').innerText = "Signed in: " +
 		              googleUser.getBasicProfile().getName();
+		          		var profile =  googleUser.getBasicProfile();
+		          		console.log("Email:" + profile.getEmail());
+		          		console.log("Name:" + profile.getName());
+
 		        }, function(error) {
 		          alert(JSON.stringify(error, undefined, 2));
 		        });
 		  }
-  </script>
+  	</script>
 
- 
-  <!-- In the callback, you would hide the gSignInWrapper element on a
-  successful sign in -->
-  
+ <!-- start 구글 로그인 버튼 -->
   <div id="gSignInWrapper">
-  
     <div id="customBtn" class="customGPlusSignIn">
-     
       <span class="icon"></span>
       <span class="buttonText">구글로 로그인</span>
     </div>
@@ -232,89 +231,11 @@
   <script>startApp();</script>
 <!-- end 구글 로그인 버튼 -->
 
-<!-- 
-	
-	<script>
-	function onSignIn(){
-	var auth2 = gapi.auth2.getAuthInstance()
-	if(auth2.isSignedIn.get()){
-	 var profile = auth2.currentUser.get().getBasicProfile();
-	 googleLoginPro(profile)
-	  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-	  console.log('Name: ' + profile.getName());
-	  console.log('Image URL: ' + profile.getImageUrl());
-	  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-	
-	}
-	
-}
-	 function signOut() {
-			if(gapi.auth2 != undefined){
-			 	var auth2 = gapi.auth2.getAuthInstance();
-		   		 auth2.signOut().then(function () {
-		    	  console.log('User signed out.');
-		    });
-			}
 
-			
-			location.href= "/user/logOut.do"
-		  }
-</script>
- -->
- 
- <script>
- function init() {
-	gapi.load('auth2', function() {
-		gapi.auth2.init();
-		options = new gapi.auth2.SigninOptionsBuilder();
-		options.setPrompt('select_account');
-        // 추가는 Oauth 승인 권한 추가 후 띄어쓰기 기준으로 추가
-		options.setScope('email profile openid https://www.googleapis.com/auth/user.birthday.read');
-        // 인스턴스의 함수 호출 - element에 로그인 기능 추가
-        // GgCustomLogin은 li태그안에 있는 ID, 위에 설정한 options와 아래 성공,실패시 실행하는 함수들
-		gapi.auth2.getAuthInstance().attachClickHandler('GgCustomLogin', options, onSignIn, onSignInFailure);
-	})
-}
-
-function onSignIn(googleUser) {
-	var access_token = googleUser.getAuthResponse().access_token
-	$.ajax({
-    	// people api를 이용하여 프로필 및 생년월일에 대한 선택동의후 가져온다.
-		url: 'https://people.googleapis.com/v1/people/me'
-        // key에 자신의 API 키를 넣습니다.
-		, data: {personFields:'birthdays', key:'AIzaSyDKw0T_m1qhDh_3Sv5OL4atqMi6_zraovw', 'access_token': access_token}
-		, method:'GET'
-	})
-	.done(function(e){
-        //프로필을 가져온다.
-		var profile = googleUser.getBasicProfile();
-		console.log(profile)
-	})
-	.fail(function(e){
-		console.log(e);
-	})
-}
-function onSignInFailure(t){		
-	console.log(t);
-}
-</script>
-
-<script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
-
-
-	
-	
-					
-					
-				</form>
+				</div>
 			</div>
-		</div>
-	</div>
-	
-
-
-	
-</body>
+		</div>	
+	</body>
 </html>
 
 <!-- footer 시작 -->

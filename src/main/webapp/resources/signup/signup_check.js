@@ -1,6 +1,6 @@
 /*
 * 회원가입시 각 항목에 대한 입력 유효성 판단 
-*/ 
+
 var space = /\s/g; 
 var join = {
 	 common: { 
@@ -30,3 +30,4 @@ var join = {
 					 if(tag == 'id') {
 						 data = this.id_status(data);
 					 } return data; } }
+*/ 

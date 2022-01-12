@@ -5,7 +5,7 @@
 
 <c:if test="${empty sessionScope.id }">	
 	<script>		
-		alert("로그인후 이용하세요");
+		alert("아이디 또는 비밀번호가 맞지 않습니다");
 		location.replace("<c:url value="/fnt/Login.do"/>");	
 	</script>
 </c:if>

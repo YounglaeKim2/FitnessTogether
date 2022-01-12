@@ -54,31 +54,4 @@
 	 
 	 <context:property-placeholder location="classpath:mybatis/mapping.properties"/>
 	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	
-	
 </beans:beans>

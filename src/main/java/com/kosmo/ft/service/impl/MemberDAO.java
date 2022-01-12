@@ -1,5 +1,6 @@
 package com.kosmo.ft.service.impl;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -24,4 +25,24 @@ public class MemberDAO {
 	public MemberDTO selectOne(Map map) {
 		return template.selectOne("memberSelectOne",map);
 	}
+	
+	public int nameck(String name) {
+		return template.selectOne("selectNameck",name);
+	}
+	
+	public int idck(String id) {
+		return template.selectOne("selectIdck",id);
+	}
+	
+	public int emailck(String email) {
+		return template.selectOne("selectEmailck",email);
+	}
+
+	public void insertMember(Map map) {
+		return ;
+	}
+	
 }
+	
+	
+

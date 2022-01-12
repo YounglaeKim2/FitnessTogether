@@ -6,6 +6,24 @@
  	<select id="memberIsLogin" parameterType="Map" resultType="int">
 			SELECT COUNT(*) FROM MEMBER WHERE id=#{id} AND pwd=#{pwd}		
 	</select>
- 
+	<select id="pwdck" resultType="int">>
+			SELECT COUNT(*) FROM MEMBER WHERE id=#{id} AND pwd=#{pwd}
+	</select>
+	<select parameterType="String" id="selectNameck" resultType="int">
+		SELECT COUNT(*) FROM MEMBER WHERE name = #{param1}  
+	</select>
+	<select parameterType="String" id="selectIdck" resultType="int">
+		SELECT COUNT(*) FROM MEMBER WHERE id = #{param1}  
+	</select>
+	<select parameterType="String" id="selectEmailck" resultType="int">
+		SELECT COUNT(*) FROM MEMBER WHERE email = #{param1}  
+	</select>
+	 <!-- 회원 가입 -->
+    <insert id="insertMember">
+    	INSERT INTO MEMBER(ID,PWD,NAME,GENDER,BIRTH,PHONE,EMAIL,PROFILE)
+    	VALUES(#{id}, #{pwd}, #{name}, #{gender}, #{birth}, #{phone}, #{email}, #{profile})
+    </insert>
+	
+ 	
  	
  </mapper> 
