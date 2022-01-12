@@ -33,8 +33,8 @@ public class CalendarDAO {
 		return template.selectList("selectWeight",map);
 	}
 
-	public void deleteWeight(String no) {
-		template.delete("deleteWegiht",no);
+	public void deleteWeight(String w_no) {
+		template.delete("deleteWegiht",w_no);
 	}
 
 	public void insertFood(Map map) {
@@ -43,6 +43,10 @@ public class CalendarDAO {
 
 	public List<Map> showFood(Map map) {
 		return template.selectList("selectFood",map);
+	}
+
+	public void deleteFood(String f_no) {
+		template.delete("deleteFood",f_no);
 	}
 
 }

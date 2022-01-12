@@ -22,7 +22,7 @@
 	</insert>
 	
 	<select id="selectCalendar" parameterType="Map" resultType="Map">
-		SELECT type,postdate FROM testweight T JOIN weightbbs W ON T.no=W.no WHERE id=#{id} 
+		SELECT type,postdate FROM testweight T JOIN weightbbs W ON T.no=W.no WHERE id=#{id}
 	</select>
 	
 	<select id="selectWeight" parameterType="Map" resultType="Map">
@@ -30,7 +30,7 @@
 	</select>
 	
 	<delete id="deleteWegiht" parameterType="String">
-		DELETE weightbbs WHERE w_no=#{no}
+		DELETE weightbbs WHERE w_no=#{w_no}
 	</delete>
 	
 	<insert id="insertFood" parameterType="Map">
@@ -40,5 +40,9 @@
 	<select id="selectFood" parameterType="Map" resultType="Map">
 		SELECT * FROM foodbbs WHERE id=#{id} AND postdate=#{postdate}
 	</select>
+	
+	<delete id="deleteFood" parameterType="String">
+		DELETE foodbbs WHERE f_no=#{f_no}
+	</delete>
 	
  </mapper> 

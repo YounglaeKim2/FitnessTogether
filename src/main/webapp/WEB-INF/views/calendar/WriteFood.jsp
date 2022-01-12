@@ -37,6 +37,8 @@
 <!-- Top 시작 -->
 <jsp:include page="/WEB-INF/views/template/Top.jsp"/>
 <!-- Top 끝 -->
+
+
    	<div class="container" style="padding-top: 100px; padding-bottom: 100px">
        	<div class="row"  style="margin-bottom: 10px;">
 	       	<div>
@@ -117,8 +119,8 @@ $(function(){
 	var totaldan = 0;
 	var totalgi = 0;
 	var count = 1;
+	var removeText = "";
 	function search(){
-		
 		$.ajax({
 			url:"<c:url value="/fnt/searchFood.do"/>",
 			data:$('#dataform').serialize(),
@@ -155,11 +157,12 @@ $(function(){
 				var tan = isNaN(Math.round(parseInt(value['NUTR_CONT2'])))?0:Math.round(parseInt(value['NUTR_CONT2']));
 				var dan = isNaN(Math.round(parseInt(value['NUTR_CONT3'])))?0:Math.round(parseInt(value['NUTR_CONT3']));
 				var gi = isNaN(Math.round(parseInt(value['NUTR_CONT4'])))?0:Math.round(parseInt(value['NUTR_CONT4']));
-				list += "<li id='li_"+num+"' class='li_'> <stron style='font-weight: vold;'>"+value['DESC_KOR']+" ["+value['MAKER_NAME']+"]</strong><p style='font-size:13px'>[1회 제공량: "+Math.round(parseInt(value['SERVING_SIZE']))+" g] [칼로리: "+kcal+" kcal] [탄수화물: "+tan+" g] [단백질: "+dan+" g] [지방: "+gi+" g]</p></li>";
-				var tr = "<tr><td><input type='checkbox' value='checked"+num+"'/></td><td>"+value['DESC_KOR']+"</td><td>"+Math.round(parseInt(value['SERVING_SIZE']))+" g</td><td>"+kcal+" kcal</td><td>"+tan+" g</td><td>"+dan+" g</td><td>"+gi+" g</td></tr>";
+				list += "<li id='li_"+num+"' class='li_'> <stron style='font-weight: vold;'>"+value['DESC_KOR']+" "+(value['MAKER_NAME']==""?value['MAKER_NAME']:"["+value['MAKER_NAME']+"]")+"</strong><p style='font-size:13px'>[1회 제공량: "+Math.round(parseInt(value['SERVING_SIZE']))+" g] [칼로리: "+kcal+" kcal] [탄수화물: "+tan+" g] [단백질: "+dan+" g] [지방: "+gi+" g]</p></li>";
+				
 				$(document).on("click","#li_"+num,function(){
+					var tr = "<tr><td><input type='checkbox' value='checked"+count+"'/></td><td>"+value['DESC_KOR']+"</td><td>"+Math.round(parseInt(value['SERVING_SIZE']))+" g</td><td>"+kcal+" kcal</td><td>"+tan+" g</td><td>"+dan+" g</td><td>"+gi+" g</td></tr>";
 					$('#foodtable > tbody:last').prev().append(tr);
-					var hidden = "<input name='food"+count++ +"' type='hidden' value='"+value['DESC_KOR']+"_"+Math.round(parseInt(value['SERVING_SIZE']))+"_"+kcal+"_"+tan+"_"+dan+"_"+gi+"'/>"
+					var hidden = "<input name='food"+count++ +"' type='hidden' id='"+value['DESC_KOR'].replaceAll(" ","")+"' value='"+value['DESC_KOR']+"_"+Math.round(parseInt(value['SERVING_SIZE']))+"_"+kcal+"_"+tan+"_"+dan+"_"+gi+"'/>"
 					$('#foodform').append(hidden);
 					totalkcal += kcal;
 					totaltan += tan;
@@ -187,9 +190,18 @@ $(function(){
 	}
 
 	$('#deletebtn').click(function(){
+/* 		if($('tr').length<=2){
+			alert('삭제할 식품이 없습니다');
+			return
+		} */
+		if($(':checkbox:checked').length ==0 || ($(':checkbox:checked').length ==1 && $(':checkbox:checked').val() == 'all')) {
+   			alert("삭제할 내용이 없습니다")
+   			return;
+   		}
 		size_ = $(':checkbox:checked').length;
 		for(var j=0;j<size_;j++){
 			if($(':checkbox:checked').eq(j).val() != "all"){
+				removeText = $(':checkbox:checked').eq(j).parent().parent().find('td:eq(1)').html().replaceAll(" ","");
 				m_kcal = parseInt(($(':checkbox:checked').eq(j).parent().parent().children('td').eq(3).html()).replace(" kcal",""));
 				m_tan = parseInt(($(':checkbox:checked').eq(j).parent().parent().children('td').eq(4).html()).replace(" g",""));
 				m_dan = parseInt(($(':checkbox:checked').eq(j).parent().parent().children('td').eq(5).html()).replace(" g",""));
@@ -199,14 +211,18 @@ $(function(){
 				totaldan -= m_dan;
 				totalgi -= m_gi;
 				$('#foodtable > tbody:eq(1) > tr').html("<td colspan='3'>종합 섭취량</td><td>"+totalkcal+" kcal</td><td>"+totaltan+" g</td><td>"+totaldan+" g</td><td>"+totalgi+" g</td>");
+				$('#foodform > input[id='+removeText+']').remove();
 				$(':checkbox:checked').eq(j).parent().parent().remove();
-				$('#foodform > input[type=hidden]:last').remove();
 				count--;
 			}
 		}
 	});
 	
 	$('#savebtn').click(function(){
+		if($('tr').length<=2){
+			alert('섭취하신 음식을 등록해주세요');
+			return
+		}
 		$('#foodform').submit();
 	});
 	

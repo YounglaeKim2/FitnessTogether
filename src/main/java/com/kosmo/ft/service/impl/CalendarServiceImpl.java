@@ -80,9 +80,9 @@ public class CalendarServiceImpl implements CalendarService {
 	}
 
 	@Override
-	public void deleteWeight(String[] no) {
-		for(int i=0;i<no.length;i++) {
-			dao.deleteWeight(no[i]);
+	public void deleteWeight(String[] w_no) {
+		for(int i=0;i<w_no.length;i++) {
+			dao.deleteWeight(w_no[i]);
 		}
 		
 	}
@@ -113,6 +113,12 @@ public class CalendarServiceImpl implements CalendarService {
 
 	public List<Map> showFood(Map map) {
 		return dao.showFood(map);
+	}
+
+	public void deleteFood(String[] f_no) {
+		for(int i=0;i<f_no.length;i++) {
+			dao.deleteFood(f_no[i]);
+		}
 	}
 
 	

@@ -15,10 +15,12 @@ public interface CalendarService {
 	
 	List<Map> showWeight(Map map);
 	
-	void deleteWeight(String[] no);
+	void deleteWeight(String[] w_no);
 	
 	void insertFood(Map map);
 	
 	List<Map> showFood(Map map);
+	
+	void deleteFood(String[] f_no);
 	
 }
