@@ -23,6 +23,24 @@
 			</when>
 		</choose>
 	</select>
+	
+	<!-- 이미지 파일 업로드 관련 -->
+	<insert id="picture_upload" parameterType="com.kosmo.ft.service.PictureDTO">
+      INSERT INTO board(bno,name,subject,content,wdate) values(seq_board.nextval,(select name from member where name=#{name}),#{content},sysdate)
+      <selectKey keyProperty="bno" resultType="int" order="AFTER">
+         SELECT seq_board.currval FROM DUAL
+      </selectKey>
+	</insert>
+	
+	<insert id="picture_src_insert" parameterType="com.kosmo.ft.service.PictureUploadDTO">
+    INSERT INTO image(ino,bno,src)
+    select seq_src.nextval, A.* from(
+      <foreach item="item" collection="src" separator="UNION ALL">
+         select #{bno} as bno, #{item.originalFilename} as src from dual
+       </foreach>) A
+   </insert>
+   
+   <!-- 리스트 관련 -->
 
 	<select id="picture_favorite_count"
 		parameterType="com.kosmo.ft.service.PictureHeartDTO" resultType="int">
@@ -240,5 +258,5 @@
 		UPDATE BOARD SET reply=reply-1
 		WHERE rno=#{rno}
 	</update>
-
+	
 </mapper> 
