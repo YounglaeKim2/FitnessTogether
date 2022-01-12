@@ -162,7 +162,8 @@ $(function(){
 				$(document).on("click","#li_"+num,function(){
 					var tr = "<tr><td><input type='checkbox' value='checked"+count+"'/></td><td>"+value['DESC_KOR']+"</td><td>"+Math.round(parseInt(value['SERVING_SIZE']))+" g</td><td>"+kcal+" kcal</td><td>"+tan+" g</td><td>"+dan+" g</td><td>"+gi+" g</td></tr>";
 					$('#foodtable > tbody:last').prev().append(tr);
-					var hidden = "<input name='food"+count++ +"' type='hidden' id='"+value['DESC_KOR'].replaceAll(" ","")+"' value='"+value['DESC_KOR']+"_"+Math.round(parseInt(value['SERVING_SIZE']))+"_"+kcal+"_"+tan+"_"+dan+"_"+gi+"'/>"
+					var id_ = value['DESC_KOR'].replaceAll(" ","").replaceAll(" ","").replaceAll(",","").replaceAll("(","").replaceAll(")","").replaceAll("-","").replaceAll("/","");
+					var hidden = "<input name='food"+count++ +"' type='hidden' id='"+id_+"' value='"+value['DESC_KOR']+"_"+Math.round(parseInt(value['SERVING_SIZE']))+"_"+kcal+"_"+tan+"_"+dan+"_"+gi+"'/>"
 					$('#foodform').append(hidden);
 					totalkcal += kcal;
 					totaltan += tan;
@@ -190,10 +191,6 @@ $(function(){
 	}
 
 	$('#deletebtn').click(function(){
-/* 		if($('tr').length<=2){
-			alert('삭제할 식품이 없습니다');
-			return
-		} */
 		if($(':checkbox:checked').length ==0 || ($(':checkbox:checked').length ==1 && $(':checkbox:checked').val() == 'all')) {
    			alert("삭제할 내용이 없습니다")
    			return;
@@ -201,7 +198,7 @@ $(function(){
 		size_ = $(':checkbox:checked').length;
 		for(var j=0;j<size_;j++){
 			if($(':checkbox:checked').eq(j).val() != "all"){
-				removeText = $(':checkbox:checked').eq(j).parent().parent().find('td:eq(1)').html().replaceAll(" ","").replaceAll(",","").replaceAll("(","").replaceAll(")","").replaceAll("-","");
+				removeText = $(':checkbox:checked').eq(j).parent().parent().find('td:eq(1)').html().replaceAll(" ","").replaceAll(",","").replaceAll("(","").replaceAll(")","").replaceAll("-","").replaceAll("/","");
 				m_kcal = parseInt(($(':checkbox:checked').eq(j).parent().parent().children('td').eq(3).html()).replace(" kcal",""));
 				m_tan = parseInt(($(':checkbox:checked').eq(j).parent().parent().children('td').eq(4).html()).replace(" g",""));
 				m_dan = parseInt(($(':checkbox:checked').eq(j).parent().parent().children('td').eq(5).html()).replace(" g",""));
@@ -211,9 +208,20 @@ $(function(){
 				totaldan -= m_dan;
 				totalgi -= m_gi;
 				$('#foodtable > tbody:eq(1) > tr').html("<td colspan='3'>종합 섭취량</td><td>"+totalkcal+" kcal</td><td>"+totaltan+" g</td><td>"+totaldan+" g</td><td>"+totalgi+" g</td>");
-				$('#foodform > input[id='+removeText+']').remove();
+				$('#foodform > input[id='+removeText+']:last').remove();
+				var renamecount = 1;
+				$('#foodform > input').each(function(){
+					if($(this).prop('name') != 'postdate' && $(this).prop('name') != 'id'){
+						$(this).prop('name','food'+ renamecount++);
+						count = renamecount;
+					}
+				})
+				if($('#foodform > input').length ==2){
+					count = 1;
+				}
+				
 				$(':checkbox:checked').eq(j).parent().parent().remove();
-				count--;
+				
 			}
 		}
 	});
