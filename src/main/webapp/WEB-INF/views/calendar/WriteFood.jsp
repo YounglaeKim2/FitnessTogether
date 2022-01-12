@@ -201,7 +201,7 @@ $(function(){
 		size_ = $(':checkbox:checked').length;
 		for(var j=0;j<size_;j++){
 			if($(':checkbox:checked').eq(j).val() != "all"){
-				removeText = $(':checkbox:checked').eq(j).parent().parent().find('td:eq(1)').html().replaceAll(" ","");
+				removeText = $(':checkbox:checked').eq(j).parent().parent().find('td:eq(1)').html().replaceAll(" ","").replaceAll(",","").replaceAll("(","").replaceAll(")","").replaceAll("-","");
 				m_kcal = parseInt(($(':checkbox:checked').eq(j).parent().parent().children('td').eq(3).html()).replace(" kcal",""));
 				m_tan = parseInt(($(':checkbox:checked').eq(j).parent().parent().children('td').eq(4).html()).replace(" g",""));
 				m_dan = parseInt(($(':checkbox:checked').eq(j).parent().parent().children('td').eq(5).html()).replace(" g",""));
