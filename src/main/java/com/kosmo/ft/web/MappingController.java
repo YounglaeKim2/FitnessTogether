@@ -43,7 +43,7 @@ public class MappingController {
 	}/////list
 	
 	
-	@RequestMapping("View.do")
+	@RequestMapping("mappingView.do")
 	public String view(@RequestParam Map map,Model model) {
 		//서비스 호출]
 		MappingDTO record=mappingService.selectOne(map);
@@ -53,7 +53,7 @@ public class MappingController {
 		model.addAttribute("record", record);
 		/////////////////////////////////////////////
 		//뷰정보 반환]
-		return "mapping/View";
+		return "mapping/MappingView";
 		
 	}
 	
@@ -80,10 +80,24 @@ public class MappingController {
 		return "mapping/View2";
 	}
 	
+	//입력폼으로 이동
 	@RequestMapping(value="mappingWrite.do",method = RequestMethod.GET)
-	public String write(@ModelAttribute("id") String id) {
+	public String mappingWrite(@ModelAttribute("id") String id
+								) {
+		//뷰정보 반환
 		return "mapping/MappingWrite";
 	}//리스트에서 작성페이지로 이동
+	//입력처리
+	@RequestMapping(value="mappingWrite.do",method = RequestMethod.POST)
+	public String mappingWriteOk(@ModelAttribute("id") String id,
+								 @RequestParam Map map
+			) {
+		//서비스 호출
+		map.put("id", id);
+		mappingService.insert(map);
+		//뷰정보 반환] 목록으로 이동
+		return "forward:/fnt/mappingList.do";
+	}
 	
 	@RequestMapping(value="getlocation.do",produces="application/json;charset=UTF-8")
 	public @ResponseBody Map getlocation(@RequestParam Map map) {

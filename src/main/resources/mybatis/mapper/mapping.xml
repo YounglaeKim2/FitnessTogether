@@ -73,7 +73,7 @@
 
 	<insert id="mappingInsert" parameterType="Map" >
 		INSERT INTO mapping
-		VALUES(SEQ_ONEMEMO.NEXTVAL,#{title},#{content},SYSDATE,#{id})
+		VALUES(SEQ_MAPPING.NEXTVAL,#{title},#{content},SYSDATE,#{id},#{latitude},#{longitude})
 	</insert>
 	
 	<select id="mappingSelectOne" parameterType="Map" resultMap="mappingDTOResult">

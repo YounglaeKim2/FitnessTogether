@@ -37,6 +37,20 @@
 				</form>
 			</div>
 		</div>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		<script type="text/javascript"
 			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f36fde54b477984a8366d99dbc1380ca"></script>
 		<script>
@@ -118,7 +132,60 @@
 	
 		</script>
 	</div>
-	    
+	
+	
+	<!-- Portfolio Grid-->
+        <section class="page-section bg-light" id="portfolio">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">인증 페이지 입니다</h2>
+                    <h3 class="section-subheading text-muted">인증 페이지 입니다</h3>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-sm-6 mb-6">
+                        <!-- Portfolio item 1-->
+                        <div class="portfolio-item">
+                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal1">
+                                <div class="portfolio-hover">
+                                    <div class="portfolio-hover-content"><i class="fas fa-question-circle fa-3x"></i></div>
+                                </div>
+                                <img class="img-fluid" src="<c:url value="/resources/images/mapping/FT1.jpg"/>" alt="..." />
+                            </a>
+                            <div class="portfolio-caption">
+                                <div class="portfolio-caption-heading">인증지역1</div>
+                                <div class="portfolio-caption-subheading text-muted">Illustration</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-6 mb-6">
+                        <!-- Portfolio item 2-->
+                        <div class="portfolio-item">
+                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal2">
+                                <div class="portfolio-hover">
+                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                                </div>
+                                <img class="img-fluid" src="<c:url value="/resources/images/mapping/FT2.jpg"/>" alt="..." />
+                            </a>
+                            <div class="portfolio-caption">
+                                <div class="portfolio-caption-heading">인증지역2</div>
+                                <div class="portfolio-caption-subheading text-muted">Graphic Design</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    
+                </div>
+            </div>
+        </section>
+	
+	
+	
+	
+	
+	
+	
 </body>
 <!-- footer 시작 -->
 <jsp:include page="/WEB-INF/views/template/Footer.jsp"/>

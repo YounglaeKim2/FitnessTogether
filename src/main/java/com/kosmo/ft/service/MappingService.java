@@ -8,6 +8,8 @@ public interface MappingService {
 //	boolean isLogin(Map map);
 	//목록용
 	ListPagingData<MappingDTO> selectList(Map map,HttpServletRequest req,int nowPage);
+	//전체 레코드 수
+	int getTotalRecod(Map map);
 	//상세보기용
 	MappingDTO selectOne(Map map);
 	//입력/수정/삭제
