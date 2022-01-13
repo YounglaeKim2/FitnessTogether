@@ -16,12 +16,15 @@
 		SELECT COUNT(*) FROM MEMBER WHERE id = #{param1}  
 	</select>
 	<select parameterType="String" id="selectEmailck" resultType="int">
-		SELECT COUNT(*) FROM MEMBER WHERE email = #{param1}  
+		SELECT COUNT(*) FROM MEMBER 
+		<where>
+		AND email = #{param1}
+		</where>
 	</select>
 	 <!-- 회원 가입 -->
-    <insert id="insertMember">
-    	INSERT INTO MEMBER(ID,PWD,NAME,GENDER,BIRTH,PHONE,EMAIL,PROFILE)
-    	VALUES(#{id}, #{pwd}, #{name}, #{gender}, #{birth}, #{phone}, #{email}, #{profile})
+    <insert parameterType="Map" id="selectSignck"  >
+    	INSERT INTO MEMBER(ID,PWD,NAME,GENDER,BIRTH,PHONE,EMAIL)
+    	VALUES(#{id}, #{pwd}, #{name}, #{gender}, #{birth}, #{phone}, #{email})
     </insert>
 	
  	

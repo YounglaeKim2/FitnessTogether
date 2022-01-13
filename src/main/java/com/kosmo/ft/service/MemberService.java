@@ -12,6 +12,8 @@ public interface MemberService {
 	 
 	 public int nameck(String name);
 
-	public void insertMember(Map map);
+	 public String signck(Map map);
+
+	
 }	
 

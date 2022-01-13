@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
+import org.apache.tomcat.util.buf.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.expression.ParseException;
 import org.springframework.stereotype.Controller;
@@ -31,11 +32,11 @@ import com.kosmo.ft.service.impl.MemberServiceImpl;
 @RequestMapping("/fnt/")
 public class LoginController {
 	
-	
+	MemberDAO memberdao;
 	@Autowired
 	private MemberServiceImpl memberService;
 	private String name;
-	
+	private SqlSession sqlSession;
 
 	// 로그인 폼으로 이동
 	@RequestMapping("Login.do")
@@ -89,27 +90,24 @@ public class LoginController {
 		// 로그인 처리
 	@RequestMapping("LoginProcess.do")
 	public String loginprocess(@RequestParam Map map,HttpSession session,SessionStatus status) {
-
-			if(map.get("id").equals("ADMIN")) { //관리자 로그인
-				boolean flag = memberService.isLogin(map);
-				if (!flag) { //관리자 로그인 실패
-					status.setComplete();
-					return "common/notLogin";
-				}
-				// 뷰정보 번환] //관리자 로그인 성공
-				session.setAttribute("id", map.get("id"));
-				return "admin/Home";
-			} //일반  로그인 실패
+		if(map.get("id").equals("ADMIN")) { //관리자 로그인
 			boolean flag = memberService.isLogin(map);
-			if(!flag) {
+			if (!flag) { //관리자 로그인 실패
 				status.setComplete();
 				return "common/notLogin";
-			} //일반 로그인 성공
-			//뷰정보 반환]
+			}
+			// 뷰정보 번환] //관리자 로그인 성공
 			session.setAttribute("id", map.get("id"));
-			return "home";
-			
-			
+			return "admin/Home";
+		} //일반  로그인 실패
+		boolean flag = memberService.isLogin(map);
+		if(!flag) {
+			status.setComplete();
+			return "common/notLogin";
+		} //일반 로그인 성공
+		//뷰정보 반환]
+		session.setAttribute("id", map.get("id"));
+		return "home";
 	}
 
 
@@ -132,17 +130,17 @@ public class LoginController {
 	}
 	
 	// 닉네임 중복 체크
-		@ResponseBody
-		@RequestMapping(value="nameck.do", method= RequestMethod.POST)
-		public String nameck(@RequestParam(name = "name" ) String name)  {
-			int cnt1 = memberService.nameck(name);
-			
-			if(cnt1 == 0) {
-				return "0";
-			}else {
-				return "1";
-			}
-		}
+	@ResponseBody
+	@RequestMapping(value="nameck.do", method= RequestMethod.POST)
+	public String nameck(@RequestParam(name = "name" ) String name)  {
+		int cnt1 = memberService.nameck(name);
+		
+		if(cnt1 == 0) {
+			return "0";
+		}else {
+			return "1";
+		}	
+	}
 	
 	
 	// 아이디 중복 체크
@@ -174,17 +172,22 @@ public class LoginController {
 	
 	
 	//회원가입 처리
-	@RequestMapping("SignUpProcess.do")
-	public String signUpprocess(@RequestParam Map map,HttpSession session){	
-		session.setAttribute("id", map.get("id"));
-		session.setAttribute("pwd", map.get("pwd"));
-		session.setAttribute("email", map.get("email"));
-		session.setAttribute("gender", map.get("gender"));
-		session.setAttribute("birth", map.get("birth"));
-		session.setAttribute("phone", map.get("phone"));
 		
-		return "home";
-	}
+		@RequestMapping("signck.do")
+		public String signck(@RequestParam Map map,HttpSession session){	
+			String sign = memberService.signck(map);
+			
+			
+			session.getAttribute("id");
+	     	session.getAttribute("pwd");
+	     	session.getAttribute("name");
+	     	session.getAttribute("email");
+	     	session.getAttribute("gender");
+	     	session.getAttribute("birth");
+	     	session.getAttribute("phone");
+			
+			return "home";
+		}
 
 	
 

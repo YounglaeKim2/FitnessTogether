@@ -39,11 +39,13 @@ public class MemberServiceImpl implements MemberService{
     public int emailck(String email) {
     	return dao.emailck(email);
     }
-    
-    @Override
-    public void insertMember(Map map) {
-    	return ;
+
+	@Override
+    public String signck(Map map) {
+    	return dao.signck(map);
     }
+
+	
     
 	
 } 
