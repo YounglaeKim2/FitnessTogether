@@ -31,7 +31,6 @@ public class MappingController {
 			@RequestParam(required = false,defaultValue = "1") int nowPage,
 	        HttpServletRequest req,//페이징에 사용할 컨텍스트 루트 경로 얻기용
 	        Model model
-	        
 			) {
 		//서비스 호출
 		ListPagingData<MappingDTO> listPagingData= mappingService.selectList(map, req, nowPage);
@@ -89,11 +88,11 @@ public class MappingController {
 	}//리스트에서 작성페이지로 이동
 	//입력처리
 	@RequestMapping(value="mappingWrite.do",method = RequestMethod.POST)
-	public String mappingWriteOk(@ModelAttribute("id") String id,
+	public String mappingWriteOk(/*@ModelAttribute("id") String id,*/
 								 @RequestParam Map map
 			) {
 		//서비스 호출
-		map.put("id", id);
+		//map.put("id", id);
 		mappingService.insert(map);
 		//뷰정보 반환] 목록으로 이동
 		return "forward:/fnt/mappingList.do";

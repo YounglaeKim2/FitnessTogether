@@ -16,6 +16,7 @@ public class MappingDTO {
 	private String title;
 	private String content;
 	private java.sql.Date postDate;
+	private java.sql.Date eventDate;
 	private String id;
 	private String name;//이름 저장용
 	//각 글에 따른 댓글 총수 저장용

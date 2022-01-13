@@ -99,7 +99,9 @@ public class MappingServiceImpl implements MappingService{
 	public Map getlocation(Map map) {
 		return dao.getlocation(map);
 	}
-  
-   
-} 
-
+	@Override
+	public int getTotalRecod(Map map) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+}

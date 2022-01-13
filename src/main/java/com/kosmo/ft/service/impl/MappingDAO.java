@@ -87,6 +87,4 @@ public class MappingDAO {
 	public Map getlocation(Map map) {
 		return template.selectOne("mappingSelectLocation", map);
 	}
-	
-	
 }
