@@ -38,9 +38,14 @@ public class MemberDAO {
 		return template.selectOne("selectEmailck",email);
 	}
 
-	public void insertMember(Map map) {
-		return ;
+	public String signck(Map map) {
+		return template.selectOne("selectSignck",map);
 	}
+	
+
+	
+
+	
 	
 }
 	

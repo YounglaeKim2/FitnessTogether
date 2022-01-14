@@ -30,34 +30,37 @@
 				<p class="w-pct60 right"
 					style="margin: 0 auto; padding: 0 540px 0 0; font-size: 13px;"></p>
 				<hr class="hr-4" style="height: 3px;">
-				<form id="dataform" action="<c:url value="/fnt/SignUpProcess.do"/>"
+				<form id="dataform" action="<c:url value="/fnt/signck.do"/>"
 					method="post">
 					<table class="w-pct60">
 						<tr>
 							<th class="w-px160">닉네임</th>
 							<td>
-								<input type="text"  maxlength="10"  id="name" name="name" placeholder="닉네임을 입력해주세요" />
+								<input type="text"   id="name" name="name" onkeyup="nameKeyup()" onfocus="showTextname()" placeholder="닉네임을 입력해주세요" />
 								<a class="btn default" onclick="checkname();" href="#none" 
 								style="color: black; font-size: 15px; font-weight: bold; height: 44px; width: 100px; margin: 3.7px 8px 7px 1px; padding: 10px 10px 10px 10px; border: 2px solid #595757;">중복확인</a>
+							<div class='valid' id="validNAME" style="display: none;">2~10자 한글,영문,숫자를 입력해주세요</div>
+							</td>
 						</tr>
 						<tr>
 							<th class="w-px161">아이디</th>
 							<td>
-								<input type="text" maxlength="15"  id="id" name="id" class="chk" onfocus="showTextid()" placeholder="6자 이상의 영문과 숫자 조합" /> 
+								<input type="text"  id="id" name="id" class="chk" onkeyup="idKeyup()" onfocus="showTextid()" placeholder="6자 이상의 영문과 숫자 조합" /> 
 								<input type="hidden" id="idck" name="idck" class="chk_id" value="N">
-								<a class="btn default" onclick="checkID();" href="#none"
+								<a class="btn default" onclick="checkid();" href="#none" 
 								style="color: black; font-size: 15px; font-weight: bold; height: 44px; width: 100px; margin: 3.7px 8px 7px 1px; padding: 10px 10px 10px 10px; border: 2px solid #595757;">중복확인</a>
 								<br>
-								<div class='valid' id="validID" style="display: none;">
-									6자 이상의 영문 소문자, 숫자를 입력하세요</div></td>
+								<div class='valid' id="validID" style="display: none;"> 5~15자 영문 소문자, 숫자를 입력하세요</div>
+							</td>
 						</tr>
 						<tr>
 							<th>비밀번호</th>
-							<td><input type="password" maxlength="16"  id="pwd" name="pwd" class="pwdck" onfocus="showTextpwd()" placeholder="비밀번호를 입력해주세요" />
-								 <span id="alert-success" style="display: none; margin: 15px  0 15px 0; color:green; font-weight: bold;">비밀번호가 일치합니다.</span>
-    							<span id="alert-danger" style="display: none; margin: 15px  0 15px 0; color: red; font-weight: bold; ">비밀번호가 일치하지 않습니다.</span>
-								<div class='valid' id="validPWD" style="display: none;">
-									8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요</div></td>
+							<td>
+								<input type="password" id="pwd" name="pwd" class="pwdck" onfocus="showTextpwd()" placeholder="비밀번호를 입력해주세요" />
+								<span id="alert-success" style="display: none; margin: 15px  0 15px 0; color:green; font-weight: bold;">비밀번호가 일치합니다.</span>
+								<span id="alert-danger" style="display: none; margin: 15px  0 15px 0; color: red; font-weight: bold; ">비밀번호가 일치하지 않습니다.</span>
+								<div class='valid' id="validPWD" style="display: none;"> 8~16자 영문 대 소문자, 숫자, 특수문자를 입력해주세요</div>
+							</td>
 						</tr>
 						<tr>
 							<th>비밀번호 확인</th>
@@ -72,9 +75,9 @@
 						</tr>
 						<tr>
 							<th>이메일</th>
-							<td><input type="text" id="email" name="email" placeholder="ex)kosmo12@kosmo.com" /> 
+							<td><input type="text" id="email" name="email" onkeyup="emailKeyup()"  placeholder="ex)kosmo12@kosmo.com" /> 
 								<input type="hidden" id="emailck" name="emailck" class="chk_email" required fld_essential label="이메일중복체크" value> 
-								<a class="btn default" href="#none"  onclick="checkemail();" style="color: black; font-size: 15px; font-weight: bold; height: 44px; width: 100px; margin: 3.7px 8px 7px 1px; padding: 10px 10px 10px 10px; border: 2px solid #595757;">중복확인</a>
+								<a class="btn default" href="#none" onclick="checkemail();" style="color: black; font-size: 15px; font-weight: bold; height: 44px; width: 100px; margin: 3.7px 8px 7px 1px; padding: 10px 10px 10px 10px; border: 2px solid #595757;">중복확인</a>
 						</tr>
 						<tr>
 							<th>생년월일</th>
@@ -124,10 +127,19 @@
 //값 초기화. 회원가입 버튼 비활성화
 // $("#sucessbtn").prop("disabled",true);
  
-var ckname = false;
-var ckid = false;
-var ckemail = false;
-
+	let ckname = false;
+	let ckid = false;
+	let ckemail = false;
+	let cksign = false;
+	
+	const regname = /^[A-Za-z0-9가-힣]{2,10}$/;
+	const regid = /^[A-za-z0-9]{5,15}$/;
+	const regemail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+	const regpwd =  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,16}$/;      
+	
+	function showTextname() {
+		$('#validNAME').show();
+	}
 	function showTextid() {
 		$('#validID').show();
 	}
@@ -135,117 +147,136 @@ var ckemail = false;
 		$('#validPWD').show();
 	}
 	
-		//닉네임 중복체크	
-		function checkname() {
-		var name = $.trim($("#name").val());
-		if (name == '' || name.length == 0) {
-			swal({title: "닉네임을 입력해주세요",icon: "warning"})
-			return;
-		}
-		
-		$.ajax({
-    		url:'/ft/fnt/nameck.do',
-    		data:{"name":name},
-    		dataType:"json",
-    		type:"post"
-    	}).done(function(data){
-    		console.log(data)
-    		
-    		if(data == '0'){
-    			swal({title: "사용가능합니다",icon: "warning"})
-    			ckname = true;
-    		} else {
-    			swal({title: "이미 등록된 닉네임입니다",icon: "error"})
-    			ckname = false;
-    		}
-   		    
-    	});
+	function nameKeyup(type) {
+		if(type == 'name'){
+			ckname = false;
+		} else if(type == 'id'){
+			ckid = false;
+		} else {
+			ckemail = false;
+		}	
 	}
 	
+	// 닉네임 중복체크
+	function checkname() {
 		
-	//  id  중복체크	
-	function checkID() {
-		var id = $.trim($("#id").val());
-		if (id == '' || id.length == 0) {
-			swal({title: "아이디를 입력해주세요",icon: "warning"})
+		var name = $.trim($("#name").val());
+		if(name == ""){
+			swal({title: "닉네임을 입력해주세요",icon: "warning"});
 			return;
+		}else if(! regname.test(name)){
+			swal({title: "2~10자 한글,영문,숫자만 입력해주세요",icon: "warning"});
+			return;
+		} else {
+			$.ajax({
+				url:'/ft/fnt/nameck.do',
+				data:{"name":name},
+				dataType:"json",
+				type:"post"
+			}).done(function(data){
+				console.log(data)
+				
+				if(data == '0'){
+					swal({title: "사용가능합니다",icon: "success"})
+					ckname = true;
+				} else {
+					swal({title: "이미 등록된 닉네임입니다",icon: "error"})
+					ckname = false;
+				}
+				
+			});
 		}
-		
-		$.ajax({
-    		url:'/ft/fnt/idck.do',
-    		data:{"id":id},
-    		dataType:"json",
-    		type:"post"
-    	}).done(function(data){
-    		console.log(data)
-    		
-    		if(data == '0'){
-    			swal({title: "사용가능합니다",icon: "success"
-				})
-    			ckid = true;
-    		} else {
-    			swal({title: "이미 등록된 아이디입니다",icon: "error"
-				})
-    			ckid = false;
-    		}
-   		    
-    	});
 	}
+	
+	// 아이디 중복체크
+	function checkid() {
+		
+		var id = $.trim($("#id").val());
+		if(id == ""){
+			swal({title: "아이디를 입력해주세요",icon: "warning"});
+			return;
+		}else if(! regid.test(id)){
+			swal({title: "5~15자 이상의 영문 소문자,숫자만 입력해주세요 ",icon: "warning"});
+			return;
+		} else {
+			$.ajax({
+				url:'/ft/fnt/idck.do',
+				data:{"id":id},
+				dataType:"json",
+				type:"post"
+			}).done(function(data){
+				console.log(data)
+				
+				if(data == '0'){
+					swal({title: "사용가능합니다",icon: "success"})
+					ckid = true;
+				} else {
+					swal({title: "이미 등록된 아이디입니다",icon: "error"})
+					ckid = false;
+				}
+				
+			});
+		}
+	}
+		
+	
 	
 	// 비밀번호 확인
 	$('.pwdck').focusout(function () {
-        var pwd = $("#pwd").val();
-        var pwdck = $("#pwdck").val();
-  
-        if ( pwd != '' && pwdck == '' ) {
-            null;
-        } else if ( pwd != "" || pwdck != "") {
-            if (pwd == pwdck) {
-                $("#alert-success").css('display', 'inline-block');
-                $("#alert-danger").css('display', 'none');
-            } else {
-                $("#alert-success").css('display', 'none');
-                $("#alert-danger").css('display', 'inline-block');
-            }
-        }
-    });
+		var pwd = $("#pwd").val();
+		var pwdck = $("#pwdck").val();
+		
+		if ( pwd != '' && pwdck == '' ) {
+			null;
+		} else if ( pwd != "" || pwdck != "") {
+			if (pwd == pwdck) {
+				$("#alert-success").css('display', 'inline-block');
+				$("#alert-danger").css('display', 'none');
+			} else {
+				$("#alert-success").css('display', 'none');
+				$("#alert-danger").css('display', 'inline-block');
+			}
+		}
+	});
 	
 	
 
 	// 이메일 중복체크
 	function checkemail() {
-		var email = $.trim($("#email").val());
-		if (email == '' || email.length == 0) {
-			swal({title: "이메일을 입력해주세요",icon: "warning"
-			})
-			return;
-		}
 		
-		$.ajax({
-    		url:'/ft/fnt/emailck.do',
-    		data:{"email":email},
-    		dataType:"json",
-    		type:"post"
-    	}).done(function(data){
-    		console.log(data)
-    		
-    		if(data == '0'){
-    			swal({title: "사용가능합니다",icon: "success"
-				})
-    			ckemail = true;
-    		} else {
-    			swal({title: "이미 등록된 이메일입니다",icon: "error"
-				})
-    			ckemail = false;
-    		}
-   		    
-    	});
+		var email = $.trim($("#email").val());
+		if(email == ""){
+			swal({title: "이메일을 입력해주세요",icon: "warning"});
+			return;
+		}else if(! regemail.test(email)){
+			swal({title: "이메일을 다시 확인해주세요 ",icon: "warning"});
+			return;
+		} else {
+			$.ajax({
+				url:'/ft/fnt/emailck.do',
+				data:{"email":email},
+				dataType:"json",
+				type:"post"
+			}).done(function(data){
+				console.log(data)
+				
+				if(data == '0'){
+					swal({title: "사용가능합니다",icon: "success"})
+					ckid = true;
+				} else {
+					swal({title: "이미 등록된 이메일입니다",icon: "error"})
+					ckid = false;
+				}
+				
+			});
+		}
 	}
 	
 	
 	
 
 	// 유효성 체크
+	
 	$(function() {
 		$("#sucessbtn").click(function() {
 			var name = $("#name").val();
@@ -257,42 +288,79 @@ var ckemail = false;
 			var birth_month = $("#birth_month").val();
 			var birth_day = $("#birth_day").val();
 			var phone = $("#phone ").val();
-			var idck = $('#idck').val()
+			var idck = $('#idck').val();
+			
 			if (name == "") {
-				swal({title: "닉네임 입력은 필수입니다",icon: "warning"})
+				swal({title: "닉네임 입력은 필수입니다",icon: "warning"});
 				$("#name").focus();
 			} else if (!id) {
-				swal({title: "아이디 입력은 필수입니다",icon: "warning"})
+				swal({title: "아이디 입력은 필수입니다",icon: "warning"});
 				$("#id").focus();
 			} else if (!pwd) {
-				swal({title: "비밀번호 입력은 필수입니다",icon: "warning"})
+				swal({title: "비밀번호 입력은 필수입니다",icon: "warning"});
 				$("#pwd").focus();
 			} else if (!pwdck) {
-				swal({title: "비밀번호 확인 입력은 필수입니다",icon: "warning"})
+				swal({title: "비밀번호 확인 입력은 필수입니다",icon: "warning"});
 				$("#pwdck").focus();
 			} else if (!email) {
-				swal({title: "이메일 입력은 필수입니다",icon: "warning"})
+				swal({title: "이메일 입력은 필수입니다",icon: "warning"});
 				$("#email").focus();
 			} else if (!birth_year) {
-				swal({title: "생년월일 입력은 필수입니다",icon: "warning"})
+				swal({title: "생년월일 입력은 필수입니다",icon: "warning"});
 				$("#birth_year").focus();
 			} else if (!birth_month) {
-				swal({title: "생년월일 입력은 필수입니다",icon: "warning"})
+				swal({title: "생년월일 입력은 필수입니다",icon: "warning"});
 				$("#birth_month").focus();
 			} else if (!birth_day) {
-				swal({title: "생년월일 입력은 필수입니다",icon: "warning"})
+				swal({title: "생년월일 입력은 필수입니다",icon: "warning"});
 				$("#birth_day").focus();
 			} else if (!phone ) {
-				swal({title: "전화번호 입력은 필수입니다",icon: "warning"})
-				$("#phone ").focus();
+				swal({title: "전화번호 입력은 필수입니다",icon: "warning"});
+				$("#phone").focus();
 			} else {
-				swal({title: "회원가입이 완료되었습니다",icon: "success"})
+				/*
+				$.ajax({
+					url:'/ft/fnt/signck.do',
+					data:{"id":id, "pwd":pwd, "name":name, "gender":gender, "birth":birth, "phone":phone, "email":email}
+					dataType:"json",
+					type:"post"
+				}).done(function(data){
+					console.log(data)
+					
+					if(data == '0'){
+						swal({title: "성공입니다",icon: "success"})
+						cksign = true;
+					} else {
+						swal({title: "실패입니다",icon: "error"})
+						cksign = false;
+					}
+				});
+				*/
+				
+				/*
+					swal({
+						title: "회원가입이 완료되었습니다",
+						icon: "success",
+						buttons: "확인"
+					}).then((value) =>{
+						if(value){
+							location.href = "/ft/fnt/signck.do";
+								
+						}
+					});
+				*/
+				
+				//swal({title: "회원가입이 완료되었습니다",icon: "success"});
 				$('#dataform').submit();
-			}
+				}
+				
 			
+		
+				
+			})	
 		});
 
-	});
+	
 </script>
 </html>
 
