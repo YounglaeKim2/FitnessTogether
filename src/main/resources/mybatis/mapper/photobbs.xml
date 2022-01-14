@@ -25,17 +25,18 @@
 	</select>
 	
 	<!-- 이미지 파일 업로드 관련 -->
-	<insert id="picture_upload" parameterType="com.kosmo.ft.service.PictureDTO">
-      INSERT INTO board(bno,name,subject,content,wdate) values(seq_board.nextval,(select name from member where name=#{name}),#{content},sysdate)
+	<insert id="pictureUpload" parameterType="Map">
+      INSERT INTO board(bno,name,subject,content,wdate) values(seq_board.nextval,(select id from member where id=#{id}),#{content},sysdate)
       <selectKey keyProperty="bno" resultType="int" order="AFTER">
          SELECT seq_board.currval FROM DUAL
       </selectKey>
 	</insert>
 	
-	<insert id="picture_src_insert" parameterType="com.kosmo.ft.service.PictureUploadDTO">
-    INSERT INTO image(ino,bno,src)
+	<!-- 이미지넘버랑 소스를 매칭하는 -->
+	<insert id="pictureSrcInsert" parameterType="Map">
+    INSERT INTO image(ino,bno,i_src)
     select seq_src.nextval, A.* from(
-      <foreach item="item" collection="src" separator="UNION ALL">
+      <foreach item="item" collection="i_src" separator="UNION ALL">
          select #{bno} as bno, #{item.originalFilename} as src from dual
        </foreach>) A
    </insert>
@@ -48,7 +49,7 @@
 	</select>
 
 	<!-- 로그인 안한버전 사진게시판 리스트 -->
-	<select id="picture_list_login"
+	<select id="picture_list"
 		resultType="com.kosmo.ft.service.PictureDTO">
 		SELECT b.bno, subject, content, name, date_format(wdate,'%Y-%m-%d')
 		wdate, hit, address, media, reply, heart, m.pro
@@ -76,7 +77,7 @@
 	</select>
 
 	<!-- 로그인 한버전 사진게시판 리스트 -->
-	<select id="picture_list"
+	<select id="picture_list_login"
 		parameterType="com.kosmo.ft.service.PictureDTO"
 		resultType="com.kosmo.ft.service.PictureDTO">
 		SELECT b.bno, subject, content, name, date_format(wdate,'%Y-%m-%d')

@@ -22,7 +22,7 @@
 	<div>
 		<form id="myform" class="form-horizontal" method="post"
 			enctype="multipart/form-data"
-			action="<c:url value="/dataroom/Write.kosmo"/>">
+			action="<c:url value="/fnt/picture_write.do"/>">
 			<div class="form-group">
 				<label class="col-sm-2 control-label">작성자</label>
 				<div class="col-sm-4">
@@ -33,8 +33,8 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">제 목</label>
 				<div class="col-sm-4">
-					<input type="text" class="form-control" name="title"
-						placeholder="제목을 입력하세요?">
+					<input type="text" class="form-control" name="subject"
+						placeholder="제목을 입력하세요">
 				</div>
 			</div>
 			<div class="form-group">
@@ -64,19 +64,20 @@
 					</div>
 				</div>
 			</div>
+
+			<h1>업로드할 이미지를 끌어와주세요!</h1>
+			<div class="upload-box">
+				<button class="btn-upload">파일선택</button>
+				<input class="btn file d-none" type="file">
+				<!-- 파일 인풋 박스 형태 -->
+			</div>
+			
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-4">
 					<button class="btn btn-primary">등록</button>
 				</div>
 			</div>
 		</form>
-	</div>
-
-	<h1>업로드할 이미지를 끌어와주세요!</h1>
-	<div class="upload-box">
-		<button class="btn-upload">파일선택</button>
-		<input class="btn file d-none" type="file">
-		<!-- 파일 인풋 박스 형태 -->
 	</div>
 
 </div>
@@ -112,16 +113,15 @@
 	/* 박스 안에서 드래그를 하고 있을 때 */
 	uploadBox.addEventListener('dragover', function(e) {
 		e.preventDefault();
-	
-		var valid = e.dataTransfer.types.indexOf('Files') >=0;
-		
-		if(!valid){
+
+		var valid = e.dataTransfer.types.indexOf('Files') >= 0;
+
+		if (!valid) {
 			this.style.backgroundColor = 'red';
+		} else {
+			this.style.backgroundColor = 'green';
 		}
-		else {
-			this.style.backgroundColor = 'green';	
-		}
-		
+
 	});
 
 	/* 박스 밖으로 드래그가 나갈 때 */
@@ -137,9 +137,9 @@
 
 		console.log('drop');
 		this.style.backgroundColor = 'white';
-		
+
 		console.dir(e.dataTransfer);
-		
+
 		var data = e.dataTransfer.files[0];
 		console.dir(data);
 	});

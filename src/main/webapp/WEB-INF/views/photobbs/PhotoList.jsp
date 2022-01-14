@@ -3,11 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!-- 카드리스트 섹션 -->
-
-<!-- Top 시작 -->
-<jsp:include page="/WEB-INF/views/template/Top.jsp" />
-<!-- Top 끝 -->
-
 <c:forEach var="tmp" items="${list}">
 
 	<div class="col-3 card inner">
@@ -21,11 +16,11 @@
 			</div>
 			<div class="card-body">
 				<div class="row">
-					<div class="col-xsm card-title">${tmp.name}</div>
+					<div class="col-xsm card-title">${tmp.id}</div>
 					<div class="col-sm card-heart" id="card-heart">
 						<c:choose>
 							<%--로그인 상태일때 -하트 클릭되게 --%>
-							<c:when test="${not empty sessionScope.name}">
+							<c:when test="${not empty sessionScope.id}">
 								<c:choose>
 									<c:when test="${empty tmp.hno}">
 										<%--빈 하트일때 --%>
@@ -82,7 +77,7 @@
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="m_subject">[${tmp.address}]&nbsp;${tmp.subject }</h5>
+					<h5 class="modal-title" id="m_subject"><!-- [${tmp.address}]&nbsp; -->${tmp.subject }</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal"
 						aria-label="Close"></button>
 				</div>
@@ -92,11 +87,11 @@
 						<div class="row">
 							<div class="col-10">
 								<span id="m_writer_profile"> <a
-									href="other_profile.do?other_id=${tmp.name }"> <img
+									href="other_profile.do?other_id=${tmp.id }"> <img
 										id="profileImage" src="" alt="프사" /> <%--업로드할 프사의 이미지 경로가 들어갈예정 --%>
 										<%-- "<c:url value="/resources/images/photobbs/upload/'${tmp.pro }'"/>" --%>
 								</a>
-								</span>&nbsp;&nbsp;<span id="m_writer">${tmp.name }</span>
+								</span>&nbsp;&nbsp;<span id="m_writer">${tmp.id }</span>
 							</div>
 							<div class="col-2">${tmp.wdate }</div>
 						</div>
@@ -105,7 +100,7 @@
 						<div class="container" id="m_media">
 							<img class="w-100" id="media-image" src="" alt="업로드이미지" />
 							<%--업로드할 사진의 이미지 경로가 들어갈예정 --%>
-							<%-- "<c:url value="/resources/images/photobbs/upload/'${tmp.media }'"/>" --%>
+							<%-- "<c:url value="/resources/images/photobbs/upload/'${tmp.ino }'"/>" --%>
 						</div>
 					</section>
 
@@ -113,7 +108,7 @@
 						<div id="m_heart_reply_hit">
 							<span id="m_heart_icon"> <c:choose>
 									<%--로그인 상태일때 - 하트 클릭되게끔 --%>
-									<c:when test="${not empty sessionScope.name }">
+									<c:when test="${not empty sessionScope.id }">
 										<c:choose>
 											<c:when test="${empty tmp.hno}">
 												<%-- 빈 하트일때 --%>
@@ -178,10 +173,10 @@
 									<!-- 댓글 목록이 들어가는 곳 -->
 								</div>
 								<!--로그인 상태에만 나오는 댓글 작성칸 -->
-								<c:if test="${not empty sessionScope.name }">
+								<c:if test="${not empty sessionScope.id }">
 									<div class="row reply-write">
 										<div class="col-1">
-											<a href="other_pro.do?other_name=${tmp.name }"> <img
+											<a href="other_pro.do?other_name=${tmp.id }"> <img
 												id="write_reply_profileImage" src="" /> <!-- "<c:url value="/resources/images/photobbs/upload/'${sessionScope.pro }'"/>" -->
 												<!-- src에는 세션에 로그인한 프로필의 사진이 들어감 -->
 											</a>
@@ -203,7 +198,7 @@
 
 				<div id="modify_delete">
 					<%-- 수정/삭제버튼 --%>
-					<c:if test="${not empty id and tmp.name eq sessionScope.name}">
+					<c:if test="${not empty id and tmp.id eq sessionScope.id}">
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary"
 								data-bs-toggle="modal" data-bs-target="#modifyModal${tmp.bno}">수정</button>
@@ -810,7 +805,3 @@ const GetList = function(currentPage){
 	};
 	
 </script>
-
-<!-- footer 시작 -->
-<jsp:include page="/WEB-INF/views/template/Footer.jsp" />
-<!-- footer 끝 -->

@@ -8,7 +8,7 @@ import lombok.Setter;
 public class PictureUploadDTO {
 	
 	private String ino;
-	private String src;
+	private String i_src;
 	private String bno;
 	
 }

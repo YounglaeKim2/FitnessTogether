@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.mapper.message">
+	
+	<select id="message_list" parameterType="com.kosmo.ft.service.MessageDTO" resultType="com.kosmo.ft.service.MessageDTO">
+		SELECT mno, room, send_id, recv_id, date_format(send_time, '%Y-%m-%d %H:%i') send_time, read_time, content, read_chk
+		FROM message
+		WHERE mno IN(SELECT MAX(bno) FROM message GROUP BY room) AND (send_id = #{id}) OR recv_id=#{id})
+		ORDER BY mno DESC;
+	</select>
+	
+	<!-- 메시지 list에서 상대방 profile 가져오기 -->
+	<select id="get_other_profile" parameterType="com.kosmo.ft.service.MessageDTO" resultType="String">
+		SELECT profile FROM member
+		<choose>
+			<when test="send_id == id">
+				
+			</when>
+		</choose>
+	</select>
+	
+</mapper> 
