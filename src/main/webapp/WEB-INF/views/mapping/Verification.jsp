@@ -149,7 +149,7 @@
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-question-circle fa-3x"></i></div>
                                 </div>
-                                <img class="img-fluid" src="<c:url value="/resources/images/mapping/FT1.jpg"/>" alt="..." />
+                                <img class="img-fluid" src="<c:url value="/resources/images/mapping/Verification1.png"/>" alt="..." />
                             </a>
                             <div class="portfolio-caption">
                                 <div class="portfolio-caption-heading">인증지역1</div>
@@ -164,7 +164,7 @@
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
-                                <img class="img-fluid" src="<c:url value="/resources/images/mapping/FT2.jpg"/>" alt="..." />
+                                <img class="img-fluid" src="<c:url value="/resources/images/mapping/Verification2.png"/>" alt="..." />
                             </a>
                             <div class="portfolio-caption">
                                 <div class="portfolio-caption-heading">인증지역2</div>

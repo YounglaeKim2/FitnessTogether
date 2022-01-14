@@ -15,31 +15,26 @@ a {
 
 	<main>
 	<div class="container">
-		  <div id="myCarousel" class="carousel slide pointer-event" data-bs-ride="carousel">
-		    <div class="carousel-indicators">
-		      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-		      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2" class=""></button>
-		      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3" class=""></button>
-		      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="3" aria-label="Slide 4" class=""></button>
-		      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="4" aria-label="Slide 5" class=""></button>
-		    
+		<div id="myCarousel" class="carousel slide pointer-event" data-bs-ride="carousel">
+			<div class="carousel-indicators">
+				<button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+				<button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2" class=""></button>
+				<button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3" class=""></button>
+				<button type="button" data-bs-target="#myCarousel" data-bs-slide-to="3" aria-label="Slide 4" class=""></button>
+				<button type="button" data-bs-target="#myCarousel" data-bs-slide-to="4" aria-label="Slide 5" class=""></button>
 		    </div>
-		    
-		    
 		    <div class="carousel-inner">
-		      <div class="carousel-item active">
-		        <img src="<c:url value="/resources/images/mapping/FT1.jpg"/>" class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"></rect></img>
-
-		        <div class="container">
-		          <div class="carousel-caption text-start">
-		            <h1>Example headline.</h1>
-		            <p>Some representative placeholder content for the first slide of the carousel.</p>
-		            <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p>
-		          </div>
-		        </div>
-		      </div>
-		      
-		      
+				<div class="carousel-item active">
+					<img src="<c:url value="/resources/images/mapping/FT1.jpg"/>" class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"></rect></img>
+					<div class="container">
+						<div class="carousel-caption text-start">
+							<h1>Example headline.</h1>
+		            		<p>Some representative placeholder content for the first slide of the carousel.</p>
+		            		<p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p>
+		          		</div>
+		        	</div>
+				</div>
+				
 		      <div class="carousel-item">
 		        <img src="<c:url value="/resources/images/mapping/FT2.jpg"/>" class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"></rect></img>
 		
@@ -91,44 +86,19 @@ a {
 		      
 		      
 		    </div>
-			    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-			      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-			      <span class="visually-hidden">Previous</span>
-			    </button>
-			    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-			      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-			      <span class="visually-hidden">Next</span>
-			    </button>
-			</div>
+			<button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Previous</span>
+			</button>
+			<button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Next</span>
+			</button>
 		</div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-  <!-- Marketing messaging and featurettes
-  ================================================== -->
-  <!-- Wrap the rest of the page in another container to center all the content. -->
+	</div>
 
-  <div class="container marketing">
-
-    
-    
-
-
-    <!-- START THE FEATURETTES -->
-
+	<div class="container marketing">
     <hr class="featurette-divider">
-
     <div class="row featurette">
       <div class="col-md-7">
         <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It’ll blow your mind.</span></h2>

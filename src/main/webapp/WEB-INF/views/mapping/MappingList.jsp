@@ -72,15 +72,10 @@
 		
 		<div class="d-grid gap-2 d-md-flex justify-content-md-end">
 			<div class="btn btn-link">
-				<a href="<c:url value="/fnt/View1.do"/> "class="btn btn-primary">지도 보기</a>
-			</div>
-		
-			<div class="btn btn-link">
-				<a href="<c:url value="/fnt/View2.do"/> "class="btn btn-primary">View2</a>
-			</div>
-		
-			<div class="btn btn-link">
 				<a href="<c:url value="/fnt/Verification.do"/> "class="btn btn-primary">인증하기</a>
+			</div>
+			<div class="btn btn-link">
+				<a href="<c:url value="/fnt/mappingWrite.do"/>" class="btn btn-primary">등록하기</a>
 			</div>
 		</div>
 		<div class="row">	
@@ -185,10 +180,7 @@
 		</div>	
 		
 		<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-			<div class="btn btn-link me-md-1">
-			<a href="<c:url value="/fnt/mappingWrite.do"/>"
-					class="btn btn-primary">등록</a>
-			</div>
+			
 			<div class="btn btn-link me-md-1">
 				<a href="<c:url value="/fnt/ZZZZ.do"/>"
 					class="btn btn-primary">ZZZZ</a>
@@ -215,7 +207,7 @@
 			//현재 위치 정보를 한번만 얻기
 			navigator.geolocation.getCurrentPosition(successCallback);
 		}
-	    
+
 		//현재 위치를 성공적으로 수신시 자동으로 호출되는 콜백함수
 		function successCallback(position) {
 			lat = position.coords.latitude;

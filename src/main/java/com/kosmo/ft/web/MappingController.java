@@ -53,30 +53,12 @@ public class MappingController {
 		/////////////////////////////////////////////
 		//뷰정보 반환]
 		return "mapping/MappingView";
-		
 	}
 	
-	
-	
-	/*
-	@RequestMapping("mappingWrite.do")
-	public String goMappingWrite() {
-		return "mapping/MappingWrite";
-	}
-	*/
 	
 	@RequestMapping("ZZZZ.do")
 	public String goZZZZ() {
 		return "mapping/ZZZZ";
-	}
-	
-	@RequestMapping("View1.do")
-	public String goView1() {
-		return "mapping/View1";
-	}
-	@RequestMapping("View2.do")
-	public String goView2() {
-		return "mapping/View2";
 	}
 	
 	//입력폼으로 이동
@@ -89,14 +71,22 @@ public class MappingController {
 	//입력처리
 	@RequestMapping(value="mappingWrite.do",method = RequestMethod.POST)
 	public String mappingWriteOk(/*@ModelAttribute("id") String id,*/
-								 @RequestParam Map map
+								 @RequestParam Map/*<String,String>*/ map
 			) {
+		/*
+		for(Map.Entry<String, String> entry :map.entrySet()) {
+			System.out.println(entry.getKey()+" - " + entry.getValue());
+		}
+		*/
+		
 		//서비스 호출
 		//map.put("id", id);
 		mappingService.insert(map);
 		//뷰정보 반환] 목록으로 이동
+		System.out.println();
 		return "forward:/fnt/mappingList.do";
 	}
+	
 	
 	@RequestMapping(value="getlocation.do",produces="application/json;charset=UTF-8")
 	public @ResponseBody Map getlocation(@RequestParam Map map) {
@@ -104,18 +94,7 @@ public class MappingController {
 		return loctionInfo;
 	}
 	
-//	@RequestMapping(value="mappingWrite.do",method = RequestMethod.POST)
-//	public String writeOk(/*@ModelAttribute("id") String id,*/
-//						  @RequestParam Map map
-//						  ) throws Exception {
-//		//map.put("id", id);
-//		mappingService.insert(map);
-//		
-//		return "forward:/mapping/mappingList.do";
-//		
-//	}
 	
-
 	@RequestMapping(value="Verification.do",method = RequestMethod.GET)
 	public String live(@ModelAttribute("id") String id) {
 		//뷰정보 반환]
@@ -136,19 +115,3 @@ public class MappingController {
 		return "mapping/Live";
 	}				  
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

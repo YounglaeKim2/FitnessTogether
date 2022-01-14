@@ -1,5 +1,7 @@
 package com.kosmo.ft.service.impl;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -58,16 +60,6 @@ public class MappingServiceImpl implements MappingService{
 				pageSize, blockPage, nowPage,
 				req.getContextPath()+"/fnt/mappingList.do?");
 		
-		//Lombok라이브러리 미 사용시
-		/*
-		ListPagingData<OneMemoDTO> listPagingData = new ListPagingData<>();
-		listPagingData.setBlockPage(blockPage);
-		listPagingData.setLists(lists);
-		listPagingData.setNowPage(nowPage);
-		listPagingData.setPageSize(pageSize);
-		listPagingData.setPagingString(pagingString);
-		listPagingData.setTotalRecordCount(totalRecordCount);
-		return listPagingData;*/
 		//Lombok사용시
 		return ListPagingData.builder().lists(lists).nowPage(nowPage).pageSize(pageSize).pagingString(pagingString).totalRecordCount(totalRecordCount).build();
 		
@@ -81,6 +73,12 @@ public class MappingServiceImpl implements MappingService{
 		
 		int affected=0;
 		try {
+			
+			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+			java.sql.Date sample = new Date(df.parse(map.get("eventDate").toString()).getTime());
+			//System.out.println(sample);
+			
+			map.put("eventDate", sample);
 			affected=dao.insert(map);
 		}
 		catch(Exception e) {e.printStackTrace();}
