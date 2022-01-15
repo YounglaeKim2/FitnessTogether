@@ -113,5 +113,11 @@ public class MappingController {
 		//mappingService.check(map);
 		//뷰정보 반환]목록으로 이동
 		return "mapping/Live";
-	}				  
+	}
+	
+	@RequestMapping("TeachableMachine.do")
+	public String teachableMachine() {
+		return "tmachine/TM";
+	}
+	
 }
