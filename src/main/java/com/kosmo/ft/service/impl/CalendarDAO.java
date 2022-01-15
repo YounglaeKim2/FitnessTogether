@@ -25,8 +25,12 @@ public class CalendarDAO {
 		template.insert("insertWeight",map);
 	}
 
-	public List<Map> showCalendar(Map map) {
-		return template.selectList("selectCalendar",map);
+	public List<Map> showCalendarw(Map map) {
+		return template.selectList("selectCalendarW",map);
+	}
+	
+	public List<Map> showCalendarf(Map map) {
+		return template.selectList("selectCalendarF",map);
 	}
 
 	public List<Map> showWeight(Map map) {

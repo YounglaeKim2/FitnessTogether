@@ -65,10 +65,7 @@
 	    </div>
 	    <form class="form-control" action="<c:url value="/fnt/writefood.do"/>" method="post" id="foodform">
 		    <input type="hidden" name='postdate' value="${date}"/>
-		   <!-- 
 			<input type="hidden" name="id" value="${sessionScope.id}"/>
-			-->
-			<input type="hidden" name="id" value="hkk1239"/>
 			<table id="foodtable" class="table" style="text-align: center;">
 				<thead class="table-primary">
 					<tr style="font-size: 1.1em; font-weight: bold;">

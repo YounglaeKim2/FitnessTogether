@@ -11,7 +11,9 @@ public interface CalendarService {
 	
 	void insertWeight(Map map);
 	
-	List<Map> showCalendar(Map map);
+	List<Map> showCalendarw(Map map);
+	
+	List<Map> showCalendarf(Map map);
 	
 	List<Map> showWeight(Map map);
 	

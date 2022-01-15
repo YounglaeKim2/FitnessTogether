@@ -21,8 +21,12 @@
 		INSERT INTO weightbbs VALUES(SEQ_BBS.NEXTVAL,#{kg},#{count},#{postdate},#{no},#{id})
 	</insert>
 	
-	<select id="selectCalendar" parameterType="Map" resultType="Map">
+	<select id="selectCalendarW" parameterType="Map" resultType="Map">
 		SELECT type,postdate FROM testweight T JOIN weightbbs W ON T.no=W.no WHERE id=#{id}
+	</select>
+	
+	<select id="selectCalendarF" parameterType="Map" resultType="Map">
+		SELECT postdate FROM foodbbs WHERE id=#{id}
 	</select>
 	
 	<select id="selectWeight" parameterType="Map" resultType="Map">
