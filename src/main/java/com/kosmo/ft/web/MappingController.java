@@ -48,7 +48,7 @@ public class MappingController {
 		MappingDTO record=mappingService.selectOne(map);
 		//데이타 저장]
 		//줄바꿈 처리
-		record.setContent(record.getContent().replace("\r\n","<br/>"));
+		//record.setContent(record.getContent().replace("\r\n","<br/>"));
 		model.addAttribute("record", record);
 		/////////////////////////////////////////////
 		//뷰정보 반환]
@@ -84,6 +84,33 @@ public class MappingController {
 		mappingService.insert(map);
 		//뷰정보 반환] 목록으로 이동
 		System.out.println();
+		return "forward:/fnt/mappingList.do";
+	}
+	
+	@RequestMapping("mappingEdit.do")
+	public String edit(@RequestParam Map map,HttpServletRequest req) {
+		if(req.getMethod().equals("GET")) {
+			//서비스 호출]
+			MappingDTO record = mappingService.selectOne(map);
+			//데이타 저장]
+			req.setAttribute("record", record);
+			//수정 폼으로 이동
+			return "mapping/MappingEdit";
+		}
+		//수정처리후 상세보기로 이동
+		//서비스 호출
+		mappingService.update(map);
+		//뷰로 포워드
+		return "forward:/fnt/mappingView.do";
+	}
+	
+	@RequestMapping("mappingDelete.do")
+	public String delete(@RequestParam Map map) throws Exception {
+		System.out.println("11111");
+		//서비스 호출
+		mappingService.delete(map);
+		//뷰로 포워드
+		System.out.println(map.get("no"));
 		return "forward:/fnt/mappingList.do";
 	}
 	

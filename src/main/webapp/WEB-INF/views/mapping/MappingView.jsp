@@ -34,6 +34,12 @@
 			<div class="btn btn-link">
 				<a href="<c:url value="/fnt/mappingList.do"/> "class="btn btn-primary">목록 보기</a>
 			</div>
+			<div class="btn btn-link">
+				<a href="<c:url value="/fnt/mappingDelete.do?no=${record.no }"/> "class="btn btn-primary">삭제</a>
+			</div>
+			<div class="btn btn-link">
+				<a href="<c:url value="/fnt/mappingEdit.do?no=${record.no }"/> "class="btn btn-primary">수정</a>
+			</div>
 		</div>
 		<div class="row">	
 			<div class="col"></div>

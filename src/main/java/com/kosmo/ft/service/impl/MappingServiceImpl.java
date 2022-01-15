@@ -86,13 +86,12 @@ public class MappingServiceImpl implements MappingService{
 	}
 	@Override
 	public int delete(Map map) {
-		// TODO Auto-generated method stub
+		dao.delete(map);
 		return 0;
 	}
 	@Override
 	public int update(Map map) {
-		// TODO Auto-generated method stub
-		return 0;
+		return dao.update(map);
 	}
 	public Map getlocation(Map map) {
 		return dao.getlocation(map);
