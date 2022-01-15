@@ -240,8 +240,6 @@ $(function() {
 						<br/>
                        	<div class="tab-content" id="myTabContent">
 							<div class="tab-pane fade show active" id="food" role="tabpanel" aria-labelledby="food-tab">
-		   						
-		   						
 							</div>
 							<div class="tab-pane fade" id="weight" role="tabpanel" aria-labelledby="weight-tab">
 							</div>
