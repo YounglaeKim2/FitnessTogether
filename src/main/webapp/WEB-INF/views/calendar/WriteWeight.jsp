@@ -7,6 +7,8 @@
 	    -webkit-appearance: none;
 	    margin: 0;
 	}
+
+출처: https://dgkim5360.tistory.com/entry/adjusting-iframe-height-100-precent [개발새발로그]
 </style>
 <!-- Top 시작 -->
 <jsp:include page="/WEB-INF/views/template/Top.jsp"/>
@@ -18,7 +20,10 @@
         	<div>
 				<span style="font-size: 3em; font-weight: bold;">${date}</span>            	
     		</div>
+    		<div align="right" style="margin-bottom: 10px">
+    		</div>
     		<div align="right">
+    			<button id="search" class="btn btn-info" style="font: bold; 10px; margin-right: 10px">운동영상 검색</button>
 	    		<svg id="add_row" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-plus-circle-fill " viewBox="0 0 16 16">
 				  <path d="M16 8	A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
 				</svg>
@@ -92,6 +97,35 @@
    		</div>    		
    	</div>    	
 </div>
+<!-- 유튜브 검색 모달 시작 -->
+<div class="modal fade" id="searchModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	<div class="modal-dialog modal-xl">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				<div><span style="font-size: 35px;font-weight: bold;">운동영상 검색</span></div>  
+				<div class="col-md-6">
+					<div class="input-group">
+						<span class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path></svg></span>
+						<input type="text" id="searchWord" name="searchWord" class="form-control" placeholder="검색하실 운동명을 입력해주세요" onKeypress="javascript:if(event.keyCode==13){search();event.preventDefault();}"/>
+						<input type="button" id="searchBtn" class="btn btn btn-info" value="검색" onkeyup="if(window.event.keyCode==13){javascropt:search()}"/>
+					</div>
+					
+				</div>
+			</div>
+			<div class="modal-body" >
+				<div id="videos" style="display: inline-block;"></div>
+				<br/>
+				<div id="playvideo" align="center" style="margin-top: 25px"><span style="font-size: 2em;font-weight: bold;">검색된 결과가 없습니다</span></div>				
+				<br/>
+				<div align="right">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
 
 <script>
 
@@ -229,6 +263,68 @@
 				$('#weightName1').html(options);
 				
 			});
+		});
+		
+		$('#search').click(function(){
+			$('#searchModal').modal('show');
+		});
+		
+		
+		
+		function search(){
+			var keyword = $('#searchWord').val()
+			$.ajax({
+				url:'http://localhost:10000/youtube/'+keyword
+			}).done(function(data){
+				$('#playvideo').html("");
+				$('#videos').html("");
+				data = JSON.parse(data);
+				var divs ="";
+				
+				$.each(data,function(index,element){
+					var num = index+1
+					divs += "<a href='#' id='play"+num+"'><img style='width: 230px; height: 130px; margin-right: 25px;' src='"+element['img']+"' data-link='"+element['link']+"' data-width='560' data-height='315'/></a>"
+					
+					$(document).on("click",'#play'+num,function(){
+						$('#playvideo').html("");
+						$('#playvideo').html(element['link']);
+					});
+				});
+				divs += "<br/>"
+				
+				$('#videos').html(divs);
+				$('#searchWord').val("");
+				
+				
+				
+			});
+		}
+
+		$('#searchModal').on('hidden.bs.modal',function(){
+			$('#videos').html("");
+			$('#searchWord').val("");
+			$('#playvideo').html("<span style='font-size: 2em;font-weight: bold;'>검색된 결과가 없습니다</span>");
+		});
+		
+		//검색버튼 클릭시
+		$('#searchBtn').click(function(){
+			if($('#searchWord').val() == ""){
+				alert("검색어를 입력해주세요");
+				return
+			}
+			search();
+		});
+		
+		$('#searchWord').on('keydown',function(){
+			if(event.keyCode === 13) {
+	        	event.preventDefault(); // 엔터키로 submit 하는거 막기
+	        	if($('#searchWord').val() == ""){
+	    			alert("검색어를 입력해주세요");
+	    			return
+	    		}
+	        	search();
+		    }
+			
 		});
 		
 	})
