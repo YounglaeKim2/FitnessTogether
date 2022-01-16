@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-    
+<%@ include file="/WEB-INF/views/common/isLogin.jsp"%>
 <!-- Top 시작 -->
 <jsp:include page="/WEB-INF/views/template/Top.jsp"/>
 <!-- Top 끝
@@ -66,8 +66,9 @@ body {
 <div class="container">
 	<main>
 	<form class="form-horizontal" method="post" action="<c:url value='/fnt/mappingWrite.do'/>">
-		<!-- 씨큐리티 적용:csrf취약점 방어용 -->
-		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+		<!-- 씨큐리티 적용:csrf취약점 방어용
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />-->
+		<input type="hidden" name="id" value="${sessionScope.id}"/>
 	    <div class="row g-5" style="padding-top:100px;">
 	      <div class="col-md-7 col-lg-8">
 	        <h4 class="mb-3">Event Info</h4>
@@ -108,15 +109,15 @@ body {
 	          -->
 	        </h4>
 	        <ul class="list-group mb-3">
-	        
+	        <!--
 	          <li class="list-group-item d-flex justify-content-between lh-sm">
 	            <div>
 	              <h6 class="my-0">ID</h6>
 	              <small class="text-muted">회원 아이디</small>
 	            </div>
-	            <span class="text-muted" name="id2">lee</span>
+	            <span class="text-muted" name="id">${id}</span>
 	          </li>
-	          
+	        -->
 	          <li class="list-group-item d-flex justify-content-between lh-sm">
 	            <div class="row">
 	              <h6 class="my-0">Latitude</h6>
@@ -177,12 +178,14 @@ body {
 						placeholder="주소"></textarea>
 				</div>
 			</div>
+			<!--
 			<div class="row">
 				<div class="col-sm-8">
 					<textarea class="form-control" name="id" rows="1" style=display:none
-						placeholder="아이디">lee</textarea>
+						placeholder="아이디">${sessionScope.id }</textarea>
 				</div>
 			</div>
+			-->
 	      </div>
 	    </div>
     </form>

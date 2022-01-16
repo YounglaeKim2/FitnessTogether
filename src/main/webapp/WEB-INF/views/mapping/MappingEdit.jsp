@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-    
+<%@ include file="/WEB-INF/views/common/isLogin.jsp"%>
 <!-- Top 시작 -->
 <jsp:include page="/WEB-INF/views/template/Top.jsp"/>
 <!-- Top 끝
@@ -66,9 +66,10 @@ body {
 <div class="container">
 	<main>
 	<form class="form-horizontal" method="post" action="<c:url value='/fnt/mappingEdit.do'/>">
-		<!-- 씨큐리티 적용:csrf취약점 방어용 -->
-		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+		<!-- 씨큐리티 적용:csrf취약점 방어용 
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />-->
 		<input type="hidden" name="no" value="${record.no}" />
+		<input type="hidden" name="id" value="${sessionScope.id}"/>
 	    <div class="row g-5" style="padding-top:100px;">
 	      <div class="col-md-7 col-lg-8">
 	        <h4 class="mb-3">Event Info</h4>
