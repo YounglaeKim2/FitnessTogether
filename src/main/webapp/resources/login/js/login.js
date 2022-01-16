@@ -110,7 +110,7 @@ let social = {
                     console.log('로그인 성공',response);
                     social.facebook.info();
                 } else {
-                    console.log('로그인 실폐',response);
+                    console.log('로그인 실패',response);
                 }
             }, {scope: 'public_profile,email'});
         },

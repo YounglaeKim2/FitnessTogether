@@ -11353,15 +11353,14 @@ p.lead {
   #sideNav {
     padding-left: 0;
     padding-right: 0;
-    margin: 40px 0 0 0 ;
     text-align: center;
     position: fixed;
     top: 0;
     left: 0;
     display: flex;
     flex-direction: column;
-    width: 17rem;
-    height: 650px;
+    width: 250px;
+    height: 750px;
   }
   #sideNav .navbar-brand {
     display: flex;

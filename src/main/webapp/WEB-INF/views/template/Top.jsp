@@ -114,12 +114,9 @@
 						href="<c:url value="/fnt/Logout.do"/>"> 로그아웃 </a>
 					</li>
 					</c:if>
-					
-					
 					<li class="nav-item"><a class="nav-link"
 						href="<c:url value="/fnt/MypagePro.do"/>"> My-Page </a>
 					</li>
-					
 					<li class="nav-item"><a class="nav-link"
 						href="<c:url value="/fnt/TeachableMachine.do"/>"> Food-Calculator </a>
 					</li>
@@ -159,9 +156,7 @@
 						class="nav-link dropdown-toggle" href="#" id="dropdownAbout"
 						data-bs-toggle="dropdown" aria-expanded="false"> About </a>
 
-						<c:if test="${!empty sessionScope.id}">
-							<li style="width:200px; padding: 10px 0 0 250px; margin: 0 0 0 -250px;">&nbsp;${sessionScope.id }&nbsp;님</li>
-						</c:if>
+						
 						<ul class="dropdown-menu" aria-labelledby="dropdownAbout">
 							<li><a class="dropdown-item"
 								href="<c:url value="/fnt/whoWeAre.do"/>">Our Amazing Team</a></li>

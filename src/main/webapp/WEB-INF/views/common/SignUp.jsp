@@ -114,9 +114,10 @@
 	if('${loginType}' != ''){
 		alert('추가정보를 입력해주세요');
 		ckemail = true;
+		/*
 		$('#email').attr('readonly', true);
 		$('#emailckBtn').hide();
-		/*
+		
 		$('#name').attr('readonly', true);
 		$('#nameckBtn').hide();
 		$('#id').attr('readonly', true);
