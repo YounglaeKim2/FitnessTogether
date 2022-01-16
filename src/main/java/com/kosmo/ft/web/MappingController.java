@@ -70,9 +70,9 @@ public class MappingController {
 	}//리스트에서 작성페이지로 이동
 	//입력처리
 	@RequestMapping(value="mappingWrite.do",method = RequestMethod.POST)
-	public String mappingWriteOk(/*@ModelAttribute("id") String id,*/
-								 @RequestParam Map/*<String,String>*/ map
-			) {
+	public String mappingWriteOk(@ModelAttribute("id") String id,
+								 @RequestParam Map map
+			) throws Exception {
 		/*
 		for(Map.Entry<String, String> entry :map.entrySet()) {
 			System.out.println(entry.getKey()+" - " + entry.getValue());
@@ -80,10 +80,9 @@ public class MappingController {
 		*/
 		
 		//서비스 호출
-		//map.put("id", id);
+		map.put("id", id);
 		mappingService.insert(map);
 		//뷰정보 반환] 목록으로 이동
-		System.out.println();
 		return "forward:/fnt/mappingList.do";
 	}
 	
@@ -140,11 +139,5 @@ public class MappingController {
 		//mappingService.check(map);
 		//뷰정보 반환]목록으로 이동
 		return "mapping/Live";
-	}
-	
-	@RequestMapping("TeachableMachine.do")
-	public String teachableMachine() {
-		return "tmachine/TM";
-	}
-	
+	}	
 }

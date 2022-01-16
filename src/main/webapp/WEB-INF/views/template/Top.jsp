@@ -102,40 +102,44 @@
 					<!-- 로그인하지 않은 경우 --> 
 					<c:if test="${empty sessionScope.id}" var="isLogin">
 					<li class="nav-item"><a class="nav-link" 
-						href="<c:url value="/fnt/Login.do"/>"> Sign-in </a>
+						href="<c:url value="/fnt/Login.do"/>"> 로그인 </a>
 					</li>
 					<li class="nav-item"><a class="nav-link"
-						href="<c:url value="/fnt/SignUp.do"/>"> Sign-up </a>
+						href="<c:url value="/fnt/SignUp.do"/>"> 회원가입 </a>
 					</li>
 					</c:if>
-					
 					<!-- 로그인한 경우 -->
 					<c:if test="${!empty sessionScope.id}" >
 					<li class="nav-item"><a class="nav-link" 
-						href="<c:url value="/fnt/Logout.do"/>"> Log-Out </a>
+						href="<c:url value="/fnt/Logout.do"/>"> 로그아웃 </a>
 					</li>
 					</c:if>
+					
 					
 					<li class="nav-item"><a class="nav-link"
 						href="<c:url value="/fnt/MypagePro.do"/>"> My-Page </a>
 					</li>
 					
 					<li class="nav-item"><a class="nav-link"
-						href="<c:url value="/fnt/mappingList.do"/>"> Perching </a>
+						href="<c:url value="/fnt/TeachableMachine.do"/>"> Food-Calculator </a>
 					</li>
 						
 					<li class="nav-item"><a class="nav-link"
-						href="<c:url value="/fnt/#.do"/>"> Chat </a>
+						href="<c:url value="/fnt/#.do"/>"> DirectMessage </a>
 					</li>
 					
 					<li class="nav-item"><a class="nav-link"
-						href="<c:url value="/fnt/calendar.do"/>"> Calendar </a>
+						href="<c:url value="/fnt/mappingList.do"/>"> 퍼칭(Perching) </a>
 					</li>
 					
 					<li class="nav-item"><a class="nav-link"
-						href="<c:url value="/fnt/sfHome.do"/>"> Sports-Facilities </a>
+						href="<c:url value="/fnt/sfHome.do"/>"> 운동시설찾기 </a>
 					</li>
-						
+					
+					<li class="nav-item"><a class="nav-link"
+						href="<c:url value="/fnt/calendar.do"/>"> 캘린더 </a>
+					</li>
+					
 
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="dropdownBoard"
@@ -149,6 +153,7 @@
 								href="#">Something else here</a></li>
 						</ul>
 					</li>
+					
 					
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="dropdownAbout"
@@ -164,10 +169,6 @@
 							<li><a class="dropdown-item" href="#">Something else here</a></li>
 						</ul>
 					</li>
-					
-					
-					
-					
 				</ul>
 			</div>
 		</div>
