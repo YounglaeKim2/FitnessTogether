@@ -158,10 +158,11 @@
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="dropdownAbout"
 						data-bs-toggle="dropdown" aria-expanded="false"> About </a>
-
+						<!--
 						<c:if test="${!empty sessionScope.id}">
 							<li style="width:200px; padding: 10px 0 0 250px; margin: 0 0 0 -250px;">&nbsp;${sessionScope.id }&nbsp;님</li>
 						</c:if>
+						-->
 						<ul class="dropdown-menu" aria-labelledby="dropdownAbout">
 							<li><a class="dropdown-item"
 								href="<c:url value="/fnt/whoWeAre.do"/>">Our Amazing Team</a></li>
@@ -170,10 +171,24 @@
 							<li><a class="dropdown-item" href="#">Something else here</a></li>
 						</ul>
 					</li>
+					
+					
+						
 				</ul>
+				
 			</div>
+			
 		</div>
+		
 	</nav>
+	<div class="container" style="padding-top:20px">
+		<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+			<c:if test="${!empty sessionScope.id}">
+				<li style="width:200px; padding: 10px 0 0 250px; margin: 0 0 0 -250px;">&nbsp;${sessionScope.id }&nbsp;님</li>
+			</c:if>
+		</div>
+	</div>
+	
 	<!-- Navigation 
     <nav id="navbarExample" class="navbar navbar-expand-lg fixed-top navbar-light" aria-label="Main navigation">
         <div class="container">

@@ -15,9 +15,6 @@ a {
 
 	<main>
 	<div class="container">
-	<div class="btn btn-link">
-				<a href="<c:url value="/fnt/TeachableMachine.do"/> "class="btn btn-primary">TM</a>
-			</div>
 		<div id="myCarousel" class="carousel slide pointer-event" data-bs-ride="carousel">
 			<div class="carousel-indicators">
 				<button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -102,9 +99,6 @@ a {
 
 	<div class="container marketing">
     <hr class="featurette-divider">
-    <div class="btn btn-link">
-				<a href="<c:url value="/fnt/TeachableMachine.do"/> "class="btn btn-primary">TM</a>
-			</div>
     <div class="row featurette">
       <div class="col-md-7">
         <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It’ll blow your mind.</span></h2>

@@ -23,7 +23,7 @@ public class TMController {
 	
 	@RequestMapping("TeachableMachine.do")
 	public String teachableMachine() {
-		return "tmachine/TM";
+		return "TM";
 	}
 	
 }
