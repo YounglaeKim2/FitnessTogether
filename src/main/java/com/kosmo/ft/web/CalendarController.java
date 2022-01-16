@@ -96,10 +96,21 @@ public class CalendarController {
 		return "calendar/Calendar";
 	}
 	
-	@PostMapping("/fnt/showCalendar.do")
+	@PostMapping("/fnt/showCalendarw.do")
 	@ResponseBody
-	public List<Map> showCalendar(@RequestParam Map map){ // 아이디값 받기위해 Map 사용
-		List<Map> lists = service.showCalendar(map);
+	public List<Map> showCalendarw(@RequestParam Map map){ // 아이디값 받기위해 Map 사용
+		List<Map> lists = service.showCalendarw(map);
+		//2021-12-01 00:00:00.0 형태로 출력됨 형태변환위해 아래코드 사용
+		for(Map date:lists) {
+			date.put("POSTDATE", date.get("POSTDATE").toString().substring(0, 10));
+		}
+		return lists;
+	}
+	
+	@PostMapping("/fnt/showCalendarf.do")
+	@ResponseBody
+	public List<Map> showCalendarf(@RequestParam Map map){ // 아이디값 받기위해 Map 사용
+		List<Map> lists = service.showCalendarf(map);
 		//2021-12-01 00:00:00.0 형태로 출력됨 형태변환위해 아래코드 사용
 		for(Map date:lists) {
 			date.put("POSTDATE", date.get("POSTDATE").toString().substring(0, 10));

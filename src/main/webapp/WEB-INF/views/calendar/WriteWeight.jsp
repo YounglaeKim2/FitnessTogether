@@ -8,7 +8,6 @@
 	    margin: 0;
 	}
 
-출처: https://dgkim5360.tistory.com/entry/adjusting-iframe-height-100-precent [개발새발로그]
 </style>
 <!-- Top 시작 -->
 <jsp:include page="/WEB-INF/views/template/Top.jsp"/>
@@ -35,10 +34,7 @@
         <div class="row">
         	<form class="form-control" action="<c:url value="/fnt/writeweight.do"/>" method="post" id="dataform">
 				<input type="hidden" name="postdate" value="${date}"/>
-				<!-- 
 				<input type="hidden" name="id" value="${sessionScope.id}"/>
-				 -->
-				<input type="hidden" name="id" value="hkk1239"/>
 				<table id="weighttable" class="table">
 					<thead class="table-primary">
 						<tr align="center">

@@ -71,8 +71,13 @@ public class CalendarServiceImpl implements CalendarService {
 	}
 
 	@Override
-	public List<Map> showCalendar(Map map) {
-		return dao.showCalendar(map);
+	public List<Map> showCalendarw(Map map) {
+		return dao.showCalendarw(map);
+	}
+	
+	@Override
+	public List<Map> showCalendarf(Map map) {
+		return dao.showCalendarf(map);
 	}
 
 	public List<Map> showWeight(Map map) {
