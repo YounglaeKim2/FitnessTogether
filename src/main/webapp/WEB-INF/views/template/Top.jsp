@@ -158,8 +158,9 @@
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="dropdownAbout"
 						data-bs-toggle="dropdown" aria-expanded="false"> About </a>
+
 						<c:if test="${!empty sessionScope.id}">
-							<li style="width:200px;">${sessionScope.id } 님 환영합니다</li>
+							<li style="width:200px; padding: 10px 0 0 250px; margin: 0 0 0 -250px;">&nbsp;${sessionScope.id }&nbsp;님</li>
 						</c:if>
 						<ul class="dropdown-menu" aria-labelledby="dropdownAbout">
 							<li><a class="dropdown-item"

@@ -196,7 +196,16 @@ public class LoginController {
 // 비밀번호 확인
 	@RequestMapping("MypagePro.do")
 	public String mypagePro(@RequestParam Map map,HttpSession session){	
-		return "mypage/Mypage";
+		//String pwdck = memberService.pwdck(map);
+		
+		String pwdck = (String)map.get("pwd");
+		
+		if("pwd".equals(pwdck) ) {
+			session.setAttribute("pwd", map.get("pwd"));
+			return "mypage/UpdateMember";
+		}else {
+			return "mypage/Mypage";
+		}
 		}
 	
 //회원정보 수정 보기

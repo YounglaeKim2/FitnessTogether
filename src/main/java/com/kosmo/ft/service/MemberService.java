@@ -18,5 +18,6 @@ public interface MemberService {
 	 
 	 public String deleteMember(String delete);
 	
+	 public String pwdck(Map map);
 }	
 

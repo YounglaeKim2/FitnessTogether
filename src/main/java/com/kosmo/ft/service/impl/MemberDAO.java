@@ -49,6 +49,9 @@ public class MemberDAO {
 		return template.selectOne("deleteMember",delete);
 	}
 	
+	public String pwdck(Map map) {
+		return template.selectOne("selectPwdck",map);
+	}
 	
 	
 }

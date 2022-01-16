@@ -32,12 +32,19 @@
 		</where>
 	</select>
 	
+	<!-- 비밀번호 확인 -->
+	<select parameterType="String" id="selectPwdck" resultType="String">
+		SELECT COUNT(*) FROM MEMBER 
+		<where>
+		AND pwd = #{pwd}
+		</where>
+	</select>
 	
 	 <!-- 회원 가입 -->
-<insert parameterType="Map" id="selectSignck">
+	<insert parameterType="Map" id="selectSignck">
 	INSERT INTO MEMBER(ID,PWD,NAME,GENDER,BIRTH,PHONE,EMAIL)
 	VALUES(#{id}, #{pwd}, #{name}, #{gender}, #{birth}, #{phone}, #{email})
-</insert>
+	</insert>
 
 <!-- 회원정보 수정 -->
 	<update parameterType="Map" id="updateMember">

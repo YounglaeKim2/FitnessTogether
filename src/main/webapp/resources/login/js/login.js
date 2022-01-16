@@ -27,6 +27,7 @@ let social = {
                         id : response.id,
                         nm : response.properties.nickname,
                         email : response.kakao_account.email,
+                       
                     };
                     socialGetInfo(userInfo);
                     setTimeout(social.kakao.logout, 500);

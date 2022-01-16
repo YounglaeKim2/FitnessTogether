@@ -55,6 +55,10 @@ public class MemberServiceImpl implements MemberService{
     	return dao.deleteMember(delete);
     }
 
-	
+	@Override
+    public String pwdck(Map map) {
+    	return dao.pwdck(map);
+    }
+
 } 
 

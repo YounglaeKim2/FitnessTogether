@@ -11353,6 +11353,7 @@ p.lead {
   #sideNav {
     padding-left: 0;
     padding-right: 0;
+    margin: 40px 0 0 0 ;
     text-align: center;
     position: fixed;
     top: 0;
@@ -11360,7 +11361,7 @@ p.lead {
     display: flex;
     flex-direction: column;
     width: 17rem;
-    height: 100vh;
+    height: 650px;
   }
   #sideNav .navbar-brand {
     display: flex;
@@ -11385,6 +11386,7 @@ p.lead {
   }
   #sideNav .navbar-collapse .navbar-nav .nav-item {
     display: block;
+    color: white;
   }
   #sideNav .navbar-collapse .navbar-nav .nav-item .nav-link {
     display: block;
