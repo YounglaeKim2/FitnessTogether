@@ -2,6 +2,7 @@ package com.kosmo.ft.web;
 
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -13,6 +14,7 @@ import org.apache.tomcat.util.buf.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.expression.ParseException;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.support.SessionStatus;
-
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kosmo.ft.service.MemberDTO;
 import com.kosmo.ft.service.impl.CalendarServiceImpl;
@@ -37,6 +39,7 @@ public class LoginController {
 	private MemberServiceImpl memberService;
 	private String name;
 	private SqlSession sqlSession;
+
 
 	// 로그인 폼으로 이동
 	@RequestMapping("Login.do")
@@ -89,25 +92,29 @@ public class LoginController {
 		
 		// 로그인 처리
 	@RequestMapping("LoginProcess.do")
-	public String loginprocess(@RequestParam Map map,HttpSession session,SessionStatus status) {
-		if(map.get("id").equals("ADMIN")) { //관리자 로그인
-			boolean flag = memberService.isLogin(map);
-			if (!flag) { //관리자 로그인 실패
-				status.setComplete();
-				return "common/notLogin";
+	public String loginprocess(@RequestParam Map map,HttpSession session,SessionStatus status,HttpServletRequest request) {
+		
+		List<String> idList = memberService.isLogin(map);
+		String loginType = (String)map.get("loginType");
+			
+		if(idList.size() == 0) {
+			if(!"ft".equals(loginType)) {
+				request.setAttribute("loginType", loginType);
+				request.setAttribute("loginEmail", map.get("loginEmail"));
+				request.setAttribute("loginNm", map.get("loginNm"));
+				return "common/SignUp"; 
 			}
-			// 뷰정보 번환] //관리자 로그인 성공
-			session.setAttribute("id", map.get("id"));
-			return "admin/Home";
-		} //일반  로그인 실패
-		boolean flag = memberService.isLogin(map);
-		if(!flag) {
 			status.setComplete();
 			return "common/notLogin";
-		} //일반 로그인 성공
-		//뷰정보 반환]
-		session.setAttribute("id", map.get("id"));
-		return "home";
+		}
+		
+		session.setAttribute("id", idList.get(0));
+		
+		if(map.get("id").equals("ADMIN")) {
+			return "admin/Home";
+		} else {
+			return "home";
+		}
 	}
 
 
@@ -157,39 +164,80 @@ public class LoginController {
 	}
 	
 	// 이메일 중복 체크
-		@ResponseBody
-		@RequestMapping(value="emailck.do", method= RequestMethod.POST)
-		public String emailck(@RequestParam(name = "email" ) String email)  {
-			int cnt2 = memberService.emailck(email);
-			
-			if(cnt2 == 0) {
-				return "0";
-			}else {
-				return "1";
-			}
-		}
+	@ResponseBody
+	@RequestMapping(value="emailck.do", method= RequestMethod.POST)
+	public String emailck(@RequestParam(name = "email" ) String email)  {
+		int cnt2 = memberService.emailck(email);
 		
+		if(cnt2 == 0) {
+			return "0";
+		}else {
+			return "1";
+		}
+	}
+	
 	
 	
 	//회원가입 처리
 		
-		@RequestMapping("signck.do")
-		public String signck(@RequestParam Map map,HttpSession session){	
-			String sign = memberService.signck(map);
-			
-			
-			session.getAttribute("id");
-	     	session.getAttribute("pwd");
-	     	session.getAttribute("name");
-	     	session.getAttribute("email");
-	     	session.getAttribute("gender");
-	     	session.getAttribute("birth");
-	     	session.getAttribute("phone");
-			
-			return "home";
+	@RequestMapping("signck.do")
+	public String signck(@RequestParam Map map,HttpSession session){	
+		String sign = memberService.signck(map);
+		
+		String joinType = (String)map.get("joinType");
+		
+		if(!"ft".equals(joinType) ) {
+			session.setAttribute("id", map.get("id"));
 		}
-
+		
+		return "home";
+	}
+// ---------------------------------------------------------------------------- Mypage
+// 비밀번호 확인
+	@RequestMapping("MypagePro.do")
+	public String mypagePro(@RequestParam Map map,HttpSession session){	
+		return "mypage/Mypage";
+		}
 	
+//회원정보 수정 보기
+	@RequestMapping("UpdateMember.do")
+	public String updateMember(@RequestParam Map map,HttpSession session){	
+		return "mypage/UpdateMember";
+		}
+	
+// 회원정보 수정 과정
+	@RequestMapping("UpdateMemberPro.do")
+	public String updateMemberPro(@RequestParam Map map,HttpSession session){	
+
+	return "mypage/UpdateMember";
+	}
+
+//비밀번호 수정
+	@RequestMapping("UpdatePwd.do")
+	public String UpdatePwd(@RequestParam Map map,HttpSession session){	
+		return "mypage/UpdatePwd";
+	}
+//비밀번호 수정
+	@RequestMapping("UpdatePwdPro.do")
+	public String UpdatePwdPro(@RequestParam Map map,HttpSession session){	
+	
+		return "common/Login";
+	}
+	
+// 회원탈퇴
+	@RequestMapping("DeleteMember.do")
+	public String QuitMember(@RequestParam Map map,HttpSession session){	
+		return "mypage/DeleteMember";
+	}
+		
+// 회원탈퇴 과정
+		@RequestMapping("DeleteMemberPro.do")
+		public String DeleteMemberPro(String id,HttpSession session,RedirectAttributes rttr){	
+			memberService.deleteMember(id);
+			session.invalidate();
+			rttr.addFlashAttribute("msg", "이용해주셔서 감사합니다.");
+				return "redirect:/fnt/Login.do";
+		}
 
 // ---------------------------------------------------
 // 관리자페이지

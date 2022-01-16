@@ -50,13 +50,6 @@
 	<script src="<c:url value="/resources/login/js/main.js"/> "/></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <!--===============================================================================================-->
-
-
-	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-	<script src="https://apis.google.com/js/platform.js"></script>
-	<script src="https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v1.0&appId=2148512708633154"></script>
-	<script src="<c:url value="/resources/login/js/login.js"/> "></script>
-
   <style type="text/css">
     #customBtn {
       display: inline-block;
@@ -65,28 +58,11 @@
       width: 260px;
       height: 40px;
       border-radius: 5px;
-      border: 2px solid #474242;
+      border: thin solid #474242;
       white-space: nowrap;
       margin-left: 10px;
       padding-left: 24dp;
     }
-     #textF {
-      display: inline-block;
-      border-color: #5890FF;
-      color: #403b3b;
-      width: 260px;
-      height: 40.8px;
-      font-size: 11.8px;
-      font-weight: bold;
-      border-radius: 5px;
-      border: thin solid #5890FF;
-      background : #5890FF;
-      white-space: nowrap;
-      margin: 10px 10px 0 10px ;
-      padding-left: 24dp;
-      font-family: 'Roboto', sans-serif;
-    }
-    
     #customBtn:hover {
       cursor: pointer;
     }
@@ -104,23 +80,13 @@
       margin-left:8px;
       margin-top:8px;
     }
-    button.iconF {
-      background: url("<c:url value="/resources/login/images/f_logo_RGB-Blue_58.png"/>" ) ;
-      background-size: 21px 21px;
-      display: inline-block;
-      vertical-align: middle;
-      width: 12px;
-      height: 21px;
-      margin-left:8px;
-      margin-top:8px;
-    }
     span.buttonText {
       display: inline-block;
       vertical-align: middle;
       margin-left: 25px;
       margin-top: 10px;
-      padding-left: 47px;
-      padding-right: 60px;
+      padding-left: 42px;
+      padding-right: 42px;
       font-size: 11.8px;
       font-weight: bold;
       /* Use the Roboto font that is loaded in the <head> */
@@ -135,7 +101,7 @@
 		<div class="container-login100">
 			<div class="wrap-login100">
 				<span class="login100-form-title p-b-26">Welcome</span>
-				<form id="form" action="<c:url value="/fnt/LoginProcess.do"/>">
+				<form action="<c:url value="/fnt/LoginProcess.do"/>">
 					<div class="wrap-input100 validate-input" >
 						<input style="font-weight:bold;" class="input100" type="text" name="id" id="id" placeholder="아이디를 입력하세요">
 					</div>
@@ -147,72 +113,130 @@
 					<div class="container-login100-form-btn">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
-							<button type="button" class="login100-form-btn" onclick="fnLogin();"> Login </button>
+							<button type="button" class="login100-form-btn" onclick="loginFu()">
+								Login
+							</button>
 						</div>
 					</div>
-					
-					<!-- 카카오 로그인 -->
-					
-					<a href="javascript:kakaoLogin();" onclick="social.kakao.login()"> 
-	  				<img src="<c:url value="/resources/login/images/kakao_login_medium_wide.png"/>" style="margin:10px; height:40px;width:260px;"></a>
-					
-					<!-- 구글 로그인
-					
-					<button type="button" class="icon" id="googleBtn">구글 로그인</button>
-					<span class="buttonText">구글 로그인</span>
-					-->
-					<div id="customBtn" class="customGPlusSignIn">
-					<span class="icon"></span>
-      				<span class="buttonText" id="googleBtn">구글 로그인</span>
-					</div>
-					
-					<!-- 페이스북 로그인 -->
-					<span class="iconF"></span>
-					<button type="button" id="textF" onclick="social.facebook.login()" style="color: white; border-width:2px; border-color:#5890FF; font-weight:bold;"><img src="<c:url value="/resources/login/images/f_logo_RGB-Blue_58.png"/>" style="width:22px; height:21px;margin: 0 60px 0 -70px; ">페이스북 로그인</button>
-					
-					
-					<input type="hidden" name="loginType" id="loginType" value="ft">
-					<input type="hidden" name="loginNm" id="loginNm">
-					<input type="hidden" name="loginEmail" id="loginEmail"> 
-					<input type="hidden" name="loginId" id="loginId"> 
 				</form>
-			</div>
-		</div>
-	</div>
+				
 	
-	<script type="text/javascript">
-		// 로그인 처리 
-		function fnLogin() {	
-			var id = $.trim($("#id").val());
-			var pwd = $.trim($("#pwd").val());
-			if(id == ""){
-				swal({title: "아이디를 입력해주세요",icon: "warning"});
-				return;
-			} else if(pwd == ""){
-				swal({title: "비밀번호를 입력해주세요",icon: "warning"});
-				return;
-			} else {
-				$('#form').submit();
-			}
-		}
-		
+	 <!-- start 카카오계정으로 로그인하기 -->
+	  <a href="javascript:kakaoLogin();"> 
+	  <img src="<c:url value="/resources/login/images/kakao_login_medium_wide.png"/>" style="margin:10px; height:40px;width:260px;"></a>
+      <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script>
+        // 자스키 - dce1a6b74b6037f0cc344d0b3f4d8a97
+        //window.Kakao.init("dce1a6b74b6037f0cc344d0b3f4d8a97");
+        console.log(Kakao.isInitialized()); // sdk초기화여부판단
+      //카카오로그인
+      function kakaoLogin() {
+          Kakao.Auth.login({
+            success: function (response) {
+              Kakao.API.request({
+                url: '/v2/user/me',
+                success: res => { 
+                	
+             
+                const email = res.kakao_account.email;
+                const gender = res.kakao_account.gender;
+                const name = res.kakao_account.profile.nickname;
+                const kakao_account = res.kakao_account;
+     
+              	  console.log(kakao_account);
+              	  console.log(email);
+	              console.log(gender);
+	              console.log(name);
+	              
+	              $('kakaoemail').val(email);
+	              $('kakaoename').val(name);
+	              $('kakaogender').val(gender);        
+	              
+	              },
+                fail: function (error) {
+                  console.log(error)
+                },
+              })
+            },
+            fail: function (error) {
+              console.log(error)
+            },
+          })
+        }
+      //카카오로그아웃  
+      window.Kakao.init('dce1a6b74b6037f0cc344d0b3f4d8a97');
+      function kakaoLogout() {
+          if (!Kakao.Auth.getAccessToken()) {
+           console.log('Not logged in');
+           return;
+          }
+          Kakao.Auth.logout(function(response){
+        	  alert(response + 'logout');
+        	  window.location.href='/'
+        	  });
+          };
+    </script>
+    <!-- end 카카오계정으로 로그인하기 
+    -->
+			
+	
+	<!-- start 구글로 로그인하기 -->
+	
+	<!-- 구글 로그인 버튼 -->
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
+	<script src="https://apis.google.com/js/api:client.js"></script>
+	<script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+ 
+  	<script>
+		  var googleUser = {};
+		  var startApp = function() {
+		    gapi.load('auth2', function(){
+		      // Retrieve the singleton for the GoogleAuth library and set up the client.
+		      auth2 = gapi.auth2.init({
+		        client_id: '483006211482-roi1dr24q8s1i4cpkpkn3b4m4k6dvg3h.apps.googleusercontent.com',
+		        cookiepolicy: 'single_host_origin',
+		        // Request scopes in addition to 'profile' and 'email'
+		        //scope: 'additional_scope'
+		      });
+		      attachSignin(document.getElementById('customBtn'));
+		    });
+		  };
 
-		$(function (){
-			social.kakao.init();
-			social.google.init("googleBtn");
-			social.facebook.init();
-		});
-		
-		function socialGetInfo(info){
-			$('#loginType').val(info.type);
-			$('#loginNm').val(info.nm);
-			$('#loginEmail').val(info.email);
-			$('#loginId').val(info.id);
-			setTimeout($('#form').submit(), 2000);
-		}
-	</script>
-</body>
+		  function attachSignin(element) {
+		    console.log(element);
+		    auth2.attachClickHandler(element, {},
+		        function(googleUser) {
+		          document.getElementById('name').innerText = "Signed in: " +
+		              googleUser.getBasicProfile().getName();
+		          		var profile =  googleUser.getBasicProfile();
+		          		console.log("Email:" + profile.getEmail());
+		          		console.log("Name:" + profile.getName());
+
+		        }, function(error) {
+		          alert(JSON.stringify(error, undefined, 2));
+		        });
+		  }
+  	</script>
+
+ <!-- start 구글 로그인 버튼 -->
+  <div id="gSignInWrapper">
+    <div id="customBtn" class="customGPlusSignIn">
+      <span class="icon"></span>
+      <span class="buttonText">구글로 로그인</span>
+    </div>
+  </div>
+  <div id="name"></div>
+  <script>startApp();</script>
+<!-- end 구글 로그인 버튼 -->
+
+
+				</div>
+			</div>
+		</div>	
+	</body>
 </html>
+
 <!-- footer 시작 -->
 <jsp:include page="/WEB-INF/views/template/Footer.jsp"/>
 <!-- footer 끝 -->

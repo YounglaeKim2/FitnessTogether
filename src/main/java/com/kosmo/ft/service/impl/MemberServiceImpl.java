@@ -21,7 +21,7 @@ public class MemberServiceImpl implements MemberService{
     private MemberDAO dao;
     
     @Override
-	public boolean isLogin(Map map) {		
+	public List<String> isLogin(Map map) {
 		return dao.isLogin(map);
 	}
   
@@ -45,8 +45,16 @@ public class MemberServiceImpl implements MemberService{
     	return dao.signck(map);
     }
 
-	
-    
+	@Override
+    public String updateMember(Map map) {
+    	return dao.updateMember(map);
+    }
+
+	@Override
+    public String deleteMember(String delete) {
+    	return dao.deleteMember(delete);
+    }
+
 	
 } 
 

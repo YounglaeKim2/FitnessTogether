@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface MemberService {
-	 boolean isLogin(Map map);
+	List<String> isLogin(Map map);
 	 
 	 public int idck(String id);
 	 
@@ -13,7 +13,10 @@ public interface MemberService {
 	 public int nameck(String name);
 
 	 public String signck(Map map);
-
+	 
+	 public String updateMember(Map map);
+	 
+	 public String deleteMember(String delete);
 	
 }	
 

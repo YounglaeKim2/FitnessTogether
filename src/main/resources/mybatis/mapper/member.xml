@@ -3,8 +3,18 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="mybatis.mapper.member">
- 	<select id="memberIsLogin" parameterType="Map" resultType="int">
-			SELECT COUNT(*) FROM MEMBER WHERE id=#{id} AND pwd=#{pwd}		
+ 	<select id="memberIsLogin" parameterType="Map" resultType="String">
+		SELECT id
+		FROM MEMBER 
+		<where>
+			<if test='loginType == "ft"'>
+				AND id = #{id} 
+				AND pwd = #{pwd}
+			</if>
+			<if test='loginType != "ft"'>
+				AND email = #{loginEmail}
+			</if>
+		</where>
 	</select>
 	<select id="pwdck" resultType="int">>
 			SELECT COUNT(*) FROM MEMBER WHERE id=#{id} AND pwd=#{pwd}
@@ -21,12 +31,29 @@
 		AND email = #{param1}
 		</where>
 	</select>
+	
+	
 	 <!-- 회원 가입 -->
-    <insert parameterType="Map" id="selectSignck"  >
-    	INSERT INTO MEMBER(ID,PWD,NAME,GENDER,BIRTH,PHONE,EMAIL)
-    	VALUES(#{id}, #{pwd}, #{name}, #{gender}, #{birth}, #{phone}, #{email})
-    </insert>
+<insert parameterType="Map" id="selectSignck">
+	INSERT INTO MEMBER(ID,PWD,NAME,GENDER,BIRTH,PHONE,EMAIL)
+	VALUES(#{id}, #{pwd}, #{name}, #{gender}, #{birth}, #{phone}, #{email})
+</insert>
+
+<!-- 회원정보 수정 -->
+	<update parameterType="Map" id="updateMember">
+		UPDATE MEMBER SET 
+		pwd = #{pwd},
+		name = #{name},
+		phone = #{phone},
+		email = #{email}
+		<where>
+		AND id = #{id} AND pwd = #{pwd}
+		</where>
+	</update>
 	
  	
- 	
+ 	<!-- 회원 탈퇴 -->
+ 	<delete id="deleteMember">
+ 		DELETE FROM MEMBER WHERE id=#{id} AND pwd=#{pwd}
+ 	</delete>
  </mapper> 

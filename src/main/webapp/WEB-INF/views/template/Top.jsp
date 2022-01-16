@@ -117,7 +117,7 @@
 					</c:if>
 					
 					<li class="nav-item"><a class="nav-link"
-						href="<c:url value="/fnt/ProAlter.do"/>"> My-Page </a>
+						href="<c:url value="/fnt/MypagePro.do"/>"> My-Page </a>
 					</li>
 					
 					<li class="nav-item"><a class="nav-link"
@@ -153,7 +153,6 @@
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="dropdownAbout"
 						data-bs-toggle="dropdown" aria-expanded="false"> About </a>
-						
 						<c:if test="${!empty sessionScope.id}">
 							<li style="width:200px;">${sessionScope.id } 님 환영합니다</li>
 						</c:if>

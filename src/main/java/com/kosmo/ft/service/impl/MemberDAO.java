@@ -17,10 +17,9 @@ public class MemberDAO {
 	@Autowired
 	private SqlSessionTemplate template;
 
-	public boolean isLogin(Map map) {
-		int count = template.selectOne("memberIsLogin",map);
-		return count==1 ? true : false;
-	}//////////////
+	public List<String> isLogin(Map map) {
+		return template.selectList("memberIsLogin",map);
+	}
 
 	public MemberDTO selectOne(Map map) {
 		return template.selectOne("memberSelectOne",map);
@@ -42,9 +41,14 @@ public class MemberDAO {
 		return template.selectOne("selectSignck",map);
 	}
 	
-
+	public String updateMember(Map map) {
+		return template.selectOne("updateMember",map);
+	}
 	
-
+	public String deleteMember(String delete) {
+		return template.selectOne("deleteMember",delete);
+	}
+	
 	
 	
 }
