@@ -41,56 +41,13 @@ public class LoginController {
 	private SqlSession sqlSession;
 
 
-	// 로그인 폼으로 이동
+	//로그인 폼으로 이동
 	@RequestMapping("Login.do")
 	public String login() {
 		return "common/Login";
 	}
-
-	/*
-	// 카카로 로그인 처리
-	@RequestMapping("KakaoLogin.do")
-	public String kakaologin(HttpSession session,HttpServletRequest request) {
-		// kakaoemail을 kakaoid에 저장
-		//String kakaoemail = request.getParameter("kakaoemail");
 		
-		//MemberDTO memberdto = new MemberDTO();
-		//MemberDAO memberdao = new MemberDAO();
-		
-		//memberdto.setId(kakaoemail);
-		
-		//int result_lookup = memberdao.loginLookup(memberdto);
-		
-		//if(result_lookup == 0) {
-			//System.out.println("카카오톡 회원 정보 설정");
-			
-			request.setAttribute("kakaoid",request.getParameter("kakaoid"));
-			request.setAttribute("kakaoname",request.getParameter("kakaoname"));
-			request.setAttribute("kakaoemail",request.getParameter("kakaoemail"));
-			request.setAttribute("kakaogender",request.getParameter("kakaogender"));
-		
-		return "common/SignUp";
-	//}else {
-		//memberdto = memberdao.loginOkNick(memberdto);
-		
-		//session.setAttribute("kakaoid", memberdto.getId());
-		//session.setAttribute("nick", memberdto.getName());
-		//session.setAttribute("profile", memberdto.getProfile());
-		//request.setAttribute("flag", 0);
-		
-		//System.out.println("kakaoid :" + memberdto.getId());
-		//System.out.println("kakaoid :" + memberdto.getName());
-		//System.out.println("kakaoid :" + memberdto.getProfile());
-		
-		
-		}
-	 	*/
-	
-		//구글 로그인 처리
-	
-	
-		
-		// 로그인 처리
+	//로그인 처리
 	@RequestMapping("LoginProcess.do")
 	public String loginprocess(@RequestParam Map map,HttpSession session,SessionStatus status,HttpServletRequest request) {
 		
@@ -117,16 +74,13 @@ public class LoginController {
 		}
 	}
 
-
+	//로그아웃
 	@RequestMapping("Logout.do")
 	public String logout(HttpSession session) {
 		session.invalidate();
 		// 뷰정보 번환]
 		return "common/Login";
 	}
-	
-	
-
 	
 // ---------------------------------------------------
 // 회원가입페이지
@@ -148,7 +102,6 @@ public class LoginController {
 			return "1";
 		}	
 	}
-	
 	
 	// 아이디 중복 체크
 	@ResponseBody

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ include file="/WEB-INF/views/common/isLogin.jsp"%>
 <!-- Top 시작 -->
 <jsp:include page="/WEB-INF/views/template/Top.jsp"/>
 <!DOCTYPE html>
@@ -31,11 +31,8 @@
 	</a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
-		
 					<ul class="navbar-nav">
 						<li class="nav-item" style="color:white; font-size: 20px;">${sessionScope.id }</li>
-					
-					
 					</ul>
 			</div>
 	</nav>
@@ -65,7 +62,6 @@
 									<input type="button" id="sucessbtn" class="btn default"
 										style="color: black; font-size: 15px; font-weight: bold; height: 44px; width: 100px; margin: 20px 950px 7px 120px; padding: 10px 10px 10px 10px; border: 2px solid #595757;"
 										value="확인" />
-					
 						</form>
 					</div>
 				</section>
