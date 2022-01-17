@@ -1,13 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+ 
+<!-- Top 시작 -->
+<jsp:include page="/WEB-INF/views/template/Top.jsp"/>
+<!-- Top 끝 -->
+ 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+
 <body>
+<div class="container px-4 py-5" id="featured-3">
+	<h1 class="pb-2 border-bottom">Calorie Calculator<h4>당신이 먹은 음식의 칼로리는?</h4></h1>
+</div>
+<div class="container">
+
+
 	<div>Teachable Machine Image Model</div>
 	
 	<!--  
@@ -24,9 +36,16 @@
 	<!-- 예측결과 표시 영역 -->
 	<div id="label-container"></div>
 	
+	
+	
+	
+</div>
+	
+	
+	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
 	<script type="text/javascript">
 	    // More API functions here:
 	    // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
@@ -163,3 +182,6 @@
 	
 </body>
 </html>
+<!-- footer 시작 -->
+<jsp:include page="/WEB-INF/views/template/Footer.jsp"/>
+<!-- footer 끝 -->

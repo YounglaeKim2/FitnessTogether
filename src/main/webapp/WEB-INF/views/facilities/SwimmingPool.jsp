@@ -52,9 +52,18 @@
 <body>
 
 	<div class="container px-4 py-5" id="featured-3">
-		<h1 class="pb-2 border-bottom">Pool Around You<h4>내 근처의 수영장 찾기</h4></h1>
+		<h1 class="pb-2 border-bottom">Gym Around You<h4>내 근처 수영장 찾기</h4></h1>
    
 	</div>
+	
+	<div class="container">
+		
+		<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+			<div class="btn btn-link">
+				<a href="<c:url value="/fnt/sfHome.do"/> "class="btn btn-primary">목록으로 돌아가기</a>
+			</div>
+		</div>
+	
 	<div class="map_wrap">
 		<div id="map"
 			style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
@@ -73,7 +82,7 @@
 			<div id="pagination"></div>
 		</div>
 	</div>
-
+	</div>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c244899725d72b692838ccde36cbb07d&libraries=services"></script>
 	<script>
 		// 마커를 담을 배열입니다
@@ -297,6 +306,19 @@
 				el.removeChild(el.lastChild);
 			}
 		}
+		
+		// 지도 타입 변경 컨트롤을 생성한다
+		var mapTypeControl = new kakao.maps.MapTypeControl();
+
+		// 지도의 상단 우측에 지도 타입 변경 컨트롤을 추가한다
+		map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);	
+
+		// 지도에 확대 축소 컨트롤을 생성한다
+		var zoomControl = new kakao.maps.ZoomControl();
+
+		// 지도의 우측에 확대 축소 컨트롤을 추가한다
+		map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+		
 	</script>
 </body>
 

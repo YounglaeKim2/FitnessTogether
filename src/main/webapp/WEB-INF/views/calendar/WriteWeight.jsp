@@ -270,7 +270,7 @@
 		function search(){
 			var keyword = $('#searchWord').val()
 			$.ajax({
-				url:'http://localhost:10000/youtube/'+keyword
+				url:'http://127.0.0.1:5000/youtube/'+keyword
 			}).done(function(data){
 				$('#playvideo').html("");
 				$('#videos').html("");
