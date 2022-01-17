@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,7 +32,10 @@
 	    // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
 	
 	    // the link to your model provided by Teachable Machine export panel
-	    var URL = "./my_model/";
+	    
+	    	//var URL = "../resources/my_model/";
+	    	var URL = "<c:url value='/resources/my_model/'/>";
+	    	console.log(URL);
 	  	//웹캡 사용시
 	    //var model, webcam, labelContainer, maxPredictions;
 	  	//웹캠을 이미지파일로 변경시
