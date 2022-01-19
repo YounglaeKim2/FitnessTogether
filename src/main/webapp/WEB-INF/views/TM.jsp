@@ -18,23 +18,20 @@
 	<h1 class="pb-2 border-bottom">Calorie Calculator<h4>당신이 먹은 음식의 칼로리는?</h4></h1>
 </div>
 <div class="container">
-
-
-	<div>Teachable Machine Image Model</div>
-	
 	<!--  
 	<button  onclick="init()">Start</button>
 	-->
 	<!--데이타 소스를 웹캠이 아니라 이미지 파일로 변경시 아래 태그(button,input)추가 -->
-	<button  onclick="predict()">예측하기</button>
+	<!-- 예측결과 표시 영역 -->
+	<h2 id="label-container"></h2>
+	<button type="button" class="btn btn-outline-dark" onclick="predict()">Get Calories</button>
 	<input type="file" id="test_image" accept=".png,.jpg,.jpeg" />
 	<!-- 선택한 이미지를 미리보기 위한 추가 -->
 	<img id="preview_image"/>
 	
 	<!-- 웹캠으로 캡처한 이미지 표시 영역(영상소스) -->
 	<div id="webcam-container"></div>
-	<!-- 예측결과 표시 영역 -->
-	<div id="label-container"></div>
+	
 	
 	
 	
@@ -107,7 +104,6 @@
 	        window.requestAnimationFrame(loop);
 	    }
 		*/
-	
 	    // run the webcam image through the image model
 	    //4.테스트 이미지로 예측하는 함수
 	    async function predict() {
@@ -119,18 +115,15 @@
 	        //이미지파일로 예측하기위한 코드 추가
 	    	/*
 	        https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
-	        
 	        model.predict(
 	        image: HTMLImageElement | HTMLCanvasElement | HTMLVideoElement | ImageBitmap,
 	        flipped = false
 	        )
 	        flipped: a boolean to trigger whether to flip on X or not the image input
-	        
 	        */
 	        var prediction = await model.predict(image,false);
 	        console.log('prediction:',prediction)
 	        //이미지파일로 변경하기 위해 아래코드 추가 끝
-	        
 	        //예측 결과를 labelContainer에 표시주는 반복문
         	//className:클래스명(분류명)
         	//probability:확률
@@ -141,10 +134,8 @@
 	                if(prediction[i].probability.toFixed(2)*100 > 50){
 	                	labelContainer.childNodes[i].innerHTML = classPrediction;
 	                }
-	            	
 	        }
 	    }
-		
 		//1.페이지 로드시 모델 로드
 		init();
 		
@@ -172,12 +163,9 @@
 	          		console.log('e.target.result:',e.target.result);//읽은 파일 내용(URL)
 	          	    //img요소의 src속성에 위 URL추가 즉 미리보기
 	          	    $('#preview_image').prop('src',e.target.result);
-	          		
 	          	}
 			}
 		}/////////////
-		
-		
 	</script>
 	
 </body>
