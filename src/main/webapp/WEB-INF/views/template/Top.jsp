@@ -134,6 +134,10 @@
 					</li>
 					
 					<li class="nav-item"><a class="nav-link"
+						href="<c:url value="/fnt/proteinList.do"/>"> 단백질추천 </a>
+					</li>
+					
+					<li class="nav-item"><a class="nav-link"
 						href="<c:url value="/fnt/calendar.do"/>"> 캘린더 </a>
 					</li>
 					

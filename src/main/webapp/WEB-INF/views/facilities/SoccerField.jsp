@@ -52,7 +52,7 @@
 <body>
 
 	<div class="container px-4 py-5" id="featured-3">
-		<h1 class="pb-2 border-bottom">Gym Around You<h4>내 근처 필라테스 찾기</h4></h1>
+		<h1 class="pb-2 border-bottom">Gym Around You<h4>내 근처 축구장 찾기</h4></h1>
    
 	</div>
 	
@@ -120,7 +120,7 @@
 			}
 
 			// 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
-			ps.keywordSearch(keyword+' 필라테스', placesSearchCB);
+			ps.keywordSearch(keyword+' 축구장', placesSearchCB);
 		}
 
 		// 장소검색이 완료됐을 때 호출되는 콜백함수 입니다

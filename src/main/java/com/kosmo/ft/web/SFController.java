@@ -41,25 +41,18 @@ public class SFController {
 		return "facilities/Pilates";
 	}
 	
+	@RequestMapping("findSoccerField.do")
+	public String findSoccerField() {
+		return "facilities/SoccerField";
+	}
+	
 	@RequestMapping("findYoga.do")
 	public String findYoga() {
 		return "facilities/Yoga";
 	}
-				  
+	
+	@RequestMapping("findBasketballCourt.do")
+	public String findBasketballCourt() {
+		return "facilities/BasketballCourt";
+	}		  
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
