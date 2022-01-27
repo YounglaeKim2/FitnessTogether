@@ -21,5 +21,6 @@
 		<mapper resource="mybatis/mapper/member.xml" />	
 		<mapper resource="mybatis/mapper/calendar.xml" />
 		<mapper resource="mybatis/mapper/mapping.xml"/>	
+		<mapper resource="mybatis/mapper/verification.xml"/>	
 	</mappers>
 </configuration>

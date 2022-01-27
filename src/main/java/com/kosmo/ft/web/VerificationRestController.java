@@ -5,17 +5,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,19 +24,14 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RequestMapping("/fnt/")
 @RestController
-public class MappingRestController {
+public class VerificationRestController {
 
 	@Autowired
 	private RestTemplate restTemplate;
-/*
-	@Autowired
-	private ObjectMapper mapper;
-	*/
+	
 
 	@GetMapping(value="/nowAddress.do",produces = "application/json;charset=UTF-8")
 	public @ResponseBody String nowAddress(@RequestParam Map map) throws JsonProcessingException{
@@ -148,7 +143,42 @@ public class MappingRestController {
 			addresses.add(documentMap);
 		}
 		return addresses;
+		
+		
 	}////////////
+	
+	@PostMapping(value="/VerificationCheck.do",produces = "application/json;charset=UTF-8")
+	public @ResponseBody Map verificationCheck(@RequestParam Map map) {
+		Map result = new HashMap();
+
+		result.put("now", map.get("now").toString());
+		result.put("choice", map.get("choice").toString());
+		if(map.get("now").toString().isEmpty()) {
+			result.put("SOF", "fail");
+			result.put("text", "현재 주소를 불러오지 못합니다.");
+		}
+		else if(map.get("choice").toString().isEmpty()) {
+			result.put("SOF", "fail");
+			result.put("text", "입력된 주소가 없습니다.");
+		}
+		else {
+			if(map.get("now").equals(map.get("choice"))) {
+				if(map.get("now").equals(map.get("portfolio1"))) {
+					result.put("SOF", "fail");
+					result.put("text", "등록된 주소입니다.");
+				}
+				else {
+					result.put("SOF", "success");
+					result.put("text", "입력된 주소를 추가 하시겠습니까?");
+				}
+			}
+			else {
+				result.put("SOF", "fail");
+				result.put("text", "현재주소와 입력된 주소가 다릅니다.");
+			}
+		}
+		return result;
+	}
 	
 	
 }
