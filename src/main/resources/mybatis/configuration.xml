@@ -14,6 +14,8 @@
 	 
 		<typeAlias type="com.kosmo.ft.service.MemberDTO" alias="MemberDTO"/>
 		<typeAlias type="com.kosmo.ft.service.MappingDTO" alias="MappingDTO"/>
+		<typeAlias type="com.kosmo.ft.service.OneMemoDTO" alias="oneMemoDTO"/>
+		<typeAlias type="com.kosmo.ft.service.LineCommentDTO" alias="lineCommentDTO"/>
 	</typeAliases>
 	
 	<!-- 매퍼파일(SQL쿼리 결과와 자바빈 매핑)의 위치정보 설정 -->
@@ -21,6 +23,9 @@
 		<mapper resource="mybatis/mapper/member.xml" />	
 		<mapper resource="mybatis/mapper/calendar.xml" />
 		<mapper resource="mybatis/mapper/mapping.xml"/>	
-		<mapper resource="mybatis/mapper/verification.xml"/>	
+		<mapper resource="mybatis/mapper/verification.xml"/>
+		<mapper resource="mybatis/mapper/dynamicsql.xml"/>
+		<mapper resource="mybatis/mapper/linecomment.xml"/>
+		<mapper resource="mybatis/mapper/onememo.xml"/>
 	</mappers>
 </configuration>
