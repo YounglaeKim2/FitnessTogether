@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -16,6 +17,12 @@ public class MemberDAO {
 
 	@Autowired
 	private SqlSessionTemplate template;
+	
+	@Resource(name = "sqlSessionFactory")
+	private SqlSessionFactory sqlMapper;
+	
+	@Inject
+	SqlSession sqlSession;
 
 	public List<String> isLogin(Map map) {
 		return template.selectList("memberIsLogin",map);
@@ -45,14 +52,29 @@ public class MemberDAO {
 		return template.selectOne("updateMember",map);
 	}
 	
-	public String deleteMember(String delete) {
-		return template.selectOne("deleteMember",delete);
+	public String updatePwd(Map map) {
+		return template.selectOne("updatePwd",map);
 	}
 	
-	public String pwdck(Map map) {
+	public String deleteMember(Map map) {
+		return template.selectOne("deleteMember",map);
+	}
+	
+	public boolean pwdck(Map map) {
 		return template.selectOne("selectPwdck",map);
 	}
 	
+	public List<MemberDTO> memberList() {
+		return template.selectList("memberList");
+	}
+	
+	public Map selectMemberInfo(String id) {
+		return template.selectOne("selectMemberInfo",id);
+	}
+	
+	public Map selectMemberInfo2(String pwd) {
+		return template.selectOne("selectMemberInfo",pwd);
+	}
 	
 }
 	

@@ -21,12 +21,12 @@
 		<link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" type="text/css" />
 		<!-- Core theme CSS (includes Bootstrap)-->
 		<link href="<c:url value="/resources/mypage/css/styles.css"/>" rel="stylesheet" />
+		<link rel="stylesheet" href="/ft/resources/signup/signup.css">
 	</head>
 	<body id="page-top">
 	<!-- Navigation-->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
 	<a class="navbar-brand js-scroll-trigger" href="#page-top">
-		<span class="d-block d-lg-none">Clarence Taylor</span>
 		<span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="<c:url value="/resources/mypage/assets/img/user.png"/>" alt="..." /></span>
 	</a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
@@ -47,20 +47,14 @@
 							<div class="subheading mb-5">회원님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인해주세요.</div>
 									<table class="w-pct60">
 										<tr>
-											<th class="w-px160">비밀번호</th>
+											<th class="w-px160" style="margin:0 0 0 50px; padding: 15px 0 0 100px;">비밀번호</th>
 											<td>
-											<input type="text" id="pwd" name="pwd" style="margin:0 0 0 10px;  height:35px;"/>
-											</td>
-										</tr>
-										<tr>
-											<th class="w-px161">비밀번호 확인</th>
-											<td>
-											<input type="text" id="pwdck" name="pwdck" style="margin:30px 0 0 10px; height:35px; "/>
+											<input type="password" id="pwd" name="pwd" class="pwd" style="margin:0 0 0 50px;  height:35px;"/>
 											</td>
 										</tr>
 								</table>
 									<input type="button" id="sucessbtn" class="btn default"
-										style="color: black; font-size: 15px; font-weight: bold; height: 44px; width: 100px; margin: 20px 950px 7px 120px; padding: 10px 10px 10px 10px; border: 2px solid #595757;"
+										style="color: black; font-size: 15px; font-weight: bold; height: 44px; width: 100px; margin: 20px 0 7px 10px; padding: 10px 10px 10px 10px; border: 2px solid #595757;"
 										value="확인" />
 						</form>
 					</div>
@@ -72,25 +66,21 @@
         <!-- Core theme JS-->
         <script src="<c:url value="/resources/mypage/js/scripts.js"/>"/></script>
         <script>
-     // 비밀번호 확인
+     // 비밀번호 입력 확인
      $(function() {
 		$("#sucessbtn").click(function() {
 			var pwd = $("#pwd").val();
-			var pwdck = $("#pwdck").val();
 			
-			if( pwd == "") {
+			if(pwd == "") {
 				swal({title: "비밀번호 입력은 필수입니다",icon: "warning"});
 				$("#pwd").focus();
-			}else if (!pwdck) {
-				swal({title: "비밀번호 확인 입력은 필수입니다",icon: "warning"});
-				$("#pwdck").focus();
 			}else{
 				$('#pwdform').submit();
 				}
 			})
-		});
-    	
-        </script>
+		});	
+
+		</script>
     </body>
 </html>
 

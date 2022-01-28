@@ -16,8 +16,18 @@ public interface MemberService {
 	 
 	 public String updateMember(Map map);
 	 
-	 public String deleteMember(String delete);
+	 public String updatePwd(Map map);
+	 
+	 public String deleteMember(Map map);
 	
-	 public String pwdck(Map map);
+	 boolean pwdck(Map map);
+	 
+	 public List<MemberDTO> memberList();
+	 
+	 
+	 public Map selectMemberInfo(String id);
+	 
+	 public Map selectMemberInfo2(String pwd);
+
 }	
 

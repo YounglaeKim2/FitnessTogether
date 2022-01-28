@@ -115,7 +115,7 @@
 					</li>
 					</c:if>
 					<li class="nav-item"><a class="nav-link"
-						href="<c:url value="/fnt/MypagePro.do"/>"> My-Page </a>
+						href="<c:url value="/fnt/Mypage.do"/>"> My-Page </a>
 					</li>
 					<li class="nav-item"><a class="nav-link"
 						href="<c:url value="/fnt/TeachableMachine.do"/>"> Food-Calculator </a>

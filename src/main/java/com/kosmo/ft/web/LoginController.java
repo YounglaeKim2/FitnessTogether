@@ -39,7 +39,7 @@ public class LoginController {
 	private MemberServiceImpl memberService;
 	private String name;
 	private SqlSession sqlSession;
-
+	private MemberDTO dto;
 
 	//로그인 폼으로 이동
 	@RequestMapping("Login.do")
@@ -53,20 +53,21 @@ public class LoginController {
 		
 		List<String> idList = memberService.isLogin(map);
 		String loginType = (String)map.get("loginType");
+		String email = (String)map.get("email");
 			
 		if(idList.size() == 0) {
 			if(!"ft".equals(loginType)) {
 				request.setAttribute("loginType", loginType);
 				request.setAttribute("loginEmail", map.get("loginEmail"));
 				request.setAttribute("loginNm", map.get("loginNm"));
+				request.setAttribute("email", map.get("email"));
 				return "common/SignUp"; 
 			}
 			status.setComplete();
 			return "common/notLogin";
 		}
-		
 		session.setAttribute("id", idList.get(0));
-		
+		session.setAttribute("email", map.get("email"));
 		if(map.get("id").equals("ADMIN")) {
 			return "admin/Home";
 		} else {
@@ -82,15 +83,14 @@ public class LoginController {
 		return "common/Login";
 	}
 	
-// ---------------------------------------------------
-// 회원가입페이지
+// -----------------------------------------------------------------------// 회원가입페이지
 	//회원가입
 	@RequestMapping("SignUp.do")
 	public String signUp(HttpSession session){
 		return "common/SignUp";
 	}
 	
-	// 닉네임 중복 체크
+	//닉네임 중복 체크
 	@ResponseBody
 	@RequestMapping(value="nameck.do", method= RequestMethod.POST)
 	public String nameck(@RequestParam(name = "name" ) String name)  {
@@ -103,7 +103,7 @@ public class LoginController {
 		}	
 	}
 	
-	// 아이디 중복 체크
+	//아이디 중복 체크
 	@ResponseBody
 	@RequestMapping(value="idck.do", method= RequestMethod.POST)
 	public String idck(@RequestParam(name = "id" ) String id)  {
@@ -116,7 +116,7 @@ public class LoginController {
 		}
 	}
 	
-	// 이메일 중복 체크
+	//이메일 중복 체크
 	@ResponseBody
 	@RequestMapping(value="emailck.do", method= RequestMethod.POST)
 	public String emailck(@RequestParam(name = "email" ) String email)  {
@@ -129,80 +129,102 @@ public class LoginController {
 		}
 	}
 	
-	
-	
-	//회원가입 처리
-		
+	//회원가입 처리	
 	@RequestMapping("signck.do")
-	public String signck(@RequestParam Map map,HttpSession session){	
+	public String signck(@RequestParam Map map,HttpSession session,HttpServletRequest request){	
 		String sign = memberService.signck(map);
-		
 		String joinType = (String)map.get("joinType");
+		String name = (String)map.get("name");
+		String email = (String)map.get("email");
+		String phone = (String)map.get("phone");
+		String birth = (String)map.get("birth");
 		
 		if(!"ft".equals(joinType) ) {
 			session.setAttribute("id", map.get("id"));
+			session.setAttribute("name", map.get("name"));
+			session.setAttribute("email", map.get("email"));
+			session.setAttribute("phone", map.get("phone"));
+			session.setAttribute("birth", map.get("birth"));
 		}
-		
 		return "home";
 	}
-// ---------------------------------------------------------------------------- Mypage
-// 비밀번호 확인
+// ----------------------------------------------------------------------------//마이페이지
+	//마이페이지 이동
+	@RequestMapping("Mypage.do")
+	public String mypage(@RequestParam Map map,HttpSession session){	
+		return "mypage/Mypage";
+		}
+	
+	//비밀번호 확인 후 마이페이지 이동
 	@RequestMapping("MypagePro.do")
-	public String mypagePro(@RequestParam Map map,HttpSession session){	
-		//String pwdck = memberService.pwdck(map);
+	public String mypagePro(@RequestParam Map map,HttpSession session, HttpServletRequest request){	
+		boolean flag =  memberService.pwdck(map);
 		
-		String pwdck = (String)map.get("pwd");
-		
-		if("pwd".equals(pwdck) ) {
-			session.setAttribute("pwd", map.get("pwd"));
+		if(!flag){
+			return "mypage/NotPwd";
+		}else{		
+			String id = (String)session.getAttribute("id");
+			Map loginInfo = memberService.selectMemberInfo(id);
+			request.setAttribute("loginInfo", loginInfo);
 			return "mypage/UpdateMember";
-		}else {
-			return "mypage/Mypage";
 		}
-		}
+	}
 	
-//회원정보 수정 보기
+	
+	//회원정보 수정 페이지 이동
 	@RequestMapping("UpdateMember.do")
-	public String updateMember(@RequestParam Map map,HttpSession session){	
+	public String updateMember(@RequestParam Map map,HttpSession session, HttpServletRequest request){
+		// db 조회 
+		String id = (String)session.getAttribute("id");
+		Map loginInfo = memberService.selectMemberInfo(id);
+		request.setAttribute("loginInfo", loginInfo);
 		return "mypage/UpdateMember";
-		}
+	}
 	
-// 회원정보 수정 과정
+	
+	//회원정보 수정 과정
 	@RequestMapping("UpdateMemberPro.do")
 	public String updateMemberPro(@RequestParam Map map,HttpSession session){	
-
-	return "mypage/UpdateMember";
+		memberService.updateMember(map);
+		session.invalidate();
+		return "home";
 	}
 
-//비밀번호 수정
+	//비밀번호 수정 페이지 이동
 	@RequestMapping("UpdatePwd.do")
-	public String UpdatePwd(@RequestParam Map map,HttpSession session){	
-		return "mypage/UpdatePwd";
-	}
-//비밀번호 수정
+	public String updatePwd(@RequestParam Map map,HttpSession session,HttpServletRequest request){			
+		String id = (String)session.getAttribute("id");
+		Map loginInfo = memberService.selectMemberInfo(id);
+		request.setAttribute("loginInfo", loginInfo);
+			return "mypage/UpdatePwd";		
+	}	
+	
+	//비밀번호 수정
 	@RequestMapping("UpdatePwdPro.do")
-	public String UpdatePwdPro(@RequestParam Map map,HttpSession session){	
-	
-		return "common/Login";
-	}
-	
-// 회원탈퇴
-	@RequestMapping("DeleteMember.do")
-	public String QuitMember(@RequestParam Map map,HttpSession session){	
-		return "mypage/DeleteMember";
-	}
-		
-// 회원탈퇴 과정
-		@RequestMapping("DeleteMemberPro.do")
-		public String DeleteMemberPro(String id,HttpSession session,RedirectAttributes rttr){	
-			memberService.deleteMember(id);
+	public String updatePwdPro(@RequestParam Map map,HttpSession session,HttpServletRequest request){	
+			memberService.updatePwd(map);
 			session.invalidate();
-			rttr.addFlashAttribute("msg", "이용해주셔서 감사합니다.");
-				return "redirect:/fnt/Login.do";
+			return "home";	
+	}
+	
+	
+	//회원탈퇴 페이지 이동
+		@RequestMapping("DeleteMember.do")
+		public String DeleteMember(@RequestParam Map map,HttpSession session, HttpServletRequest request){		
+			return "mypage/DeleteMember";		
 		}
-
-// ---------------------------------------------------
-// 관리자페이지
+		
+	//회원탈퇴 과정
+	@RequestMapping("DeleteMemberPro.do")
+	public String deleteMemberPro(@RequestParam Map map,HttpSession session,HttpServletRequest request){	
+		//String id = (String)session.getAttribute("id");
+		memberService.deleteMember(map);
+		//session.removeAttribute(id);
+		session.invalidate();
+		return "common/AfDeleteMember";
+	}
+	
+// -------------------------------------------------------------------------//관리자페이지
 	//메인페이지로 이동
 	@RequestMapping("Main.do")
 	 public String main() {
@@ -216,20 +238,17 @@ public class LoginController {
 	}
 	
 	//게시판관리로 이동
-		@RequestMapping("Board.do")
-		 public String board() {
-		  return "admin/Board";
-		}
+	@RequestMapping("Board.do")
+	 public String board() {
+	  return "admin/Board";
+	}
 	
 	//회원관리로 이동
-		@RequestMapping("MemberAdmin.do")
-			public String memberAdmin() {
-		 return "admin/MemberAdmin";
-		}
+	@RequestMapping("MemberAdmin.do")
+	public String memberAdmin(Model model) {
+		List<MemberDTO> list = memberService.memberList();
+		model.addAttribute("list",list);
+		return "admin/MemberAdmin";
+	}
 }
 		
-	
-	
-	
-	
-

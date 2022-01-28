@@ -197,7 +197,7 @@ table tr td label:not(:last-child) {
 	outline: none;
 	vertical-align: top;
 }
-.w-pct60 input {
+.w-pct60-1 input {
 	height: 44px;
 	width: 332px;
 	padding: 10px 14px;
@@ -211,6 +211,7 @@ table tr td label:not(:last-child) {
 	outline: none;
 	vertical-align: top;
 }
+
 
 input::placeholder {
 	color: #d1cfcf;

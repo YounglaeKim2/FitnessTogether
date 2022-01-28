@@ -16,9 +16,11 @@
 			</if>
 		</where>
 	</select>
-	<select id="pwdck" resultType="int">>
-			SELECT COUNT(*) FROM MEMBER WHERE id=#{id} AND pwd=#{pwd}
+	<!-- 
+	<select parameterType="Map" id="pwdck" resultType="int">>
+			SELECT COUNT(*) FROM MEMBER WHERE pwd=#{pwd}
 	</select>
+	-->
 	<select parameterType="String" id="selectNameck" resultType="int">
 		SELECT COUNT(*) FROM MEMBER WHERE name = #{param1}  
 	</select>
@@ -32,8 +34,9 @@
 		</where>
 	</select>
 	
+	
 	<!-- 비밀번호 확인 -->
-	<select parameterType="String" id="selectPwdck" resultType="String">
+	<select parameterType="Map" id="selectPwdck" resultType="boolean">
 		SELECT COUNT(*) FROM MEMBER 
 		<where>
 		AND pwd = #{pwd}
@@ -41,26 +44,55 @@
 	</select>
 	
 	 <!-- 회원 가입 -->
-	<insert parameterType="Map" id="selectSignck">
+	<insert parameterType="Map" id="selectSignck" >
 	INSERT INTO MEMBER(ID,PWD,NAME,GENDER,BIRTH,PHONE,EMAIL)
 	VALUES(#{id}, #{pwd}, #{name}, #{gender}, #{birth}, #{phone}, #{email})
 	</insert>
 
 <!-- 회원정보 수정 -->
 	<update parameterType="Map" id="updateMember">
-		UPDATE MEMBER SET 
-		pwd = #{pwd},
-		name = #{name},
-		phone = #{phone},
-		email = #{email}
+		UPDATE MEMBER 
+		SET 
+			name = #{name},
+			phone = #{phone},
+			pwd = #{pwd}
 		<where>
-		AND id = #{id} AND pwd = #{pwd}
+			AND id = #{id}
 		</where>
 	</update>
 	
- 	
- 	<!-- 회원 탈퇴 -->
- 	<delete id="deleteMember">
- 		DELETE FROM MEMBER WHERE id=#{id} AND pwd=#{pwd}
+<!-- 비밀번호 변경 -->
+	<update parameterType="Map" id="updatePwd">
+		UPDATE MEMBER 
+		SET 
+			pwd = #{pwd}
+		<where>
+			AND pwd = #{pwd}
+		</where>
+	</update>
+	
+<!-- 회원 탈퇴 -->
+ 	<delete parameterType="Map" id="deleteMember">
+ 		DELETE MEMBER 
+ 		WHERE id = #{id}  
  	</delete>
+ 	
+<!-- 회원 목록 -->
+	<select id="memberList" resultType="MemberDTO">
+		SELECT
+			id,name,email,phone,gender,birth
+		FROM MEMBER 
+	</select>
+	
+	<select id="selectMemberInfo" resultType="Map" parameterType="String">
+	/* mybatis.mapper.member.selectMemberInfo */
+		SELECT
+			*
+		FROM MEMBER 
+		<where>
+			AND id = #{param1}
+		</where>
+	</select>
+
+
  </mapper> 

@@ -76,9 +76,7 @@
 						<tr>
 							<th>생년월일</th>
 							<td>
-							<input type="text" name="birth" id="birth_year" pattern="[0-9]*"  size="4" maxlength="4" placeholder="YYYY" style="width:100px;">						
-							<input type="text" name="birth" id="birth_month" pattern="[0-9]*" size="2" maxlength="2" placeholder="MM" style="width:100px;">		
-							<input type="text" name="birth" id="birth_day" pattern="[0-9]*" size="2" maxlength="2" placeholder="DD" style="width:100px;">
+							<input type="text" name="birth" id="birth" pattern="[0-9]*"  size="8" maxlength="8" placeholder="YYYYMMDD" style="width:332px;">						
 							</td>
 						</tr>
 						<tr>
@@ -131,6 +129,7 @@
 	const regid = /^[A-za-z0-9]{5,15}$/;
 	const regemail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
 	const regpwd =  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,16}$/;      
+
 	
 	function showTextname() {
 		$('#validNAME').show();
@@ -279,9 +278,7 @@
 			var pwd = $("#pwd").val();
 			var pwdck = $("#pwdck").val();
 			var email = $("#email").val();
-			var birth_year = $("#birth_year").val();
-			var birth_month = $("#birth_month").val();
-			var birth_day = $("#birth_day").val();
+			var birth = $("#birth").val();
 			var phone = $("#phone ").val();
 			var idck = $('#idck').val();
 			
@@ -300,52 +297,13 @@
 			} else if (!email) {
 				swal({title: "이메일 입력은 필수입니다",icon: "warning"});
 				$("#email").focus();
-			} else if (!birth_year) {
+			} else if (!birth) {
 				swal({title: "생년월일 입력은 필수입니다",icon: "warning"});
-				$("#birth_year").focus();
-			} else if (!birth_month) {
-				swal({title: "생년월일 입력은 필수입니다",icon: "warning"});
-				$("#birth_month").focus();
-			} else if (!birth_day) {
-				swal({title: "생년월일 입력은 필수입니다",icon: "warning"});
-				$("#birth_day").focus();
+				$("#birth").focus();
 			} else if (!phone ) {
 				swal({title: "전화번호 입력은 필수입니다",icon: "warning"});
 				$("#phone").focus();
 			} else {
-				/*
-				$.ajax({
-					url:'/ft/fnt/signck.do',
-					data:
-					dataType:"json",
-					type:"post"
-				}).done(function(data){
-					console.log(data)
-					
-					if(data == '0'){
-						swal({title: "성공입니다",icon: "success"})
-						cksign = true;
-					} else {
-						swal({title: "실패입니다",icon: "error"})
-						cksign = false;
-					}
-				});
-				*/
-				
-				/*
-					swal({
-						title: "회원가입이 완료되었습니다",
-						icon: "success",
-						buttons: "확인"
-					}).then((value) =>{
-						if(value){
-							location.href = "/ft/fnt/signck.do";
-								
-						}
-					});
-				*/
-				
-				//swal({title: "회원가입이 완료되었습니다",icon: "success"});
 				$('#dataform').submit();
 				}
 			})	
