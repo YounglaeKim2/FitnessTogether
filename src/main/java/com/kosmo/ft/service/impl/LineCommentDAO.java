@@ -31,16 +31,16 @@ public class LineCommentDAO {
 		return template.selectOne("mappingFindNameById",id);
 	}
 
-//	public int update(Map map) {		
-//		return template.update("commentUpdate",map);
-//	}
-//
-//	public int delete(Map map) {
-//		
-//		return template.delete("commentDelete",map);
-//	}
-//
-//	public int deleteByNo(Map map) {
-//		return template.delete("commentDeleteByNo",map);
-//	}
+	public int update(Map map) {		
+		return template.update("commentUpdate",map);
+	}
+
+	public int delete(Map map) {
+		
+		return template.delete("commentDelete",map);
+	}
+
+	public int deleteByNo(Map map) {
+		return template.delete("commentDeleteByNo",map);
+	}
 }
