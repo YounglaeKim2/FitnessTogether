@@ -55,7 +55,12 @@ public class VerificationRestController {
 		String nowlocation="";
 		for(Map document : nowDocuments) {
 			if((document.get("region_type")).toString().equals("H")) {
-				nowlocation=document.get("address_name").toString();
+				if(map.get("jsp").equals("verification")) {
+					nowlocation=document.get("address_name").toString();
+				}
+				else {
+					nowlocation=document.get("region_2depth_name").toString();
+				}
 			}
 		}
 		return nowlocation;

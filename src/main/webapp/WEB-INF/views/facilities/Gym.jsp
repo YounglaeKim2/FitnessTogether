@@ -87,10 +87,45 @@
 	<script>
 		// 마커를 담을 배열입니다
 		var markers = [];
+		var lat = "";
+		var lng = "";
+		if (navigator.geolocation) {
+			//브라우저의 geolocation 지원 여부 판단
+
+			//PositionOptions객체 설정용]
+			var options = {
+				timeout : 3000,
+				maximumAge : 5000
+			};
+			//현재 위치 정보를 한번만 얻기
+			navigator.geolocation.getCurrentPosition(successCallback);
+		}
+		//현재 위치를 성공적으로 수신시 자동으로 호출되는 콜백함수
+		function successCallback(position) {
+			lat = position.coords.latitude;
+			lng = position.coords.longitude;
+			console.log("latitude : %s longitude : %s",lat,lng);
+			
+			$.ajax({
+				url:"<c:url value="/fnt/nowAddress.do"/>",
+				data:'latitude='+lat+'&longitude='+lng+'&jsp=facilities',
+				dataType:'text',
+				type:'get',
+				success:function(data){
+					$("#keyword").attr('value',data);
+					console.log(data);
+					searchPlaces();
+				},
+				error:function(error){//서버로부터 비정상적인 응답을 받았을때 호출되는 콜백함수
+					console.log('%O',error);
+					console.log('에러:',error.responseText);
+				}
+			});
+		}
 
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		mapOption = {
-			center : new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+			center : new kakao.maps.LatLng(lat, lng), // 지도의 중심좌표
 			level : 1
 		// 지도의 확대 레벨
 		};
@@ -106,8 +141,6 @@
 			zIndex : 1
 		});
 
-		// 키워드로 장소를 검색합니다
-		searchPlaces();
 
 		// 키워드 검색을 요청하는 함수입니다
 		function searchPlaces() {

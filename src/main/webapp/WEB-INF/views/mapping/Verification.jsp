@@ -123,7 +123,7 @@
 				
 				$.ajax({
 					url:"<c:url value="/fnt/nowAddress.do"/>",
-					data:'latitude='+lat+'&longitude='+lng,
+					data:'latitude='+lat+'&longitude='+lng+'&jsp=verification',
 					dataType:'text',
 					type:'get',
 					success:function(data){successNowAjax(data,'nowPolling');},
