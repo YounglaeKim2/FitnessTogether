@@ -27,5 +27,6 @@
 		<mapper resource="mybatis/mapper/dynamicsql.xml"/>
 		<mapper resource="mybatis/mapper/linecomment.xml"/>
 		<mapper resource="mybatis/mapper/onememo.xml"/>
+		<mapper resource="mybatis/mapper/android.xml"/>
 	</mappers>
 </configuration>
