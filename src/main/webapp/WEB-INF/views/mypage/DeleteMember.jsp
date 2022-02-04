@@ -46,39 +46,20 @@
 		<div id="main">
 			<div class="content" style="width: 2000px; height: 500px; text-align: center; margin:100px 800px 0 200px; padding: 0 750px 0 0; ">
 				<p class="w-pct60 right" style="margin: 0 auto; padding: 0 540px 0 0; font-size: 13px;"></p>
-					<form class="deleteMember" id="deleteMember" action="<c:url value="/fnt/DeleteMemberPro.do"/>" method="post">
-					<input type="hidden" name="id" value="${sessionScope.id}"/>
+					
+					
 					<span class="delete_user"><img class="deleteUser" style="width:130px;height:130px;margin:0 560px 0 0;"src="<c:url value="/resources/mypage/images/delete_user.png"/>" /></span>
 				<div class="subheading mb-5" style="color:black; font-weight:bold; padding: 0 600px 0 0;">정말&nbsp;&nbsp;탈퇴&nbsp;&nbsp;하시겠습니까?</div>
 				<div class="subheading mb-6" style="color:black; font-weight:bold; padding: 0 600px 0 0;">탈퇴한&nbsp;&nbsp;데이터는&nbsp;&nbsp;복구가&nbsp;&nbsp;되지&nbsp;&nbsp;않습니다.</div>
 				<div class="subheading mb-7" style="color:black; font-weight:bold; padding: 0 600px 0 0;">탈퇴를&nbsp;&nbsp;원하시면&nbsp;&nbsp;아래 "<span class="highlight" style="background-color:#f5bfab;">회원&nbsp;&nbsp;탈퇴</span>" 버튼을&nbsp;&nbsp;눌러주세요</div>
-					<input type="button" id="sucessbtn" class="btn default" onclick="location.href='/ft/fnt/DeleteMemberPro.do'"
-						style="color: black; font-size: 15px; font-weight: bold; height: 44px; width: 100px; margin: 30px 600px 7px 0; padding: 10px 10px 10px 10px; border: 2px solid #595757;" value="회원탈퇴" />
+					<form class="deleteMember" id="deleteMember" action="<c:url value="/fnt/DeleteMemberPro.do"/>" method="post">
+						<input type="hidden" name="id" value="${sessionScope.id}"/>
+						<button id="sucessbtn" class="btn default" style="color: black; font-size: 15px; font-weight: bold; height: 44px; width: 100px; margin: 30px 600px 7px 0; padding: 10px 10px 10px 10px; border: 2px solid #595757">회원탈퇴</button>
 					</form>
 			</div>
 		</div>
 	</div>
-
-		<script>
-     // 유효성 체크
-    	
-    	$(function() {
-    		$("#sucessbtn").click(function() {
-    				$.ajax({
-    					url:'/ft/fnt/DeleteMemberPro.do',
-    					data:{"id":id},
-    					dataType:"json",
-    					type:"post"
-    				}).done(function(data){
-    					console.log(data)		
-    				$('#deleteMember').submit();
-    				}	
-    			})	
-    		});
-        
-        
-        </script>
-    </body>
+</body>
 </html>
 
 <!-- footer 시작 -->

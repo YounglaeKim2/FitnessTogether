@@ -1,6 +1,7 @@
 package com.kosmo.ft.web;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,7 @@ import org.springframework.expression.ParseException;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,10 +26,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kosmo.ft.service.ListPagingData;
 import com.kosmo.ft.service.MemberDTO;
+import com.kosmo.ft.service.OneMemoDTO;
 import com.kosmo.ft.service.impl.CalendarServiceImpl;
 import com.kosmo.ft.service.impl.MemberDAO;
 import com.kosmo.ft.service.impl.MemberServiceImpl;
+import com.kosmo.ft.service.impl.OneMemoServiceImpl;
 
 	
 @Controller
@@ -40,6 +45,10 @@ public class LoginController {
 	private String name;
 	private SqlSession sqlSession;
 	private MemberDTO dto;
+	
+	//서비스 주입]
+	@Resource(name="memoService")
+	private OneMemoServiceImpl memoService;
 
 	//로그인 폼으로 이동
 	@RequestMapping("Login.do")
@@ -60,7 +69,7 @@ public class LoginController {
 				request.setAttribute("loginType", loginType);
 				request.setAttribute("loginEmail", map.get("loginEmail"));
 				request.setAttribute("loginNm", map.get("loginNm"));
-				request.setAttribute("email", map.get("email"));
+				//request.setAttribute("email", map.get("email"));
 				return "common/SignUp"; 
 			}
 			status.setComplete();
@@ -209,17 +218,17 @@ public class LoginController {
 	
 	
 	//회원탈퇴 페이지 이동
-		@RequestMapping("DeleteMember.do")
-		public String DeleteMember(@RequestParam Map map,HttpSession session, HttpServletRequest request){		
-			return "mypage/DeleteMember";		
-		}
+	@RequestMapping("DeleteMember.do")
+	public String DeleteMember(@RequestParam Map map){	
+		System.out.println(String.format("컨트롤러id : %s", map.get("id")));
+		return "mypage/DeleteMember";		
+	}
 		
 	//회원탈퇴 과정
 	@RequestMapping("DeleteMemberPro.do")
 	public String deleteMemberPro(@RequestParam Map map,HttpSession session,HttpServletRequest request){	
-		//String id = (String)session.getAttribute("id");
+		String id = (String)session.getAttribute("id");
 		memberService.deleteMember(map);
-		//session.removeAttribute(id);
 		session.invalidate();
 		return "common/AfDeleteMember";
 	}
@@ -237,10 +246,31 @@ public class LoginController {
 	  return "admin/Statics";
 	}
 	
-	//게시판관리로 이동
+	//게시판관리
 	@RequestMapping("Board.do")
-	 public String board() {
-	  return "admin/Board";
+	 public String board(
+		@ModelAttribute("id") @RequestParam Map map,//검색 파라미터 및 페이징용 키값 저장용
+		@RequestParam(required = false,defaultValue = "1") int nowPage,
+		HttpServletRequest req,//페이징에 사용할 컨텍스트 루트 경로 얻기용
+		Model model) 
+	{
+		//서비스 호출
+		ListPagingData<OneMemoDTO> listPagingData = memoService.selectList(map, req, nowPage);
+		List<OneMemoDTO> list = listPagingData.getLists();
+		
+		//데이타 저장
+		model.addAttribute("list", list);
+		
+		return "admin/Board";
+	}
+	
+	//게시물 삭제
+	@RequestMapping("DeleteBoard.do")
+	public String deleteBoard(@ModelAttribute("id") String id,@RequestParam Map map) throws Exception {
+		//서비스 호출
+		memoService.delete(map);
+		//뷰로 포워드
+		return "admin/Board";
 	}
 	
 	//회원관리로 이동
@@ -250,5 +280,23 @@ public class LoginController {
 		model.addAttribute("list",list);
 		return "admin/MemberAdmin";
 	}
+	
+	//회원탈퇴처리
+	@RequestMapping("deleteMemberAdmin.do")
+	public String deleteMemberAdmin(@RequestParam Map map,HttpSession session,HttpServletRequest request){	
+		String id = (String)session.getAttribute("id");
+		memberService.deleteMember(map);
+		//session.removeAttribute(id);
+		session.invalidate();
+		return "admin/MemberAdmin";
+	}
+	
+	@RequestMapping("viewBoard.do")
+	public String viewPro(@RequestParam Map map, Model model){		 
+		OneMemoDTO record = memoService.selectOne(map);
+		model.addAttribute("record",record);
+		return "admin/BoardView";
+	}
+	
 }
 		

@@ -52,11 +52,6 @@
 								<li class="nav-item"><a class="nav-link"
 									href="<c:url value="/fnt/Main.do"/>"><i class="fa fa-home"></i>
 										Home</a></li>
-								<!-- 
-                  <li class="nav-item">
-                  	<a class="nav-link" href="<c:url value="/fnt/Statics.do"/>"><i class="fa fa-bar-chart-o"></i> 통계 </a>                  
-                  </li>
-                   -->
 								<li class="nav-item"><a class="nav-link"
 									href="<c:url value="/fnt/Board.do"/>"><i class="fa fa-edit"></i>
 										게시판관리</a></li>
@@ -66,8 +61,6 @@
 							</ul>
 						</div>
 					</div>
-					<!-- /sidebar menu -->
-					<!-- /menu footer buttons -->
 					<div class="sidebar-footer hidden-small">
 						<a style="width: 230px;" data-toggle="tooltip"
 							data-placement="top" title="Logout"
@@ -90,70 +83,36 @@
 			<!-- page content -->
 			<div class="right_col" role="main">
 				<div class="">
-					<div class="page-title">
-						<div class="title_left"></div>
-						<div class="clearfix"></div>
-						<div class="col-md-12 col-sm-12  ">
-							<div class="x_panel">
-								<div class="x_title">
-									<h2>게시판 관리</h2>
-									<ul class="nav navbar-right panel_toolbox">
-										<li><a class="collapse-link"><i
-												class="fa fa-chevron-up"></i></a></li>
-										<li class="dropdown"><a href="#" class="dropdown-toggle"
-											data-toggle="dropdown" role="button" aria-expanded="false"><i
-												class="fa fa-wrench"></i></a>
-											<div class="dropdown-menu"
-												aria-labelledby="dropdownMenuButton">
-												<a class="dropdown-item" href="#">Settings 1</a> <a
-													class="dropdown-item" href="#">Settings 2</a>
-											</div></li>
-										<li><a class="close-link"><i class="fa fa-close"></i></a>
-										</li>
-									</ul>
-									<div class="clearfix"></div>
-								</div>
-								<div class="x_content">
-									<div class="table-responsive">
-										
-										<table class="table table-striped jambo_table bulk_action">
-											<thead>
-												<tr class="headings">
-													<th class="column-title">번호</th>
-													<th class="column-title">제목</th>
-													<th class="column-title">닉네임</th>
-													<th class="column-title">아이디</th>
-													<th class="column-title">작성일</th>
-													<th class="column-title no-link last"> <span class="nobr">정보</span></th>
-												</tr>
-											</thead>
-											<tbody>
-												<c:if test="${empty list}">
-													<tr>
-														<td colspan="16">일치하는 데이터가 없습니다.</td>
-													</tr>
-												</c:if>
-												<c:forEach var="m" items="${list}">
-													<tr>
-														<td> ${ m.no }</td>
-														<td> ${ m.title }</td>
-														<td> ${ m.name }</td>
-														<td> ${ m.id }</td>
-														<td> ${ m.postDate }</td>
-														<td> 
-															<button type="button" onclick="fnView(${m.no})">상세보기</button>
-															<button type="button" onclick="fnDelete(${m.no})">삭제</button>
-														</td>
-													</tr>
-												</c:forEach>
-											</tbody>
-										</table>
-										<form id="pwdform"action="<c:url value="/fnt/viewBoard.do"/>" >
-											<input type="hidden" name="no" value="">
-										</form>
-									</div>
-								</div>
-							</div>
+					<div class="row">
+						<div class="col-md-offset-2 col-md-8">
+							<form id="viewForm" action="" method="POST">
+								<table class="table table-bordered table-striped">
+									<tbody>
+										<tr>
+											<th class="text-center">번호</th>
+											<td>${record.no}</td>
+										</tr>
+										<tr>
+											<th class="text-center">제목</th>
+											<td><input type="text" name="title" value="${record.title}"></td>
+										</tr>
+										<tr>
+											<th class="text-center">작성자</th>
+											<td>${record.name}</td>
+										</tr>
+										<tr>
+											<th class="text-center">등록일</th>
+											<td>${record.postDate}   </td>
+										</tr>
+										<tr>
+											<th class="text-center" colspan="2">내용</th>
+										</tr>
+										<tr>
+											<td colspan="2">${record.content}</td>
+										</tr>
+									</tbody>
+								</table>
+							</form>
 						</div>
 					</div>
 				</div>
@@ -173,36 +132,10 @@
 	</div>
 </body>
 <script>
-	function fnView(no) {
-		$('[name=no]').val(no);
-		$('#pwdform').submit();
+	function save() {
+		값체크 
+		
+		$('viewForm').submit();
 	}
-	function fnDelete(no) {
-		var result = swal("삭제하시겠습니까?");
-		if (result) {
-			$.ajax({
-				url : '/ft/fnt/DeleteBoard.do',
-				data : { "no" : no },
-				dataType : "json",
-				type : "post",
-			}).done(function(result) {
-				if (result) {
-					swal("삭제되었습니다");
-					window.location.reload();
-				} else {
-					swal("삭제할 수 없습니다");
-				}
-			})
-		}
-	}
-	
-	
-	//게시물 삭제
-	/* $(function() {
-		$(".deletebtn").click(function() {
-			$this
-			
-		})
-	}); */
 </script>
 </html>

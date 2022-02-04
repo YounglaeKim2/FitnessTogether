@@ -12,6 +12,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.kosmo.ft.service.MemberDTO;
+import com.kosmo.ft.service.OneMemoDTO;
 
 public class MemberDAO {
 
@@ -56,8 +57,9 @@ public class MemberDAO {
 		return template.selectOne("updatePwd",map);
 	}
 	
-	public String deleteMember(Map map) {
-		return template.selectOne("deleteMember",map);
+	public void deleteMember(Map map) {
+		System.out.println(String.format("DAOid : %s", map.get("id")));
+		template.selectOne("deleteMember",map);
 	}
 	
 	public boolean pwdck(Map map) {
@@ -67,14 +69,12 @@ public class MemberDAO {
 	public List<MemberDTO> memberList() {
 		return template.selectList("memberList");
 	}
-	
+
 	public Map selectMemberInfo(String id) {
 		return template.selectOne("selectMemberInfo",id);
 	}
 	
-	public Map selectMemberInfo2(String pwd) {
-		return template.selectOne("selectMemberInfo",pwd);
-	}
+
 	
 }
 	
