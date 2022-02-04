@@ -27,25 +27,11 @@
         <script src="<c:url value="/resources/mypage/js/scripts.js"/>"/></script>
 	</head>
 	<body id="page-top">
-	<!-- Navigation-->
-	<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
-	<a class="navbar-brand js-scroll-trigger" href="#page-top">
-		<span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="<c:url value="/resources/mypage/assets/img/user.png"/>" alt="..." /></span>
-	</a>
-		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-			<div class="collapse navbar-collapse" id="navbarResponsive">
-					<ul class="navbar-nav">
-						<li class="nav-item">${sessionScope.id}</li>
-						<li class="nav-item"><a class="nav-link js-scroll-trigger" href="<c:url value="/fnt/UpdateMember.do"/>">프로필수정</a></li>
-						<li class="nav-item"><a class="nav-link js-scroll-trigger" href="<c:url value="/fnt/DeleteMember.do"/>">회원 탈퇴</a></li>
-					</ul>
-			</div>
-	</nav>
 		<!-- 본문시작 -->
 		<div id="container">
 		<div id="main">
 			<div class="content"
-				style="width: 2000px; text-align: center; margin: 40px 500px 40px 0 ; padding: 0 500px 0 0 ">
+				style="width: 2000px; text-align: center; margin: 100px 0 40px 0 ; padding: 0 850px 0 0; ">
 				<p class="w-pct60 right" style="margin: 0 auto; padding: 0 540px 0 0; font-size: 13px;"></p>
 				<form id="dataform" action="/ft/fnt/UpdateMemberPro.do" method="post">
 					<table class="w-pct60">
@@ -53,7 +39,7 @@
 							<th class="w-px160">닉네임</th>
 							<td>
 								<input type="text" id="name" name="name"  onkeyup="nameKeyup()" onfocus="showTextname()" value="${ loginInfo.NAME }" placeholder="닉네임을 입력해주세요" />
-								<a class="btn default" id="nameckBtn"  onclick="checkname();" href="#none"  style="color: black; font-size: 15px; font-weight: bold; height: 44px; width: 100px; margin: 3.7px 8px 7px 1px; padding: 10px 10px 10px 10px; border: 2px solid #595757;">중복확인</a>
+								<a class="btn default" id="nameckBtn"  onclick="checkname();" href="#none"  style="color: black; font-size: 15px; font-weight: bold; height: 44px; width: 100px; padding: 10px 10px 10px 10px; border: 2px solid #595757;">중복확인</a>
 							<div class='valid' id="validNAME" style="display: none;">2~10자 한글,영문,숫자를 입력해주세요</div>
 							</td>
 						</tr>
@@ -109,10 +95,13 @@
 							</td>
 						</tr>
 					</table>
-					<hr class="hr-4" style="height: 3px;">
+
 					<input type="button" id="sucessbtn" class="btn default"
-						style="color: black; font-size: 15px; font-weight: bold; height: 44px; width: 100px; margin: 10px 950px 7px 500px; padding: 10px 10px 10px 10px; border: 2px solid #595757;"
+						style="color: black; font-size: 15px; font-weight: bold; height: 44px; margin:0 10px 0 0;  width: 100px; padding: 10px 10px 10px 10px; border: 2px solid #595757;"
 						value="저장하기" />
+					<input type="button" id="sucessbtn2" class="btn default" 
+						style="color: black; font-size: 15px; font-weight: bold; height: 44px; width: 100px; margin: 0 100px 0 10px;  padding: 10px 10px 10px 10px; border: 2px solid #595757;"
+						value="탈퇴하기" />
 					<input type="hidden" name="joinType" value="ft">
 				</form>
 			</div>

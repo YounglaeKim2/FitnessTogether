@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.kosmo.ft.service.MemberDTO;
 import com.kosmo.ft.service.MemberService;
+import com.kosmo.ft.service.OneMemoDTO;
 
 @Service("memberService")
 public class MemberServiceImpl implements MemberService{
@@ -78,8 +79,9 @@ public class MemberServiceImpl implements MemberService{
 
 	//마이페이지-회원탈퇴
 	@Override
-    public String deleteMember(Map map) {
-    	return dao.deleteMember(map);
+    public void deleteMember(Map map) {
+		System.out.println(String.format("서비스id : %s", map.get("id")));
+    	dao.deleteMember(map);
     }
 	
 	//관리자페이지-회원관리
@@ -88,6 +90,5 @@ public class MemberServiceImpl implements MemberService{
 		return dao.memberList();
 	}
 
-	
 } 
 

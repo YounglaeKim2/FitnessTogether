@@ -66,9 +66,11 @@
                   <li class="nav-item">
                   <a class="nav-link" href="<c:url value="/fnt/Main.do"/>"><i class="fa fa-home"></i> Home</a>
                   </li>
+                  <!-- =
                   <li class="nav-item">
                   <a class="nav-link" href="<c:url value="/fnt/Statics.do"/>"><i class="fa fa-bar-chart-o"></i> 통계 </a>                  
                   </li>
+                   -->
                   <li class="nav-item">
                   <a class="nav-link" href="<c:url value="/fnt/Board.do"/>"><i class="fa fa-edit"></i> 게시판관리</a>                   
                   </li>

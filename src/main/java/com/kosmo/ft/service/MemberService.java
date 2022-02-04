@@ -18,11 +18,12 @@ public interface MemberService {
 	 
 	 public String updatePwd(Map map);
 	 
-	 public String deleteMember(Map map);
+	 public void deleteMember(Map map);
 	
 	 boolean pwdck(Map map);
 	 
 	 public List<MemberDTO> memberList();
+
 	 
 	 
 	 public Map selectMemberInfo(String id);

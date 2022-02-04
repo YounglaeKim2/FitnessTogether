@@ -73,7 +73,7 @@
 	
 <!-- 회원 탈퇴 -->
  	<delete parameterType="Map" id="deleteMember">
- 		DELETE MEMBER 
+ 		DELETE FROM MEMBER 
  		WHERE id = #{id}  
  	</delete>
  	
