@@ -4,12 +4,12 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="mybatis/mapper/calendar.xml">
  	<select id="selectOptions" parameterType="String" resultType="Map">
-		SELECT name FROM testweight WHERE type = #{type} 		
+		SELECT name FROM weightlist WHERE type = #{type} 		
 	</select>
 	
 	<select id="selectSportsNo" parameterType="String" resultType="Map">
-		SELECT no FROM testweight
-		WHERE name =#{name}
+		SELECT no FROM weightlist
+		WHERE name = #{name}
 		<!--   
 		<foreach collection="collection" open="(" close=")" item="item" separator=",">
 			#{item}
@@ -18,32 +18,32 @@
 	</select>
 	
 	<insert id="insertWeight" parameterType="Map">
-		INSERT INTO weightbbs VALUES(SEQ_BBS.NEXTVAL,#{kg},#{count},#{postdate},#{no},#{id})
+		INSERT INTO weightbbs VALUES(SEQ_WEIGHTBBS.NEXTVAL,#{kg},#{count},#{postdate},#{no},#{id})
+	</insert>
+	
+	<insert id="insertFood" parameterType="Map">
+		INSERT INTO foodbbs VALUES(SEQ_FOODBBS.NEXTVAL,#{f_name},#{f_size},#{f_kcal},#{f_tan},#{f_dan},#{f_gi},#{postdate},#{id})
 	</insert>
 	
 	<select id="selectCalendarW" parameterType="Map" resultType="Map">
-		SELECT type,postdate FROM testweight T JOIN weightbbs W ON T.no=W.no WHERE id=#{id}
+		SELECT type,w_postdate FROM weightlist T JOIN weightbbs W ON T.no=W.no WHERE id=#{id}
 	</select>
 	
 	<select id="selectCalendarF" parameterType="Map" resultType="Map">
-		SELECT postdate FROM foodbbs WHERE id=#{id}
+		SELECT f_postdate FROM foodbbs WHERE id=#{id}
 	</select>
 	
 	<select id="selectWeight" parameterType="Map" resultType="Map">
-		SELECT * FROM testweight T JOIN weightbbs W ON T.no=W.no WHERE id=#{id} AND postdate=#{postdate}
+		SELECT * FROM weightlist T JOIN weightbbs W ON T.no=W.no WHERE id=#{id} AND w_postdate=#{postdate}
+	</select>
+	
+	<select id="selectFood" parameterType="Map" resultType="Map">
+		SELECT * FROM foodbbs WHERE id=#{id} AND f_postdate=#{postdate}
 	</select>
 	
 	<delete id="deleteWegiht" parameterType="String">
 		DELETE weightbbs WHERE w_no=#{w_no}
 	</delete>
-	
-	<insert id="insertFood" parameterType="Map">
-		INSERT INTO foodbbs VALUES(SEQ_FOODBBS.NEXTVAL,#{f_name},#{f_size},#{f_kcal},#{f_tan},#{f_dan},#{f_gi},#{id},#{postdate})
-	</insert>
-	
-	<select id="selectFood" parameterType="Map" resultType="Map">
-		SELECT * FROM foodbbs WHERE id=#{id} AND postdate=#{postdate}
-	</select>
 	
 	<delete id="deleteFood" parameterType="String">
 		DELETE foodbbs WHERE f_no=#{f_no}

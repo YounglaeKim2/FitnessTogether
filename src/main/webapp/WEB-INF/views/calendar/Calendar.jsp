@@ -37,6 +37,8 @@ $(function() {
 		type:"post"
 	}).done(function(fdate){
 		
+		console.log(fdate);
+		
 		$.ajax({
 			url:'<c:url value="/fnt/showCalendarw.do"/>',
 			data:{"id":"${sessionScope.id}"},
@@ -48,17 +50,17 @@ $(function() {
 			var events = list.map(function(item){
 				return {
 					title : item["TYPE"]+" 운동",
-					start : item["POSTDATE"]
+					start : item["W_POSTDATE"]
 				}
 			});
 			events = [...new Set(events.map(JSON.stringify))].map(JSON.parse);
 			
 			
-			console.log(fdate);
+			
 			var food = fdate.map(function(item){
 				return {
 					title : "식단 기록",
-					start : item["POSTDATE"],
+					start : item["F_POSTDATE"],
 					color: "aqua",
 					textColor: "black"
 				}
@@ -172,7 +174,7 @@ $(function() {
 	 	            	}
 	 	         
 	 	            	$.each(data,function(index,element){
-	 	            		list += "<tr><td><input type='checkbox' name='w_no' value='"+element['W_NO']+"'/></td><td>"+element['TYPE']+"</td><td>"+element['NAME']+"</td><td>"+element['KG']+"</td><td>"+element['COUNT']+"</td></tr>";
+	 	            		list += "<tr><td><input type='checkbox' name='w_no' value='"+element['W_NO']+"'/></td><td>"+element['TYPE']+"</td><td>"+element['NAME']+"</td><td>"+element['W_KG']+"</td><td>"+element['W_COUNT']+"</td></tr>";
 	 	            	});
 	 	            		
 	 	           		list += "</table>";

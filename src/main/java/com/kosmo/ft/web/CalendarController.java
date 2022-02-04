@@ -102,7 +102,7 @@ public class CalendarController {
 		List<Map> lists = service.showCalendarw(map);
 		//2021-12-01 00:00:00.0 형태로 출력됨 형태변환위해 아래코드 사용
 		for(Map date:lists) {
-			date.put("POSTDATE", date.get("POSTDATE").toString().substring(0, 10));
+			date.put("W_POSTDATE", date.get("W_POSTDATE").toString().substring(0, 10));
 		}
 		return lists;
 	}
@@ -113,7 +113,7 @@ public class CalendarController {
 		List<Map> lists = service.showCalendarf(map);
 		//2021-12-01 00:00:00.0 형태로 출력됨 형태변환위해 아래코드 사용
 		for(Map date:lists) {
-			date.put("POSTDATE", date.get("POSTDATE").toString().substring(0, 10));
+			date.put("F_POSTDATE", date.get("F_POSTDATE").toString().substring(0, 10));
 		}
 		return lists;
 	}
@@ -123,7 +123,7 @@ public class CalendarController {
 	public List<Map> showWeight(@RequestParam Map map){ // 아이디와 날짜 정보받기
 		List<Map> lists = service.showWeight(map);
 		for(Map date:lists) {
-			date.put("POSTDATE", date.get("POSTDATE").toString().substring(0, 10));
+			date.put("W_POSTDATE", date.get("W_POSTDATE").toString().substring(0, 10));
 		}
 		return lists;
 	}
@@ -145,7 +145,7 @@ public class CalendarController {
 	public List<Map> showFood(@RequestParam Map map){ // 아이디와 날짜 정보받기
 		List<Map> lists = service.showFood(map);
 		for(Map date:lists) {
-			date.put("POSTDATE", date.get("POSTDATE").toString().substring(0, 10));
+			date.put("F_POSTDATE", date.get("F_POSTDATE").toString().substring(0, 10));
 		}
 		return lists;
 	}
