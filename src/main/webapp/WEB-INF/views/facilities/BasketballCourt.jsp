@@ -52,7 +52,7 @@
 <body>
 
 	<div class="container px-4 py-5" id="featured-3">
-		<h1 class="pb-2 border-bottom">Gym Around You<h4>내 근처 농구장 찾기</h4></h1>
+		<h1 class="pb-2 border-bottom">Basketball Court Around You<h4>내 근처 농구장 찾기</h4></h1>
    
 	</div>
 	
@@ -86,28 +86,20 @@
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c244899725d72b692838ccde36cbb07d&libraries=services"></script>
 	
 	<script>
-
-		// 마커를 담을 배열입니다
 		var markers = [];
 		var lat = "";
 		var lng = "";
 		if (navigator.geolocation) {
-			//브라우저의 geolocation 지원 여부 판단
-
-			//PositionOptions객체 설정용]
 			var options = {
 				timeout : 3000,
 				maximumAge : 5000
 			};
-			//현재 위치 정보를 한번만 얻기
 			navigator.geolocation.getCurrentPosition(successCallback);
 		}
-		//현재 위치를 성공적으로 수신시 자동으로 호출되는 콜백함수
 		function successCallback(position) {
 			lat = position.coords.latitude;
 			lng = position.coords.longitude;
 			console.log("latitude : %s longitude : %s",lat,lng);
-			
 			$.ajax({
 				url:"<c:url value="/fnt/nowAddress.do"/>",
 				data:'latitude='+lat+'&longitude='+lng+'&jsp=facilities',
@@ -118,111 +110,65 @@
 					console.log(data);
 					searchPlaces();
 				},
-				error:function(error){//서버로부터 비정상적인 응답을 받았을때 호출되는 콜백함수
+				error:function(error){
 					console.log('%O',error);
 					console.log('에러:',error.responseText);
 				}
 			});
 		}
-
-		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		var mapContainer = document.getElementById('map'),
 		mapOption = {
-			center : new kakao.maps.LatLng(lat, lng), // 지도의 중심좌표
+			center : new kakao.maps.LatLng(lat, lng),
 			level : 1
-		// 지도의 확대 레벨
 		};
-
-		// 지도를 생성합니다    
 		var map = new kakao.maps.Map(mapContainer, mapOption);
-
-		// 장소 검색 객체를 생성합니다
 		var ps = new kakao.maps.services.Places();
-
-		// 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
 		var infowindow = new kakao.maps.InfoWindow({
 			zIndex : 1
 		});
-
-		// 키워드 검색을 요청하는 함수입니다
 		function searchPlaces() {
-
 			var keyword = document.getElementById('keyword').value;
-
 			if (!keyword.replace(/^\s+|\s+$/g, '')) {
 				alert('키워드를 입력해주세요!');
 				return false;
 			}
-
-			// 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
 			ps.keywordSearch(keyword+' 농구장', placesSearchCB);
 		}
-
-		// 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
 		function placesSearchCB(data, status, pagination) {
 			if (status === kakao.maps.services.Status.OK) {
-
-				// 정상적으로 검색이 완료됐으면
-				// 검색 목록과 마커를 표출합니다
 				displayPlaces(data);
-
-				// 페이지 번호를 표출합니다
 				displayPagination(pagination);
-
 			} else if (status === kakao.maps.services.Status.ZERO_RESULT) {
-
 				alert('검색 결과가 존재하지 않습니다.');
 				return;
-
 			} else if (status === kakao.maps.services.Status.ERROR) {
-
 				alert('검색 결과 중 오류가 발생했습니다.');
 				return;
-
 			}
 		}
-
-		// 검색 결과 목록과 마커를 표출하는 함수입니다
 		function displayPlaces(places) {
-
 			var listEl = document.getElementById('placesList'), menuEl = document
 					.getElementById('menu_wrap'), fragment = document
 					.createDocumentFragment(), bounds = new kakao.maps.LatLngBounds(), listStr = '';
-
-			// 검색 결과 목록에 추가된 항목들을 제거합니다
 			removeAllChildNods(listEl);
-
-			// 지도에 표시되고 있는 마커를 제거합니다
 			removeMarker();
-
 			for (var i = 0; i < 15; i++) {
-
-				// 마커를 생성하고 지도에 표시합니다
 				var placePosition = new kakao.maps.LatLng(places[i].y,
 						places[i].x), marker = addMarker(placePosition, i), itemEl = getListItem(
-						i, places[i]); // 검색 결과 항목 Element를 생성합니다
-
-				// 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
-				// LatLngBounds 객체에 좌표를 추가합니다
+						i, places[i]);
 				bounds.extend(placePosition);
-
-				// 마커와 검색결과 항목에 mouseover 했을때
-				// 해당 장소에 인포윈도우에 장소명을 표시합니다
-				// mouseout 했을 때는 인포윈도우를 닫습니다
 				(function(marker, title) {
 					kakao.maps.event.addListener(marker, 'mouseover',
 							function() {
 								displayInfowindow(marker, title);
 							});
-
 					kakao.maps.event.addListener(marker, 'mouseout',
 							function() {
 								infowindow.close();
 							});
-
 					itemEl.onmouseover = function() {
 						displayInfowindow(marker, title);
 					};
-
 					itemEl.onmouseout = function() {
 						infowindow.close();
 					};
@@ -230,18 +176,11 @@
 
 				fragment.appendChild(itemEl);
 			}
-
-			// 검색결과 항목들을 검색결과 목록 Elemnet에 추가합니다
 			listEl.appendChild(fragment);
 			menuEl.scrollTop = 0;
-
-			// 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
 			map.setBounds(bounds);
 		}
-
-		// 검색결과 항목을 Element로 반환하는 함수입니다
 		function getListItem(index, places) {
-
 			var el = document.createElement('li'), itemStr = '<span class="markerbg marker_'
 					+ (index + 1)
 					+ '"></span>'

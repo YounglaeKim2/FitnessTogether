@@ -117,16 +117,9 @@
 					<li class="nav-item"><a class="nav-link"
 						href="<c:url value="/fnt/Mypage.do"/>"> My-Page </a>
 					</li>
-					<li class="nav-item"><a class="nav-link"
-						href="<c:url value="/fnt/TeachableMachine.do"/>"> Food-Calculator </a>
-					</li>
-						
-					<li class="nav-item"><a class="nav-link"
-						href="<c:url value="/fnt/#.do"/>"> DirectMessage </a>
-					</li>
 					
 					<li class="nav-item"><a class="nav-link"
-						href="<c:url value="/fnt/mappingList.do"/>"> 퍼칭(Perching) </a>
+						href="<c:url value="/fnt/mappingList.do"/>"> 퍼칭(Person Matching) </a>
 					</li>
 					
 					<li class="nav-item"><a class="nav-link"
@@ -134,13 +127,16 @@
 					</li>
 					
 					<li class="nav-item"><a class="nav-link"
+						href="<c:url value="/fnt/calendar.do"/>"> 캘린더 </a>
+					</li>
+					
+					<li class="nav-item"><a class="nav-link"
 						href="<c:url value="/fnt/proteinList.do"/>"> 단백질추천 </a>
 					</li>
 					
 					<li class="nav-item"><a class="nav-link"
-						href="<c:url value="/fnt/calendar.do"/>"> 캘린더 </a>
+						href="<c:url value="/fnt/TeachableMachine.do"/>"> 칼로리 계산 </a>
 					</li>
-					
 
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="dropdownBoard"
@@ -155,7 +151,7 @@
 						</ul>
 					</li>
 					
-					
+					<!--
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="dropdownAbout"
 						data-bs-toggle="dropdown" aria-expanded="false"> About </a>
@@ -167,6 +163,7 @@
 							<li><a class="dropdown-item" href="#">Something else here</a></li>
 						</ul>
 					</li>
+					-->
 					
 					<c:if test="${!empty sessionScope.id}">
 						<li style="padding: 10px 0 0 0;">&nbsp;${sessionScope.id }&nbsp;님</li>
