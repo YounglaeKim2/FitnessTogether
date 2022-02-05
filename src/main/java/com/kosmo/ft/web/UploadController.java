@@ -13,21 +13,12 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 @Controller
 public class UploadController {
 
-	@RequestMapping(value = "/fnt/fileUpload.do", method = RequestMethod.GET)
-	public String dragAndDrop(Model model) {
-		
-		return "fileupload";
-	
-	}
-	
-	@RequestMapping(value = "/fnt/fileUpload/post.do") //ajax에서 호출하는 부분
+	@RequestMapping(value = "/fnt/image/upload.do",method = RequestMethod.POST) //ajax에서 호출하는 부분
 	@ResponseBody
-	public String upload(MultipartHttpServletRequest multipartRequest) {
+	public String imageupload(MultipartHttpServletRequest multipartRequest) {
 		
 		Iterator<String> itr = multipartRequest.getFileNames();
-		
 		String filePath = "/FitnessTogether/src/main/webapp/resources/images/upload/inputimages"; //
-		
 		while(itr.hasNext()) {
 			
 			MultipartFile mpf = multipartRequest.getFile(itr.next());

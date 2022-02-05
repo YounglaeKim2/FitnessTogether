@@ -2,38 +2,89 @@ package com.kosmo.ft.web;
 
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kosmo.ft.service.PictureDTO;
 import com.kosmo.ft.service.PictureHeartDTO;
 import com.kosmo.ft.service.PictureReplyDTO;
 import com.kosmo.ft.service.impl.PictureDAO;
 import com.kosmo.ft.service.impl.PictureHeartDAO;
 import com.kosmo.ft.service.impl.PictureReplyDAO;
+import com.kosmo.ft.service.impl.PictureUploadServiceImpl;
 
 @Controller
 public class PhotoBbsController extends HttpServlet{
+	
+	@Autowired
+	PictureDAO dao;
+	
+	//서비스 주입]
+	@Resource(name = "pictureUploadService")
+	private PictureUploadServiceImpl pictureUploadService;
+	
+	//게시글입력폼이동
+	@RequestMapping(value = "/fnt/picture_write.do",method = RequestMethod.GET)
+	public String write(@ModelAttribute("id") String id) {
+		
+		return "photobbs/Picture_write";
+	}
+		
+	//게시글 입력처리]
+	@RequestMapping(value = "/fnt/picture_write.do",method = RequestMethod.POST)
+	public String writeOK(
+			MultipartHttpServletRequest mhsr) throws Exception{ 
+		pictureUploadService.pictureUpload(mhsr);
+		//뷰정보 반환] 목록으로 이동
+		return "forward:/fnt/picture_list.do";
+	}
+	
+	//수정폼으로 이동 및 수정처리
+	@RequestMapping("/fnt/picture_modify.do")
+	public String modify(@RequestParam Map map,HttpServletRequest req) {
+		if(req.getMethod().equals("POST")) {
+			//서비스 호출]
+			PictureDTO record = pictureUploadService.selectOne(map);
+			//데이터 저장
+			req.setAttribute("record", record);
+			//수정폼으로 이동
+			return "/fnt/picture_modify.do";
+		}
+		//수정처리후 리스트로 이동
+		pictureUploadService.modify(map);
+		
+		return "forward:/fnt/picture_list.do";
+	}
+	
+	//삭제처리
+	@RequestMapping("/fnt/picture_delete.do")
+	public String delete(@RequestParam Map map)throws Exception{
+		//서비스 호출
+		pictureUploadService.delete(map);
+		//리스트로
+		return "forward:/fnt/picture_list.do";
+	}
 	
 	//공통적용 + 검색창 목록 관련
 	@RequestMapping("/fnt/picture_list.do")
 	public String picture_list(HttpServletRequest request, HttpSession session) {
 		
 		final int PAGE_ROW_COUNT = 12;
-		
-		//dao 객체생성
-		PictureDAO dao = new PictureDAO();
 		
 		//보여줄 페이지의 번호를 일단 1이라고 초기값 지정
 		int pageNum =1;
@@ -69,7 +120,7 @@ public class PhotoBbsController extends HttpServlet{
 		
 		//startRowNum과 rowCount를 PictureDTO객체에 담는다.
 		PictureDTO pto = new PictureDTO();
-		pto.setStartRownum(startRowNum);
+		pto.setStartRowNum(startRowNum);
 		pto.setEndRowNum(endRowNum);
 		pto.setRowCount(rowCount);
 		
@@ -86,15 +137,10 @@ public class PhotoBbsController extends HttpServlet{
 			else if (condition.equals("content")) { //내용검색
 				pto.setContent(keyword);
 			}
-			else if (condition.equals("writer")) { //작성자검색
-				pto.setName(keyword);
-			}
-			else if (condition.equals("content")) { //위치검색
-				pto.setAddress(keyword);
-			}//다른검색조건 추가시 else if추가
+			//다른검색조건 추가시 else if추가
 			
 		}
-		if (session.getAttribute("name") == null) {
+		if (session.getAttribute("id") == null) {
 			//로그인 상태가 아닐때
 			//System.out.println("로그인 상태가 아닐때");
 			//사진 게시판 목록 가져오기
@@ -104,8 +150,8 @@ public class PhotoBbsController extends HttpServlet{
 			//로그인 상태일때
 			//System.out.println("로그인 상태일때");
 			
-			//현재 사용자의 닉네임 세팅
-			pto.setName((String) session.getAttribute("name"));
+			//현재 사용자의 아이디 세팅
+			pto.setId((String) session.getAttribute("id"));
 			
 			//사진 게시판 목록 가져오기
 			list = dao.boardListLogin(pto);
@@ -144,8 +190,6 @@ public class PhotoBbsController extends HttpServlet{
 		//한 페이지에 표시할 이미지카드수(12로 설정)
 		final int PAGE_ROW_COUNT = 12;
 		
-		PictureDAO dao = new PictureDAO();
-		
 		//보여줄 페이지의 번호를 일단 1이라고 초기값 지정
 		int pageNum =1;
 		//페이지 번호가 파라미터로 전달되는지 읽어와 본다
@@ -176,7 +220,7 @@ public class PhotoBbsController extends HttpServlet{
 		
 		//startRowNum과 rowCount를 PictureDTO 객체에 담기
 		PictureDTO pto = new PictureDTO();
-		pto.setStartRownum(startRowNum);
+		pto.setStartRowNum(startRowNum);
 		pto.setEndRowNum(endRowNum);
 		pto.setRowCount(rowCount);
 		
@@ -194,21 +238,16 @@ public class PhotoBbsController extends HttpServlet{
 			else if(condition.equals("content")) { //내용일경우
 				pto.setContent(keyword);
 			}
-			else if(condition.equals("name")) { //작성자 닉네임 일경우
-				pto.setName(keyword);
-			}
-			else if(condition.equals("address")) { //위치(주소)일경우
-				pto.setAddress(keyword);
-			} //기타 검색조건 추가시 아래 else if() 계속 추가
+			
+			 //기타 검색조건 추가시 아래 else if() 계속 추가
 		}
 		
 		// 위의 분기에 따라 pto에 담기에는 내용이 다르고
 		// 그 내용을 기준으로 조건이 다를때마다 다른내용이 select 되도록 dynamic query를 구성한다.
 		// 글 목록 얻어오기
 		
-		if(session.getAttribute("name") == null) {
+		if(session.getAttribute("id") == null) {
 			//로그인 상태가 아닐때
-			System.out.println("로그인 상태가 아닐때");
 			//사진게시판 목록 가져오
 			list = dao.boardList(pto);
 		}
@@ -216,7 +255,7 @@ public class PhotoBbsController extends HttpServlet{
 			//로그인 상태일때
 			
 			//현재 사용자의 닉네임을 세팅
-			pto.setName((String)session.getAttribute("name"));
+			pto.setId((String)session.getAttribute("id"));
 			
 			//사진게시판 목록 가져오기
 			list = dao.boardListLogin(pto);
@@ -240,19 +279,20 @@ public class PhotoBbsController extends HttpServlet{
 	
 	/////////////좋아요 관련
 	
+	@Autowired
+	PictureHeartDAO heartDao;
+	
 	@ResponseBody
 	@RequestMapping(value = "/fnt/saveHeart.do")
 	public PictureDTO save_heart(@RequestParam String hno, HttpSession session) {
 		
 		PictureHeartDTO dto = new PictureHeartDTO();
 		
-		PictureHeartDAO heartDao = new PictureHeartDAO();
-		
 		//게시물 번호를 세팅
 		dto.setBno(hno);
 		
-		//좋아요 누른 사람 name을 세팅
-		dto.setName((String)session.getAttribute("name"));
+		//좋아요 누른 사람 id을 세팅
+		dto.setId((String)session.getAttribute("id"));
 		
 		// +1된 좋아요수 담아오기 위하여
 		PictureDTO pto = heartDao.pictureSaveHeart(dto);
@@ -265,13 +305,12 @@ public class PhotoBbsController extends HttpServlet{
 	public PictureDTO remove_heart(@RequestParam String hno, HttpSession session) {
 		
 		PictureHeartDTO dto = new PictureHeartDTO();
-		PictureHeartDAO heartDao = new PictureHeartDAO();
 		
 		//게시물 번호를 세팅
 		dto.setBno(hno);
 		
 		//좋아요 누른 사람 name을 세팅
-		dto.setName((String)session.getAttribute("name"));
+		dto.setId((String)session.getAttribute("id"));
 		
 		// +1된 좋아요수 담아오기 위하여
 		PictureDTO pto = heartDao.pictureRemoveHeart(dto);
@@ -282,13 +321,15 @@ public class PhotoBbsController extends HttpServlet{
 	
 	//댓글 관련
 	
+	@Autowired
+	PictureReplyDAO replyDao;
+	
 	//댓글 작성
 	@ResponseBody
 	@RequestMapping(value = "/fnt/picture_write_reply.do")
 	public PictureDTO write_reply(@RequestParam String rno, @RequestParam String content, HttpSession session) {
 		
 		PictureReplyDTO dto = new PictureReplyDTO();
-		PictureReplyDAO replyDao = new PictureReplyDAO();
 		
 		//게시물 번호 세팅
 		dto.setBno(rno);
@@ -297,7 +338,7 @@ public class PhotoBbsController extends HttpServlet{
 		dto.setContent(content);
 		
 		//댓글작성자 name을 name으로 세팅
-		dto.setName((String)session.getAttribute("name"));
+		dto.setName((String)session.getAttribute("id"));
 		
 		// +1된 댓글 갯수를 담아오기 위해서
 		PictureDTO pto = replyDao.pictureWriteReply(dto);
@@ -312,7 +353,6 @@ public class PhotoBbsController extends HttpServlet{
 									@RequestParam String content, HttpSession session) {
 		
 		PictureReplyDTO dto = new PictureReplyDTO();
-		PictureReplyDAO replyDao = new PictureReplyDAO();
 		
 		//게시물 번호 세팅
 		dto.setBno(bno);
@@ -328,7 +368,7 @@ public class PhotoBbsController extends HttpServlet{
 		dto.setContent(content);
 		
 		//대댓글 작성자 name을 세팅
-		dto.setName((String)session.getAttribute("name"));
+		dto.setName((String)session.getAttribute("id"));
 		
 		// +1된 대댓글갯수 담아오기
 		PictureDTO pto = replyDao.pictureWriteReReply(dto);
@@ -342,7 +382,6 @@ public class PhotoBbsController extends HttpServlet{
 	public ArrayList<PictureReplyDTO> reply_list(@RequestParam String rno, HttpSession session){
 		
 		PictureReplyDTO dto = new PictureReplyDTO();
-		PictureReplyDAO replyDao = new PictureReplyDAO();
 		
 		//댓글리스트의 게시물번호 세팅
 		dto.setBno(rno);
@@ -360,7 +399,6 @@ public class PhotoBbsController extends HttpServlet{
 	public PictureDTO picture_delete_reply(@RequestParam String rno, @RequestParam String bno) {
 		
 		PictureReplyDTO dto = new PictureReplyDTO();
-		PictureReplyDAO replyDao = new PictureReplyDAO();
 		
 		//댓글 번호 세팅
 		dto.setRno(rno);
@@ -381,7 +419,6 @@ public class PhotoBbsController extends HttpServlet{
 									@RequestParam int grp) {
 		
 		PictureReplyDTO dto = new PictureReplyDTO();
-		PictureReplyDAO replyDao = new PictureReplyDAO();
 		
 		//대댓번호 세팅 - 대댓 삭제하기 위해
 		dto.setRno(rno);

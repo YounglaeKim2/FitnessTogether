@@ -17,13 +17,13 @@ public class MessageDAO {
 	//메시지 리스트
 	public ArrayList<MessageDTO> messageList(MessageDTO dto){
 		
-		String id = dto.getId();
+		String name = dto.getName();
 		
 		//메시지 리스트에 나타낼 것들 가져오기 - 가장 최근 메시지, 보낸사람 프사, 보낸사람 id
 		ArrayList<MessageDTO> list = (ArrayList)template.selectList("message_list", dto);
 		
 		for(MessageDTO mto : list) {
-			mto.setId(id);
+			mto.setName(name);
 			//현재 사용자가 해당 room에서 안읽은 메시지의 갯수를 가져온다.
 			int unread = template.selectOne("count_unread", mto);
 			//현재 사용자가 메시지를 주고받는 상대 profile을 가져온다.
@@ -33,11 +33,11 @@ public class MessageDAO {
 			//메시지 상대의 프로필 사진을 mto에 set한다.
 			mto.setProfile(profile);
 			//메시지 상대 id를 세팅한다. other_id
-			if(id.equals(mto.getSend_id())) {
-				mto.setOther_id(mto.getRecv_id());
+			if(name.equals(mto.getSend_name())) {
+				mto.setOther_name(mto.getRecv_name());
 			}
 			else {
-				mto.setOther_id(mto.getSend_id());
+				mto.setOther_name(mto.getSend_name());
 			}
 		}
 		return list;
@@ -47,8 +47,8 @@ public class MessageDAO {
 	public ArrayList<MessageDTO> roomContentList(MessageDTO dto){
 		
 		System.out.println("room : " + dto.getRoom());
-		System.out.println("recv_id : " + dto.getRecv_id());
-		System.out.println("id : " + dto.getId());
+		System.out.println("recv_name : " + dto.getRecv_name());
+		System.out.println("name : " + dto.getName());
 		
 		//메시지 내역을 가져오기
 		ArrayList<MessageDTO> clist = (ArrayList)template.selectList("room_content_list", dto);

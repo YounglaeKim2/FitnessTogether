@@ -16,6 +16,11 @@
 		<typeAlias type="com.kosmo.ft.service.MappingDTO" alias="MappingDTO"/>
 		<typeAlias type="com.kosmo.ft.service.OneMemoDTO" alias="oneMemoDTO"/>
 		<typeAlias type="com.kosmo.ft.service.LineCommentDTO" alias="lineCommentDTO"/>
+		<typeAlias type="com.kosmo.ft.service.PictureDTO" alias="PictureDTO"/>
+		<typeAlias type="com.kosmo.ft.service.PictureUploadDTO" alias="PictureUploadDTO"/>
+		<typeAlias type="com.kosmo.ft.service.PictureHeartDTO" alias="PictureHeartDTO"/>
+		<typeAlias type="com.kosmo.ft.service.PictureReplyDTO" alias="PictureReplyDTO"/>
+		<typeAlias type="com.kosmo.ft.service.MessageDTO" alias="MessageDTO"/>
 	</typeAliases>
 	
 	<!-- 매퍼파일(SQL쿼리 결과와 자바빈 매핑)의 위치정보 설정 -->
@@ -28,5 +33,7 @@
 		<mapper resource="mybatis/mapper/linecomment.xml"/>
 		<mapper resource="mybatis/mapper/onememo.xml"/>
 		<mapper resource="mybatis/mapper/android.xml"/>
+		<mapper resource="mybatis/mapper/photobbs.xml"/>
+		<!-- <mapper resource="mybatis/mapper/message.xml"/> -->
 	</mappers>
 </configuration>

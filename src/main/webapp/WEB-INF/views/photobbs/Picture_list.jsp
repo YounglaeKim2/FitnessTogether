@@ -7,20 +7,17 @@
 <!-- Top 끝 -->
 
 <div id="card-search" class="card-search">
-	<!-- 검색버튼과 form -->
-	<!-- "<c: value="/fnt/picture_list.do"/>" -->
-	<form action="<c: value="/fnt/picture_list.do"/>" method="post">
+	<form action="<c:url value="/fnt/picture_list.do"/>" method="post">
 		<div class="row justify-content-md center" id="search">
 			<div class="col-1"></div>
 			<div class="col-1">
 				<div class="value" id="condition_pick" style="text-align: right;">
 					<select id="condition" name="condition" class="form-select">
-						<option value="title"
-							${condition eq 'title' ? ''selected' : ''}>제목</option>
-							<option value="content" ${condition eq 'subject' ? ''selected' : ''}>내용</option>
-						<option value="name"
-							${condition eq 'name' ? ''selected' : ''}>닉네임</option>
-							<option value="address" ${condition eq 'address' ? ''selected' : ''}>위치</option>
+						<option value="subject"
+							${condition eq 'subject' ? 'selected' : ''}>제목</option>
+						<option value="content"
+							${condition eq 'content' ? 'selected' : ''}>내용</option>
+						<%-- <option value="name" ${condition eq 'name' ? 'selected' : ''}>닉네임</option> --%>
 					</select>
 				</div>
 			</div>
@@ -29,23 +26,22 @@
 				<input value="${keyword}" type="text" name="keyword"
 					placeholder="검색어를 입력하세요" class="form-control"
 					style="padding-left: 0px;">
-
 			</div>
-
 			<div class="col-md-2" style="padding: 0px; text-align: left;">
 				<span><button class="btn btn-success" type="submit">검색</button></span>
-				<span id="writebox"> <c:if test="${!empty sessionScope.name}">
+				<span id="writebox"> 
 						<c:choose>
-							<c:when test="${empty sessionScope.name}">
-								<button type="button" class="btn btn--radius-2 btn--blue-2"
+							<c:when test="${empty sessionScope.id}">
+								<button type="button" 
+									class="btn btn-dark"
 									onclick="javascript:alert('로그인 해주십시오')">글쓰기</button>
 							</c:when>
 							<c:otherwise>
-								<button type="button" class="btn btn--radius-2 btn--blue-2"
-									onclick="location.href="<c:value="/fnt/picture_write.do"/>"">글쓰기</button>
+								<button type="button"
+									class="btn btn-info"
+									onclick="location.href='<c:url value="/fnt/picture_write.do"/>'">글쓰기</button>
 							</c:otherwise>
 						</c:choose>
-					</c:if>
 				</span>
 			</div>
 		</div>
@@ -62,15 +58,17 @@
 <!-- 카드형 게시물 섹션 -->
 <section id="card-list" class="card-list">
 	<div class="container">
-		<div class="row card-list-container thumbnails"></div>
-
+		<div class="card-list-container">
+			
+		</div>
 	</div>
 </section>
 <!-- 카드형 게시물 섹션 끝-->
 
 <!-- 로딩이미지 아직 미지정-->
 <div class="back-drop">
-	<img src=" "/>
+	 <img
+		src="<c:url value="/resources/images/photobbs/background/loading.gif"/>" />
 </div>
 
 <script>
@@ -116,7 +114,7 @@ const GetList = function(currentPage){
 	
 	//무한 스크롤
 	$.ajax({
-		url:"<c: value="/fnt/photoList.do"/>",
+		url:"<c:url value="/fnt/photoList.do"/>",
 		method:"POST",
 		//검색기능이 있는 경우 condition과 keyword를 함께 넘겨줘야한다.(검색결과만 출력하기 위해서)
 		data:"pageNum="+currentPage+"&condition=${condition}&keyword=${keyword}",
@@ -145,7 +143,7 @@ const GetList = function(currentPage){
 					console.log("빈하트 클릭" + bno);
 					
 					$.ajax({
-						url : "<c: value="/fnt/saveHeart.do"/>",
+						url : "<c:url value="/fnt/saveHeart.do"/>",
 						type : 'post',
 						data : {
 							bno : bno,
@@ -178,7 +176,7 @@ const GetList = function(currentPage){
 					console.log("꽉찬하트 클릭"+bno);
 					
 					$.ajax({
-						url: "<c: value="/fnt/removeHeart.do"/>",
+						url: "<c:url value="/fnt/removeHeart.do"/>",
 						type: "post",
 						data:{
 							bno : bno,
@@ -259,7 +257,7 @@ const GetList = function(currentPage){
 					
 					// reply+1 하고 그 값을 가져옴
 					$.ajax({
-						url : "<c: value="/fnt/picture_write_reply.do"/>",
+						url : "<c:url value="/fnt/picture_write_reply.do"/>",
 						type: "post",
 						data: {
 							bno : bno,
@@ -286,9 +284,21 @@ const GetList = function(currentPage){
 		}
 	});
 };
-	
+
 </script>
 
+<style>
+.card-search {
+	padding: 4rem;
+}
+
+.back-drop {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding-bottom: 16rem;
+}
+</style>
 
 <!-- footer 시작 -->
 <jsp:include page="/WEB-INF/views/template/Footer.jsp" />

@@ -4,22 +4,104 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="mybatis.mapper.message">
+
+	<resultMap type="MessageDTO" id="MessageDTOResult">
+		<result column="mno" property="mno"/>
+		<result column="room" property="room"/>
+		<result column="send_name" property="send_name"/>
+		<result column="recv_name" property="recv_name"/>
+		<result column="send_time" property="send_time"/>
+		<result column="read_time" property="read_time"/>
+		<result column="content" property="content"/>
+		<result column="readchk" property="readchk"/>
+		<result column="other_name" property="other_name"/>
+		<result column="profile" property="profile"/>
+		<result column="name" property="name"/>
+		<result column="unread" property="unread"/>
+	</resultMap>
 	
-	<select id="message_list" parameterType="com.kosmo.ft.service.MessageDTO" resultType="com.kosmo.ft.service.MessageDTO">
-		SELECT mno, room, send_id, recv_id, date_format(send_time, '%Y-%m-%d %H:%i') send_time, read_time, content, read_chk
+	<select id="message_list" parameterType="MessageDTO" resultType="MessageDTOResult">
+		SELECT mno, room, send_name, recv_name, date_format(send_time, '%Y-%m-%d %H:%i') send_time, read_time, content, readchk
 		FROM message
-		WHERE mno IN(SELECT MAX(bno) FROM message GROUP BY room) AND (send_id = #{id}) OR recv_id=#{id})
+		WHERE mno IN(SELECT MAX(mno) FROM message GROUP BY room) AND (send_name = #{name}) OR recv_name=#{name})
 		ORDER BY mno DESC;
 	</select>
 	
 	<!-- 메시지 list에서 상대방 profile 가져오기 -->
-	<select id="get_other_profile" parameterType="com.kosmo.ft.service.MessageDTO" resultType="String">
+	<select id="get_other_profile" parameterType="MessageDTO" resultType="String">
 		SELECT profile FROM member
 		<choose>
-			<when test="send_id == id">
-				
+			<when test="send_name == name">
+				WHERE name = #{recv_name}
 			</when>
+			<otherwise>
+				WHERE name = #{send_name}
+			</otherwise>
 		</choose>
+	</select>
+	
+	<!-- 안읽은 메시지 갯수 가져오기 -->
+	<select id="count_unread" parameterType="MessageDTO" resultType="Int">
+		SELECT COUNT(mno) FROM message
+		WHERE recv_name = #{name} AND readchk=0 AND room=#{room}
+	</select>
+	
+	<!-- 메시지 내용 가져오기 -->
+	<select id="room_coutent_list" parameterType="MessageDTO" resultType="MessageDTO">
+		SELECT m.mno, m.room, m.send_name, m.recv_name, date_format(m.send_time, '%Y-%m-%d %H:%i') send_time, m.read_time, m.content, m.readchk, u.profile
+		FROM message m LEFT OUTER JOIN member u
+		ON m.send_name = u.name
+		<choose>
+			<when test="room != 0">
+				WHERE room=#{room}
+			</when>
+			<otherwise>
+				WHERE (recv_name = #{recv_name} AND send_name = #{name}) OR (send_name = #{recv_name} AND recv_name = #{name})
+			</otherwise>
+		</choose>
+	</select>
+
+	<!-- 메시지 읽음 처리 -->
+	<update id="message_read_chk" parameterType="MessageDTO">
+		UPDATE message SET readchk=1
+		<choose>
+			<when test="room != 0">
+				WHERE room=#{room} AND readchk=0 AND recv_name=#{name}
+			</when>
+			<otherwise>
+				WHERE send_name = #{recv_name} AND readchk=0 AND recv_name=#{name}
+			</otherwise>
+		</choose>
+	</update>
+	
+	<!-- 메시지리스트에서 메시지 보내기 -->
+	<insert id="messageSendInlist" parameterType="MessageDTO">
+		<choose>
+			<when test="room != 0">
+				INSERT INTO message VALUES(0, #{room}, #{send_name}, #{recv_name}, now(), now(), #{content}, 0)
+			</when>
+			<otherwise>
+				INSERT INTO message VALUES(0, #{room}, #{send_name}, #{recv_name}, now(), now(), #{content}, 0)
+			</otherwise>
+		</choose>
+	</insert>
+	
+	<!-- room 번호 최대값 구하기 -->
+	<select id="max_room" parameterType="MessageDTO" resultType="Int">
+		SELECT MAX(room) FROM message
+	</select>
+	
+	<!-- 메시지 이력이 있는지 검색 -->
+	<select id="exist_chat" parameterType="MessageDTO" resultType="Int"> 
+		SELECT COUNT(mno) FROM message
+		WHERE (recv_name = #{recv_name} AND send_name=#{send_name}) OR (send_name = #{recv_name} AND recv_name=#{send_name})
+	</select>
+	
+	<!-- 기존 메시지 내역의 room 번호를 가져옴 -->
+	<select id="select_room" parameterType="MessageDTO" resultType="String">
+		SELECT room FROM message
+		WHERE (recv_name = #{recv_name} AND send_name=#{send_name}) OR (sned_name = #{recv_name} AMD recv_name=#{send_name})
+		limit 0,1	
 	</select>
 	
 </mapper> 
