@@ -94,19 +94,11 @@
 						<div class="menu_section">
 							<ul class="nav side-menu">
 								<li class="nav-item"><a class="nav-link"
-									href="<c:url value="/fnt/Main.do"/>"><i class="fa fa-home"></i>
-										Home</a></li>
-								<!--  
-                <li class="nav-item">
-                  	<a class="nav-link" href="<c:url value="/fnt/Statics.do"/>"><i class="fa fa-bar-chart-o"></i> 통계 </a>                  
-                </li>
-                -->
-								<li class="nav-item"><a class="nav-link"
-									href="<c:url value="/fnt/Board.do"/>"><i class="fa fa-edit"></i>
-										게시판관리</a></li>
-								<li class="nav-item"><a class="nav-link"
 									href="<c:url value="/fnt/MemberAdmin.do"/>"><i
 										class="fa fa-desktop"></i> 회원관리</a></li>
+								<li class="nav-item"><a class="nav-link"
+									href="<c:url value="/fnt/Board.do"/>"><i class="fa fa-edit"></i>
+										게시판관리</a></li>		
 							</ul>
 						</div>
 					</div>
@@ -125,9 +117,7 @@
 
 			<div class="top_nav">
 				<div class="nav_menu">
-					<div class="nav toggle">
-						<a id="menu_toggle"><i class="fa fa-bars"></i></a>
-					</div>
+
 					<nav class="nav navbar-nav"></nav>
 				</div>
 			</div>
@@ -146,14 +136,6 @@
 										<ul class="nav navbar-right panel_toolbox">
 											<li><a class="collapse-link"><i
 													class="fa fa-chevron-up"></i></a></li>
-											<li class="dropdown"><a href="#" class="dropdown-toggle"
-												data-toggle="dropdown" role="button" aria-expanded="false"><i
-													class="fa fa-wrench"></i></a>
-												<div class="dropdown-menu"
-													aria-labelledby="dropdownMenuButton">
-													<a class="dropdown-item" href="#">Settings 1</a> <a
-														class="dropdown-item" href="#">Settings 2</a>
-												</div></li>
 											<li><a class="close-link"><i class="fa fa-close"></i></a>
 											</li>
 										</ul>
@@ -192,15 +174,16 @@
 																	<td>${m.birth}</td>
 																	<td>${m.phone}</td>
 																	<td>${m.email}</td>
-																	<td>
-																		<a class="btn default" 
-																		href="#none"
-																		onclick="fnQuit('${m.id}')"
-																		type="button"
-																		style="color: black; background-color: #f5f2f2; 
-																		font-size: 12px; font-weight: bold; height: 30px; 
-																		width: 60px; margin: 0px 30px 0px 90px; 
-																		padding: 5px 0px 0px 0px; border: 2px solid #595757;">탈퇴</a>
+															<td>
+																	<form action="/ft/fnt/deleteMemberAdmin.do">
+																		<input type="hidden" name="id" value="${m.id}"/>
+																		<button class="btn default" 																	
+																			style="color: black; background-color: #f5f2f2; 
+																			font-size: 12px; font-weight: bold; height: 30px; 
+																			width: 60px; margin: 0px 30px 0px 0px; 
+																			padding: 5px 0px 0px 0px; border: 2px solid #595757">탈퇴
+																		</button>
+																	</form>
 																	</td>
 																</tr>
 															</c:forEach>
@@ -210,11 +193,20 @@
 											</div>
 										</div>
 									</div>
-								</div>
-							</div>
+			<!-- footer content -->
+			<footer>
+				<div class="pull-right">
+					Fitness Together
+				</div>
+				<div class="clearfix"></div>
+			</footer>
+			<!-- /footer content -->
+			</div>
+		</div>
 </body>
 
 <script>
+/*
 	function fnQuit(id) {
 		var result = swal("강제탈퇴하시겠습니까?");
 		if (result) {
@@ -237,6 +229,6 @@
 			
 		}
 	}
-	
+	*/
 </script>
 </html>

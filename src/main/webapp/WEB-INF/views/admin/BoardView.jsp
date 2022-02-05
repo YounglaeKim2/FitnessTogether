@@ -50,14 +50,10 @@
 						<div class="menu_section">
 							<ul class="nav side-menu">
 								<li class="nav-item"><a class="nav-link"
-									href="<c:url value="/fnt/Main.do"/>"><i class="fa fa-home"></i>
-										Home</a></li>
-								<li class="nav-item"><a class="nav-link"
-									href="<c:url value="/fnt/Board.do"/>"><i class="fa fa-edit"></i>
-										게시판관리</a></li>
-								<li class="nav-item"><a class="nav-link"
 									href="<c:url value="/fnt/MemberAdmin.do"/>"><i
 										class="fa fa-desktop"></i> 회원관리</a></li>
+								<li class="nav-item"><a class="nav-link"
+									href="<c:url value="/fnt/Board.do"/>"><i class="fa fa-edit"></i>게시판관리</a></li>
 							</ul>
 						</div>
 					</div>
@@ -72,10 +68,7 @@
 			</div>
 
 			<div class="top_nav">
-				<div class="nav_menu">
-					<div class="nav toggle">
-						<a id="menu_toggle"><i class="fa fa-bars"></i></a>
-					</div>
+				<div class="nav_menu">				
 					<nav class="nav navbar-nav"></nav>
 				</div>
 			</div>
@@ -84,7 +77,7 @@
 			<div class="right_col" role="main">
 				<div class="">
 					<div class="row">
-						<div class="col-md-offset-2 col-md-8">
+						<div class="col-md-offset-2 col-md-12">
 							<form id="viewForm" action="" method="POST">
 								<table class="table table-bordered table-striped">
 									<tbody>
@@ -94,7 +87,7 @@
 										</tr>
 										<tr>
 											<th class="text-center">제목</th>
-											<td><input type="text" name="title" value="${record.title}"></td>
+											<td>${record.title}</td>
 										</tr>
 										<tr>
 											<th class="text-center">작성자</th>
@@ -102,7 +95,7 @@
 										</tr>
 										<tr>
 											<th class="text-center">등록일</th>
-											<td>${record.postDate}   </td>
+											<td>${record.postDate}</td>
 										</tr>
 										<tr>
 											<th class="text-center" colspan="2">내용</th>
@@ -116,14 +109,20 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</div>		
 			
-			<!-- /page content -->
 			<!-- footer content -->
 			<footer>
 				<div class="pull-right">
-					Gentelella - Bootstrap Admin Template by <a
-						href="https://colorlib.com">Colorlib</a>
+					<form action="/ft/fnt/Board.do" method="post">
+						<button  class="btn default" id="btn3" 
+							style="color: black; background-color: #f5f2f2; 
+							font-size: 12px; font-weight: bold; height: 30px; 
+							width: 60px; border: 2px solid #595757">목록
+						</button>
+					</form>
+					<br>
+					Fitness Together
 				</div>
 				<div class="clearfix"></div>
 			</footer>

@@ -58,7 +58,7 @@ public class LoginController {
 		
 	//로그인 처리
 	@RequestMapping("LoginProcess.do")
-	public String loginprocess(@RequestParam Map map,HttpSession session,SessionStatus status,HttpServletRequest request) {
+	public String loginprocess(@RequestParam Map map,Model model,HttpSession session,SessionStatus status,HttpServletRequest request) {
 		
 		List<String> idList = memberService.isLogin(map);
 		String loginType = (String)map.get("loginType");
@@ -78,7 +78,9 @@ public class LoginController {
 		session.setAttribute("id", idList.get(0));
 		session.setAttribute("email", map.get("email"));
 		if(map.get("id").equals("ADMIN")) {
-			return "admin/Home";
+				List<MemberDTO> list = memberService.memberList();
+				model.addAttribute("list",list);
+			return "admin/MemberAdmin";
 		} else {
 			return "home";
 		}
@@ -198,7 +200,7 @@ public class LoginController {
 		session.invalidate();
 		return "home";
 	}
-
+	
 	//비밀번호 수정 페이지 이동
 	@RequestMapping("UpdatePwd.do")
 	public String updatePwd(@RequestParam Map map,HttpSession session,HttpServletRequest request){			
@@ -236,8 +238,10 @@ public class LoginController {
 // -------------------------------------------------------------------------//관리자페이지
 	//메인페이지로 이동
 	@RequestMapping("Main.do")
-	 public String main() {
-	return "admin/Home";
+	 public String main(Model model) {
+		List<MemberDTO> list = memberService.memberList();
+		model.addAttribute("list",list);
+	return "admin/MemberAdmin";
 	}
 	
 	//통계로 이동
@@ -266,10 +270,15 @@ public class LoginController {
 	
 	//게시물 삭제
 	@RequestMapping("DeleteBoard.do")
-	public String deleteBoard(@ModelAttribute("id") String id,@RequestParam Map map) throws Exception {
+	public String deleteBoard(@ModelAttribute("id") String id, Model model, 
+			@RequestParam(required = false,defaultValue = "1") int nowPage,
+			HttpServletRequest req,
+			@RequestParam Map map) throws Exception {
 		//서비스 호출
 		memoService.delete(map);
-		//뷰로 포워드
+		ListPagingData<OneMemoDTO> listPagingData = memoService.selectList(map, req, nowPage);
+		List<OneMemoDTO> list = listPagingData.getLists();
+		model.addAttribute("list", list);	
 		return "admin/Board";
 	}
 	
@@ -283,13 +292,16 @@ public class LoginController {
 	
 	//회원탈퇴처리
 	@RequestMapping("deleteMemberAdmin.do")
-	public String deleteMemberAdmin(@RequestParam Map map,HttpSession session,HttpServletRequest request){	
+	public String deleteMemberAdmin(@RequestParam Map map,Model model,HttpSession session,HttpServletRequest request){	
 		String id = (String)session.getAttribute("id");
 		memberService.deleteMember(map);
 		//session.removeAttribute(id);
-		session.invalidate();
+		//session.invalidate();
+		List<MemberDTO> list = memberService.memberList();
+		model.addAttribute("list",list);
 		return "admin/MemberAdmin";
 	}
+	
 	
 	@RequestMapping("viewBoard.do")
 	public String viewPro(@RequestParam Map map, Model model){		 

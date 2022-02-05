@@ -26,89 +26,88 @@
         <!-- Core theme JS-->
         <script src="<c:url value="/resources/mypage/js/scripts.js"/>"/></script>
 	</head>
-	<body id="page-top">
+	<body id="page-top" style="padding: 0 0 0 0;">
 		<!-- 본문시작 -->
 		<div id="container">
-		<div id="main">
-			<div class="content"
-				style="width: 2000px; text-align: center; margin: 100px 0 40px 0 ; padding: 0 850px 0 0; ">
-				<p class="w-pct60 right" style="margin: 0 auto; padding: 0 540px 0 0; font-size: 13px;"></p>
-				<form id="dataform" action="/ft/fnt/UpdateMemberPro.do" method="post">
-					<table class="w-pct60">
-						<tr>
-							<th class="w-px160">닉네임</th>
-							<td>
-								<input type="text" id="name" name="name"  onkeyup="nameKeyup()" onfocus="showTextname()" value="${ loginInfo.NAME }" placeholder="닉네임을 입력해주세요" />
-								<a class="btn default" id="nameckBtn"  onclick="checkname();" href="#none"  style="color: black; font-size: 15px; font-weight: bold; height: 44px; width: 100px; padding: 10px 10px 10px 10px; border: 2px solid #595757;">중복확인</a>
-							<div class='valid' id="validNAME" style="display: none;">2~10자 한글,영문,숫자를 입력해주세요</div>
-							</td>
-						</tr>
-						<tr>
-							<th class="w-px161">아이디</th>
-							<td>
-								<input type="text"  id="id" name="id" class="chk" onkeyup="idKeyup()" onfocus="showTextid()" placeholder="6자 이상의 영문과 숫자 조합"   value="${sessionScope.id }" readonly="readonly"/> 
-								<input type="hidden" id="idck" name="idck" class="chk_id" value="N">		
-							</td>
-						</tr>
-						<tr>
-							<th>신규 비밀번호</th>
-							<td>
-								<input type="password" id="pwd" name="pwd" class="pwd" onfocus="showTextpwd()" placeholder="비밀번호를 입력해주세요" />
-								<span id="alert-success" style="display: none; margin: 15px  0 15px 0; color:green; font-weight: bold;">비밀번호가 일치합니다.</span>
-								<span id="alert-danger" style="display: none; margin: 15px  0 15px 0; color: red; font-weight: bold; ">비밀번호가 일치하지 않습니다.</span>
-								<div class='valid' id="validPWD" style="display: none;"> 8~16자 영문 대 소문자, 숫자, 특수문자를 입력해주세요</div>
-							</td>
-						</tr>
-						 
-						<tr>
-							<th>신규 비밀번호 확인</th>
-							<td><input type="password" maxlength="16"  id="pwdck" name="pwdck"class="pwdck" placeholder="비밀번호를 한번 더 입력해주세요" />								
-						</tr>
-						<tr>
-							<th>성별</th>
-							<td>
-								<label><input type="radio" style="width: 50px; background: black; height: 20px; border: 1px;" id="gender1" name="gender" value="남" <c:if test="${ loginInfo.GENDER eq '남' }">checked="checked"</c:if> />남자</label>
-								 <span class="ico"></span> 
-								<label><input type="radio" style="width: 50px; height: 20px; border: 1px;" id="gender2" name="gender" value="여" <c:if test="${ loginInfo.GENDER eq '여' }">checked="checked"</c:if> />여자</label>
-							</td>
-						</tr>
-						<tr>
-							<th>이메일</th>
-							<td>								
-								<input type="text" id="email" name="email" onkeyup="emailKeyup()"  placeholder="ex)kosmo12@kosmo.com" value="${loginInfo.EMAIL}"  readonly="readonly" /> 
-								<input type="hidden" id="emailck" name="emailck" class="chk_email" required fld_essential label="이메일중복체크" value> 					
-							</td>
-						</tr>
-						<tr>
-							<th>생년월일</th>
-							<td>
-							<input type="text" name="birth" id="birth" pattern="[0-9]*"  size="8" maxlength="8" placeholder="YYYYMMDD" value="${loginInfo.BIRTH}" style="width:332px;" readonly="readonly" />						
-							</td>
-						</tr>
-						<tr>
-							<th>전화번호</th>
-							<td><input type="text" maxlength="11" id="phone" name="phone"  placeholder="숫자만 입력해주세요" value="${loginInfo.PHONE}" style="width: 200px;" /></td>
-						</tr>
-						<tr>
-							<th></th>
-							<td>
-							</td>
-						</tr>
-					</table>
-
-					<input type="button" id="sucessbtn" class="btn default"
-						style="color: black; font-size: 15px; font-weight: bold; height: 44px; margin:0 10px 0 0;  width: 100px; padding: 10px 10px 10px 10px; border: 2px solid #595757;"
-						value="저장하기" />
-					<input type="button" id="sucessbtn2" class="btn default" 
-						style="color: black; font-size: 15px; font-weight: bold; height: 44px; width: 100px; margin: 0 100px 0 10px;  padding: 10px 10px 10px 10px; border: 2px solid #595757;"
-						value="탈퇴하기" />
-					<input type="hidden" name="joinType" value="ft">
-				</form>
+			<div id="main">
+				<div class="content" style="width: 2000px; text-align: center; margin: 100px 0 40px 250px ; padding: 0 850px 0 0; ">
+					<p class="w-pct60 right" style="margin: 0 auto; padding: 0 540px 0 0; font-size: 13px;"></p>
+						<form id="dataform" action="/ft/fnt/UpdateMemberPro.do" method="post">
+							<table class="w-pct60">
+							<tr>
+								<th class="w-px160">닉네임</th>
+								<td>
+									<input type="text" id="name" name="name"  onkeyup="nameKeyup()" onfocus="showTextname()" value="${ loginInfo.NAME }" placeholder="닉네임을 입력해주세요" />
+									<a class="btn default" id="nameckBtn"  onclick="checkname();" href="#none"  style="color: black; font-size: 15px; font-weight: bold; height: 44px; width: 100px; padding: 10px 10px 10px 10px; border: 2px solid #595757;">중복확인</a>
+									<div class='valid' id="validNAME" style="display: none;">2~10자 한글,영문,숫자를 입력해주세요</div>
+								</td>
+							</tr>
+							<tr>
+								<th class="w-px161">아이디</th>
+								<td>
+									<input type="text"  id="id" name="id" class="chk" onkeyup="idKeyup()" onfocus="showTextid()" placeholder="6자 이상의 영문과 숫자 조합"   value="${sessionScope.id }" readonly="readonly"/> 
+									<input type="hidden" id="idck" name="idck" class="chk_id" value="N">		
+								</td>
+							</tr>
+							<tr>
+								<th>신규 비밀번호</th>
+								<td>
+									<input type="password" id="pwd" name="pwd" class="pwd" onfocus="showTextpwd()" placeholder="비밀번호를 입력해주세요" />
+									<span id="alert-success" style="display: none; margin: 15px  0 15px 0; color:green; font-weight: bold;">비밀번호가 일치합니다.</span>
+									<span id="alert-danger" style="display: none; margin: 15px  0 15px 0; color: red; font-weight: bold; ">비밀번호가 일치하지 않습니다.</span>
+									<div class='valid' id="validPWD" style="display: none;"> 8~16자 영문 대 소문자, 숫자, 특수문자를 입력해주세요</div>
+								</td>
+							</tr>
+							<tr>
+								<th>신규 비밀번호 확인</th>
+								<td><input type="password" maxlength="16"  id="pwdck" name="pwdck"class="pwdck" placeholder="비밀번호를 한번 더 입력해주세요" />								
+							</tr>
+							<tr>
+								<th>성별</th>
+								<td>
+									<label><input type="radio" style="width: 50px; background: black; height: 20px; border: 1px;" id="gender1" name="gender" value="남" <c:if test="${ loginInfo.GENDER eq '남' }">checked="checked"</c:if> />남자</label>
+									 <span class="ico"></span> 
+									<label><input type="radio" style="width: 50px; height: 20px; border: 1px;" id="gender2" name="gender" value="여" <c:if test="${ loginInfo.GENDER eq '여' }">checked="checked"</c:if> />여자</label>
+								</td>
+							</tr>
+							<tr>
+								<th>이메일</th>
+								<td>								
+									<input type="text" id="email" name="email" onkeyup="emailKeyup()"  placeholder="ex)kosmo12@kosmo.com" value="${loginInfo.EMAIL}"  readonly="readonly" /> 
+									<input type="hidden" id="emailck" name="emailck" class="chk_email" required fld_essential label="이메일중복체크" value> 					
+								</td>
+							</tr>
+							<tr>
+								<th>생년월일</th>
+								<td>
+								<input type="text" name="birth" id="birth" pattern="[0-9]*"  size="8" maxlength="8" placeholder="YYYYMMDD" value="${loginInfo.BIRTH}" style="width:332px;" readonly="readonly" />						
+								</td>
+							</tr>
+							<tr>
+								<th>전화번호</th>
+								<td><input type="text" maxlength="11" id="phone" name="phone"  placeholder="숫자만 입력해주세요" value="${loginInfo.PHONE}" style="width: 200px;" /></td>
+							</tr>
+							<tr>
+								<th></th>
+								<td>
+								</td>
+							</tr>
+						</table>
+							<input type="button" id="sucessbtn" class="btn default"
+								style="color: black; font-size: 15px; font-weight: bold; height: 44px; margin:0 200px 0 0;  width: 100px; padding: 10px 10px 10px 10px; border: 2px solid #595757;"
+								value="저장하기" />
+							<input type="hidden" name="joinType" value="ft">
+						</form>
+							<form class="deleteMember" id="deleteMember" action="<c:url value="/fnt/DeleteMemberPro.do"/>" method="post">
+								<input type="hidden" name="id" value="${sessionScope.id}"/>
+								<div style="text-align: right;">
+									<button id="sucessbtn" class="btn default" style="color: black; font-size: 15px; font-weight: bold; height: 44px; width: 100px; margin: 30px 50px 7px 0; padding: 10px 10px 10px 10px; border: 2px solid #595757">탈퇴하기</button>
+								</div>
+							</form>
+				</div>
 			</div>
 		</div>
-	</div>
-</body>
-
+	</body>
 <script>
 	function showTextname() {
 		$('#validNAME').show();
@@ -229,11 +228,8 @@
 			}
 		})	
 	});
-
-	
 </script>		
 </html>
-
 <!-- footer 시작 -->
 <jsp:include page="/WEB-INF/views/template/Footer.jsp"/>
 <!-- footer 끝 -->
