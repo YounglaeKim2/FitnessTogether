@@ -83,8 +83,8 @@ let social = {
 		},
 	facebook : {
 			data : {
-			appId : '526838325242510',
-			version: "v1.0",
+			appId : '1352297528534403',
+			version: "v8.0",
 			},
 			init : function (){
 				window.fbAsyncInit = function() {

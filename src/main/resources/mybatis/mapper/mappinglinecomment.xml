@@ -42,13 +42,13 @@
 		VALUES(SEQ_LINECOMMENTS.CURRVAL,#{linecomment},SYSDATE,#{no},#{id})
 		
 	</insert>
-	<update id="commentUpdate" parameterType="Map">
+	<update id="mappingcommentUpdate" parameterType="Map">
 		UPDATE mappinglinecomments SET linecomment = #{linecomment} WHERE lno = #{lno}
 	</update>
-	<delete id="commentDelete" parameterType="Map">
+	<delete id="mappingcommentDelete" parameterType="Map">
 		DELETE mappinglinecomments WHERE lno=#{lno}
 	</delete>
-	<delete id="commentDeleteByNo" parameterType="Map">
+	<delete id="mappingcommentDeleteByNo" parameterType="Map">
 		DELETE mappinglinecomments WHERE no=#{no}
 	</delete>
 	

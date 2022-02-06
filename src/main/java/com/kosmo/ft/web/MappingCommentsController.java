@@ -20,10 +20,10 @@ import com.kosmo.ft.service.impl.MappingLineCommentServiceImpl;
 public class MappingCommentsController {
 	//서비스 주입]
 	@Autowired
-	private MappingLineCommentServiceImpl commentService;
+	private MappingLineCommentServiceImpl mappingcommentService;
 	//ObjectMapper API(Jackson에 포함된 클래스) 주입:빈 설정파일에 등록 혹은 SpringBeanConfig클래스에 @Bean으로 등록
 	@Autowired
-	private ObjectMapper mapper;
+	private ObjectMapper mappingmapper;
 	
 	/*
 	 * @RequestParam : key - value쌍으로 받을때
@@ -53,7 +53,7 @@ public class MappingCommentsController {
 	@PostMapping(value="/mapping/comments/List.do",produces = "application/json; charset=UTF-8")	
 	public List<Map> list(@ModelAttribute("id") String id,@RequestParam Map map) throws JsonProcessingException {
 		//서비스 호출]
-		List<Map> lists= commentService.selectList(map);
+		List<Map> lists= mappingcommentService.selectList(map);
 		//데이타베이스에서 읽어온 값:2021-11-23 12:34:49.0
 		if(lists.size() !=0)
 			System.out.println("데이타베이스에서 읽어온 값:"+lists.get(0).get("LPOSTDATE"));
@@ -75,7 +75,7 @@ public class MappingCommentsController {
 	public String write(@ModelAttribute("id") String id,@RequestParam Map map) {
 		map.put("id", id);//(씨큐리티 미 사용시)한줄 댓글 작성자의 아이디를 맵에 설정
 		//서비스 호출]
-		String commentInfo = commentService.insert(map);
+		String commentInfo = mappingcommentService.insert(map);
 		//데이타 반환]
 		return commentInfo;//입력된 글의 키와 작성자이름 문자열로 반환
 	}
@@ -84,7 +84,7 @@ public class MappingCommentsController {
 	public String update(@ModelAttribute("id") String id,@RequestParam Map map) {
 	
 		//서비스 호출]
-		commentService.update(map);
+		mappingcommentService.update(map);
 		//수정한 글의 키값 반환
 		return map.get("lno").toString();
 	}/////////////
@@ -93,7 +93,7 @@ public class MappingCommentsController {
 	public String delete(@ModelAttribute("id") String id,@RequestParam Map map) {
 	
 		//서비스 호출]
-		int affected=commentService.delete(map);
+		int affected=mappingcommentService.delete(map);
 		//삭제된 행의 수 반환
 		return String.valueOf(affected);
 	}/////////////

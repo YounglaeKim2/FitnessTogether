@@ -48,6 +48,7 @@
 	</beans:bean>
 	
 	<beans:bean id="mapper" class="com.fasterxml.jackson.databind.ObjectMapper"/>
+	<beans:bean id="mappingmapper" class="com.fasterxml.jackson.databind.ObjectMapper"/>
 	
 	<context:component-scan base-package="com.kosmo.ft" />
 	 <!-- 리소스 컨트롤러에 주입할 커맨드객체(DTO계열) 빈 등록-세터 인젝션을 통해 초기화 --> 
