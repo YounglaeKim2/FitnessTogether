@@ -179,14 +179,7 @@
 		  </div>
 		</div>	
 		
-		<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-			
-			<div class="btn btn-link me-md-1">
-				<a href="<c:url value="/fnt/ZZZZ.do"/>"
-					class="btn btn-primary">ZZZZ</a>
-			</div>
-			
-		</div>
+		
 	</div>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c244899725d72b692838ccde36cbb07d&libraries=clusterer"></script>
 	<script>

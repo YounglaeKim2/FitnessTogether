@@ -76,9 +76,7 @@
 <body>
 	<div class="container">
 		<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-			<div class="btn btn-link">
-				<a href="<c:url value="#"/> " class="btn btn-primary">참여하기</a>
-			</div>
+			
 			<div class="btn btn-link">
 				<a href="<c:url value="/fnt/mappingList.do"/> "
 					class="btn btn-primary">목록 보기</a>
@@ -111,7 +109,6 @@
 	<div class="container" style="padding-top: 15px;">
 
 		<div class="row">
-			<div class="col-md-offset-2 col-md-8">
 				<table class="table table-bordered table-striped">
 					<tr>
 						<th class="col-md-2 text-center">번호</th>
@@ -141,11 +138,9 @@
 				<input type="hidden" name="title" value=${record.title }> <input
 					type="hidden" name="latitude" value=${record.latitude }> <input
 					type="hidden" name="longitude" value=${record.longitude }>
-			</div>
 		</div>
 
 		<div class="row">
-			<div class="col-md-8">
 				<div class="text-center">
 					<h4>한줄 댓글 입력 폼</h4>
 					<form class="form-inline" id="frm">
@@ -159,7 +154,6 @@
 						<div id="comments" class="col-md-12"></div>
 					</div>
 				</div>
-			</div>
 		</div>
 	</div>
 </body>

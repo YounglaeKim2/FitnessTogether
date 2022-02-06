@@ -231,7 +231,9 @@
 			}
 		})	
 	});
-</script>		
+	
+</script>
+
 </html>
 <!-- footer 시작 -->
 <jsp:include page="/WEB-INF/views/template/Footer.jsp"/>

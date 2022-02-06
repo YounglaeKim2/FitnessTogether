@@ -199,7 +199,7 @@ public class LoginController {
 	public String updateMemberPro(@RequestParam Map map,HttpSession session){	
 			memberService.updateMember(map);
 			session.invalidate();
-		return "home";
+		return "mypage/AfUpdateMember";
 	}
 	
 	/*
