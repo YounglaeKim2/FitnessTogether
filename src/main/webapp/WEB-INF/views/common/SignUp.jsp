@@ -102,35 +102,19 @@
 
 
 <script>
-//값 초기화. 회원가입 버튼 비활성화
-// $("#sucessbtn").prop("disabled",true);
 	let ckname = false;
 	let ckid = false;
 	let ckemail = false;
 	let cksign = false;
-	
 	if('${loginType}' != ''){
 		alert('추가정보를 입력해주세요');
 		ckemail = true;
-		/*
-		$('#email').attr('readonly', true);
-		$('#emailckBtn').hide();
-		
-		$('#name').attr('readonly', true);
-		$('#nameckBtn').hide();
-		$('#id').attr('readonly', true);
-		$('#idckBtn').hide();
-		*/
 		$('[name=joinType]').val('${loginType}');
-		
 	}
-	
 	const regname = /^[A-Za-z0-9가-힣]{2,10}$/;
 	const regid = /^[A-za-z0-9]{5,15}$/;
 	const regemail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
-	const regpwd =  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,16}$/;      
-
-	
+	const regpwd =  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,16}$/;
 	function showTextname() {
 		$('#validNAME').show();
 	}
@@ -140,7 +124,6 @@
 	function showTextpwd() {
 		$('#validPWD').show();
 	}
-	
 	function nameKeyup(type) {
 		if(type == 'name'){
 			ckname = false;
@@ -150,8 +133,6 @@
 			ckemail = false;
 		}	
 	}
-	
-	// 닉네임 중복체크
 	function checkname() {
 		
 		var name = $.trim($("#name").val());
@@ -181,8 +162,6 @@
 			});
 		}
 	}
-	
-	// 아이디 중복체크
 	function checkid() {
 		
 		var id = $.trim($("#id").val());
@@ -212,10 +191,6 @@
 			});
 		}
 	}
-		
-	
-	
-	// 비밀번호 확인
 	$('.pwdck').focusout(function () {
 		var pwd = $("#pwd").val();
 		var pwdck = $("#pwdck").val();
@@ -232,10 +207,6 @@
 			}
 		}
 	});
-	
-	
-
-	// 이메일 중복체크
 	function checkemail() {
 		
 		var email = $.trim($("#email").val());
@@ -261,16 +232,9 @@
 					swal({title: "이미 등록된 이메일입니다",icon: "error"})
 					ckid = false;
 				}
-				
 			});
 		}
 	}
-	
-	
-	
-
-	// 유효성 체크
-	
 	$(function() {
 		$("#sucessbtn").click(function() {
 			var name = $("#name").val();
