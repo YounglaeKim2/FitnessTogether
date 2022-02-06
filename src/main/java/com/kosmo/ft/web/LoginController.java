@@ -49,7 +49,8 @@ public class LoginController {
 	//서비스 주입]
 	@Resource(name="memoService")
 	private OneMemoServiceImpl memoService;
-
+	
+	//-----------------------------------------------------------------//로그인
 	//로그인 폼으로 이동
 	@RequestMapping("Login.do")
 	public String login() {
@@ -157,7 +158,7 @@ public class LoginController {
 			session.setAttribute("phone", map.get("phone"));
 			session.setAttribute("birth", map.get("birth"));
 		}
-		return "home";
+		return "common/AfSignUp";
 	}
 // ----------------------------------------------------------------------------//마이페이지
 	//마이페이지 이동
@@ -169,14 +170,14 @@ public class LoginController {
 	//비밀번호 확인 후 마이페이지 이동
 	@RequestMapping("MypagePro.do")
 	public String mypagePro(@RequestParam Map map,HttpSession session, HttpServletRequest request){	
-		boolean flag =  memberService.pwdck(map);
-		
-		if(!flag){
-			return "mypage/NotPwd";
-		}else{		
-			String id = (String)session.getAttribute("id");
-			Map loginInfo = memberService.selectMemberInfo(id);
-			request.setAttribute("loginInfo", loginInfo);
+			boolean flag =  memberService.pwdck(map);
+			
+			if(!flag){
+				return "mypage/NotPwd";
+			}else{		
+				String id = (String)session.getAttribute("id");
+				Map loginInfo = memberService.selectMemberInfo(id);
+				request.setAttribute("loginInfo", loginInfo);
 			return "mypage/UpdateMember";
 		}
 	}
@@ -185,10 +186,10 @@ public class LoginController {
 	//회원정보 수정 페이지 이동
 	@RequestMapping("UpdateMember.do")
 	public String updateMember(@RequestParam Map map,HttpSession session, HttpServletRequest request){
-		// db 조회 
-		String id = (String)session.getAttribute("id");
-		Map loginInfo = memberService.selectMemberInfo(id);
-		request.setAttribute("loginInfo", loginInfo);
+			// db 조회 
+			String id = (String)session.getAttribute("id");
+			Map loginInfo = memberService.selectMemberInfo(id);
+			request.setAttribute("loginInfo", loginInfo);
 		return "mypage/UpdateMember";
 	}
 	
@@ -196,11 +197,12 @@ public class LoginController {
 	//회원정보 수정 과정
 	@RequestMapping("UpdateMemberPro.do")
 	public String updateMemberPro(@RequestParam Map map,HttpSession session){	
-		memberService.updateMember(map);
-		session.invalidate();
+			memberService.updateMember(map);
+			session.invalidate();
 		return "home";
 	}
 	
+	/*
 	//비밀번호 수정 페이지 이동
 	@RequestMapping("UpdatePwd.do")
 	public String updatePwd(@RequestParam Map map,HttpSession session,HttpServletRequest request){			
@@ -209,7 +211,9 @@ public class LoginController {
 		request.setAttribute("loginInfo", loginInfo);
 			return "mypage/UpdatePwd";		
 	}	
+	*/
 	
+	/*
 	//비밀번호 수정
 	@RequestMapping("UpdatePwdPro.do")
 	public String updatePwdPro(@RequestParam Map map,HttpSession session,HttpServletRequest request){	
@@ -217,25 +221,25 @@ public class LoginController {
 			session.invalidate();
 			return "home";	
 	}
+	*/
 	
 	
 	//회원탈퇴 페이지 이동
 	@RequestMapping("DeleteMember.do")
 	public String DeleteMember(@RequestParam Map map){	
-		System.out.println(String.format("컨트롤러id : %s", map.get("id")));
 		return "mypage/DeleteMember";		
 	}
 		
 	//회원탈퇴 과정
 	@RequestMapping("DeleteMemberPro.do")
 	public String deleteMemberPro(@RequestParam Map map,HttpSession session,HttpServletRequest request){	
-		String id = (String)session.getAttribute("id");
-		memberService.deleteMember(map);
-		session.invalidate();
+			String id = (String)session.getAttribute("id");
+			memberService.deleteMember(map);
+			session.invalidate();
 		return "common/AfDeleteMember";
 	}
 	
-// -------------------------------------------------------------------------//관리자페이지
+// ----------------------------------------------------------------------------//관리자페이지
 	//메인페이지로 이동
 	@RequestMapping("Main.do")
 	 public String main(Model model) {
@@ -265,7 +269,7 @@ public class LoginController {
 		//데이타 저장
 		model.addAttribute("list", list);
 		
-		return "admin/Board";
+	return "admin/Board";
 	}
 	
 	//게시물 삭제
@@ -274,39 +278,39 @@ public class LoginController {
 			@RequestParam(required = false,defaultValue = "1") int nowPage,
 			HttpServletRequest req,
 			@RequestParam Map map) throws Exception {
-		//서비스 호출
-		memoService.delete(map);
-		ListPagingData<OneMemoDTO> listPagingData = memoService.selectList(map, req, nowPage);
-		List<OneMemoDTO> list = listPagingData.getLists();
-		model.addAttribute("list", list);	
+			//서비스 호출
+			memoService.delete(map);
+			ListPagingData<OneMemoDTO> listPagingData = memoService.selectList(map, req, nowPage);
+			List<OneMemoDTO> list = listPagingData.getLists();
+			model.addAttribute("list", list);	
 		return "admin/Board";
 	}
 	
 	//회원관리로 이동
 	@RequestMapping("MemberAdmin.do")
 	public String memberAdmin(Model model) {
-		List<MemberDTO> list = memberService.memberList();
-		model.addAttribute("list",list);
+			List<MemberDTO> list = memberService.memberList();
+			model.addAttribute("list",list);
 		return "admin/MemberAdmin";
 	}
 	
 	//회원탈퇴처리
 	@RequestMapping("deleteMemberAdmin.do")
 	public String deleteMemberAdmin(@RequestParam Map map,Model model,HttpSession session,HttpServletRequest request){	
-		String id = (String)session.getAttribute("id");
-		memberService.deleteMember(map);
-		//session.removeAttribute(id);
-		//session.invalidate();
-		List<MemberDTO> list = memberService.memberList();
-		model.addAttribute("list",list);
+			String id = (String)session.getAttribute("id");
+			memberService.deleteMember(map);
+			//session.removeAttribute(id);
+			//session.invalidate();
+			List<MemberDTO> list = memberService.memberList();
+			model.addAttribute("list",list);
 		return "admin/MemberAdmin";
 	}
 	
 	
 	@RequestMapping("viewBoard.do")
 	public String viewPro(@RequestParam Map map, Model model){		 
-		OneMemoDTO record = memoService.selectOne(map);
-		model.addAttribute("record",record);
+			OneMemoDTO record = memoService.selectOne(map);
+			model.addAttribute("record",record);
 		return "admin/BoardView";
 	}
 	

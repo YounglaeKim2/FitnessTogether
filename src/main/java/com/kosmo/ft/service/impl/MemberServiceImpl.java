@@ -22,26 +22,31 @@ public class MemberServiceImpl implements MemberService{
     @Resource(name="memberDAO")
     private MemberDAO dao;
     
+    //로그인
     @Override
 	public List<String> isLogin(Map map) {
 		return dao.isLogin(map);
 	}
   
+    //회원가입-닉네임확인
     @Override
     public int nameck(String name) {
     	return dao.nameck(name);
     }
     
+    //회원가입-아이디확인
     @Override
     public int idck(String id) {
     	return dao.idck(id);
     }
 
+    //회원가입-비밀번호확인
 	@Override
     public boolean pwdck(Map map) {
     	return dao.pwdck(map);
     }
     
+	//회원가입-이메일확인
     @Override
     public int emailck(String email) {
     	return dao.emailck(email);
@@ -53,16 +58,10 @@ public class MemberServiceImpl implements MemberService{
     	return dao.signck(map);
     }
 	
-	//회원정보담
+	//회원정보담기
 	@Override
 	public Map selectMemberInfo(String id) {
 		return dao.selectMemberInfo(id);
-	}
-	
-	//회원정보담
-	@Override
-	public Map selectMemberInfo2(String pwd) {
-		return dao.selectMemberInfo(pwd);
 	}
 	
 	//마이페이지-회원정보수정
@@ -76,11 +75,10 @@ public class MemberServiceImpl implements MemberService{
     public String updatePwd(Map map) {
     	return dao.updatePwd(map);
     }
-
+	
 	//마이페이지-회원탈퇴
 	@Override
     public void deleteMember(Map map) {
-		System.out.println(String.format("서비스id : %s", map.get("id")));
     	dao.deleteMember(map);
     }
 	

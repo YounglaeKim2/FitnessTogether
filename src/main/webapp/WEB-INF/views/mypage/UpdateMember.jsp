@@ -29,9 +29,11 @@
 	<body id="page-top" style="padding: 0 0 0 0;">
 		<!-- 본문시작 -->
 		<div id="container">
+			<div class="tit_page" style="font-size: 22pt;padding: 50px 0 7px 380px;">개인정보 수정</div>
 			<div id="main">
-				<div class="content" style="width: 2000px; text-align: center; margin: 100px 0 40px 250px ; padding: 0 850px 0 0; ">
+				<div class="content" style="width: 2000px; text-align: center; margin: 20px 0 5px 250px ; padding: 0 850px 0 0; ">
 					<p class="w-pct60 right" style="margin: 0 auto; padding: 0 540px 0 0; font-size: 13px;"></p>
+						<hr class="hr-4" style="height: 3px;margin:0 0 15px 250px">
 						<form id="dataform" action="/ft/fnt/UpdateMemberPro.do" method="post">
 							<table class="w-pct60">
 							<tr>
@@ -93,8 +95,9 @@
 								</td>
 							</tr>
 						</table>
+						<hr class="hr-4" style="height: 3px;margin:0 0 20px 250px">
 							<input type="button" id="sucessbtn" class="btn default"
-								style="color: black; font-size: 15px; font-weight: bold; height: 44px; margin:0 200px 0 0;  width: 100px; padding: 10px 10px 10px 10px; border: 2px solid #595757;"
+								style="color: black; font-size: 15px; font-weight: bold; height: 44px; margin:0 88px 0 0;  width: 100px; padding: 10px 10px 10px 10px; border: 2px solid #595757;"
 								value="저장하기" />
 							<input type="hidden" name="joinType" value="ft">
 						</form>

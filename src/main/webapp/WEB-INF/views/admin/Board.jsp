@@ -99,13 +99,13 @@
 										
 										<table class="table table-striped jambo_table bulk_action">
 											<thead>
-												<tr class="headings">
+												<tr class="headings" style="text-align:center">
 													<th class="column-title">번호</th>
 													<th class="column-title">제목</th>
 													<th class="column-title">닉네임</th>
 													<th class="column-title">아이디</th>
-													<th class="column-title">작성일</th>
-													<th class="column-title no-link last"> <span class="nobr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;정보</span></th>
+													<th class="column-title">&nbsp;&nbsp;&nbsp;&nbsp;작성일</th>
+													<th class="column-title no-link last"> <span class="nobr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;정보</span></th>
 												</tr>
 											</thead>
 											<tbody>
@@ -115,29 +115,19 @@
 													</tr>
 												</c:if>
 												<c:forEach var="m" items="${list}">
-													<tr>
+													<tr style="text-align:center">
 														<td> ${ m.no }</td>
 														<td> ${ m.title }</td>
 														<td> ${ m.name }</td>
 														<td> ${ m.id }</td>
 														<td> ${ m.postDate }</td>
 														<td> 
-														<button class="btn btn-secondary" id="btn1"
-															 style="font-size:12px;"
-															 onclick="fnView(${m.no})">상세보기</button>
-														<button class="btn default" id="btn1"
-															 onclick="fnView(${m.no})"
-															 style="color: black; background-color: #f5f2f2; 
-															font-size: 12px; font-weight: bold; height: 30px; 
-															width: 60px; margin: 0px 30px 0px 0px; 
-															padding: 5px 0px 0px 0px; border: 2px solid #595757"
-															 >상세보기</button>
-														<button class="btn btn-secondary" id="btn1"
-															 style="font-size:12px;background-color:#36526e"
+														<button class="btn btn-secondary" id="btn1" 
+															 style="font-size:12px;background-color:#36526e;width:80px;margin:0 0 7px 22px"
 															 onclick="fnView(${m.no})">상세보기</button>
 														<form action="/ft/fnt/DeleteBoard.do" method="post">
 															<button  class="btn btn-secondary" id="btn2" 
-															 style="font-size:12px;"
+															 style="font-size:12px;background-color:#36526e;width:80px;margin:0 0 7px 22px"
 															>삭제</button>
 															<input type="hidden" name="no" value="${m.no}"/>
 														</form>

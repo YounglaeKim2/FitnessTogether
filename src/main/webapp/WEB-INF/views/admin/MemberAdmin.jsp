@@ -150,7 +150,7 @@
 														class="table table-striped table-bordered"
 														style="width: 100%">
 														<thead>
-															<tr>
+															<tr style="text-align:center;">
 																<th>아이디</th>
 																<th>닉네임</th>
 																<th>성별</th>
@@ -167,20 +167,20 @@
 																</tr>
 															</c:if>
 															<c:forEach var="m" items="${list}">
-																<tr>
-																	<td>${m.id}</td>
-																	<td>${m.name}</td>
-																	<td>${m.gender}</td>
+																<tr style="text-align:center;">
+																	<td >${m.id}</td>
+																	<td >${m.name}</td>
+																	<td >${m.gender}</td>
 																	<td>${m.birth}</td>
-																	<td>${m.phone}</td>
+																	<td >${m.phone}</td>
 																	<td>${m.email}</td>
 															<td>
-																	<form action="/ft/fnt/deleteMemberAdmin.do">
+																	<form action="/ft/fnt/deleteMemberAdmin.do" style="text-align:center">
 																		<input type="hidden" name="id" value="${m.id}"/>
 																		<button class="btn default" 																	
 																			style="color: black; background-color: #f5f2f2; 
 																			font-size: 12px; font-weight: bold; height: 30px; 
-																			width: 60px; margin: 0px 30px 0px 0px; 
+																			width: 60px; 
 																			padding: 5px 0px 0px 0px; border: 2px solid #595757">탈퇴
 																		</button>
 																	</form>
