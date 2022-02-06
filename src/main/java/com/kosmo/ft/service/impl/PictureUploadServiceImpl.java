@@ -44,11 +44,12 @@ public class PictureUploadServiceImpl implements PictureUploadService {
         map.put("content", content);
 
         if (!imgFile.isEmpty()) {
-            String path = mhsr.getServletContext().getRealPath("");
+            String path = mhsr.getServletContext().getRealPath("resources/images/upload/picture");
             System.out.println(path);
 
-            String rename = FileUpDownUtils.getNewFileName(path, imgFile.getOriginalFilename());
-            File dest = new File(path + File.separator + rename);
+            String rename=FileUpDownUtils.getNewFileName(path,imgFile.getOriginalFilename());
+            File dest = new File(path+File.separator+rename);
+
 
             System.out.println(rename);
             System.out.println(dest);
@@ -92,7 +93,7 @@ public class PictureUploadServiceImpl implements PictureUploadService {
 
 
         if (!imgFile.isEmpty()) {
-            String path = mhsr.getServletContext().getRealPath("");
+            String path = mhsr.getServletContext().getRealPath("resources/images/upload/picture");
             System.out.println(path);
 
             String rename = FileUpDownUtils.getNewFileName(path, imgFile.getOriginalFilename());

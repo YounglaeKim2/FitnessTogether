@@ -26,7 +26,7 @@
                 </c:if>
 
                 <c:if test="${not empty item.imgName}">
-                    <img src="<%=request.getRealPath("/") %>/${item.imgName}">
+                    <img src="<c:url value='/resources/images/upload/picture/${item.imgName}'/>">
                 </c:if>
             </div>
 
