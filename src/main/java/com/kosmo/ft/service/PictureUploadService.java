@@ -6,16 +6,18 @@ import java.util.Map;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import javax.servlet.http.HttpServletRequest;
+
 public interface PictureUploadService {
-	
+
 	boolean pictureUpload(MultipartHttpServletRequest mhsr);
 
-	int modify(Map map);
+	int modify(MultipartHttpServletRequest mhsr);
 
 	void delete(Map map);
 
 	PictureDTO selectOne(Map map);
 
-	
-}	
+
+}
 

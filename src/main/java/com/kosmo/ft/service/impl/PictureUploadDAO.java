@@ -17,28 +17,25 @@ public class PictureUploadDAO {
 
 	//게시글 삽입
 	public int pictureUpload(Map map) {
-
 		return template.insert("pictureUpload", map);
 	}
 
 	public int update(Map map) {
-
 		return template.update("pictureUpdate", map);
 	}
 
 	public void delete(Map map) {
-
 		template.delete("pictureDelete", map);
 	}
 
 	//이미지소스
 	public int pictureSrcInsert(Map map) {
-			
+
 		return template.insert("pictureSrcInsert", map);
 	}
 
 	public PictureDTO selectOne(Map map) {
-		
+
 		return template.selectOne("pictureSelectOne",map);
 	}
 

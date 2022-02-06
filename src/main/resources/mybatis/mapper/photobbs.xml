@@ -1,117 +1,128 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="mybatis.mapper.photobbs">
 
-	<resultMap type="PictureDTO" id="PictureDTOResult">
-		<result column="bno" property="bno"/>
-		<result column="subject" property="subject"/>
-		<result column="content" property="content"/>
-		<result column="wdate" property="wdate"/>
-		<result column="hit" property="hit"/>
-		<result column="reply" property="reply"/>
-		<result column="hno" property="hno"/>
-		<result column="id" property="id"/>
-		<result column="imgName" property="imageName"/>
-		<result column="startRowNum" property="startRowNum"/>
-		<result column="endRowNum" property="endRowNum"/>
-		<result column="rowCount" property="rowCount"/>
-	</resultMap>
-	
-	<select id="picture_count" parameterType="PictureDTO"
-		resultType="int">
-		SELECT COUNT(bno) FROM BOARD
-		<choose>
-			<!-- if문과 비슷한 구조로 subject가 둘 null이 아니면 제목검색 이런식 -->
-			<when test="subject != null">
-				WHERE SUBJECT LIKE '%'||#{subject}||'%'
-			</when>
-			<when test="content != null">
-				WHERE CONTENT LIKE '%'||#{content}||'%'
-			</when>
-		</choose>
-	</select>
-	
-	<!-- 로그인 안한버전 사진게시판 리스트 -->
-	<select id="picture_list" resultType="PictureDTO">
-		SELECT bno, subject, content, name, wdate, hit, reply, heart, imgName
-		FROM BOARD b LEFT OUTER JOIN MEMBER m ON b.id = m.id
+    <resultMap type="PictureDTO" id="PictureDTOResult">
+        <result column="bno" property="bno"/>
+        <result column="subject" property="subject"/>
+        <result column="content" property="content"/>
+        <result column="wdate" property="wdate"/>
+        <result column="hit" property="hit"/>
+        <result column="reply" property="reply"/>
+        <result column="hno" property="hno"/>
+        <result column="id" property="id"/>
+        <result column="imgName" property="imgName"/>
+        <result column="startRowNum" property="startRowNum"/>
+        <result column="endRowNum" property="endRowNum"/>
+        <result column="rowCount" property="rowCount"/>
+    </resultMap>
 
-		<choose>
-			<!-- if문과 비슷한 구조로 subject가 둘 null이 아니면 제목검색 이런식 -->
-			<when test="subject != null">
-				WHERE SUBJECT LIKE '%'||#{subject}||'%'
-			</when>
-			<when test="content != null">
-				WHERE CONTENT LIKE '%'||#{content}||'%'
-			</when>
-		</choose>
-		ORDER BY bno DESC
-	</select>
+    <select id="picture_count" parameterType="PictureDTO"
+            resultType="int">
+        SELECT COUNT(bno) FROM BOARD
+        <choose>
+            <!-- if문과 비슷한 구조로 subject가 둘 null이 아니면 제목검색 이런식 -->
+            <when test="subject != null">
+                WHERE SUBJECT LIKE '%'||#{subject}||'%'
+            </when>
+            <when test="content != null">
+                WHERE CONTENT LIKE '%'||#{content}||'%'
+            </when>
+        </choose>
+    </select>
 
-	<!-- 로그인 한버전 사진게시판 리스트 -->
-	<select id="picture_list_login" parameterType="PictureDTO"
-		resultType="PictureDTO">
-		SELECT b.bno, subject, content, b.id, name, wdate, hit, reply, heart, hno, imgName
-		FROM BOARD b LEFT OUTER JOIN HEART h ON #{id} = h.id AND b.bno = h.bno
-		LEFT OUTER JOIN MEMBER m ON b.id = m.id
-		 <choose>
-			<when test="subject != null">
-				WHERE SUBJECT LIKE '%'||#{subject}||'%'
-			</when>
-			<when test="content != null">
-				WHERE CONTENT LIKE '%'||#{content}||'%'
-			</when>
-		</choose>
-		ORDER BY bno DESC
-	</select>
-	
-	<!-- BEST 게시물5 리스트 -->
-	<select id="best_picture_list" parameterType="PictureDTO"
-		resultType="PictureDTO">
-		SELECT bno, hit, reply, heart
-		FROM BOARD
+    <!-- 로그인 안한버전 사진게시판 리스트 -->
+    <select id="picture_list" resultType="PictureDTO">
+        SELECT bno, subject, content, name, wdate, hit, reply, heart, imgName
+        FROM BOARD b LEFT OUTER JOIN MEMBER m ON b.id = m.id
 
-		<choose>
-			<!-- if문과 비슷한 구조로 subject가 둘 null이 아니면 제목검색 이런식 -->
-			<when test="subject != null">
-				WHERE SUBJECT LIKE '%'||#{subject}||'%'
-			</when>
-			<when test="content != null">
-				WHERE CONTENT LIKE '%'||#{content}||'%'
-			</when>
-		</choose>
-		ORDER BY heart DESC
-	</select>
-	
-	<select id="pictureSelectOne" parameterType="Map" resultMap="PictureDTOResult">
-		SELECT b.*,m.name FROM
-		member m JOIN board b ON m.id=b.id
-		WHERE bno =#{bno}	
-	</select>
-	
-	<!-- 업로드 -->
+        <choose>
+            <!-- if문과 비슷한 구조로 subject가 둘 null이 아니면 제목검색 이런식 -->
+            <when test="subject != null">
+                WHERE SUBJECT LIKE '%'||#{subject}||'%'
+            </when>
+            <when test="content != null">
+                WHERE CONTENT LIKE '%'||#{content}||'%'
+            </when>
+        </choose>
+        ORDER BY bno DESC
+    </select>
 
-	<!-- 게시글 업로드 관련 -->
-	<insert id="pictureUpload" parameterType="Map">
-		INSERT INTO board(bno,subject,content,hit,reply,heart,wdate,id,imgName)
-		values(bno.nextval,#{subject},#{content},0,0,0,sysdate,#{id},#{imgName})
-		<selectKey keyProperty="bno" resultType="int" order="AFTER">
-			SELECT bno.currval FROM DUAL
-		</selectKey>
-	</insert>
-	
-	<!-- 게시글 수정 -->
-	<update id="pictureUpdate" parameterType="Map">
-		UPDATE board SET subject=#{subject},content=#{content},imgName=#{imgName},wdate=sysdate WHERE bno=#{bno}
-	</update>
-	
-	<!-- 게시글 삭제 -->
-	<delete id="pictureDelete" parameterType="String">
-		DELETE board WHERE bno=#{bno}
-	</delete>
-	
+    <!-- 로그인 한버전 사진게시판 리스트 -->
+    <select id="picture_list_login" parameterType="PictureDTO"
+            resultType="PictureDTO">
+        SELECT *
+            FROM (
+                SELECT b.bno, subject, content, b.id, name, wdate, hit, reply, heart, hno, imgName, ROWNUM AS RNUM
+                FROM BOARD b
+                LEFT OUTER JOIN HEART h ON #{id} = h.id AND b.bno = h.bno
+                LEFT OUTER JOIN MEMBER m ON b.id = m.id
+                )
+            WHERE RNUM BETWEEN #{startRowNum} AND #{endRowNum}
+        <choose>
+            <when test="subject != null">
+                WHERE SUBJECT LIKE '%'||#{subject}||'%'
+            </when>
+            <when test="content != null">
+                WHERE CONTENT LIKE '%'||#{content}||'%'
+            </when>
+        </choose>
+        ORDER BY bno ASC
+    </select>
 
-</mapper> 
+    <!-- BEST 게시물5 리스트 -->
+    <select id="best_picture_list" parameterType="PictureDTO"
+            resultType="PictureDTO">
+        SELECT bno, hit, reply, heart
+        FROM BOARD
+
+        <choose>
+            <!-- if문과 비슷한 구조로 subject가 둘 null이 아니면 제목검색 이런식 -->
+            <when test="subject != null">
+                WHERE SUBJECT LIKE '%'||#{subject}||'%'
+            </when>
+            <when test="content != null">
+                WHERE CONTENT LIKE '%'||#{content}||'%'
+            </when>
+        </choose>
+        ORDER BY heart DESC
+    </select>
+
+    <select id="pictureSelectOne" parameterType="Map" resultMap="PictureDTOResult">
+        SELECT b.*, m.name
+            FROM member m
+                     JOIN board b ON m.id = b.id
+            WHERE bno = #{bno}
+    </select>
+
+    <!-- 업로드 -->
+
+    <!-- 게시글 업로드 관련 -->
+    <insert id="pictureUpload" parameterType="Map">
+        <selectKey keyProperty="bno" resultType="int" order="BEFORE">
+            SELECT SEQ_BNO.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO board(bno,subject,content,hit,reply,heart,wdate,id,imgName)
+        values(#{bno},#{subject},#{content},0,0,0,sysdate,#{id},#{imgName})
+    </insert>
+
+    <!-- 게시글 수정 -->
+    <update id="pictureUpdate" parameterType="Map">
+        UPDATE board
+        SET subject=#{subject},
+            content=#{content},
+            imgName=#{imgName},
+            wdate=sysdate
+            WHERE bno = #{bno}
+    </update>
+
+    <!-- 게시글 삭제 -->
+    <delete id="pictureDelete" parameterType="Map">
+        DELETE FROM board WHERE bno = #{bno}
+    </delete>
+
+
+</mapper>
