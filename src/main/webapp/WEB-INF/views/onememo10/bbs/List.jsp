@@ -17,11 +17,7 @@
 <!-- 실제 내용 시작 -->
 <div class="container">
 	<div class="container px-4 py-5" id="featured-3">
-<<<<<<< HEAD
 		<h1 class="pb-2 border-bottom">종 합 게 시 판<h4>무 엇 이 든 적 어 보 세 요 ! ! ! ! !</h4></h1>
-=======
-		<h1 class="pb-2 border-bottom">종합 게시판<h4>종합 게시판 입니다.</h4></h1>
->>>>>>> branch 'master' of https://github.com/YounglaeKim2/FitnessTogether.git
 	</div>
 	<!-- 
 	<figure class="text-center" style="padding-top: 100px;">
