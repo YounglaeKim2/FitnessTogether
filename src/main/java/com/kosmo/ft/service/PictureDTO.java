@@ -12,16 +12,15 @@ public class PictureDTO {
 	private String content; // 내용
 	private String wdate; // 작성일
 	private String hit; // 조회수
-	private String address; // 사용자 위치(주소)
 	private String reply; // 댓글수
 	private String heart; // 하트수 
 	
 	private String hno; //현재 사용자가 좋아요 누른건지 아닌지
-	private String pro; // 프사
-	private String name; // 닉네임
-	
+	private String id;
+	private String imgName; //
+
 	//시작 게시물 번호
-	private int startRownum; //
+	private int startRowNum; //
 	//끝 게시물 번호
 	private int endRowNum; //
 	//가져갈 게시물 갯수

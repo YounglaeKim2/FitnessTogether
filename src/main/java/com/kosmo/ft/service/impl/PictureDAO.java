@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import com.kosmo.ft.service.PictureDTO;
 
+//리스트관련
+
 @Repository
 public class PictureDAO {
 
@@ -16,14 +18,14 @@ public class PictureDAO {
 
 	public ArrayList<PictureDTO> boardList(PictureDTO dto) {
 
-		ArrayList<PictureDTO> list = (ArrayList) template.selectList("picture_list", dto);
+		ArrayList<PictureDTO> list = (ArrayList)template.selectList("picture_list", dto);
 
 		return list;
 	}
 
 	public ArrayList<PictureDTO> boardListLogin(PictureDTO dto) {
 
-		ArrayList<PictureDTO> list = (ArrayList) template.selectList("picture_list_login", dto);
+		ArrayList<PictureDTO> list = (ArrayList)template.selectList("picture_list_login", dto);
 
 		return list;
 	}

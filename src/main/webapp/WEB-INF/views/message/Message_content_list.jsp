@@ -7,11 +7,11 @@
 <c:forEach var="tmp" items="${clist}">
 
 	<c:choose>
-		<c:when test="${sessionScope.id ne tmp.send_id }">
+		<c:when test="${sessionScope.name ne tmp.send_name }">
 			<!-- 받은메시지 -->
 			<div class="incoming_msg">
 				<div class="incoming_msg_img">
-					<a href="other_profile.do?other_id={tmp.send_id}"> <!-- <img src="<c:url value="/resources/images/upload/profile/${tmp.profile}"/>" alt="보낸사람프사">  -->
+					<a href="other_profile.do?other_name={tmp.send_name}"> <!-- <img src="<c:url value="/resources/images/upload/profile/${tmp.profile}"/>" alt="보낸사람프사">  -->
 						<img
 						src="<c:url value="/resources/images/upload/profile/tempprofile2.jpg"/>"
 						alt="보낸사람프사"> <!-- 주석처리한것이 불러올 프사이미지이고 아래는 임시로 저장해놓은것입니다. -->
@@ -29,7 +29,7 @@
 		<c:otherwise>
 		<!-- 보낸 메시지 -->
 		<div class="outgoing_msg">
-			<div class="semt_msg">
+			<div class="sent_msg">
 				<p>${tmp.content }</p>
 				<span class="time_date">${tmp.send_time }</span>
 			</div>

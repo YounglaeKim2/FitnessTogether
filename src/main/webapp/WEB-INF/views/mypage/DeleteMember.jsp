@@ -28,16 +28,15 @@
 	<body id="page-top">
 	<!-- Navigation-->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
-	<a class="navbar-brand js-scroll-trigger" href="#page-top">
-		<span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="<c:url value="/resources/mypage/assets/img/user.png"/>" alt="..." /></span>
-	</a>
+		<a class="navbar-brand js-scroll-trigger" href="#">
+			<span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="<c:url value="/resources/mypage/assets/img/user.png"/>" alt="..." /></span>
+		</a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 					<ul class="navbar-nav">
 						<li class="nav-item">${sessionScope.id }</li>
 						<li class="nav-item"><a class="nav-link js-scroll-trigger" href="<c:url value="/fnt/UpdateMember.do"/>">프로필수정</a></li>
 						<li class="nav-item"><a class="nav-link js-scroll-trigger" href="<c:url value="/fnt/DeleteMember.do"/>">회원 탈퇴</a></li>
-					
 					</ul>
 			</div>
 	</nav>
@@ -46,9 +45,7 @@
 		<div id="main">
 			<div class="content" style="width: 2000px; height: 500px; text-align: center; margin:100px 800px 0 200px; padding: 0 750px 0 0; ">
 				<p class="w-pct60 right" style="margin: 0 auto; padding: 0 540px 0 0; font-size: 13px;"></p>
-					
-					
-					<span class="delete_user"><img class="deleteUser" style="width:130px;height:130px;margin:0 560px 0 0;"src="<c:url value="/resources/mypage/images/delete_user.png"/>" /></span>
+				<span class="delete_user"><img class="deleteUser" style="width:130px;height:130px;margin:0 560px 0 0;"src="<c:url value="/resources/mypage/images/delete_user.png"/>" /></span>
 				<div class="subheading mb-5" style="color:black; font-weight:bold; padding: 0 600px 0 0;">정말&nbsp;&nbsp;탈퇴&nbsp;&nbsp;하시겠습니까?</div>
 				<div class="subheading mb-6" style="color:black; font-weight:bold; padding: 0 600px 0 0;">탈퇴한&nbsp;&nbsp;데이터는&nbsp;&nbsp;복구가&nbsp;&nbsp;되지&nbsp;&nbsp;않습니다.</div>
 				<div class="subheading mb-7" style="color:black; font-weight:bold; padding: 0 600px 0 0;">탈퇴를&nbsp;&nbsp;원하시면&nbsp;&nbsp;아래 "<span class="highlight" style="background-color:#f5bfab;">회원&nbsp;&nbsp;탈퇴</span>" 버튼을&nbsp;&nbsp;눌러주세요</div>

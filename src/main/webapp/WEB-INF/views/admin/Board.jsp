@@ -50,19 +50,11 @@
 						<div class="menu_section">
 							<ul class="nav side-menu">
 								<li class="nav-item"><a class="nav-link"
-									href="<c:url value="/fnt/Main.do"/>"><i class="fa fa-home"></i>
-										Home</a></li>
-								<!-- 
-                  <li class="nav-item">
-                  	<a class="nav-link" href="<c:url value="/fnt/Statics.do"/>"><i class="fa fa-bar-chart-o"></i> 통계 </a>                  
-                  </li>
-                   -->
+									href="<c:url value="/fnt/MemberAdmin.do"/>"><i
+										class="fa fa-desktop"></i> 회원관리</a></li>
 								<li class="nav-item"><a class="nav-link"
 									href="<c:url value="/fnt/Board.do"/>"><i class="fa fa-edit"></i>
 										게시판관리</a></li>
-								<li class="nav-item"><a class="nav-link"
-									href="<c:url value="/fnt/MemberAdmin.do"/>"><i
-										class="fa fa-desktop"></i> 회원관리</a></li>
 							</ul>
 						</div>
 					</div>
@@ -80,9 +72,6 @@
 
 			<div class="top_nav">
 				<div class="nav_menu">
-					<div class="nav toggle">
-						<a id="menu_toggle"><i class="fa fa-bars"></i></a>
-					</div>
 					<nav class="nav navbar-nav"></nav>
 				</div>
 			</div>
@@ -100,14 +89,6 @@
 									<ul class="nav navbar-right panel_toolbox">
 										<li><a class="collapse-link"><i
 												class="fa fa-chevron-up"></i></a></li>
-										<li class="dropdown"><a href="#" class="dropdown-toggle"
-											data-toggle="dropdown" role="button" aria-expanded="false"><i
-												class="fa fa-wrench"></i></a>
-											<div class="dropdown-menu"
-												aria-labelledby="dropdownMenuButton">
-												<a class="dropdown-item" href="#">Settings 1</a> <a
-													class="dropdown-item" href="#">Settings 2</a>
-											</div></li>
 										<li><a class="close-link"><i class="fa fa-close"></i></a>
 										</li>
 									</ul>
@@ -124,7 +105,7 @@
 													<th class="column-title">닉네임</th>
 													<th class="column-title">아이디</th>
 													<th class="column-title">작성일</th>
-													<th class="column-title no-link last"> <span class="nobr">정보</span></th>
+													<th class="column-title no-link last"> <span class="nobr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;정보</span></th>
 												</tr>
 											</thead>
 											<tbody>
@@ -141,8 +122,25 @@
 														<td> ${ m.id }</td>
 														<td> ${ m.postDate }</td>
 														<td> 
-															<button type="button" onclick="fnView(${m.no})">상세보기</button>
-															<button type="button" onclick="fnDelete(${m.no})">삭제</button>
+														<button class="btn btn-secondary" id="btn1"
+															 style="font-size:12px;"
+															 onclick="fnView(${m.no})">상세보기</button>
+														<button class="btn default" id="btn1"
+															 onclick="fnView(${m.no})"
+															 style="color: black; background-color: #f5f2f2; 
+															font-size: 12px; font-weight: bold; height: 30px; 
+															width: 60px; margin: 0px 30px 0px 0px; 
+															padding: 5px 0px 0px 0px; border: 2px solid #595757"
+															 >상세보기</button>
+														<button class="btn btn-secondary" id="btn1"
+															 style="font-size:12px;background-color:#36526e"
+															 onclick="fnView(${m.no})">상세보기</button>
+														<form action="/ft/fnt/DeleteBoard.do" method="post">
+															<button  class="btn btn-secondary" id="btn2" 
+															 style="font-size:12px;"
+															>삭제</button>
+															<input type="hidden" name="no" value="${m.no}"/>
+														</form>
 														</td>
 													</tr>
 												</c:forEach>
@@ -150,6 +148,7 @@
 										</table>
 										<form id="pwdform"action="<c:url value="/fnt/viewBoard.do"/>" >
 											<input type="hidden" name="no" value="">
+											<input type="hidden" name="no" value="${m.no}"/>
 										</form>
 									</div>
 								</div>
@@ -163,8 +162,7 @@
 			<!-- footer content -->
 			<footer>
 				<div class="pull-right">
-					Gentelella - Bootstrap Admin Template by <a
-						href="https://colorlib.com">Colorlib</a>
+					Fitness Together
 				</div>
 				<div class="clearfix"></div>
 			</footer>
@@ -177,6 +175,7 @@
 		$('[name=no]').val(no);
 		$('#pwdform').submit();
 	}
+	/*
 	function fnDelete(no) {
 		var result = swal("삭제하시겠습니까?");
 		if (result) {
@@ -195,7 +194,7 @@
 			})
 		}
 	}
-	
+	*/
 	
 	//게시물 삭제
 	/* $(function() {

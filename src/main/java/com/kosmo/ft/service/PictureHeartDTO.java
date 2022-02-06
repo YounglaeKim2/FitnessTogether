@@ -9,6 +9,6 @@ public class PictureHeartDTO {
 	
 	private String hno;
 	private String bno;
-	private String name;
+	private String id;
 	
 }

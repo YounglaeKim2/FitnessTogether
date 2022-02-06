@@ -27,7 +27,7 @@
 					<!-- 메시지 검색 -->
 					<div class="srch_bar">
 						<div class="stylish-input-group">
-							<input type="text" class="search-bar" placeholder="Search">
+							<input type="text" class="search-bar" placeholder="사람찾기" id="search_people">
 							<span class="input-group-addon">
 								<button type="button">
 									<i class="fa fa-search" aria-hidden="true"></i>
@@ -74,7 +74,7 @@
 				$('.chat_list').on('click',function(){
 					
 					var room = $(this).attr('room');
-					var other_id = $(this).attr('other-id');
+					var other_name = $(this).attr('other-name');
 					
 					//선택한 메시지빼고 나머지는 avtive효과 해제하기
 					$('.char_list_box').not('.chat_list_box.chat').removeClass('active_chat');
@@ -100,7 +100,7 @@
 					$('.msg_send_btn').on('click',function(){
 						
 						//메시지 전송 함수 호출
-						SendMessage(room, other_id);
+						SendMessage(room, other_name);
 						//전송버튼을 누르면 메시지 리스트가 리로드되며 현재 열린 메시지의 선택됨표시 사라짐
 						//이를 해결하기 위하여 메시지 전송버튼을 누르고 메시지 리스트가 리로드되면 현재 열린 메시지가 선택됨 표시되도록
 						$('.chat_list_box:first').addClass('active_chat');
@@ -130,7 +130,7 @@
 				$('.chat_list').on('click',function(){
 					
 					var room = $(this).attr('room');
-					var other_id = $(this).attr('other-id');
+					var other_name = $(this).attr('other-name');
 					
 					//선택한 메시지빼고 나머지는 avtive효과 해제하기
 					$('.char_list_box').not('.chat_list_box.chat').removeClass('active_chat');
@@ -156,7 +156,7 @@
 					$('.msg_send_btn').on('click',function(){
 						
 						//메시지 전송 함수 호출
-						SendMessage(room, other_id);
+						SendMessage(room, other_name);
 						//전송버튼을 누르면 메시지 리스트가 리로드되며 현재 열린 메시지의 선택됨표시 사라짐
 						//이를 해결하기 위하여 메시지 전송버튼을 누르고 메시지 리스트가 리로드되면 현재 열린 메시지가 선택됨 표시되도록
 						$('.chat_list_box:first').addClass('active_chat');
@@ -197,7 +197,7 @@
 	};
 	
 	// 메세지를 전송하는 함수
-	const SendMessage = function(room,other_id){
+	const SendMessage = function(room,other_name){
 		
 		var content = $('.write_msg').val();
 		
@@ -212,7 +212,7 @@
 				method: "post",
 				data: {
 					room : room,
-					other_id : other_id,
+					other_name : other_name,
 					content : content
 				},
 				success: function(data){

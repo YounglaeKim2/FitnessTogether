@@ -4,260 +4,114 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="mybatis.mapper.photobbs">
-	<select id="picture_count"
-		parameterType="com.kosmo.ft.service.PictureDTO" resultType="int">
+
+	<resultMap type="PictureDTO" id="PictureDTOResult">
+		<result column="bno" property="bno"/>
+		<result column="subject" property="subject"/>
+		<result column="content" property="content"/>
+		<result column="wdate" property="wdate"/>
+		<result column="hit" property="hit"/>
+		<result column="reply" property="reply"/>
+		<result column="hno" property="hno"/>
+		<result column="id" property="id"/>
+		<result column="imgName" property="imageName"/>
+		<result column="startRowNum" property="startRowNum"/>
+		<result column="endRowNum" property="endRowNum"/>
+		<result column="rowCount" property="rowCount"/>
+	</resultMap>
+	
+	<select id="picture_count" parameterType="PictureDTO"
+		resultType="int">
 		SELECT COUNT(bno) FROM BOARD
 		<choose>
 			<!-- if문과 비슷한 구조로 subject가 둘 null이 아니면 제목검색 이런식 -->
 			<when test="subject != null">
-				WHERE (SUBJECT LIKE CONCAT('%',#{subject},'%'))
+				WHERE SUBJECT LIKE '%'||#{subject}||'%'
 			</when>
 			<when test="content != null">
-				WHERE (CONTENT LIKE CONCAT('%',#{content},'%'))
-			</when>
-			<when test="name != null">
-				WHERE (CONTENT LIKE CONCAT('%',#{name},'%'))
-			</when>
-			<when test="address != null">
-				WHERE (CONTENT LIKE CONCAT('%',#{address},'%'))
+				WHERE CONTENT LIKE '%'||#{content}||'%'
 			</when>
 		</choose>
 	</select>
 	
-	<!-- 이미지 파일 업로드 관련 -->
-	<insert id="pictureUpload" parameterType="Map">
-      INSERT INTO board(bno,name,subject,content,wdate) values(seq_board.nextval,(select id from member where id=#{id}),#{content},sysdate)
-      <selectKey keyProperty="bno" resultType="int" order="AFTER">
-         SELECT seq_board.currval FROM DUAL
-      </selectKey>
-	</insert>
-	
-	<!-- 이미지넘버랑 소스를 매칭하는 -->
-	<insert id="pictureSrcInsert" parameterType="Map">
-    INSERT INTO image(ino,bno,i_src)
-    select seq_src.nextval, A.* from(
-      <foreach item="item" collection="i_src" separator="UNION ALL">
-         select #{bno} as bno, #{item.originalFilename} as src from dual
-       </foreach>) A
-   </insert>
-   
-   <!-- 리스트 관련 -->
-
-	<select id="picture_favorite_count"
-		parameterType="com.kosmo.ft.service.PictureHeartDTO" resultType="int">
-		SELECT COUNT(*) FROM HEART WHERE name LIKE '${name}'
-	</select>
-
 	<!-- 로그인 안한버전 사진게시판 리스트 -->
-	<select id="picture_list"
-		resultType="com.kosmo.ft.service.PictureDTO">
-		SELECT b.bno, subject, content, name, date_format(wdate,'%Y-%m-%d')
-		wdate, hit, address, media, reply, heart, m.pro
-		FROM BOARD b LEFT
-		OUTER JOIN MEMBER m
-		ON b.name = m.name
+	<select id="picture_list" resultType="PictureDTO">
+		SELECT bno, subject, content, name, wdate, hit, reply, heart, imgName
+		FROM BOARD b LEFT OUTER JOIN MEMBER m ON b.id = m.id
 
 		<choose>
 			<!-- if문과 비슷한 구조로 subject가 둘 null이 아니면 제목검색 이런식 -->
 			<when test="subject != null">
-				WHERE (SUBJECT LIKE CONCAT('%',#{subject},'%'))
+				WHERE SUBJECT LIKE '%'||#{subject}||'%'
 			</when>
 			<when test="content != null">
-				WHERE (CONTENT LIKE CONCAT('%',#{content},'%'))
-			</when>
-			<when test="name != null">
-				WHERE (CONTENT LIKE CONCAT('%',#{name},'%'))
-			</when>
-			<when test="address != null">
-				WHERE (CONTENT LIKE CONCAT('%',#{address},'%'))
+				WHERE CONTENT LIKE '%'||#{content}||'%'
 			</when>
 		</choose>
-		ORDER BY b.bno DESC
-		limit #{startRowNum}, #{rowCount}
+		ORDER BY bno DESC
 	</select>
 
 	<!-- 로그인 한버전 사진게시판 리스트 -->
-	<select id="picture_list_login"
-		parameterType="com.kosmo.ft.service.PictureDTO"
-		resultType="com.kosmo.ft.service.PictureDTO">
-		SELECT b.bno, subject, content, name, date_format(wdate,'%Y-%m-%d')
-		wdate, hit, address, media, reply, heart, h.hno ,m.pro
-		FROM BOARD b
-		LEFT OUTER JOIN HEART h
-		ON #{name} = h.name AND b.bno = h.bno
-		LEFT OUTER
-		JOIN MEMBER m
-		ON b.name = m.name
-
-		<choose>
-			<!-- if문과 비슷한 구조로 subject가 둘 null이 아니면 제목검색 이런식 -->
+	<select id="picture_list_login" parameterType="PictureDTO"
+		resultType="PictureDTO">
+		SELECT b.bno, subject, content, b.id, name, wdate, hit, reply, heart, hno, imgName
+		FROM BOARD b LEFT OUTER JOIN HEART h ON #{id} = h.id AND b.bno = h.bno
+		LEFT OUTER JOIN MEMBER m ON b.id = m.id
+		 <choose>
 			<when test="subject != null">
-				WHERE (SUBJECT LIKE CONCAT('%',#{subject},'%'))
+				WHERE SUBJECT LIKE '%'||#{subject}||'%'
 			</when>
 			<when test="content != null">
-				WHERE (CONTENT LIKE CONCAT('%',#{content},'%'))
-			</when>
-			<when test="name != null">
-				WHERE (CONTENT LIKE CONCAT('%',#{name},'%'))
-			</when>
-			<when test="address != null">
-				WHERE (CONTENT LIKE CONCAT('%',#{address},'%'))
+				WHERE CONTENT LIKE '%'||#{content}||'%'
 			</when>
 		</choose>
-		ORDER BY b.bno DESC
-		limit #{startRowNum}, #{rowCount}
+		ORDER BY bno DESC
 	</select>
-
+	
 	<!-- BEST 게시물5 리스트 -->
-	<select id="best_picture_list"
-		parameterType="com.kosmo.ft.service.PictureDTO"
-		resultType="com.kosmo.ft.service.PictureDTO">
-		SELECT bno, name, hit, address, media, reply, heart
+	<select id="best_picture_list" parameterType="PictureDTO"
+		resultType="PictureDTO">
+		SELECT bno, hit, reply, heart
 		FROM BOARD
 
 		<choose>
 			<!-- if문과 비슷한 구조로 subject가 둘 null이 아니면 제목검색 이런식 -->
 			<when test="subject != null">
-				WHERE (SUBJECT LIKE CONCAT('%',#{subject},'%'))
+				WHERE SUBJECT LIKE '%'||#{subject}||'%'
 			</when>
 			<when test="content != null">
-				WHERE (CONTENT LIKE CONCAT('%',#{content},'%'))
-			</when>
-			<when test="name != null">
-				WHERE (CONTENT LIKE CONCAT('%',#{name},'%'))
-			</when>
-			<when test="address != null">
-				WHERE (CONTENT LIKE CONCAT('%',#{address},'%'))
+				WHERE CONTENT LIKE '%'||#{content}||'%'
 			</when>
 		</choose>
 		ORDER BY heart DESC
-		limit 5
 	</select>
+	
+	<select id="pictureSelectOne" parameterType="Map" resultMap="PictureDTOResult">
+		SELECT b.*,m.name FROM
+		member m JOIN board b ON m.id=b.id
+		WHERE bno =#{bno}	
+	</select>
+	
+	<!-- 업로드 -->
 
-	<!-- 좋아요 관련 -->
-
-	<!-- 좋아요 추가 -->
-
-	<insert id="picture_heart_save"
-		parameterType="com.kosmo.ft.service.PictureHeartDTO">
-		INSERT INTO HEART
-		VALUES(0, #{bno}, #{name})
+	<!-- 게시글 업로드 관련 -->
+	<insert id="pictureUpload" parameterType="Map">
+		INSERT INTO board(bno,subject,content,hit,reply,heart,wdate,id,imgName)
+		values(bno.nextval,#{subject},#{content},0,0,0,sysdate,#{id},#{imgName})
+		<selectKey keyProperty="bno" resultType="int" order="AFTER">
+			SELECT bno.currval FROM DUAL
+		</selectKey>
 	</insert>
-
-	<update id="picture_heart_up"
-		parameterType="com.kosmo.ft.service.PictureHeartDTO">
-		UPDATE BOARD SET heart=heart+1
-		WHERE NO=#{NO}
-	</update>
-
-	<!-- 좋아요 삭제 -->
-	<delete id="picture_heart_remove"
-		parameterType="com.kosmo.ft.service.PictureHeartDTO">
-		DELETE FROM HEART
-		WHERE bno=#{bno} AND name=#{name}
-	</delete>
-
-	<update id="picture_heart_down"
-		parameterType="com.kosmo.ft.service.PictureHeartDTO">
-		UPDATE BOARD SET heart=heart-1
-	</update>
-
-	<!-- 좋아요 추가/삭제시 좋아요 갯수 가져오기 -->
-	<select id="picture_heart_count"
-		parameterType="com.kosmo.ft.service.PictureHeartDTO"
-		resultType="com.kosmo.ft.service.PictureHeartDTO">
-		SELECT heart
-		FROM BOARD
-		WHERE bno=#{bno}
-	</select>
-
-	<!-- 댓글관련 -->
-
-	<!-- 댓글 쓰기 -->
-	<insert id="picture_reply_write"
-		parameterType="com.kosmo.ft.service.PictureReplyDTO">
-		INSERT INTO REPLY
-		VALUES(0, #{bno}, #{grp}, 0, 0, #{name}, #{content}, now())
-	</insert>
-
-	<!-- 댓글일경우 rno,grp 일치하게 함 -->
-	<update id="picture_reply_check"
-		parameterType="com.kosmo.ft.service.PictureReplyDTO">
-		UPDATE REPLY SET grp=#{grp}
-		WHERE rno != grp
-	</update>
-
-	<!-- 댓글이 삭제된 댓글일때 그에 딸린 대댓글들이 모두 삭제되면 테이블에서 완전삭제 -->
-	<delete id="picture_reply_delete_after_rereply_delete"
-		parameterType="com.kosmo.ft.service.PictureReplyDTO">
-		DELETE FROM REPLY
-		WHERE content="" AND grp=#{grp}
-	</delete>
-
-	<!-- 대댓글 쓰기 -->
-	<insert id="picture_rereply_write"
-		parameterType="com.kosmo.ft.service.PictureReplyDTO">
-		INSERT INTO REPLY
-		VALUES(0, #{bno}, #{grp}, 0, #{grpl}, #{name}, #{content}, now())
-	</insert>
-
-	<!-- BOARD에 댓글 수 증가시키기 -->
-	<update id="picture_reply_up"
-		parameterType="com.kosmo.ft.service.PictureReplyDTO">
-		UPDATE BOARD SET reply=reply+1
-		WHERE rno != #{rno}
-	</update>
-
-	<!-- 댓글 리스트 가져오기 -->
-	<select id="picture_replyList"
-		parameterType="com.kosmo.ft.service.PictureReplyDTO" resultType="com.kosmo.ft.service.PictureReplyDTO">
-		SELECT r.rno, r.bno, r.grp, r.grpl, r.name, r.content, date_format(wdate,'%Y-%m-%d') wdate, datediff(now(), wdate) wgap, m.pro
-		FROM REPLY r LEFT OUTER JOIN MEMBER m
-		ON r.name = m.name
-		WHERE r.bno = #{bno}
-		ORDER BY grp ASC, grps DESC
-	</select>
 	
-	<!-- 댓글 추가/삭제시 댓글 갯수 가져오기 -->
-	<select id="picture_reply_count"
-		parameterType="com.kosmo.ft.service.PictureReplyDTO" resultType="com.kosmo.ft.service.PictureReplyDTO">
-		SELECT reply
-		FROM BOARD
-		WHERE rno = #{rno}
-	</select>
+	<!-- 게시글 수정 -->
+	<update id="pictureUpdate" parameterType="Map">
+		UPDATE board SET subject=#{subject},content=#{content},imgName=#{imgName},wdate=sysdate WHERE bno=#{bno}
+	</update>
 	
-	<!-- 댓글의 대댓글 수를 카운트 -->
-	<select id="picture_count-rereply"
-		parameterType="com.kosmo.ft.service.PictureReplyDTO" resultType="int">
-		SELECT COUNT(bno)
-		FROM REPLY
-		WHERE bno = #{bno} AND grp = #{grp}
-	</select>
-	
-	<!-- 대댓글 수를 카운트 -->
-	<select id="picture_count_rereply_fromrereply"
-		parameterType="com.kosmo.ft.service.PictureReplyDTO" resultType="int">
-		SELECT COUNT(bno)
-		FROM REPLY
-		WHERE rno = #{grp} AND grp = #{grp}
-	</select>
-	
-	<!-- 댓글 삭제(대댓글이 없는 경우) -->
-	<delete id="picture_reply_delete" parameterType="com.kosmo.ft.service.PictureReplyDTO">
-		DELETE FROM REPLY
-		WHERE rno=#{rno}
+	<!-- 게시글 삭제 -->
+	<delete id="pictureDelete" parameterType="String">
+		DELETE board WHERE bno=#{bno}
 	</delete>
 	
-	<!-- 댓글 삭제(대댓글이 있는 경우) -->
-	<update id="picture_reply_not_delete" parameterType="com.kosmo.ft.service.PictureReplyDTO">
-		UPDATE REPLY SET content=""
-		WHERE rno=#{rno}
-	</update>
-	
-	<!-- BOARD 테이블의 댓글 수 감소 -->
-	<update id="picture_reply_down" parameterType="com.kosmo.ft.service.PictureReplyDTO">
-		UPDATE BOARD SET reply=reply-1
-		WHERE rno=#{rno}
-	</update>
-	
+
 </mapper> 

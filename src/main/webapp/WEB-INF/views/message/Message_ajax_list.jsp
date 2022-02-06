@@ -5,11 +5,11 @@
 <c:forEach var="tmp" items="${list}">
 	<div class="chat_list_box${tmp.room} chat_list_box">
 		<div type="button" class="chat_list" room="${tmp.room}"
-			other-id="${tmp.other_id }">
+			other-name="${tmp.other_name }">
 			<!-- active-chat -->
 			<div class="chat_people">
 				<div class="chat_img">
-					<a href="other_profile.do?other_id=${tmp.other_id}"> 
+					<a href="other_profile.do?other_name=${tmp.other_name}"> 
 						<!-- <img src="<c:url value="/resources/images/upload/profile/${tmp.profile}"/>" alt="프사1">  -->
 						<img src="<c:url value="/resources/images/upload/profile/tempprofile1.jpg"/>"
 						alt="프사1"> <!-- 주석처리한것이 불러올 프사이미지이고 아래는 임시로 저장해놓은것입니다. -->

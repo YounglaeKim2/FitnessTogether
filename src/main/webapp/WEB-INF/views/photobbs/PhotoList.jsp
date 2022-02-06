@@ -10,13 +10,13 @@
 			<div class="card-img" type="button" idx="${tmp.bno}"
 				data-bs-toggle="modal" data-bs-target="viewModal${tmp.bno}">
 				<div class="box">
-					<img src="./upload/picture/${tmp.media}"
+					<img src="<c:url value="/resources/images/upload/picture/${tmp.imgName}"/>"
 						class="card-img-top img-wrapper" alt="...">
 				</div>
 			</div>
 			<div class="card-body">
 				<div class="row">
-					<div class="col-xsm card-title">${tmp.id}</div>
+					<div class="col-xsm card-title">${tmp.name}</div>
 					<div class="col-sm card-heart" id="card-heart">
 						<c:choose>
 							<%--로그인 상태일때 -하트 클릭되게 --%>
@@ -86,12 +86,12 @@
 						<!-- 글쓴이 프로필 사진이 원형으로 나오는 부분 -->
 						<div class="row">
 							<div class="col-10">
-								<span id="m_writer_profile"> <a
-									href="other_profile.do?other_id=${tmp.id }"> <img
-										id="profileImage" src="" alt="프사" /> <%--업로드할 프사의 이미지 경로가 들어갈예정 --%>
-										<%-- "<c:url value="/resources/images/photobbs/upload/'${tmp.pro }'"/>" --%>
+								<%-- <span id="m_writer_profile"> <a
+									href="other_profile.do?other_name=${tmp.name }"><img
+										id="profileImage" src="" alt="프사" />
+										 "<c:url value="/resources/images/photobbs/upload/'${tmp.profile }'"/>"
 								</a>
-								</span>&nbsp;&nbsp;<span id="m_writer">${tmp.id }</span>
+								</span>&nbsp;&nbsp; --%><span id="m_writer">${tmp.name }</span>
 							</div>
 							<div class="col-2">${tmp.wdate }</div>
 						</div>
@@ -176,10 +176,10 @@
 								<c:if test="${not empty sessionScope.id }">
 									<div class="row reply-write">
 										<div class="col-1">
-											<a href="other_pro.do?other_name=${tmp.id }"> <img
-												id="write_reply_profileImage" src="" /> <!-- "<c:url value="/resources/images/photobbs/upload/'${sessionScope.pro }'"/>" -->
+											<%-- <a href="other_profile.do?other_name=${tmp.name }"> <img
+												id="write_reply_profileImage" src="" />"<c:url value="/resources/images/photobbs/upload/'${sessionScope.profile }'"/>"
 												<!-- src에는 세션에 로그인한 프로필의 사진이 들어감 -->
-											</a>
+											</a> --%>
 										</div>
 										<div class="col-8" class="input_reply_div">
 											<input class="w-100 form-control" id="input_reply${tmp.rno}"
@@ -256,11 +256,6 @@
 	</div>
 </c:forEach>
 
-
-
-
-
-
 <script>
 	//페이지가 열리자마자 실행되는 자스코드
 	
@@ -295,7 +290,7 @@
 			
 			// +1된 hit값 불러오기
 			$.ajax({
-				url : "<c: value="/fnt/picture_view.do"/>",
+				url : "<c:url value="/fnt/picture_write.do"/>",
 				type: "post",
 				data: {
 					bno : bno
@@ -343,7 +338,7 @@
 			
 			//reply+1 하고 그 값을 가져오기
 			$.ajax({
-				url : "<c: value="/fnt/picture_write_rereply.do"/>",
+				url : "<c:url value="/fnt/picture_write_rereply.do"/>",
 				type : "post",
 				data : {
 					rno : rno,
@@ -374,7 +369,7 @@
 	const DeleteReply = function(rno, bno){
 		//grp이 rno인 댓글이 있는 경우 content에 null을 넣고 없으면 삭제.
 		$.ajax({
-			url: "<c: value="/fnt/picture_delete_reply.do"/>",
+			url: "<c:url value="/fnt/picture_delete_reply.do"/>",
 			type: "post",
 			data : {
 				rno : rno,
@@ -402,7 +397,7 @@
 	const DeleteReReply = function(rno, bno, grp){
 		
 		$.ajax({
-			url: "<c: value="/fnt/picture_delete_rereply.do"/>",
+			url: "<c:url value="/fnt/picture_delete_rereply.do"/>",
 			type: "post",
 			data : {
 				rno : rno,
@@ -434,7 +429,7 @@
 	//게시물의 댓글 목록을 불러오는 자스코드
 	const ReplyList = function(rno){
 		$.ajax({
-			url : "<c: value="/fnt/picture_replyList.do"/>",
+			url : "<c:url value="/fnt/picture_replyList.do"/>",
 			type : 'post',
 			data : {
 				rno : rno
@@ -455,7 +450,7 @@
 					var content = data[i].content;
 					var wdate = data[i].wdate;
 					var wgap = data[i].wgap;
-					var pro = data[i].pro;
+					/* var profile = data[i].profile; */
 					
 					console.log(grpl]); //댓글일땐 0, 대댓글일땐 1
 					
@@ -469,10 +464,10 @@
 					else{
 						if(grpl == 0){ //댓글일때
 							listHtml += "	 <div class='col-1'>";
-							listHtml += "	 		<a href='other_pro.do?other_name="+name+"'>";
+							/* listHtml += "	 		<a href='other_profile.do?other_id="+id+"'>"; */
 							//아래 프로필이미지 경로는 나중에 물어보고 수정하기
-							listHtml += "	 				<img class='reply_list_profileImage' src='./upload/pro/"+ pro +"'/>";						
-							listHtml += "	 		</a>";		
+							/* listHtml += "	 				<img class='reply_list_profileImage' src='./upload/profile/"+ profile +"'/>"; */						
+							/* listHtml += "	 		</a>";	 */	
 							listHtml += "	 </div>";
 							listHtml += "	 <div class='rereply-content col-8'>";
 							listHtml += "	 		<div>";
@@ -484,7 +479,7 @@
 							listHtml += "	 				</span>";
 							listHtml += "	 		</div>";
 							// 현재 로그인 상태일때 답글작성 버튼이 나온다.
-							if("${name}" != ""){
+							if("${id}" != ""){
 								listHtml += "			<div>";
 								//함수에 게시글번호(bno), 댓글번호(rno), 모댓글 작성자(name)를 인자로 담아서 넘기고
 								//이때 댓글 작성자 name은 string, string을 인자로 넣기위해 "", ''로 감싼다.
@@ -496,9 +491,9 @@
 						else{ //대댓글일때
 							listHtml += "	 <div class='col-1'>";
 							listHtml += "	 </div>";
-							listHtml += "	 <div class='col-1'>";
-							listHtml += "	 				<img class='reply_list_profileImage' src='./upload/pro/"+ pro +"'/>";
-							listHtml += "	 </div>";
+							/* listHtml += "	 <div class='col-1'>"; */
+							/* listHtml += "	 				<img class='reply_list_profileImage' src='./upload/profile/"+ profile +"'/>"; */
+							/* listHtml += "	 </div>"; */
 							listHtml += "	 <div class='rereply-content col-7'>";
 							listHtml += "	 		<div>";
 							listHtml += "	 				<span>";
@@ -535,10 +530,10 @@
 						listHtml += "  		<div class='col-1'>"		
 						listHtml += "   </div>"
 						listHtml += "  		<div class='col-1'>"
-						listHtml += "  			<a href='other_profile.do?other_name="+name+"'>";
-						listHtml += "  				<img id='write_reply_profileImage' src='<c:url value="/resources/images/upload/profile/${pro}"/>'";
+						/* listHtml += "  			<a href='other_profile.do?other_name="+name+"'>"; */
+						/* listHtml += "  				<img id='write_reply_profileImage' src='<c:url value="/resources/images/upload/profile/${profile}"/>'"; */
 						//위 두항목은 추후에 .do와 프로필 경로 등 반드시 합의하에 수정할 것.
-						listHtml += "  			</a>";
+						/* listHtml += "  			</a>"; */
 						listHtml += "   	</div>"
 						listHtml += "  		<div class='col-7'>"
 						listHtml += "		<input class='w-100 input_rereply_div form-control'	id='input_rereply"+ rno +"' type='text' placeholder='댓글을 입력하세요'>"		

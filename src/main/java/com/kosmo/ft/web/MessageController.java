@@ -25,10 +25,10 @@ public class MessageController {
 	@RequestMapping(value = "/fnt/message_list.do")
 	public String message_list(HttpServletRequest request,HttpSession session) {
 		
-		String id = (String)session.getAttribute("id");
+		String name = (String)session.getAttribute("id");
 		
 		MessageDTO dto = new MessageDTO();
-		dto.setId(id);
+		dto.setName(name);
 		
 		//메시지 리스트
 		ArrayList<MessageDTO> list = messageDao.messageList(dto);
@@ -40,10 +40,10 @@ public class MessageController {
 	@RequestMapping(value = "/fnt/message_ajax_list.do")
 	public String message_ajax_list(HttpServletRequest request, HttpSession session) {
 		
-		String id = (String)session.getAttribute("id");
+		String name = (String)session.getAttribute("id");
 		
 		MessageDTO dto = new MessageDTO();
-		dto.setId(id);
+		dto.setName(name);
 		
 		//메시지 리스트
 		ArrayList<MessageDTO> list = messageDao.messageList(dto);
@@ -52,13 +52,14 @@ public class MessageController {
 		return "message/message_ajax_list";
 	}
 	
+	@RequestMapping(value = "/fnt/message_content_list.do")
 	public String message_content_list(HttpServletRequest request, HttpSession session) {
 		
 		int room = Integer.parseInt(request.getParameter("room"));
 		
 		MessageDTO dto = new MessageDTO();
 		dto.setRoom(room);
-		dto.setId((String)session.getAttribute("id"));
+		dto.setName((String)session.getAttribute("id"));
 		
 		//메시지 내용을 가져온다.
 		ArrayList<MessageDTO> clist = messageDao.roomContentList(dto);
@@ -70,13 +71,13 @@ public class MessageController {
 	//메시지 리스트에서 메시지 보내기
 	@ResponseBody
 	@RequestMapping(value = "/fnt/message_send_inlist.do")
-	public int message_send_inlist(@RequestParam int room,@RequestParam String other_id,
+	public int message_send_inlist(@RequestParam int room,@RequestParam String other_name,
 				@RequestParam String content, HttpSession session) {
 				
 		MessageDTO dto = new MessageDTO();
 		dto.setRoom(room);
-		dto.setSend_id((String)session.getAttribute("id"));
-		dto.setRecv_id(other_id);
+		dto.setSend_name((String)session.getAttribute("id"));
+		dto.setRecv_name(other_name);
 		dto.setContent(content);
 		
 		int flag = messageDao.messageSendInlist(dto);
