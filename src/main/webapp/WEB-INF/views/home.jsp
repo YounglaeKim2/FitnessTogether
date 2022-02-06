@@ -148,12 +148,13 @@ a {
     
     <div class="row featurette">
       <div class="col-md-7">
-        <h2 class="featurette-heading">Video.<h4 style="color:gray;"> learn exercise through videos</h4></h2>
+        <h2 class="featurette-heading"><a class="nav-link" href="javascript:void(0);" onclick="searchVideo();">Video.</a><h4 style="color:gray;"> learn exercise through videos</h4></h2>
         <p class="lead">동영상으로 운동을 배워요</p>
       </div>
       <div class="col-md-5">
-        <img src="<c:url value="/resources/images/mapping/FT8.jpg"/>" class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"></rect></img>
-
+      	<a class="nav-link" href="javascript:void(0);" onclick="searchVideo();">
+        	<img src="<c:url value="/resources/images/mapping/FT8.jpg"/>" class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"></rect></img>
+		</a>
       </div>
     </div>
 
@@ -177,6 +178,35 @@ a {
 
   </div><!-- /.container -->
 
+	<!-- 유튜브 검색 모달 시작 -->
+	<div class="modal fade" id="searchModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog modal-xl">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					<div><span style="font-size: 35px;font-weight: bold;">운동영상 검색</span></div>  
+					<div class="col-md-6">
+						<div class="input-group">
+							<span class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path></svg></span>
+							<input type="text" id="searchWord" name="searchWord" class="form-control" placeholder="검색하실 운동명을 입력해주세요" onKeypress="javascript:if(event.keyCode==13){search();event.preventDefault();}"/>
+							<input type="button" id="searchBtn" class="btn btn btn-info" value="검색" onkeyup="if(window.event.keyCode==13){javascropt:search()}"/>
+						</div>
+						
+					</div>
+				</div>
+				<div class="modal-body" >
+					<div id="videos" style="display: inline-block;"></div>
+					<br/>
+					<div id="playvideo" align="center" style="margin-top: 25px"><span style="font-size: 2em;font-weight: bold;">검색된 결과가 없습니다</span></div>				
+					<br/>
+					<div align="right">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 
   <!-- FOOTER -->
   <footer class="container">
@@ -187,6 +217,78 @@ a {
   </footer>
 </main>
 </body>
+<script>
+ 
+	function searchVideo(){
+			$('#searchModal').modal('show');
+	}
+ 
+ $(function(){
+	 
+	 function search(){
+			var keyword = $('#searchWord').val()
+			$.ajax({
+				url:'http://127.0.0.1:10000/youtube/'+keyword
+			}).done(function(data){
+				$('#playvideo').html("");
+				$('#videos').html("");
+				data = JSON.parse(data);
+				var divs ="";
+				
+				$.each(data,function(index,element){
+					var num = index+1
+					divs += "<a href='jaavscript:void(0);' id='play"+num+"'><img style='width: 230px; height: 130px; margin-right: 25px;' src='"+element['img']+"' data-link='"+element['link']+"' data-width='560' data-height='315'/></a>"
+					
+					$(document).on("click",'#play'+num,function(){
+						$('#playvideo').html("");
+						$('#playvideo').html(element['link']);
+					});
+				});
+				divs += "<br/>"
+				
+				$('#videos').html(divs);
+				$('#searchWord').val("");
+				
+				
+				
+			});
+		}
+
+	 
+	 	
+		
+	 
+		$('#searchModal').on('hidden.bs.modal',function(){
+			$('#videos').html("");
+			$('#searchWord').val("");
+			$('#playvideo').html("<span style='font-size: 2em;font-weight: bold;'>검색된 결과가 없습니다</span>");
+		});
+		
+		//검색버튼 클릭시
+		$('#searchBtn').click(function(){
+			if($('#searchWord').val() == ""){
+				alert("검색어를 입력해주세요");
+				return
+			}
+			search();
+		});
+		
+		$('#searchWord').on('keydown',function(){
+			if(event.keyCode === 13) {
+	        	event.preventDefault(); // 엔터키로 submit 하는거 막기
+	        	if($('#searchWord').val() == ""){
+	    			alert("검색어를 입력해주세요");
+	    			return
+	    		}
+	        	search();
+		    }
+			
+		});
+	 
+ });
+
+</script>
+
 <!-- footer 시작 -->
 <jsp:include page="/WEB-INF/views/template/Footer.jsp"/>
 <!-- footer 끝 -->
