@@ -43,7 +43,7 @@ public class OneMemoController {
 	//목록 처리]
 	@RequestMapping("List.do")
 	public String list(
-					   @ModelAttribute("id")
+					   @ModelAttribute("id") String id,
 					   @RequestParam Map map,//검색 파라미터 및 페이징용 키값 저장용
 					   @RequestParam(required = false,defaultValue = "1") int nowPage,
 			           HttpServletRequest req,//페이징에 사용할 컨텍스트 루트 경로 얻기용

@@ -131,7 +131,7 @@
 	
 								<td class="text-left"><a
 									href="<c:url value="/fnt/mappingView.do?no=${item.no}&nowPage="/><c:out value="${param.nowPage }" default="1"/>">${item.title }</a>
-									<span class="badge">${item.commentCount }</span></td>
+									<span class="badge bg-secondary rounded-pill">${item.commentCount }</span></td>
 								<td>${item.name }</td>
 								<td>${item.postDate }</td>
 							</tr>

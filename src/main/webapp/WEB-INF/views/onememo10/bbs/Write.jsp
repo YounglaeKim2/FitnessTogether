@@ -7,17 +7,21 @@
 <!-- 상단메뉴 시작 -->
 <jsp:include page="/WEB-INF/views/template/Top.jsp"/>
 <!-- 상단메뉴 끝 -->
-
+<!-- 
 <link href="<c:url value="/resources/css/bootstrap.css"/>" rel="stylesheet">
-
+ -->
 <!-- 실제 내용 시작 -->
 <div class="container">
-
-	<figure class="text-center">
+	<div class="container px-4 py-5" id="featured-3">
+		<h1 class="pb-2 border-bottom">등 록 게 시 판<h4>적 어 보 세 요 ! ! ! ! !</h4></h1>
+	</div>
+	<!-- 
+	<figure class="text-center" style="padding-top: 100px;">
 		<blockquote class="blockquote">
 			<h1>등 록 페 이 지</h1>
 		</blockquote>
 	</figure>
+	 -->
 	<div class="row">
 		<div class="col-md-12">
 			<form class="form-horizontal" method="post"
@@ -51,7 +55,7 @@
 
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-10 text-end">
-						<button type="submit" class="btn btn-success">등록</button>
+						<button type="submit" class="btn btn-primary">등록</button>
 					</div>
 				</div>
 			</form>

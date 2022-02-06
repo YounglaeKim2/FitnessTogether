@@ -13,23 +13,25 @@
 <!-- 상단메뉴 끝 -->
 
 
-<link href="<c:url value="/resources/css/bootstrap.css"/>" rel="stylesheet">
-
 
 <!-- 실제 내용 시작 -->
 <div class="container">
-
-	<figure class="text-center">
+	<div class="container px-4 py-5" id="featured-3">
+		<h1 class="pb-2 border-bottom">Q & A<h4>무 엇 이 든 물 어 보 세 요 ! ! ! ! !</h4></h1>
+	</div>
+	<!-- 
+	<figure class="text-center" style="padding-top: 100px;">
 		<blockquote class="blockquote">
 			<h1>Q & A</h1>
 		</blockquote>
 		<figcaption class="blockquote-footer">게 시 판</figcaption>
 	</figure>
+	 -->
 	<!-- 작성하기 버튼 -->
 	<div class="row">
 		<div class="col-md-12 text-end">
 			<a href="<c:url value="/onememo/bbs/Write.do"/>"
-				class="btn btn-success">등록</a>
+				class="btn btn-primary">등록</a>
 		</div>
 	</div>
 	<div class="row">
@@ -56,8 +58,8 @@
 						<tr>
 							<td>${listPagingData.totalRecordCount - (((listPagingData.nowPage - 1) * listPagingData.pageSize) + loop.index)}</td>			
 							
-							<td class="text-left"><a href="<c:url value="/onememo/bbs/View.do?no=${item.no}&nowPage="/><c:out value="${param.nowPage }" default="1"/>">${item.title }</a> <span
-								class="badge bg-primary rounded-pill">${item.commentCount }</span></td>
+							<td class="text-secondary"><a href="<c:url value="/onememo/bbs/View.do?no=${item.no}&nowPage="/><c:out value="${param.nowPage }" default="1"/>">${item.title }</a> <span
+								class="badge bg-secondary rounded-pill">${item.commentCount }</span></td>
 							<td>${item.name }</td>
 							<td>${item.postDate }</td>
 						</tr>

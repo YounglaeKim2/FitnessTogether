@@ -16,6 +16,7 @@
 		<typeAlias type="com.kosmo.ft.service.MappingDTO" alias="MappingDTO"/>
 		<typeAlias type="com.kosmo.ft.service.OneMemoDTO" alias="oneMemoDTO"/>
 		<typeAlias type="com.kosmo.ft.service.LineCommentDTO" alias="lineCommentDTO"/>
+		<typeAlias type="com.kosmo.ft.service.MappingLineCommentDTO" alias="MappinglineCommentDTO"/>
 		<typeAlias type="com.kosmo.ft.service.PictureDTO" alias="PictureDTO"/>
 		<typeAlias type="com.kosmo.ft.service.PictureUploadDTO" alias="PictureUploadDTO"/>
 		<typeAlias type="com.kosmo.ft.service.PictureHeartDTO" alias="PictureHeartDTO"/>
@@ -32,6 +33,7 @@
 		<mapper resource="mybatis/mapper/dynamicsql.xml"/>
 		<mapper resource="mybatis/mapper/linecomment.xml"/>
 		<mapper resource="mybatis/mapper/onememo.xml"/>
+		<mapper resource="mybatis/mapper/mappinglinecomment.xml"/>
 		<mapper resource="mybatis/mapper/android.xml"/>
 		<mapper resource="mybatis/mapper/photobbs.xml"/>
 		<!-- <mapper resource="mybatis/mapper/message.xml"/> -->

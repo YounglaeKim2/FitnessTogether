@@ -60,9 +60,13 @@
 
 	<select id="mappingSelectList" parameterType="Map" resultType="mappingDTO">
 		SELECT * FROM
-			(SELECT T.*,ROWNUM R FROM
-				(SELECT o.*,m.name FROM mapping o JOIN member m ON m.id=o.id ORDER BY no DESC) 
-			T)
+		(SELECT T.*,ROWNUM R FROM
+			(SELECT o.*,m.name,(SELECT COUNT(*) FROM mappinglinecomments WHERE no=o.no) as commentCount FROM 
+				mapping o JOIN member m ON m.id=o.id 
+				<if test="searchWord !=null">
+					WHERE ${searchColumn} LIKE '%' || #{searchWord} || '%'
+				</if>				
+				ORDER BY no DESC) T)
 		WHERE R BETWEEN #{start} AND #{end}
 	</select>
 	

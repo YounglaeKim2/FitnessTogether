@@ -57,6 +57,7 @@
 	<select id="memoIsLogin" parameterType="Map" resultType="int">
 		SELECT COUNT(*) FROM member WHERE id=#{id} AND pwd=#{pwd}		
 	</select>
+	
 	<select id="memoSelectList" parameterType="Map" resultType="oneMemoDTO">
 		SELECT * FROM
 		(SELECT T.*,ROWNUM R FROM
@@ -68,29 +69,33 @@
 				ORDER BY no DESC) T)
 		WHERE R BETWEEN #{start} AND #{end}
 	</select>
+	
 	<select id="memoTotalRowCount" parameterType="Map" resultType="int">
 		SELECT COUNT(*) FROM onememo o JOIN member m ON m.id=o.id
 		<if test="searchWord !=null">
 			WHERE ${searchColumn} LIKE '%' || #{searchWord} || '%'
 		</if>
-		
-		
 	</select>
+	
 	<insert id="memoInsert" parameterType="Map" >
 		INSERT INTO onememo
 		VALUES(SEQ_ONEMEMO.NEXTVAL,#{title},#{content},SYSDATE,#{id})
 	</insert>
+	
 	<select id="memoSelectOne" parameterType="Map" resultMap="oneMemoDTOResult">
 		SELECT o.*,m.name FROM
 		member m JOIN onememo o ON m.id=o.id
 		WHERE no =#{no}	
 	</select>
+	
 	<select id="memoFindNameById" parameterType="String" resultType="String">
 		SELECT name FROM member WHERE id=#{id}
 	</select>
+	
 	<update id="memoUpdate" parameterType="Map">
 		UPDATE onememo SET title=#{title},content=#{content} WHERE no=#{no}
 	</update>
+	
 	<delete id="memoDelete" parameterType="Map">
 		DELETE onememo WHERE no=#{no}
 	</delete>

@@ -8,9 +8,9 @@
 <!-- 상단메뉴 시작 -->
 <jsp:include page="/WEB-INF/views/template/Top.jsp"/>
 <!-- 상단메뉴 끝 -->
-
+<!-- 
 <link href="<c:url value="/resources/css/bootstrap.css"/>" rel="stylesheet">
-
+ -->
 <style>
 div{
 	margin: auto;
@@ -25,12 +25,16 @@ b{
 
 <!-- 실제 내용 시작 -->
 <div class="container">
-
+	<div class="container px-4 py-5" id="featured-3">
+		<h1 class="pb-2 border-bottom">상 세 보 기 게 시 판<h4>상 세 히 보 세 요 ! ! ! ! !</h4></h1>
+	</div>
+	<!-- 
 	<figure class="text-center">
 		<blockquote class="blockquote">
 			<h1>상 세 보 기 페 이 지</h1>
 		</blockquote>
 	</figure>
+	 -->
 	<!-- 씨큐리티 사용시:사용자 권한 출력 div -->
 	<!-- 
 	<div>
@@ -88,7 +92,7 @@ b{
 				<sec:authorize access="isAuthenticated()" >
 				 -->
 				<li><a href="<c:url value='/onememo/bbs/Edit.do?no=${record.no}'/>"
-					class="btn btn-success" style="margin: auto;">수정</a></li>
+					class="btn btn-primary" style="margin: auto;">수정</a></li>
 				<li><a href="javascript:isDelete(); " class="btn btn-danger" style="margin: auto;">삭제</a></li>
 				<!-- 
 				</sec:authorize>
@@ -97,7 +101,7 @@ b{
 				</c:if>
 				
 				<li><a href="<c:url value='/onememo/bbs/List.do?nowPage=${param.nowPage}'/>"
-					class="btn btn-primary" style="margin: auto;">목록</a></li>
+					class="btn btn-success" style="margin: auto;">목록</a></li>
 				
 			</ul>
 		</div>
@@ -123,7 +127,7 @@ b{
 					<input placeholder="댓글을 입력하세요"
 						id="title" class="form-control" type="text" size="50"
 						name="linecomment" /> 
-						<input class="btn btn-success" id="submit"
+						<input class="btn btn-primary" id="submit"
 						type="button" value="등록" />
 				</form>
 				<div class="row">
@@ -223,12 +227,12 @@ b{
 			
 			//씨큐리티 미 사용시
 			if("${sessionScope.id}"==element['ID'])
-			//씨큐리티 사용시
 			
+			//씨큐리티 사용시
 			//if('<sec:authentication property="principal.username"/>'==element['ID'])
-				comments+="<td><span href=\"#\" style='cursor:pointer' class='delete' title='"+element["LNO"]+"'>삭제</span></td></tr>";
+				comments+="<td><span href=\"#\" style='cursor:pointer' class='delete btn btn-danger' title='"+element["LNO"]+"'>삭제</span></td></tr>";
 			else
-				comments+="<td>삭제불가</td></tr>";
+				comments+="<td><span class='btn btn-danger'>삭제불가</span></td></tr>";
 			
 		});
 		comments+="</tbody></table>";
@@ -289,7 +293,7 @@ b{
 				$('#title').val("");
 				$('#title').focus();
 				
-				
+				showComments();
 				
 			}
 			
