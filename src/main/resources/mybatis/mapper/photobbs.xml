@@ -52,26 +52,21 @@
     </select>
 
     <!-- 로그인 한버전 사진게시판 리스트 -->
-    <select id="picture_list_login" parameterType="PictureDTO"
-            resultType="PictureDTO">
-        SELECT *
-            FROM (
-                SELECT b.bno, subject, content, b.id, name, wdate, hit, reply, heart, hno, imgName, ROWNUM AS RNUM
-                FROM BOARD b
-                LEFT OUTER JOIN HEART h ON #{id} = h.id AND b.bno = h.bno
-                LEFT OUTER JOIN MEMBER m ON b.id = m.id
-                )
-            WHERE RNUM BETWEEN #{startRowNum} AND #{endRowNum}
-        <choose>
-            <when test="subject != null">
-                WHERE SUBJECT LIKE '%'||#{subject}||'%'
-            </when>
-            <when test="content != null">
-                WHERE CONTENT LIKE '%'||#{content}||'%'
-            </when>
-        </choose>
-        ORDER BY bno ASC
-    </select>
+	<select id="picture_list_login" parameterType="PictureDTO"
+		resultType="PictureDTO">
+		SELECT b.bno, subject, content, b.id, name, wdate, hit, reply, heart, hno, imgName
+		FROM BOARD b LEFT OUTER JOIN HEART h ON #{id} = h.id AND b.bno = h.bno
+		LEFT OUTER JOIN MEMBER m ON b.id = m.id
+		 <choose>
+			<when test="subject != null">
+				WHERE SUBJECT LIKE '%'||#{subject}||'%'
+			</when>
+			<when test="content != null">
+				WHERE CONTENT LIKE '%'||#{content}||'%'
+			</when>
+		</choose>
+		ORDER BY bno DESC
+	</select>
 
     <!-- BEST 게시물5 리스트 -->
     <select id="best_picture_list" parameterType="PictureDTO"

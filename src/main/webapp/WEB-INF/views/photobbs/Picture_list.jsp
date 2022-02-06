@@ -73,17 +73,30 @@
                             </c:if>
 
                             <c:if test="${not empty b.imgName}">
-                                <img src="<c:url value='/resources/images/upload/picture/${b.imgName}'/>">
+                                <img
+									src="<c:url value='/resources/images/upload/picture/${b.imgName}'/>">
                             </c:if>
                         </a>
                     </div>
 
                     <div class="card-content-wrap">
-                        <span> ${ b.id } </span>
-                        <span> heart </span>
-                        <span> comment </span>
-                        <span> view </span>
-                    </div>
+						<span> ${ b.subject } </span> 
+						<%-- <span> <img alt="하트아이콘이미지"
+							src="<c:url value="/resources/images/photobbs/icons/bi bi-suit-heart-fill.png"/>"
+							class="bi bi-suit-heart-fill" width="16" height="16">
+						</span> <span id="heart${b.bno}">${b.heart}</span>
+						댓글 아이콘
+						<span> <img alt="댓글아이콘이미지"
+							src="<c:url value="/resources/images/photobbs/icons/bi bi-chat-dots.png"/>"
+							class="bi bi-chat-dots" width="16" height="16">
+						</span> <span id="reply${b.bno}">${b.reply}</span>
+
+						눈알 아이콘
+						<span> <img alt="조회수아이콘이미지"
+							src="<c:url value="/resources/images/photobbs/icons/bi bi-eye.png"/>"
+							class="bi bi-eye" width="16" height="16">
+						</span> <span id="hit${b.bno}">${b.hit}</span> --%>
+					</div>
                 </div>
             </c:forEach>
         </div>
@@ -152,157 +165,47 @@
                 //로딩중이 아니라고 표시한다.
                 isLoading = false;
                 console.log("ajax");
-
-                $(".heart-click").unbind('click');
-                //로그인 한 상태에서 하트를 클릭했을 때 (로그인한 상태의 하트의 <a></a> class명: heart-click)
-                $(".heart-click").click(function () {
-
-                    //게시물 번호(bno)를 idx로 전달받아 저장
-                    var bno = $(this).attr('idx');
-                    console.log("heart-click");
-
-                    //빈하트를 눌렀을때
-                    if ($(this).children('png').attr('class') == "bi bi-suit-heart-fill") {
-                        console.log("빈하트 클릭" + bno);
-
-                        $.ajax({
-                            url    : "<c:url value="/fnt/saveHeart.do"/>",
-                            type   : 'post',
-                            data   : {
-                                bno: bno,
-                            },
-                            success: function (pto) {
-                                //페이지 새로고침
-                                //document.location.reload(true);
-
-                                var heart = pto.heart;
-
-                                //페이지와 모달창에 하트수를 갱신
-                                $('#m_heart' + bno).text(heart);
-                                $('#heart' + bno).text(heart);
-
-                                console.log("하트추가 성공");
-                            },
-                            error  : function () {
-                                alert('서버에 에러가 발생했습니다');
-                            }
-
-                        });
-
-                        console.log("꽉찬하트로 바꾸기");
-                        $(this).attr('src', '<c:url value="/resources/images/photobbs/icons/bi bi-suit-heart-fill.png"/>')
-                        $('.heart_icon' + bno).attr('src', '<c:url value="/resources/images/photobbs/icons/bi bi-suit-heart-fill.png"/>')
-
-                        //꽉찬 하트를 눌렀을 때
-                    } else if ($(this).children('png').attr('class') == "bi bi-suit-heart-fill") {
-                        console.log("꽉찬하트 클릭" + bno);
-
-                        $.ajax({
-                            url    : "<c:url value="/fnt/removeHeart.do"/>",
-                            type   : "post",
-                            data   : {
-                                bno: bno,
-                            },
-                            success: function (pto) {
-                                //페이지 새로고침
-                                //document.location.reload(true);
-
-                                var heart = pto.heart;
-                                //페이지, 모달창에 하트 수 갱신
-                                $('#m_heart' + bno).text(heart);
-                                $('#heart' + bno).text(heart);
-
-                                console.log("하트삭제 성공");
-                            },
-                            error  : function () {
-                                alert('서버 에러');
-                            }
-                        });
-                        console.log("빈하트로 바꾸기");
-
-                        //빈하트로 바꾸기
-                        $(this).attr('src', '<c:url value="/resources/images/photobbs/icons/bi bi-suit-heart.png"/>')
-                        $('.heart_icon' + bno).attr('src', '<c:url value="/resources/images/photobbs/icons/bi bi-suit-heart.png"/>')
-                    }
-                });
-
-                //로그인 안한 상태에서 하트를 클릭하면 로그인해야한다는 알림창이 뜹니다.
-                //(로그인한 상태인 하트의 <a></a> class명: heart-notlogin)
-                $('.heart-notlogin').unbind('click');
-                $('.heart-notlogin').click(function () {
-                    alert('로그인 하셔야 하트를 누를 수 있습니다');
-                });
-
-                //페이지가 뒤로가기 하면 하트버튼과 하트 수 갱신이 안됨. 이때 하트 누르면 DB에 중복으로 들어감
-                //이것을 방지하기위해 뒤로가기할때 css로 클릭막고 새로고침으로 갱신된 하트수가 나오게 하기위함
-                $(window).bind("pageshow", function (event) {
-                    //파폭,사파리 뿐 아니라 익스 크롬의 경우도 고려하여
-                    if (event.originalEvent.persisted || (window.performance && window.performance.navigation.type == 2)) {
-                        console.log('BFCahe로부터 복원됨');
-                        $(".heart-click").css("pointer-events", "none");
-                        location.reload(); //새로고침
-                    } else {
-                        console.log('하트수 최신화된 페이지 열기');
-                    }
-                });
-
-                //댓글아이콘을 클릭했을때 댓글 리스트 함수를 호출
-                $(".open_reply_list").unbind('click');
-                $(".open_reply_list").click(function () {
-                    var bno = $(this).attr('idx');
-                    //게시물의 no에 해당하는 댓글 리스트를 가져오는 함수
-                    ReplyList(bno);
-                });
-
-                //댓글 달기 버튼 클릭시 실행
-                $(".write_reply").unbind('click');
-                $(".write_reply").click(function () {
-                    //게시물 번호
-                    var bno = $(this).attr('idx');
-                    //책갈피
-                    //댓글 입력란의 내용을 가져온다.
-                    var content = $("#input_reply" + bno).val();
-
-                    //앞뒤 공백을 제거한다.(띄어쓰기만 입력했을때 댓글작성안되게 처리하기 위함)
-                    content = content.trim();
-
-                    console.log(content);
-
-                    if (content == "") { //입력 내용없을시
-                        alert("내용을 입력하세요");
-                    } else {
-                        //입력란 비우기
-                        $('#input_reply' + bno).val("");
-
-                        // reply+1 하고 그 값을 가져옴
-                        $.ajax({
-                            url    : "<c:url value="/fnt/picture_write_reply.do"/>",
-                            type   : "post",
-                            data   : {
-                                bno    : bno,
-                                content: content
-                            },
-                            success: function (pto) {
-
-                                var reply = pto.reply;
-                                //페이지, 모달창에 댓글 수 갱신
-                                $('#m_reply' + bno).text(reply);
-                                $('#reply' + bno).text(reply);
-
-                                console.log("댓글 작성 성공");
-
-                                //댓글리스트 새로 받아오기
-                                ReplyList(bno);
-                            },
-                            error  : function () {
-                                alert('서버 에러');
-                            }
-                        });
-                    }
-                });
             }
         });
     };
+</script>
+
+<script>
+	
+		//조회수 올리기 시작
+		$(document).on('click','card-img',function(){
+			//게시물 번호(bno)를 idx로 전달받아 저장합니다.
+			var bno = $(this).attr('idx');
+			
+			console.log(bno+"에 hit(조회수) + 1을 함");
+			
+			// +1된 hit값 불러오기
+			$.ajax({
+				url : "<c:url value="/fnt/picture_write.do"/>",
+				type: 'get',
+				data: {
+					bno : bno
+				},
+				success : function(to){
+					var hit = to.hit;
+					
+					$('#_hit'+bno).text(hit);
+					$('#hit'+bno).text(hit);
+				
+				},
+				error: function(){
+					alert('서버 에러');
+				}
+			});
+		});
+	
+	
+	//창 크기 변해도 가로세로 맞추기 위해
+	$(window).resize(function(){
+		$('.box').each(function(){
+			$(this).height($(this).width());
+		});
+	}).resize();
 
 </script>
 

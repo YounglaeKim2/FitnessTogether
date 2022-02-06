@@ -16,7 +16,7 @@
 	<div class="form-group">
 		<div class="name">제목</div>
 		<div class="value">
-			<input class="input--style-6" type="text" name="subject">
+			<input class="input-style-6" type="text" name="subject">
 		</div>
 	</div>
 
@@ -25,7 +25,7 @@
 		<div class="name">내용</div>
 		<div class="value">
 			<div class="summernote-group">
-				<textarea class="summernote" name="content" id="content"></textarea>
+				<textarea class="summernote" name="content" id="content" rows="10" cols="70"></textarea>
 			</div>
 		</div>
 	</div>
@@ -34,14 +34,14 @@
 		<div class="name">파일 업로드</div>
 		<div class="value">
 			<div class="input-group js-input-file">
-				<input class="input-file" type="file" name="imgName" id="file" accept="image/png">
-				<label class="label--file" for="file">파일 선택</label>
+				<input class="input-file" type="file" name="imgName" id="file" accept="image/png, image/jpg, image/gif">
+				<label class="label--file" for="file">jpg,png,gif파일을 선택해주세요</label>
 			</div>
 		</div>
 	</div>
 
 	<div class="form-group">
-		<button class="btn btn-radius btn--blue-2" type="submit" id="submit1">등록하기</button>
+		<button class="btn btn-primary" type="submit" id="submit1">등록하기</button>
 	</div>
 </form>
 
@@ -103,39 +103,6 @@
 
 			});
 		}
-
-		//내용란 설정
-		var toolbar = [
-				//글꼴설정
-				[ 'fontname', [ 'fontname' ] ],
-				//글자 크기 설정
-				[ 'fontsize', [ 'fontsize' ] ],
-				//굵기,기울임꼴,밑줄,취소선,서식지우기
-				[
-						'style',
-						[ 'bold', 'italic', 'underline', 'strikethrough',
-								'clear' ] ],
-				//글자색
-				[ 'color', [ 'forecolor', 'color' ] ],
-				//표만들기
-				[ 'table', [ 'table' ] ],
-				//글머리 기호, 번호매기기, 문단정렬
-				[ 'para', [ 'ul', 'ol', 'paragraph' ] ],
-				//줄간격
-				[ 'height', [ 'height' ] ],
-				//코드보기,확대해서보기,도움말
-				[ 'view', [ 'codeview', 'fullscreen', 'help' ] ] ];
-
-		var setting = {
-			height : 300, //에디터 높이
-			minHeight : null,
-			maxHeight : null,
-			focus : true,
-			lang : "ko-KR",
-			placeholder : "최대 1000자까지 쓸 수 있습니다"
-
-		}
-		$('.summernote').summernote(setting);
 
 	};//onload
 </script>

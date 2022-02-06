@@ -36,6 +36,7 @@
 		<mapper resource="mybatis/mapper/mappinglinecomment.xml"/>
 		<mapper resource="mybatis/mapper/android.xml"/>
 		<mapper resource="mybatis/mapper/photobbs.xml"/>
+		<mapper resource="mybatis/mapper/photoheart.xml"/>
 		<!-- <mapper resource="mybatis/mapper/message.xml"/> -->
 	</mappers>
 </configuration>

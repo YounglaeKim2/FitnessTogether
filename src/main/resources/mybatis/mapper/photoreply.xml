@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.mapper.photobbs">
+
+    <resultMap type="PictureHeartDTO" id="PictureHeartDTOResult">
+        <result column="rno" property="rno"/>
+        <result column="bno" property="bno"/>
+        <result column="grp" property="grp"/>
+        <result column="grps" property="grps"/>
+        <result column="grpl" property="grpl"/>
+        <result column="content" property="content"/>
+        <result column="rwdate" property="rwdate"/>
+        <result column="rwgap" property="rwgap"/>
+        <result column="id" property="id"/>
+    </resultMap>
+
+   <insert id="picture_reply_write" parameterType="PictureReplyDTO">
+		INSERT INTO REPLY
+		VALUES(0, #{bno}, #{grp}, 0, 0, #{id}, #{content}, now())
+	</insert>
+
+	<!-- 댓글일경우 rno,grp 일치하게 함 -->
+	<update id="picture_reply_check" parameterType="PictureReplyDTO">
+		UPDATE REPLY SET
+		grp=#{grp}
+		WHERE rno != grp
+	</update>
+
+	<!-- 댓글이 삭제된 댓글일때 그에 딸린 대댓글들이 모두 삭제되면 테이블에서 완전삭제 -->
+	<delete id="picture_reply_delete_after_rereply_delete"
+		parameterType="PictureReplyDTO">
+		DELETE FROM REPLY
+		WHERE content="" AND grp=#{grp}
+	</delete>
+
+	<!-- 대댓글 쓰기 -->
+	<insert id="picture_rereply_write"
+		parameterType="PictureReplyDTO">
+		INSERT INTO REPLY
+		VALUES(0, #{bno}, #{grp}, 0, #{grpl},
+		#{id}, #{content}, now())
+	</insert>
+
+	<!-- BOARD에 댓글 수 증가시키기 -->
+	<update id="picture_reply_up" parameterType="PictureReplyDTO">
+		UPDATE BOARD SET
+		reply=reply+1
+		WHERE rno != #{rno}
+	</update>
+
+	<!-- 댓글 리스트 가져오기 -->
+	<select id="picture_replyList" parameterType="PictureReplyDTO"
+		resultType="PictureReplyDTO">
+		SELECT r.rno, r.bno, r.grp, r.grpl, r.id, r.content,
+		date_format(wdate,'%Y-%m-%d') wdate, datediff(now(), wdate) wgap
+		FROM REPLY r LEFT OUTER JOIN MEMBER m
+		ON r.id = m.id
+		WHERE r.bno = #{bno}
+		ORDER BY grp ASC, grps DESC
+	</select>
+
+	<!-- 댓글 추가/삭제시 댓글 갯수 가져오기 -->
+	<select id="picture_reply_count" parameterType="PictureReplyDTO"
+		resultType="PictureReplyDTO">
+		SELECT reply
+		FROM BOARD
+		WHERE rno = #{rno}
+	</select>
+
+	<!-- 댓글의 대댓글 수를 카운트 -->
+	<select id="picture_count-rereply"
+		parameterType="PictureReplyDTO" resultType="int">
+		SELECT COUNT(bno)
+		FROM REPLY
+		WHERE bno = #{bno} AND grp = #{grp}
+	</select>
+
+	<!-- 대댓글 수를 카운트 -->
+	<select id="picture_count_rereply_fromrereply"
+		parameterType="PictureReplyDTO" resultType="int">
+		SELECT COUNT(bno)
+		FROM REPLY
+		WHERE rno = #{grp} AND grp = #{grp}
+	</select>
+
+	<!-- 댓글 삭제(대댓글이 없는 경우) -->
+	<delete id="picture_reply_delete"
+		parameterType="PictureReplyDTO">
+		DELETE FROM REPLY
+		WHERE rno=#{rno}
+	</delete>
+
+	<!-- 댓글 삭제(대댓글이 있는 경우) -->
+	<update id="picture_reply_not_delete"
+		parameterType="PictureReplyDTO">
+		UPDATE REPLY SET content=""
+		WHERE rno=#{rno}
+	</update>
+
+	<!-- BOARD 테이블의 댓글 수 감소 -->
+	<update id="picture_reply_down" parameterType="PictureReplyDTO">
+		UPDATE BOARD SET
+		reply=reply-1
+		WHERE rno=#{rno}
+	</update>
+
+
+</mapper>

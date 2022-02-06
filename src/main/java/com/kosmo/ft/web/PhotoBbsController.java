@@ -37,6 +37,12 @@ public class PhotoBbsController extends HttpServlet {
     private PictureUploadServiceImpl pictureUploadService;
 
     //게시글입력폼이동
+    @RequestMapping(value = "/fnt/picture_listshift.do", method = RequestMethod.GET)
+    public String list(@ModelAttribute("id") String id) {
+        return "forward:/fnt/picture_list.do";
+    }
+    
+    //목록으로이동
     @RequestMapping(value = "/fnt/picture_write.do", method = RequestMethod.GET)
     public String write(@ModelAttribute("id") String id) {
         return "photobbs/Picture_write";

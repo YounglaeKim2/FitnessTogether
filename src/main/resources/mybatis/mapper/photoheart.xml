@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.mapper.photobbs">
+
+    <resultMap type="PictureHeartDTO" id="PictureHeartDTOResult">
+        <result column="hno" property="hno"/>
+        <result column="id" property="id"/>
+        <result column="bno" property="bno"/>
+    </resultMap>
+
+   <insert id="picture_heart_save" parameterType="PictureHeartDTO">
+		INSERT INTO HEART
+		VALUES(0, #{bno}, #{id})
+	</insert>
+
+	<update id="picture_heart_up" parameterType="PictureHeartDTO">
+		UPDATE BOARD SET
+		heart=heart+1
+		WHERE bno=#{bno}
+	</update>
+
+	<!-- 좋아요 삭제 -->
+	<delete id="picture_heart_remove"
+		parameterType="PictureHeartDTO">
+		DELETE FROM HEART
+		WHERE bno=#{bno} AND id=#{id}
+	</delete>
+
+	<update id="picture_heart_down" parameterType="PictureHeartDTO">
+		UPDATE BOARD SET
+		heart=heart-1
+	</update>
+
+	<!-- 좋아요 추가/삭제시 좋아요 갯수 가져오기 -->
+	<select id="picture_heart_count" parameterType="PictureHeartDTO"
+		resultType="PictureHeartDTO">
+		SELECT heart
+		FROM BOARD
+		WHERE bno=#{bno}
+	</select>
+
+</mapper>
